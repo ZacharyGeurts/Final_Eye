@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# Final_Eye Linux install — v1.0
+# Final_Eye Linux install
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
+VER="$(cat VERSION 2>/dev/null | tr -d '\n' || echo unknown)"
 
-echo "Final_Eye v1.0 — installing Python dependencies…"
+echo "Final_Eye v${VER} — installing Python dependencies…"
 python3 -m pip install --user -r requirements.txt
 
 echo "Sealing codebase…"

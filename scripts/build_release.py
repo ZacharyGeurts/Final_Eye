@@ -12,6 +12,7 @@ import tarfile
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGING = ROOT / "packaging"
@@ -195,12 +196,21 @@ def write_checksums(artifacts: list[Path]) -> Path:
     return out
 
 
+def _codename() -> str:
+    try:
+        sys.path.insert(0, str(ROOT))
+        from zocr_product import product_info
+        return str(product_info().get("codename") or "teach-authority")
+    except Exception:
+        return "teach-authority"
+
+
 def write_manifest(version: str, artifacts: list[Path]) -> Path:
     doc = {
         "schema": "final-eye-release-manifest/v1",
         "product": "Final_Eye",
         "version": version,
-        "codename": "sovereign-vision",
+        "codename": _codename(),
         "ts": _ts(),
         "platforms": {
             "linux": f"Final_Eye-{version}-linux-x86_64.tar.gz",
@@ -226,13 +236,17 @@ def write_manifest(version: str, artifacts: list[Path]) -> Path:
 
 
 def write_release_notes(version: str) -> Path:
-    body = f"""# Final_Eye v{version} — sovereign-vision
+    codename = _codename()
+    body = f"""# Final_Eye v{version} — {codename}
 
-**The Final Eyeball** — sovereign field robotics vision for Linux, Windows, macOS, Docker, and source.
+**The Final Eyeball** — sovereign field robotics vision for Linux, Windows, macOS, and source.
 
-## Highlights
-- Silent capture integrity · GVC1/GRKMF1 proprietary codec (not MPEG)
-- Field Ops UI at `:9479/ops` · 33 automated tests
+## Highlights (v1.1)
+- **Teach doctrine** — the eye speaks; independent weapon authority over 37 weapons
+- API: `/api/eye/authority`, `/api/eye/targets`, `/api/eye/teach/doctrine`, `/api/eye/understand`
+- Threat-only fire: `POST /api/eye/weapons/fire {{"threat":"provenance_mismatch"}}` — eye selects salvo
+- Silent capture · GVC1/GRKMF1 proprietary codec (not MPEG)
+- Field Ops UI at `:9479/ops` · **34 automated tests**
 - Grok16 field_opt + Queen/Hostess/ZAC integration
 - Illustrated textbook: https://zacharygeurts.github.io/Final_Eye/
 
@@ -264,10 +278,11 @@ cd Final_Eye-{version}-macos
 ./Start\\ Final\\ Eye.command
 ```
 
-### Docker
+### Docker (build locally)
+GHCR image for v{version} builds from the included `Dockerfile` when CI workflow is enabled. Until then:
 ```bash
-docker pull ghcr.io/zacharygeurts/final-eye:{version}
-docker run -p 9479:9479 ghcr.io/zacharygeurts/final-eye:{version}
+docker build -t final-eye:{version} .
+docker run -p 9479:9479 final-eye:{version}
 ```
 
 ### Source (all platforms)
@@ -291,13 +306,48 @@ Proprietary — scientific robotics review permitted at tagged releases.
     return out
 
 
+def verify_linux_tarball(path: Path, version: str) -> dict[str, Any]:
+    """Smoke-verify release tarball: VERSION, teach doctrine, product version."""
+    import tarfile
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        with tarfile.open(path, "r:gz") as tar:
+            tar.extractall(tmp)
+        root_name = f"Final_Eye-{version}-linux-x86_64"
+        stage = Path(tmp) / root_name
+        if not stage.is_dir():
+            raise SystemExit(f"release verify failed: missing {root_name}/ in tarball")
+        ver = (stage / "VERSION").read_text(encoding="utf-8").strip()
+        if ver != version:
+            raise SystemExit(f"release verify failed: VERSION={ver!r} expected {version!r}")
+        teach = stage / "data" / "eye-teach-doctrine.json"
+        if not teach.is_file():
+            raise SystemExit("release verify failed: missing data/eye-teach-doctrine.json")
+        sys.path.insert(0, str(stage))
+        try:
+            from zocr_product import product_info
+            pinfo = product_info()
+        finally:
+            if str(stage) in sys.path:
+                sys.path.remove(str(stage))
+        if pinfo.get("version") != version:
+            raise SystemExit(
+                f"release verify failed: product version {pinfo.get('version')!r}"
+            )
+        return {"ok": True, "version": ver, "codename": pinfo.get("codename")}
+
+
 def main() -> int:
     version = _version()
     RELEASES.mkdir(parents=True, exist_ok=True)
     print(f"Building Final_Eye v{version} releases…", flush=True)
 
     artifacts: list[Path] = []
-    artifacts.append(build_linux_tar(version))
+    linux_tar = build_linux_tar(version)
+    verify_linux_tarball(linux_tar, version)
+    print(f"  verify: linux tar ok (VERSION, teach doctrine, product)", flush=True)
+    artifacts.append(linux_tar)
     print(f"  linux tar: {artifacts[-1].name} ({artifacts[-1].stat().st_size // 1024} KB)")
     artifacts.append(build_macos_tar(version))
     print(f"  macos tar: {artifacts[-1].name}")
@@ -314,8 +364,9 @@ def main() -> int:
 
     notes = write_release_notes(version)
     manifest = write_manifest(version, artifacts)
+    artifacts.extend([notes, manifest])
     sums = write_checksums(artifacts)
-    artifacts.extend([notes, manifest, sums])
+    artifacts.append(sums)
 
     print(json.dumps({
         "version": version,

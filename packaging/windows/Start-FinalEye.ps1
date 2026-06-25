@@ -1,4 +1,4 @@
-# Final_Eye v1.0 — start server
+# Final_Eye — start server
 $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $Root
 $py = if (Get-Command py -ErrorAction SilentlyContinue) { "py -3" } else { "python" }

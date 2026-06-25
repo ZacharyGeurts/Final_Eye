@@ -87,7 +87,7 @@ curl -s http://127.0.0.1:9479/api/grok16 | jq '.profiles'
 | **Windows** | `Final_Eye-1.1.0-windows-x64.zip` |
 | **macOS** | `Final_Eye-1.1.0-macos-universal.tar.gz` |
 | **Source** | `Final_Eye-1.1.0-source.tar.gz` |
-| **Docker** | `ghcr.io/zacharygeurts/final-eye:1.1.0` |
+| **Docker** | Build locally: `docker build -t final-eye:1.1.0 .` (GHCR when CI enabled) |
 
 Download from [GitHub Releases](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.1.0). Verify: `sha256sum -c SHA256SUMS`.
 

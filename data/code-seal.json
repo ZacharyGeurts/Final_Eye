@@ -1,7 +1,7 @@
 {
   "schema": "zocr-code-seal/v1",
   "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
-  "ts": "2026-06-25T13:16:02.913216+00:00",
+  "ts": "2026-06-25T13:19:54.551915+00:00",
   "files": {
     "gui/app.py": "2057285345ef1bc286c5458ae0c8f6797e440879945ba9b7f1e3812363aff623",
     "zocr.py": "28bc7afdf1f099196e5f9d134a060a70d95af3b8623ad5da9de5b7f65480b802",
