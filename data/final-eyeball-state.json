@@ -1,12 +1,211 @@
 {
   "schema": "zocr-final-eyeball-state/v1",
-  "active_mode": "war",
+  "active_mode": "dishes",
   "active_voice": "tactical",
   "last_prescription": {
-    "eye_profile": "raptor",
-    "rig_preset": "stereo_human",
-    "video_profile": "tactical",
-    "vigilance_profile": "sentinel"
+    "eye_profile": "human",
+    "rig_preset": "monocular",
+    "video_profile": "idle",
+    "vigilance_profile": null
   },
-  "updated": "2026-06-25T11:21:20.559681+00:00"
+  "updated": "2026-06-25T12:37:02.092571+00:00",
+  "sovereign_time": {
+    "schema": "zocr-eyeball-sovereign-time/v1",
+    "always": true,
+    "enabled": true,
+    "module": "/home/default/Desktop/SG/Latest/NEXUS-Shield/lib/sovereign-time.py",
+    "port": 9123,
+    "nexus": {
+      "schema": "sovereign-time/v1",
+      "updated": "2026-06-25T12:37:02.077019Z",
+      "port": 9123,
+      "max_skew_ms": 50.0,
+      "max_freq_delta_khz": 250000,
+      "local": {
+        "mono_ns": 108318599154063,
+        "realtime_ns": 1782391022076332775,
+        "utc": "2026-06-25T12:37:02.076974Z",
+        "host": "default-X870-Pro-RS",
+        "freq_khz": {
+          "cpu0": 4965919,
+          "cpu1": 4965429,
+          "cpu10": 3874872,
+          "cpu11": 3007000,
+          "cpu12": 3007000,
+          "cpu13": 4966210,
+          "cpu14": 4965572,
+          "cpu15": 4961139,
+          "cpu16": 3007000,
+          "cpu17": 4965760,
+          "cpu18": 3007000,
+          "cpu19": 3448968,
+          "cpu2": 4965932,
+          "cpu20": 3007000,
+          "cpu21": 3007000,
+          "cpu22": 4914216,
+          "cpu23": 4880497,
+          "cpu3": 3314707,
+          "cpu4": 4971203,
+          "cpu5": 3007000,
+          "cpu6": 4932961,
+          "cpu7": 3749779,
+          "cpu8": 4828174,
+          "cpu9": 3007000
+        },
+        "freq_sum_khz": 97727338,
+        "micron_witness": "e76010f9d3df7866"
+      },
+      "last_pulse": {
+        "schema": "sovereign-time/v1",
+        "pulse": 1,
+        "chain": "final_eye:status",
+        "host": "default-X870-Pro-RS",
+        "mono_ns": 107620503779738,
+        "realtime_ns": 1782390323980958801,
+        "utc": "2026-06-25T12:25:23.981589Z",
+        "freq_sum_khz": 98934073,
+        "micron_witness": "fe4b75ce14097976",
+        "entropy_tag": "049bddf0c9c0",
+        "sig": "5fa9c2ea26860816d7660342cdde2845429cc769af298a4239185e7d9237194d"
+      },
+      "last_verify": null,
+      "receipt_log": "/home/default/Desktop/SG/Final_Eye/data/sovereign-time-state/sovereign-time-receipts.jsonl",
+      "posture": "operator_timeserver \u2014 disable pool NTP when terror threat is assumed"
+    },
+    "sealed_mono_ns": 107620503779738,
+    "micron_witness": "fe4b75ce14097976",
+    "pulse": 1,
+    "eyeball_last": {
+      "schema": "sovereign-time/v1",
+      "pulse": 1,
+      "chain": "final_eye:status",
+      "host": "default-X870-Pro-RS",
+      "mono_ns": 107620503779738,
+      "realtime_ns": 1782390323980958801,
+      "utc": "2026-06-25T12:25:23.981589Z",
+      "freq_sum_khz": 98934073,
+      "micron_witness": "fe4b75ce14097976",
+      "entropy_tag": "049bddf0c9c0",
+      "sig": "5fa9c2ea26860816d7660342cdde2845429cc769af298a4239185e7d9237194d"
+    },
+    "verdict": "USER_OK",
+    "ok": true,
+    "rule": "Sovereign time always seals eyeball \u2014 monotonic witness, never pool-only"
+  },
+  "redundancy": {
+    "schema": "zocr-eyeball-redundancy/v1",
+    "always": true,
+    "rule": "Interwoven redundancies \u2014 no single path owns truth",
+    "paths": [
+      {
+        "id": "vision_live",
+        "path": [
+          "capture",
+          "pattern",
+          "video",
+          "wrdt",
+          "eye"
+        ],
+        "hops_ok": [
+          false,
+          false,
+          true,
+          true,
+          false
+        ],
+        "ok": false,
+        "woven": false
+      },
+      {
+        "id": "vision_offense",
+        "path": [
+          "capture",
+          "offense",
+          "kill",
+          "capture"
+        ],
+        "hops_ok": [
+          false,
+          true,
+          true,
+          false
+        ],
+        "ok": false,
+        "woven": false
+      },
+      {
+        "id": "vision_trust",
+        "path": [
+          "wrdt",
+          "code_seal",
+          "hostess7_truth",
+          "queen_gates"
+        ],
+        "hops_ok": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "ok": true,
+        "woven": true
+      },
+      {
+        "id": "vision_egress",
+        "path": [
+          "nexus_trust",
+          "queen_gates",
+          "capture"
+        ],
+        "hops_ok": [
+          true,
+          true,
+          false
+        ],
+        "ok": false,
+        "woven": true
+      },
+      {
+        "id": "vision_assist",
+        "path": [
+          "eye",
+          "rig",
+          "neural",
+          "code_seal"
+        ],
+        "hops_ok": [
+          false,
+          false,
+          true,
+          true
+        ],
+        "ok": false,
+        "woven": false
+      },
+      {
+        "id": "vision_time",
+        "path": [
+          "sovereign_time",
+          "code_seal",
+          "eye",
+          "capture"
+        ],
+        "hops_ok": [
+          true,
+          true,
+          false,
+          false
+        ],
+        "ok": false,
+        "woven": false
+      }
+    ],
+    "paths_total": 6,
+    "woven_paths": 2,
+    "mesh_ok": false,
+    "required_ok": false,
+    "peers_ok": 10,
+    "ok": false
+  },
+  "grok16_profile": "ai"
 }

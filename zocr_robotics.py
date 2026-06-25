@@ -53,6 +53,8 @@ def arm_robotics(
         "product": product_info(),
         "mode": mode,
         "final_eyeball": final,
+        "sovereign_time": final.get("sovereign_time"),
+        "redundancy": final.get("redundancy"),
         "video_tune": tuned.get("resolved"),
         "stream": stream,
         "affordances": {
@@ -75,4 +77,5 @@ def robotics_doctrine() -> dict[str, Any]:
         "combat": "AI-tunable 3–20 fps — POST /api/video/tune",
         "media": "Legacy through 16K, up to 240 fps — GRKMF1/GVC1",
         "arm": "POST /api/robotics/arm {\"mode\":\"war|dishes\",\"start_stream\":true}",
+        "field_compiler": "Grok16 + FIELDC v4 — GET /api/field/compiler",
     }

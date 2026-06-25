@@ -1,0 +1,353 @@
+{
+  "schema": "zocr-entity-eyeball/v2",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "title": "Twin Entity Eyeballs",
+  "rule": "Monster in one eye socket — Queen offense, NEXUS trust strikes, thermodynamics, Grok16 field_opt. Vita lives; Veritas forward.",
+  "socket_fit": {
+    "rule": "Full arsenal racks inside the ocular cavity — bounded assist, unbounded strike doctrine",
+    "racks": 8,
+    "weapons_total": 37,
+    "max_salvo": 4,
+    "lineage": ["Queen eyeball weaponize", "NEXUS Trust Strike", "ZOCR thermodynamics", "Grok16 field_opt"]
+  },
+  "twins": {
+    "living": {
+      "id": "living",
+      "entity": "Vita",
+      "title": "The Eyeball That Lives",
+      "role": "perceive · stream · thermo · cascade",
+      "motto": "Make it live — joules bounded, engine truth before glass",
+      "always": ["sovereign_time", "redundancy", "assist_contract", "field_power"],
+      "modules": ["zocr_preserve", "zocr_stream", "zocr_video", "zocr_vision", "zocr_stereo", "zocr_grok16"]
+    },
+    "truth": {
+      "id": "truth",
+      "entity": "Veritas",
+      "title": "The Eyeball That Talks Truth",
+      "role": "guard · forward · strike · trust",
+      "motto": "Always forward — NEXUS-grade trust strike in a socket",
+      "always": ["sovereign_time", "redundancy", "forward_ledger", "weapons_armed"],
+      "modules": ["zocr_pattern", "zocr_offense", "zocr_trust", "zocr_security", "zocr_kill"]
+    }
+  },
+  "racks": {
+    "core": {"label": "Core forward", "entity": "both", "count": 9},
+    "thermo": {"label": "Thermodynamics", "entity": "living", "count": 5},
+    "rf": {"label": "RF · spectrum", "entity": "living", "count": 4},
+    "trust": {"label": "IRTN · Hostess7", "entity": "truth", "count": 5},
+    "pattern": {"label": "Pattern weave", "entity": "truth", "count": 4},
+    "compiler": {"label": "Grok16 field", "entity": "living", "count": 4},
+    "nexus": {"label": "NEXUS strike", "entity": "truth", "count": 6},
+    "queen": {"label": "Queen salvo", "entity": "both", "count": 4}
+  },
+  "weapons": {
+    "forward_truth": {
+      "rack": "core", "label": "Forward truth", "entity": "truth",
+      "strike": "advance_ledger", "offense": "speak_and_seal",
+      "targets": ["lie", "tamper", "provenance_mismatch"],
+      "handler": "forward_truth",
+      "doctrine": "Truth advances — never backward"
+    },
+    "reject_lie": {
+      "rack": "core", "label": "Reject lie", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "pattern_strike",
+      "targets": ["grid_jam", "moire_weave", "injected_marker", "provenance_mismatch"],
+      "doctrine": "Lies rejected before vault"
+    },
+    "pattern_strike": {
+      "rack": "core", "label": "Pattern strike", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "pattern_strike",
+      "targets": ["grid_jam", "moire_weave", "static_snow"],
+      "doctrine": "Foreign weave struck on ingress"
+    },
+    "preempt_rtx": {
+      "rack": "core", "label": "Preempt RTX", "entity": "living",
+      "strike": "reject_and_failover", "offense": "preempt_rtx",
+      "targets": ["blackout", "frozen_display", "timing_gap", "rf_jam"],
+      "doctrine": "Engine truth before jammed glass"
+    },
+    "trip_capture": {
+      "rack": "core", "label": "Trip capture", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "trip_capture",
+      "targets": ["whiteout", "weaponized_interference"],
+      "trip": ["capture"],
+      "doctrine": "Hostile light trips capture"
+    },
+    "trip_vision": {
+      "rack": "core", "label": "Trip vision", "entity": "truth",
+      "strike": "trip_vision", "offense": "kill_strike",
+      "targets": ["provenance_mismatch", "corrupt_frame"],
+      "trip": ["vision"],
+      "doctrine": "Vision path tripped on confirmed lie"
+    },
+    "seal_threat": {
+      "rack": "core", "label": "Seal threat", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "seal_threat",
+      "targets": ["injected_marker", "corrupt_frame"],
+      "doctrine": "Auditable offense ledger"
+    },
+    "kill_strike": {
+      "rack": "core", "label": "Kill strike", "entity": "truth",
+      "strike": "trip_vision", "offense": "kill_strike",
+      "targets": ["provenance_mismatch"],
+      "trip": ["vision"],
+      "doctrine": "One whole kill when lie proven"
+    },
+    "vigilance_forward": {
+      "rack": "core", "label": "Vigilance forward", "entity": "living",
+      "strike": "patrol", "offense": "vigilance_start",
+      "targets": ["timing_gap", "frozen_display"],
+      "handler": "vigilance_forward",
+      "doctrine": "Patrol while truth guards forward"
+    },
+    "joule_throttle": {
+      "rack": "thermo", "label": "Joule throttle", "entity": "living",
+      "strike": "field_power", "offense": "joule_throttle",
+      "targets": ["thermal_breach", "frozen_display"],
+      "handler": "joule_throttle",
+      "doctrine": "Thermodynamics — slash joules per frame before rods heat"
+    },
+    "entropy_fold": {
+      "rack": "thermo", "label": "Entropy fold", "entity": "living",
+      "strike": "field_power", "offense": "entropy_fold",
+      "targets": ["entropy_spoof", "timing_gap"],
+      "handler": "entropy_fold",
+      "doctrine": "Grok16 FIELD_ENTROPY_DISPATCH — fold hostile timing"
+    },
+    "thermal_strike": {
+      "rack": "thermo", "label": "Thermal strike", "entity": "living",
+      "strike": "reject_and_failover", "offense": "thermal_strike",
+      "targets": ["whiteout", "thermal_breach"],
+      "trip": ["capture"],
+      "doctrine": "White-hot frames rejected — biology first"
+    },
+    "cool_gate": {
+      "rack": "thermo", "label": "Cool gate", "entity": "living",
+      "strike": "assist", "offense": "cool_gate",
+      "targets": ["thermal_breach"],
+      "handler": "cool_gate",
+      "doctrine": "Assist contract cool path — one tenant, no overdraw"
+    },
+    "rod_dominant_snap": {
+      "rack": "thermo", "label": "Rod snap", "entity": "living",
+      "strike": "perceive", "offense": "preempt_rtx",
+      "targets": ["blackout", "frozen_display"],
+      "handler": "rod_snap",
+      "doctrine": "Scotopic snap — mammal night profile + RTX preempt"
+    },
+    "rf_jam_slice": {
+      "rack": "rf", "label": "RF jam slice", "entity": "living",
+      "strike": "reject_and_failover", "offense": "preempt_rtx",
+      "targets": ["rf_jam", "blackout"],
+      "doctrine": "RF jam — take RTX before display lies"
+    },
+    "spectrum_hard_switch": {
+      "rack": "rf", "label": "Spectrum hard", "entity": "living",
+      "strike": "perceive", "offense": "preempt_rtx",
+      "targets": ["rf_jam", "static_snow"],
+      "handler": "spectrum_hard",
+      "doctrine": "Raptor UV hard switch on jam"
+    },
+    "wifi_lie_reject": {
+      "rack": "rf", "label": "WiFi lie reject", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "pattern_strike",
+      "targets": ["injected_marker", "grid_jam"],
+      "doctrine": "NEXUS RF lie — pattern strike before trust"
+    },
+    "static_snow_shred": {
+      "rack": "rf", "label": "Snow shred", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "pattern_strike",
+      "targets": ["static_snow"],
+      "doctrine": "Shred static snow on ingress"
+    },
+    "trust_strike": {
+      "rack": "trust", "label": "Trust strike", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "trust_strike",
+      "targets": ["trust_breach", "provenance_mismatch"],
+      "handler": "trust_strike",
+      "doctrine": "NEXUS Trust Strike — mesh quorum before vault"
+    },
+    "irtn_woven": {
+      "rack": "trust", "label": "IRTN woven", "entity": "truth",
+      "strike": "verify", "offense": "seal_threat",
+      "targets": ["trust_breach"],
+      "handler": "irtn_woven",
+      "doctrine": "Interwoven redundancies — verify all paths"
+    },
+    "hostess_corroborate": {
+      "rack": "trust", "label": "Hostess7", "entity": "truth",
+      "strike": "verify", "offense": "seal_threat",
+      "targets": ["trust_breach"],
+      "handler": "hostess_corroborate",
+      "doctrine": "Hostess7 bridge corroborates vision lane"
+    },
+    "mesh_sever": {
+      "rack": "trust", "label": "Mesh sever", "entity": "truth",
+      "strike": "trip_vision", "offense": "trust_strike",
+      "targets": ["trust_breach", "corrupt_frame"],
+      "trip": ["vision"],
+      "handler": "mesh_sever",
+      "doctrine": "Sever unwoven path — offense auditable"
+    },
+    "code_seal_maul": {
+      "rack": "trust", "label": "Seal maul", "entity": "truth",
+      "strike": "verify", "offense": "seal_threat",
+      "targets": ["corrupt_frame"],
+      "handler": "code_seal_maul",
+      "doctrine": "Code seal verify + re-seal on tamper"
+    },
+    "moire_kill": {
+      "rack": "pattern", "label": "Moiré kill", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "pattern_strike",
+      "targets": ["moire_weave"],
+      "handler": "moire_kill",
+      "doctrine": "Moiré weave is a lie — scan and strike"
+    },
+    "grid_jam_sever": {
+      "rack": "pattern", "label": "Grid sever", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "pattern_strike",
+      "targets": ["grid_jam"],
+      "doctrine": "Grid jam severed at ingress"
+    },
+    "provenance_seal": {
+      "rack": "pattern", "label": "Provenance seal", "entity": "truth",
+      "strike": "stamp", "offense": "seal_threat",
+      "targets": ["provenance_mismatch"],
+      "handler": "provenance_seal",
+      "doctrine": "Stamp weave — expect on next scan"
+    },
+    "foreign_weave_purge": {
+      "rack": "pattern", "label": "Weave purge", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "pattern_strike",
+      "targets": ["moire_weave", "injected_marker", "grid_jam"],
+      "handler": "weave_purge",
+      "doctrine": "Purge all foreign weave on last frame"
+    },
+    "g16_preempt": {
+      "rack": "compiler", "label": "G16 preempt", "entity": "living",
+      "strike": "reject_and_failover", "offense": "preempt_rtx",
+      "targets": ["compiler_gap", "timing_gap"],
+      "handler": "g16_preempt",
+      "doctrine": "Grok16 ready — engine path first"
+    },
+    "field_opt_burst": {
+      "rack": "compiler", "label": "Field-opt burst", "entity": "living",
+      "strike": "perceive", "offense": "preempt_rtx",
+      "targets": ["blackout", "rf_jam"],
+      "handler": "field_opt_burst",
+      "doctrine": "field_opt burst — submicron fabric + tactical fps"
+    },
+    "gnu26_strike": {
+      "rack": "compiler", "label": "gnu++26 strike", "entity": "truth",
+      "strike": "verify", "offense": "seal_threat",
+      "targets": ["compiler_gap", "corrupt_frame"],
+      "handler": "gnu26_strike",
+      "doctrine": "Compiler witness sealed on strike"
+    },
+    "forge_forward": {
+      "rack": "compiler", "label": "Forge forward", "entity": "living",
+      "strike": "verify", "offense": "preempt_rtx",
+      "targets": ["compiler_gap"],
+      "handler": "forge_forward",
+      "doctrine": "Queen forge posture + RTX preempt"
+    },
+    "laser_corridor_slice": {
+      "rack": "nexus", "label": "Laser corridor", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "trip_capture",
+      "targets": ["weaponized_interference", "whiteout"],
+      "trip": ["capture"],
+      "doctrine": "NEXUS corridor slice — sever hostile light path"
+    },
+    "autokill_certain": {
+      "rack": "nexus", "label": "Autokill certain", "entity": "truth",
+      "strike": "trip_vision", "offense": "kill_strike",
+      "targets": ["provenance_mismatch"],
+      "trip": ["vision", "capture"],
+      "doctrine": "PINPOINT CERTAIN — autokill when provenance fails"
+    },
+    "hardware_destroy_trip": {
+      "rack": "nexus", "label": "Hardware trip", "entity": "truth",
+      "strike": "trip_vision", "offense": "kill_strike",
+      "targets": ["weaponized_interference", "provenance_mismatch"],
+      "trip": ["vision", "capture", "stream"],
+      "doctrine": "NEXUS hardware destroy metaphor — trip all vision choke points"
+    },
+    "ai_beacon_reject": {
+      "rack": "nexus", "label": "AI beacon reject", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "pattern_strike",
+      "targets": ["injected_marker", "grid_jam"],
+      "handler": "ai_beacon_reject",
+      "doctrine": "Machine-precision C2 markers rejected"
+    },
+    "hell_rip": {
+      "rack": "nexus", "label": "Hell rip", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "trust_strike",
+      "targets": ["trust_breach", "weaponized_interference"],
+      "trip": ["egress"],
+      "handler": "hell_rip",
+      "doctrine": "Hostility priority — rip unwoven egress; heaven never bumped"
+    },
+    "heaven_pass": {
+      "rack": "nexus", "label": "Heaven pass", "entity": "truth",
+      "strike": "advance_ledger", "offense": "speak_and_seal",
+      "targets": ["lie"],
+      "handler": "heaven_pass",
+      "doctrine": "Heaven passes at zero cost — no friendly fire"
+    },
+    "queen_weaponize": {
+      "rack": "queen", "label": "Queen weaponize", "entity": "both",
+      "strike": "arm", "offense": "weaponize",
+      "targets": ["lie", "rf_jam", "provenance_mismatch"],
+      "handler": "queen_weaponize",
+      "doctrine": "Queen eyeball weaponize — war + mesh + offense"
+    },
+    "vigilance_swarm": {
+      "rack": "queen", "label": "Vigil swarm", "entity": "living",
+      "strike": "patrol", "offense": "vigilance_start",
+      "targets": ["timing_gap", "frozen_display"],
+      "handler": "vigilance_swarm",
+      "doctrine": "Modular additives swarm patrol"
+    },
+    "offense_streak_ignite": {
+      "rack": "queen", "label": "Streak ignite", "entity": "truth",
+      "strike": "reject_and_failover", "offense": "preempt_rtx",
+      "targets": ["blackout", "rf_jam", "grid_jam"],
+      "handler": "streak_ignite",
+      "doctrine": "Manually arm preempt — streak hot"
+    },
+    "twin_salvo": {
+      "rack": "queen", "label": "Twin salvo", "entity": "both",
+      "strike": "arm", "offense": "weaponize",
+      "targets": ["lie", "tamper", "rf_jam"],
+      "handler": "twin_salvo",
+      "doctrine": "Vita live + Veritas forward — full socket salvo"
+    }
+  },
+  "forward": {
+    "rule": "Truth eyeball never walks backward — every tick advances or rejects",
+    "lie_markers": [
+      "provenance_mismatch", "grid_jam", "moire_weave", "injected_marker",
+      "whiteout", "corrupt_frame", "rf_jam", "trust_breach", "entropy_spoof",
+      "thermal_breach", "compiler_gap", "weaponized_interference"
+    ],
+    "truth_markers": ["woven_paths", "code_seal", "USER_OK", "last_good", "pattern_ok", "g16_ready"],
+    "threat_weapon_map": {
+      "provenance_mismatch": "autokill_certain",
+      "whiteout": "laser_corridor_slice",
+      "weaponized_interference": "hardware_destroy_trip",
+      "grid_jam": "grid_jam_sever",
+      "moire_weave": "moire_kill",
+      "injected_marker": "ai_beacon_reject",
+      "corrupt_frame": "code_seal_maul",
+      "timing_gap": "entropy_fold",
+      "blackout": "preempt_rtx",
+      "frozen_display": "joule_throttle",
+      "static_snow": "static_snow_shred",
+      "rf_jam": "rf_jam_slice",
+      "trust_breach": "trust_strike",
+      "entropy_spoof": "entropy_fold",
+      "thermal_breach": "thermal_strike",
+      "compiler_gap": "g16_preempt"
+    }
+  }
+}

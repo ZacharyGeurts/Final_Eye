@@ -1,0 +1,57 @@
+{
+  "schema": "zocr-entity-eyeball-state/v1",
+  "living_live": true,
+  "truth_forward": true,
+  "weapons_armed": true,
+  "forward_count": 9,
+  "lies_rejected": 8,
+  "last_weapon": {
+    "ts": "2026-06-25T12:37:02.597282+00:00",
+    "weapon": "hell_rip",
+    "entity": "truth",
+    "acted": [
+      "hell_rip",
+      "offense:trust_breach"
+    ],
+    "heaven_hell": {
+      "ok": true,
+      "schema": "zocr-hell-rip/v1",
+      "ripped": true,
+      "threat": "trust_breach",
+      "soul_side": "hell",
+      "hell_chosen": true,
+      "hostility_priority": "hell_first",
+      "offense": {
+        "ok": true,
+        "rule": "Defense of vision requires offense.",
+        "schema": "zocr-offense-strike/v1",
+        "ts": "2026-06-25T12:37:02.564964+00:00",
+        "threat": "trust_breach",
+        "strike": "reject_and_failover",
+        "offense": "seal_threat",
+        "severity": "medium",
+        "acted": [
+          "seal_threat"
+        ],
+        "source": "heaven_hell:hell_rip"
+      },
+      "rips_total": 3
+    },
+    "offense": {
+      "ok": true,
+      "rule": "Defense of vision requires offense.",
+      "schema": "zocr-offense-strike/v1",
+      "ts": "2026-06-25T12:37:02.564964+00:00",
+      "threat": "trust_breach",
+      "strike": "reject_and_failover",
+      "offense": "seal_threat",
+      "severity": "medium",
+      "acted": [
+        "seal_threat"
+      ],
+      "source": "heaven_hell:hell_rip"
+    }
+  },
+  "updated": "2026-06-25T12:37:02.597309+00:00",
+  "weaponize_mode": "dishes"
+}

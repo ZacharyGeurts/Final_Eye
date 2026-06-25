@@ -155,6 +155,22 @@ def _peer_nexus_trust() -> dict[str, Any]:
     }
 
 
+def _peer_sovereign_time() -> dict[str, Any]:
+    try:
+        from zocr_sovereign_time import sovereign_time_status
+        st = sovereign_time_status(seal=False)
+        return {
+            "id": "sovereign_time",
+            "ok": st.get("ok", st.get("verdict") == "USER_OK"),
+            "role": "time",
+            "verdict": st.get("verdict"),
+            "always": st.get("always", True),
+            "sealed_mono_ns": st.get("sealed_mono_ns"),
+        }
+    except ImportError:
+        return {"id": "sovereign_time", "ok": False, "role": "time", "error": "zocr_sovereign_time missing"}
+
+
 def _peer_queen_gates() -> dict[str, Any]:
     queen = _queen_root()
     panel_py = queen / "lib" / "field-queen-browser.py"
@@ -207,6 +223,7 @@ def trust_peers() -> list[dict[str, Any]]:
         _peer_hostess7_truth(),
         _peer_nexus_trust(),
         _peer_queen_gates(),
+        _peer_sovereign_time(),
     ]
 
 

@@ -1,0 +1,49 @@
+{
+  "schema": "zocr-field-compiler/v1",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "rule": "SG/Grok16 is the field compiler — g16 @ gnu++26, field_opt profile, Queen Forge compiler_probe",
+  "primary": {
+    "product": "Grok16",
+    "root": "SG/Grok16",
+    "driver": "g16",
+    "cxx_std": "gnu++26",
+    "default_profile": "field_opt",
+    "manifest": "Grok16/data/grok16-toolchain.json",
+    "profiles": "Grok16/data/grok16-profiles.json",
+    "forge": "Grok16/forge/grok16-forge.py",
+    "toolchain_sh": "Grok16/scripts/grok16-toolchain.sh",
+    "queen_probe": "NewLatest/Queen/lib/queen-forge.py compiler_probe"
+  },
+  "layers": {
+    "grok16": {
+      "product": "Grok16",
+      "role": "Field compiler — entropy dispatch, wave phase, FieldX86, NEXUS scoring",
+      "driver": "g16",
+      "cxx_driver": "g++16",
+      "cxx_std": "gnu++26",
+      "profile": "field_opt",
+      "eye_engine": "cone_v2_field_opt",
+      "module": "zocr_grok16.py"
+    },
+    "fieldc": {
+      "id": "FIELDC",
+      "version": "4.0.2026",
+      "label": "AmmoOS Field Compiler v4",
+      "role": "RTX runtime — .fld → AMMO .OBJ inside queen-browser",
+      "pipeline": ".fld → ASM → AMMO .OBJ",
+      "engine": "AMOURANTHRTX/Navigator/engine/FieldFieldCc.hpp",
+      "note": "Sub-layer under Grok16-built RTX — not a substitute for g16"
+    }
+  },
+  "eyeball": {
+    "rule": "Final Eyeball perceive tuned by Grok16 profile — war→vulkan_rtx, dishes→ai, patrol→field_opt",
+    "module": "zocr_eye.py",
+    "witness": "grok16_eye_witness on every eye_status and final_eyeball_status"
+  },
+  "endpoints": {
+    "GET /api/field/compiler": "Grok16 status + Queen forge posture",
+    "GET /api/field/compiler/doctrine": "Field compiler mandate",
+    "POST /api/field/compiler/probe": "Queen compiler_probe refresh",
+    "GET /api/grok16": "Canonical Grok16 status from SG/Grok16"
+  }
+}

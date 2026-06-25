@@ -25,6 +25,7 @@ from zocr_pattern import pattern_status
 from zocr_offense import offense_status
 from zocr_trust import trust_network_status
 from zocr_product import product_info
+from zocr_field_compiler import field_compiler_status
 from zocr_vision import forge_snapshot
 
 _START = time.time()
@@ -80,6 +81,7 @@ def live_status() -> dict:
         "doctrine": "Confidence always in Vision — defense requires offense — ZOCRSM1, WRDT seals, adaptive tide.",
         "session": vs,
         "forge": forge,
+        "field_compiler": field_compiler_status(),
         "stream": stream_status(),
         "video": video_status(),
         "field": {

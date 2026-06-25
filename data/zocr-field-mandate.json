@@ -107,6 +107,27 @@
     "require_approval": true,
     "builtin": ["rtx", "xwd_silent", "grim", "mss", "hold", "synthetic"]
   },
+  "field_compiler": {
+    "spec": "data/field-compiler.json",
+    "module": "zocr_field_compiler.py",
+    "rule": "Grok16 builds sovereign RTX; FIELDC v4 compiles .fld inside AmmoOS — both wired through Queen Forge",
+    "grok16": {
+      "manifest": "Queen/data/g16-toolchain.json",
+      "probe": "Queen lib/queen-forge.py compiler_probe",
+      "profile": "field_opt",
+      "cxx_std": "gnu++26"
+    },
+    "fieldc": {
+      "version": "4.0.2026",
+      "pipeline": ".fld → ASM → AMMO .OBJ",
+      "engine": "AMOURANTHRTX/Navigator/engine/FieldFieldCc.hpp"
+    },
+    "endpoints": {
+      "GET /api/field/compiler": "Unified compiler + forge posture",
+      "GET /api/field/compiler/doctrine": "Field compiler mandate",
+      "POST /api/field/compiler/probe": "Refresh compiler_probe"
+    }
+  },
   "video": {
     "format": "ZOCRSM1",
     "spec": "data/zocr-video-format.json",

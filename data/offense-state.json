@@ -1,21 +1,19 @@
 {
   "schema": "zocr-offense-state/v1",
-  "strikes_total": 44,
-  "threat_streak": 0,
-  "preempt_armed": false,
+  "strikes_total": 51,
+  "threat_streak": 7,
+  "preempt_armed": true,
   "last_strike": {
     "schema": "zocr-offense-strike/v1",
-    "ts": "2026-06-25T11:39:52.313840+00:00",
-    "threat": "grid_jam",
+    "ts": "2026-06-25T12:37:02.564964+00:00",
+    "threat": "trust_breach",
     "strike": "reject_and_failover",
-    "offense": "pattern_strike",
-    "severity": "high",
+    "offense": "seal_threat",
+    "severity": "medium",
     "acted": [
-      "pattern_strike",
       "seal_threat"
     ],
-    "source": "xwd_silent",
-    "profile": "watch"
+    "source": "heaven_hell:hell_rip"
   },
-  "updated": "2026-06-25T11:39:52.393591+00:00"
+  "updated": "2026-06-25T12:37:02.564969+00:00"
 }

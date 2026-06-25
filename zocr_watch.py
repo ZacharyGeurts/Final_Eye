@@ -220,6 +220,46 @@ def main() -> int:
         from zocr_pattern import scan_frame
         print(json.dumps(scan_frame(Path(sys.argv[2])), indent=2))
         return 0
+    if cmd in ("bench-low-end", "bench"):
+        from zocr_bench import benchmark_low_end
+        print(json.dumps(benchmark_low_end(), indent=2))
+        return 0
+    if cmd in ("eyeball", "eyeball-status"):
+        from zocr_eye import final_eyeball_status
+        from zocr_contract import contract_status
+        from zocr_offense import offense_status
+        from zocr_trust import verify_trust_mesh
+        from zocr_entity_eyeball import twin_eyeball_status
+        print(json.dumps({
+            "ok": True,
+            "final_eyeball": final_eyeball_status(),
+            "twins": twin_eyeball_status(),
+            "contract": contract_status(),
+            "offense": offense_status(),
+            "trust_mesh": verify_trust_mesh(),
+        }, indent=2))
+        return 0
+    if cmd in ("twins", "entity-eyeball"):
+        from zocr_entity_eyeball import twin_eyeball_status
+        print(json.dumps(twin_eyeball_status(), indent=2))
+        return 0
+    if cmd in ("living-live", "make-live") and len(sys.argv) > 2:
+        from zocr_entity_eyeball import make_living_live
+        print(json.dumps(make_living_live(sys.argv[2]), indent=2))
+        return 0
+    if cmd in ("truth-forward", "forward"):
+        from zocr_entity_eyeball import truth_forward
+        print(json.dumps(truth_forward(), indent=2))
+        return 0
+    if cmd == "fire-weapon" and len(sys.argv) > 2:
+        from zocr_entity_eyeball import fire_entity_weapon
+        threat = sys.argv[3] if len(sys.argv) > 3 else None
+        print(json.dumps(fire_entity_weapon(sys.argv[2], threat=threat), indent=2))
+        return 0
+    if cmd == "robotics-arm" and len(sys.argv) > 2:
+        from zocr_robotics import arm_robotics
+        print(json.dumps(arm_robotics(sys.argv[2], start_stream="--stream" in sys.argv), indent=2))
+        return 0
     print(json.dumps({
         "error": "usage: zocr_watch.py [look|observe|status|seal|security|pattern|pattern-scan PATH|additives|vigilance-start|vigilance-stop|stream-start PROFILE|stream-stop|verify|capabilities]",
     }, indent=2))

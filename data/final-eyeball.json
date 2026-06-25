@@ -4,6 +4,10 @@
   "title": "The Final Eyeball",
   "subtitle": "One whole sight — war-sharp, dish-gentle, never flashed",
   "rule": "We never presume vision loss. Confidence always in Vision.",
+  "twins": {
+    "living": "Vita — the eyeball that lives; make perceive and stream live",
+    "truth": "Veritas — the eyeball that talks truth; always forward, guards lies, wields entity weapons"
+  },
   "vision_confidence": "Confidence always in Vision — protect biological eyes, sharpen field eye, cascade carries truth",
   "voices": [
     "tactical", "clinical", "field_poet", "maternal", "engineer",
@@ -32,11 +36,18 @@
       "Hold and vault affirm Vision — we do not announce defeat",
       "Kill switch stops hostile paths — not belief in seeing"
     ],
+    "sovereign_time": [
+      "Sovereign time always seals eyeball — monotonic pulse before status, arm, perceive",
+      "Micron witness binds mono_ns to silicon freq — SQUIDGIE on RTC tamper",
+      "Never pool-only NTP for vision receipts — operator pulse :9123 or local seal",
+      "sealed_ts on every eye_status and final_eyeball_status tick"
+    ],
     "irtn": [
       "Interwoven redundancies trust network — Hostess7 corroborates ZOCR",
-      "No single path owns truth — woven paths: live, offense, trust, egress, assist",
-      "Queen gates + NEXUS trust + WRDT + code seal = quorum",
-      "Vision lane in Hostess7 neural stack echoes field frames"
+      "No single path owns truth — woven paths: live, offense, trust, egress, assist, time",
+      "Queen gates + NEXUS trust + WRDT + code seal + sovereign time = quorum",
+      "Vision lane in Hostess7 neural stack echoes field frames",
+      "redundancy always reported — woven_paths on every eyeball arm and verify"
     ],
     "offense": [
       "Defense of vision requires offense",

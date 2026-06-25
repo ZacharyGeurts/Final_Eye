@@ -34,14 +34,16 @@
       {"id": "wrdt", "layer": "integrity", "module": "World_Redata"},
       {"id": "hostess7_truth", "layer": "corroboration", "module": "Hostess7"},
       {"id": "nexus_trust", "layer": "egress", "module": "NEXUS-Shield"},
-      {"id": "queen_gates", "layer": "mandate", "module": "Queen"}
+      {"id": "queen_gates", "layer": "mandate", "module": "Queen"},
+      {"id": "sovereign_time", "layer": "time", "module": "sovereign-time.py"}
     ],
     "edges": [
       ["capture", "pattern"], ["capture", "offense"], ["pattern", "offense"],
       ["capture", "video"], ["video", "wrdt"], ["pattern", "code_seal"],
       ["offense", "kill"], ["eye", "rig"], ["eye", "neural"], ["rig", "neural"],
       ["code_seal", "neural"], ["wrdt", "hostess7_truth"], ["hostess7_truth", "queen_gates"],
-      ["nexus_trust", "queen_gates"], ["kill", "capture"], ["video", "eye"]
+      ["nexus_trust", "queen_gates"], ["kill", "capture"], ["video", "eye"],
+      ["sovereign_time", "code_seal"], ["sovereign_time", "eye"], ["sovereign_time", "capture"]
     ]
   },
   "redundancy_paths": [
@@ -49,7 +51,8 @@
     {"id": "vision_offense", "path": ["capture", "offense", "kill", "capture"]},
     {"id": "vision_trust", "path": ["wrdt", "code_seal", "hostess7_truth", "queen_gates"]},
     {"id": "vision_egress", "path": ["nexus_trust", "queen_gates", "capture"]},
-    {"id": "vision_assist", "path": ["eye", "rig", "neural", "code_seal"]}
+    {"id": "vision_assist", "path": ["eye", "rig", "neural", "code_seal"]},
+    {"id": "vision_time", "path": ["sovereign_time", "code_seal", "eye", "capture"]}
   ],
   "quorum": {
     "min_peers": 4,

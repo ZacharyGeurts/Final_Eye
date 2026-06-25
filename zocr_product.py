@@ -1,4 +1,4 @@
-"""Final_Eye product metadata — v0.9 robotics release."""
+"""Final_Eye product metadata — v0.9.6 truth/heaven-hell release."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -11,9 +11,9 @@ if not _VERSION_FILE.is_file():
 
 PRODUCT_ID = "Final_Eye"
 PRODUCT_NAME = "The Final Eyeball"
-VERSION = "0.9.0"
+VERSION = "0.9.6"
 SCHEMA = "final-eye-product/v1"
-CODENAME = "robotics-review"
+CODENAME = "truth-heaven-hell"
 LICENSE = "proprietary"
 REPO = "https://github.com/ZacharyGeurts/Final_Eye"
 
@@ -39,6 +39,11 @@ def product_info() -> dict[str, Any]:
             "media": grkmf_id,
             "codec": codec,
             "mandate": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+            "field_compiler": {
+                "grok16": "G16 @ gnu++26 — Queen Forge compiler_probe",
+                "fieldc": "FIELDC v4 — .fld → AMMO .OBJ (FieldFieldCc)",
+            },
+            "forge": "Queen lib/queen-forge.py",
         },
         "robotics": {
             "on_demand_capture": True,
@@ -48,6 +53,12 @@ def product_info() -> dict[str, Any]:
             "combat_fps_range": [3, 20],
             "media_fps_max": 240,
             "resolution_max": "15360x8640",
+        },
+        "assist_contract": {
+            "posture": "assistive",
+            "rule": "One tenant in a shared system — bounded usage, no overflow or overdraw",
+            "env": "FINAL_EYE_ASSIST=1",
+            "module": "zocr_contract.py",
         },
         "review": {
             "target": "scientific robotics masters",

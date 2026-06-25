@@ -1,0 +1,115 @@
+/* ZOCR HUD — closed manifest tiles only, no injected markup */
+#hudBar {
+  border-bottom: 1px solid var(--border, #243044);
+  background: #0d1219;
+  padding: 0.55rem 1rem 0.65rem;
+  font-size: 0.68rem;
+}
+#hudBar .hud-rule {
+  color: var(--muted, #8b9cb3);
+  margin-bottom: 0.45rem;
+  letter-spacing: 0.03em;
+}
+#hudBar .hud-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: stretch;
+}
+#hudBar .hud-switches {
+  flex: 1 1 320px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  align-content: flex-start;
+}
+#hudBar .hud-chip {
+  border: 1px solid var(--border, #243044);
+  background: #121820;
+  color: var(--text, #e6edf3);
+  border-radius: 4px;
+  padding: 0.2rem 0.45rem;
+  font-family: inherit;
+  font-size: 0.65rem;
+  cursor: pointer;
+  line-height: 1.35;
+}
+#hudBar .hud-chip.on {
+  border-color: var(--accent, #5eead4);
+  color: var(--accent, #5eead4);
+}
+#hudBar .hud-chip.focus {
+  box-shadow: 0 0 0 1px var(--accent, #5eead4);
+}
+#hudBar .hud-chip:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+#hudBar .hud-focus {
+  flex: 1 1 280px;
+  min-width: 240px;
+  border: 1px solid var(--border, #243044);
+  border-radius: 6px;
+  padding: 0.45rem 0.55rem;
+  background: #121820;
+}
+#hudBar .hud-focus-title {
+  color: var(--muted, #8b9cb3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.6rem;
+  margin-bottom: 0.35rem;
+}
+#hudBar .hud-focus-body {
+  color: var(--text, #e6edf3);
+  line-height: 1.45;
+}
+#hudBar .hud-meter-line {
+  margin: 0.15rem 0;
+}
+#hudBar .hud-meter-line span {
+  color: var(--accent, #5eead4);
+}
+#hudBar .hud-spectrum {
+  margin-top: 0.35rem;
+}
+#hudBar .hud-gamut {
+  display: flex;
+  height: 10px;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid var(--border, #243044);
+  margin: 0.35rem 0 0.25rem;
+}
+#hudBar .hud-gamut-seg {
+  min-width: 2px;
+  opacity: 0.55;
+}
+#hudBar .hud-gamut-seg.active {
+  opacity: 1;
+  outline: 1px solid #fff;
+  z-index: 1;
+}
+#hudBar .hud-gamut-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  color: var(--muted, #8b9cb3);
+  font-size: 0.58rem;
+}
+#hudBar .hud-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 0 0 auto;
+}
+#hudBar .hud-actions button {
+  margin: 0;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.65rem;
+}
+#hudBar .hud-count {
+  color: var(--muted, #8b9cb3);
+  text-align: right;
+  font-size: 0.6rem;
+}

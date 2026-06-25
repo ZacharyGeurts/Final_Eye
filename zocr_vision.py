@@ -76,30 +76,8 @@ def _procs() -> list[str]:
 
 
 def forge_snapshot() -> dict[str, Any]:
-    tail = _read_tail(FORGE_LOG, 18)
-    bin_path = _find_binary()
-    stage = _stage_from_tail(tail)
-    if bin_path:
-        stage = "binary_ready"
-    rtx_files = 0
-    if RTX_BUILD.is_dir():
-        try:
-            rtx_files = sum(1 for _ in RTX_BUILD.rglob("*") if _.is_file())
-        except OSError:
-            pass
-    return {
-        "ts": _ts(),
-        "stage": stage,
-        "binary_ready": bin_path is not None,
-        "binary": str(bin_path) if bin_path else None,
-        "forge_log_bytes": FORGE_LOG.stat().st_size if FORGE_LOG.is_file() else 0,
-        "rtx_file_count": rtx_files,
-        "cmake_cache": (RTX_BUILD / "CMakeCache.txt").is_file(),
-        "makefile": (RTX_BUILD / "Makefile").is_file(),
-        "running": bool(_procs()) and stage not in ("binary_ready", "failed", "rtx_done"),
-        "procs": _procs(),
-        "tail": tail,
-    }
+    from zocr_field_compiler import forge_posture
+    return forge_posture()
 
 
 def _latest_ppm() -> Path | None:
@@ -151,8 +129,8 @@ def grab_frame(*, prefer: str = "auto", preserve: bool = True) -> tuple[Path | N
     return None, "none"
 
 
-def look(*, label: str = "look", prefer: str = "auto") -> dict[str, Any]:
-    """On-demand vision — one frame when you ask. No quota."""
+def look(*, label: str = "look", prefer: str = "auto", enhance_eye: bool | None = None) -> dict[str, Any]:
+    """On-demand vision — one frame when you ask. Eye runs cool unless enhance_eye."""
     from zocr import ocr_image, write_capture, tesseract_available
 
     forge = forge_snapshot()
@@ -163,19 +141,28 @@ def look(*, label: str = "look", prefer: str = "auto") -> dict[str, Any]:
         acq = acquire_preserved(prefer=prefer, allow_hold=True)
         preserve_meta = acq
         if acq.get("path"):
-            from zocr_stereo import perceive_rig
-            rig = perceive_rig(acq["path"])
+            from zocr_cool import cool_enabled, register_worker
+            register_worker("preserve")
+            run_eye = enhance_eye
+            if run_eye is None:
+                run_eye = os.environ.get("ZOCR_LOOK_EYE", "").strip().lower() in ("1", "true", "yes")
+                if cool_enabled() and not run_eye:
+                    run_eye = False
             image = Path(acq["path"])
-            for e in rig.get("eyes", []):
-                if e.get("role") in ("center", "left") and e.get("path"):
-                    image = Path(e["path"])
-                    break
-            else:
+            eye_meta: dict[str, Any] = {"rig": {}, "eyes": [], "stereo": {}, "cool_skip": not run_eye}
+            if run_eye:
+                from zocr_stereo import perceive_rig
+                rig = perceive_rig(acq["path"], on_demand=True)
+                eye_meta = {"rig": rig, "eyes": rig.get("eyes", []), "stereo": rig.get("stereoscopic", {})}
                 for e in rig.get("eyes", []):
-                    if e.get("path"):
+                    if e.get("role") in ("center", "left") and e.get("path"):
                         image = Path(e["path"])
                         break
-            eye_meta = {"rig": rig, "eyes": rig.get("eyes", []), "stereo": rig.get("stereoscopic", {})}
+                else:
+                    for e in rig.get("eyes", []):
+                        if e.get("path"):
+                            image = Path(e["path"])
+                            break
             source = acq.get("source", "none")
         else:
             image, source, eye_meta = None, "none", {}

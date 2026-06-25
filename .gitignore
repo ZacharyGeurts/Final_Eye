@@ -20,6 +20,7 @@ data/neural-analysis.jsonl
 data/eye-teach.jsonl
 data/vigilance-log.jsonl
 data/pattern-security.jsonl
+data/sovereign-time-state/sovereign-time-key.bin
 manifest.jsonl
 *.grkm
-.DS_Store
+.DS_Storedata/sovereign-time-state/sovereign-time-key.bin

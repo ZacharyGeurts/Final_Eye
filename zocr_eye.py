@@ -1,4 +1,4 @@
-"""ZOCR ocular spectrum v2 — cone sensitivity, adaptation, foveal acuity."""
+"""ZOCR ocular spectrum v2 — cone sensitivity, adaptation, foveal acuity; Grok16 field_opt tuned."""
 from __future__ import annotations
 
 import json
@@ -6,9 +6,11 @@ import math
 import os
 import tempfile
 from datetime import datetime, timezone
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
+from zocr_grok16 import grok16_eye_tune, grok16_eye_witness, grok16_profile_for_eye, grok16_profile_for_mode
 from zocr_session import log_event
 
 _ROOT = Path(__file__).resolve().parent
@@ -178,14 +180,74 @@ def _activations_to_display(acts: list[float], spec: dict[str, Any]) -> tuple[in
     return _clamp(acts[0]), _clamp(acts[1]), _clamp(acts[2])
 
 
-def _cone_perceive_bytes(rgb: bytes, spec: dict[str, Any]) -> bytes:
+def _active_grok16_tune(*, profile_id: str | None = None) -> dict[str, Any]:
+    mode = _load_final_state().get("active_mode", "dishes")
+    return grok16_eye_tune(mode=mode, eye_profile=profile_id or active_profile())
+
+
+@lru_cache(maxsize=32)
+def _cone_kernel_cached(profile_id: str, adapt_key: int) -> tuple[Any, ...]:
+    spec = profile_spec(profile_id)
+    adapt = adapt_key / 1000.0
+    cones = spec.get("cones")
+    display = spec.get("display_matrix")
+    uv = bool(spec.get("uv_sensitive"))
+    return (cones, display, uv, adapt, spec.get("matrix"))
+
+
+def _cone_perceive_bytes(
+    rgb: bytes,
+    spec: dict[str, Any],
+    *,
+    tune: dict[str, Any] | None = None,
+    profile_id: str | None = None,
+) -> bytes:
+    pid = profile_id or spec.get("id") or active_profile()
+    t = tune or _active_grok16_tune(profile_id=pid)
+    adapt = float(spec.get("adaptation", 0.12)) * float(t.get("adaptation_scale", 1.0))
+    adapt_key = int(round(adapt * 1000))
+    cones, display, uv, _, matrix = _cone_kernel_cached(pid, adapt_key)
+
+    try:
+        import numpy as np
+        arr = np.frombuffer(rgb, dtype=np.uint8).reshape(-1, 3).astype(np.float32)
+        c = arr / 255.0
+        lin = np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
+        if cones:
+            w = np.array([c.get("weights", [0.33, 0.33, 0.34]) for c in cones], dtype=np.float32)
+            acts = lin @ w.T
+            if uv:
+                uv_ch = np.maximum(0.0, lin[:, 2] * 1.2 - lin[:, 0] * 0.35)
+                acts = np.column_stack([acts, uv_ch])
+        else:
+            m = np.array(matrix or [[1, 0, 0], [0, 1, 0], [0, 0, 1]], dtype=np.float32)
+            acts = arr @ m.T
+        mean_a = acts.mean(axis=1) / 255.0
+        gain = 1.0 / (1.0 + adapt * 10.0 * mean_a)
+        acts = acts * gain[:, np.newaxis]
+        if display is not None:
+            d = np.array(display, dtype=np.float32)
+            out_rgb = acts @ d.T
+        elif acts.shape[1] >= 4:
+            out_rgb = np.column_stack([
+                acts[:, 0] * 0.9 + acts[:, 3] * 0.15,
+                acts[:, 1] * 0.95 + acts[:, 3] * 0.05,
+                acts[:, 2] * 1.1 + acts[:, 3] * 0.45,
+            ])
+        else:
+            out_rgb = acts[:, :3]
+        out_rgb = np.clip(np.round(out_rgb), 0, 255).astype(np.uint8)
+        return out_rgb.tobytes()
+    except ImportError:
+        pass
+
     out = bytearray(len(rgb))
-    adapt = float(spec.get("adaptation", 0.12))
+    adapt_gain_k = adapt * 10.0
     for i in range(0, len(rgb), 3):
         r, g, b = rgb[i], rgb[i + 1], rgb[i + 2]
         acts = _receptor_activations(r, g, b, spec)
         mean_a = sum(acts) / max(len(acts), 1) / 255.0
-        gain = 1.0 / (1.0 + adapt * 10.0 * mean_a)
+        gain = 1.0 / (1.0 + adapt_gain_k * mean_a)
         acts = [a * gain for a in acts]
         nr, ng, nb = _activations_to_display(acts, spec)
         out[i], out[i + 1], out[i + 2] = nr, ng, nb
@@ -253,9 +315,18 @@ def _rod_scotopic(img: Any) -> Any:
     return lum.convert("RGB")
 
 
-def perceive(path: Path, *, profile_id: str | None = None, out_path: Path | None = None) -> tuple[Path | None, dict[str, Any]]:
+def perceive(
+    path: Path,
+    *,
+    profile_id: str | None = None,
+    out_path: Path | None = None,
+    on_demand: bool = False,
+) -> tuple[Path | None, dict[str, Any]]:
     pid = profile_id or active_profile()
     spec = profile_spec(pid)
+    mode = _load_final_state().get("active_mode", "dishes")
+    tune = grok16_eye_tune(mode=mode, eye_profile=pid)
+    engine = tune.get("engine", spec.get("engine", ENGINE))
     meta: dict[str, Any] = {
         "profile": pid,
         "label": spec.get("label", pid),
@@ -263,9 +334,11 @@ def perceive(path: Path, *, profile_id: str | None = None, out_path: Path | None
         "range_nm": spec.get("range_nm", []),
         "receptors": spec.get("receptors", []),
         "mode": spec.get("mode", "matrix"),
-        "engine": spec.get("engine", ENGINE),
+        "engine": engine,
         "teach": spec.get("teach", ""),
         "perceived": pid != "human",
+        "grok16": tune,
+        "field_compiler": grok16_eye_witness(mode=mode, eye_profile=pid),
     }
 
     if not path.is_file():
@@ -275,45 +348,69 @@ def perceive(path: Path, *, profile_id: str | None = None, out_path: Path | None
         return path, meta
 
     try:
+        from zocr_cool import cool_status, eye_budget, eye_may_run, prepare_eye_image, yield_share
+        meta["cool"] = cool_status()
+        if not eye_may_run(on_demand=on_demand):
+            meta["perceived"] = False
+            meta["cool_skip"] = True
+            return path, meta
+        budget = eye_budget(on_demand=on_demand)
+        meta["eye_budget"] = budget
+    except ImportError:
+        budget = {}
+
+    try:
         from PIL import Image
     except ImportError:
         return path, {**meta, "error": "pil_missing"}
 
     try:
         img = Image.open(path).convert("RGB")
+        img, budget_meta = prepare_eye_image(img, on_demand=on_demand)
+        if budget_meta:
+            meta["eye_budget"] = budget_meta
         mode = spec.get("mode", "matrix")
+        allow_thermal = budget.get("allow_thermal", True) if budget else True
+        allow_foveal = budget.get("allow_foveal", True) if budget else True
 
         if mode == "luminance":
             img = _rod_scotopic(img)
         elif mode == "thermal_overlay":
-            img = _thermal_overlay(img)
-            if spec.get("cones") or spec.get("engine") == ENGINE:
-                raw = _cone_perceive_bytes(img.tobytes(), spec)
+            if allow_thermal:
+                img = _thermal_overlay(img)
+            if spec.get("cones") or spec.get("engine", ENGINE).startswith("cone_v2"):
+                raw = _cone_perceive_bytes(img.tobytes(), spec, tune=tune, profile_id=pid)
                 img = Image.frombytes("RGB", img.size, raw)
             elif spec.get("matrix"):
                 raw = _apply_matrix(img.tobytes(), spec["matrix"])
                 img = Image.frombytes("RGB", img.size, raw)
-        elif spec.get("cones") or spec.get("engine") == ENGINE:
-            raw = _cone_perceive_bytes(img.tobytes(), spec)
+        elif spec.get("cones") or spec.get("engine", ENGINE).startswith("cone_v2"):
+            raw = _cone_perceive_bytes(img.tobytes(), spec, tune=tune, profile_id=pid)
             img = Image.frombytes("RGB", img.size, raw)
         else:
             matrix = spec.get("matrix", [[1, 0, 0], [0, 1, 0], [0, 0, 1]])
             raw = _apply_matrix(img.tobytes(), matrix)
             img = Image.frombytes("RGB", img.size, raw)
 
-        if spec.get("post") == "sharpen" or spec.get("foveal"):
-            img = _foveal_acuity(img, strength=float(spec.get("foveal_strength", 0.65)))
+        foveal_base = float(spec.get("foveal_strength", 0.65))
+        foveal_strength = min(1.0, foveal_base * float(tune.get("foveal_scale", 1.0)))
+        if allow_foveal and (spec.get("post") == "sharpen" or spec.get("foveal")):
+            img = _foveal_acuity(img, strength=foveal_strength)
 
         EYE_OUT.mkdir(parents=True, exist_ok=True)
         dst = out_path or EYE_OUT / f"{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}_{pid}.png"
         img.save(dst, optimize=True)
         meta["path"] = str(dst)
+        try:
+            yield_share(on_demand=on_demand)
+        except Exception:
+            pass
         return dst if dst.is_file() else path, meta
     except Exception as exc:
         return path, {**meta, "error": str(exc)}
 
 
-def perceive_if_active(path: Path | str | None) -> tuple[Path | None, dict[str, Any]]:
+def perceive_if_active(path: Path | str | None, *, on_demand: bool = False) -> tuple[Path | None, dict[str, Any]]:
     if not path:
         return None, {"profile": active_profile(), "perceived": False}
     path = Path(path)
@@ -327,7 +424,7 @@ def perceive_if_active(path: Path | str | None) -> tuple[Path | None, dict[str, 
             "engine": ENGINE,
             "teach": spec.get("teach", ""),
         }
-    out, meta = perceive(path, profile_id=pid)
+    out, meta = perceive(path, profile_id=pid, on_demand=on_demand)
     return out, meta
 
 
@@ -412,6 +509,17 @@ def speak_final(
     }
 
 
+def _eyeball_witness(*, seal: bool = True) -> dict[str, Any]:
+    try:
+        from zocr_sovereign_time import eyeball_time_and_redundancy
+        return eyeball_time_and_redundancy(seal=seal)
+    except ImportError:
+        return {
+            "sovereign_time": {"always": True, "ok": False, "error": "zocr_sovereign_time missing"},
+            "redundancy": {"always": True, "ok": False, "error": "zocr_sovereign_time missing"},
+        }
+
+
 def set_final_mode(
     mode: str,
     *,
@@ -445,6 +553,13 @@ def set_final_mode(
     _save_final_state(st)
 
     spoken = speak_final(mode=mode, voice=voice or st.get("active_voice"))
+    witness = _eyeball_witness(seal=True)
+    g16_tune = grok16_eye_tune(mode=mode, eye_profile=m.get("eye_profile"))
+    st["sovereign_time"] = witness.get("sovereign_time")
+    st["redundancy"] = witness.get("redundancy")
+    st["grok16_profile"] = g16_tune.get("grok16_profile")
+    _save_final_state(st)
+
     log_event(
         "final_eyeball",
         ok=True,
@@ -453,6 +568,8 @@ def set_final_mode(
         rig=m.get("rig_preset"),
         video=m.get("video_profile"),
         source=source,
+        sovereign_verdict=(witness.get("sovereign_time") or {}).get("verdict"),
+        redundancy_woven=(witness.get("redundancy") or {}).get("woven_paths"),
     )
     return {
         "ok": eye_result.get("ok", False) and rig_result.get("ok", False),
@@ -463,6 +580,10 @@ def set_final_mode(
         "prescription": spoken.get("prescription"),
         "speak": spoken.get("speak"),
         "voice": spoken.get("voice"),
+        "sovereign_time": witness.get("sovereign_time"),
+        "redundancy": witness.get("redundancy"),
+        "grok16": g16_tune,
+        "field_compiler": grok16_eye_witness(mode=mode, eye_profile=m.get("eye_profile")),
         "video_hint": (
             f"POST /api/stream/start {{\"profile\":\"{m.get('video_profile', 'idle')}\"}}"
             if m.get("video_profile") and m.get("video_profile") != "idle"
@@ -495,9 +616,12 @@ def final_eyeball_status() -> dict[str, Any]:
     st = _load_final_state()
     mid = st.get("active_mode", "dishes")
     spoken = speak_final(mode=mid, voice=st.get("active_voice"))
+    witness = _eyeball_witness(seal=True)
+    sealed_mono = (witness.get("sovereign_time") or {}).get("sealed_mono_ns")
     return {
         "schema": "zocr-final-eyeball-status/v1",
         "ts": _ts(),
+        "sealed_ts": sealed_mono,
         "title": doc.get("title"),
         "active_mode": mid,
         "active_voice": st.get("active_voice", "robotics_brief"),
@@ -506,22 +630,65 @@ def final_eyeball_status() -> dict[str, Any]:
         "speak": spoken.get("speak"),
         "prescription": spoken.get("prescription"),
         "preservation": doc.get("preservation", {}),
+        "sovereign_time": witness.get("sovereign_time"),
+        "redundancy": witness.get("redundancy"),
+        "twins": _twin_eyeballs(),
         "eye": eye_status(),
+        "grok16": grok16_eye_tune(mode=mid, eye_profile=(spoken.get("prescription") or {}).get("eye_profile")),
+        "field_compiler": grok16_eye_witness(
+            mode=mid,
+            eye_profile=(spoken.get("prescription") or {}).get("eye_profile"),
+        ),
         "path": str(FINAL_PATH),
     }
 
 
+def _twin_eyeballs() -> dict[str, Any]:
+    try:
+        from zocr_entity_eyeball import (
+            _load_state as entity_state,
+            entity_weapons,
+            living_eyeball_status,
+            truth_eyeball_status,
+        )
+        st = entity_state()
+        return {
+            "schema": "zocr-twin-eyeball-summary/v1",
+            "living": living_eyeball_status(),
+            "truth": truth_eyeball_status(),
+            "both_live": bool(st.get("living_live")),
+            "always_forward": bool(st.get("truth_forward", True)),
+            "weapons_armed": bool(st.get("weapons_armed", True)),
+            "weapons": entity_weapons(),
+        }
+    except ImportError:
+        return {"error": "zocr_entity_eyeball missing"}
+
+
 def spectrum_doctrine() -> dict[str, Any]:
     doc = load_doctrine()
+    mode = _load_final_state().get("active_mode", "dishes")
+    pid = active_profile()
     return {
         "schema": "zocr-spectrum-doctrine/v2",
         "title": "Ocular spectrum — cone sensitivity engine",
-        "engine": ENGINE,
+        "engine": grok16_eye_tune(mode=mode, eye_profile=pid).get("engine", ENGINE),
         "doctrine": doc.get("doctrine"),
         "profiles": list_profiles(),
-        "active": active_profile(),
+        "active": pid,
         "taught": _load_state().get("taught", []),
+        "grok16_profile": grok16_profile_for_mode(mode),
+        "eye_grok16_profile": grok16_profile_for_eye(pid),
+        "field_compiler": grok16_eye_witness(mode=mode, eye_profile=pid),
     }
+
+
+def _cool_summary() -> dict[str, Any]:
+    try:
+        from zocr_contract import contract_status
+        return contract_status()
+    except ImportError:
+        return {"enabled": False, "posture": "assistive"}
 
 
 def eye_status() -> dict[str, Any]:
@@ -535,10 +702,15 @@ def eye_status() -> dict[str, Any]:
                     recent.append(json.loads(line))
         except (OSError, json.JSONDecodeError):
             pass
+    witness = _eyeball_witness(seal=False)
+    st_doc = witness.get("sovereign_time") or {}
+    mode = _load_final_state().get("active_mode", "dishes")
+    tune = grok16_eye_tune(mode=mode, eye_profile=pid)
     return {
         "schema": "zocr-eye-status/v2",
         "ts": _ts(),
-        "engine": ENGINE,
+        "sealed_ts": st_doc.get("sealed_mono_ns"),
+        "engine": tune.get("engine", ENGINE),
         "active_profile": pid,
         "label": spec.get("label"),
         "class": spec.get("class"),
@@ -550,7 +722,12 @@ def eye_status() -> dict[str, Any]:
         "taught": _load_state().get("taught", []),
         "recent_teach": recent,
         "doctrine_path": str(DOCTRINE_PATH),
-        "rule": "Cone v2 — receptor weights, retinal adaptation, foveal acuity, UV channel",
+        "rule": "Cone v2 + Grok16 field_opt — entropy dispatch adaptation, wave-phase fovea",
+        "grok16": tune,
+        "field_compiler": grok16_eye_witness(mode=mode, eye_profile=pid),
+        "cool": _cool_summary(),
+        "sovereign_time": st_doc,
+        "redundancy": witness.get("redundancy"),
         "final_eyeball": {
             "active_mode": _load_final_state().get("active_mode"),
             "title": load_final_eyeball().get("title"),

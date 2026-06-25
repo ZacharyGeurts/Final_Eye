@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ZOCR · Field Robotics Vision</title>
+  <link rel="stylesheet" href="/hud.css">
   <style>
     :root {
       --bg:#0a0e14; --panel:#121820; --text:#e6edf3; --muted:#8b9cb3;
@@ -34,6 +35,7 @@
     <h1>ZOCR · Field Robotics Vision</h1>
     <div class="sub" id="meta">ZOCRSM1 sub-micron video · WRDT seals · adaptive tide</div>
   </header>
+  <div id="hudBar" aria-label="HUD module bar"></div>
   <main>
     <section id="stream">
       <h2>Video · ZOCRSM1 (no flash)</h2>
@@ -229,8 +231,16 @@
       const off = d.offense || {};
       const tr = d.trust || {};
       const fe = d.final_eyeball || {};
+      const fc = d.field_compiler || {};
+      const g16 = fc.grok16 || {};
+      const fld = fc.fieldc || {};
+      const fcLine = g16.version || g16.dumpversion
+        ? `G16 ${g16.version || g16.dumpversion} · FIELDC ${fld.version || '4.0.2026'}`
+        : '';
       document.getElementById('meta').textContent =
-        (fe.title ? fe.title + ' · ' : '') + (d.doctrine || '');
+        (fe.title ? fe.title + ' · ' : '') +
+        (fcLine ? fcLine + ' · ' : '') +
+        (d.doctrine || '');
       document.getElementById('finalEyeStats').innerHTML =
         `mode <span>${fe.active_mode || '—'}</span> · voice <span>${fe.active_voice || '—'}</span> · ` +
         `eye <span>${(fe.eye && fe.eye.label) || '—'}</span>`;
@@ -444,5 +454,6 @@
     refresh().catch(() => { document.getElementById('meta').textContent = 'Offline — ./start.sh --no-open'; });
     setInterval(() => refresh().catch(() => {}), 5000);
   </script>
+  <script src="/hud-modules.js"></script>
 </body>
 </html>

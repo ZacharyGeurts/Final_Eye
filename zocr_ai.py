@@ -19,6 +19,7 @@ from zocr_vigilance import vigilance_status
 from zocr_session import vision_status
 from zocr_stream import fps_profiles, stream_status
 from zocr_video import format_doctrine, video_status
+from zocr_field_compiler import field_compiler_status
 from zocr_vision import forge_snapshot, look
 
 _ROOT = Path(__file__).resolve().parent
@@ -27,6 +28,21 @@ SG = _ROOT.parent
 
 def _ts() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _assist_limits() -> dict[str, Any]:
+    try:
+        from zocr_contract import contract_status
+        c = contract_status()
+        return {
+            "posture": c.get("posture", "assistive"),
+            "flash_capture": False,
+            "overflow": False,
+            "contract": c.get("contract", {}).get("budgets", {}),
+            "usage": c.get("usage", {}),
+        }
+    except ImportError:
+        return {"posture": "assistive", "flash_capture": False}
 
 
 def capabilities() -> dict[str, Any]:
@@ -67,7 +83,7 @@ def capabilities() -> dict[str, Any]:
         "rig": rig_status(),
         "neural": neural_status(),
         "backends": capture_backends(),
-        "limits": {"frame_quota": None, "flash_capture": False},
+        "limits": _assist_limits(),
         "endpoints": {
             "GET /api/stream/mjpeg?profile=watch": "MJPEG view — set FPS via profile",
             "POST /api/stream/start": "{\"profile\":\"tactical\",\"prefer\":\"auto\"}",
@@ -98,6 +114,8 @@ def capabilities() -> dict[str, Any]:
             "GET /api/rig": "Multi-eye rig + stereoscopic status",
             "POST /api/rig/configure": "{\"preset\":\"stereo_human\"} or custom eyes array",
             "POST /api/neural/analyze": "Protected NN assistance on frame",
+            "GET /api/field/compiler": "Grok16 + FIELDC v4 + Queen forge posture",
+            "POST /api/field/compiler/probe": "Refresh Queen compiler_probe",
         },
         "paths": {
             "root": str(_ROOT),
@@ -137,7 +155,8 @@ def robotics_context(*, capture: dict[str, Any] | None = None) -> dict[str, Any]
             "resolved": st.get("resolved"),
         },
         "grkmf_ai_tune": tune,
-        "forge": {k: v for k, v in forge.items() if k != "tail"},
+        "forge": {k: v for k, v in forge.items() if k not in ("tail", "grok16", "fieldc")},
+        "field_compiler": field_compiler_status(),
         "protection": {
             "mandate_id": load_mandate().get("mandate_id"),
             "chain": verify_chain(tail=3),

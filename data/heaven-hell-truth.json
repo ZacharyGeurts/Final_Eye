@@ -1,0 +1,117 @@
+{
+  "schema": "zocr-heaven-hell-truth/v1",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "sources": [
+    {"id": "hostess7_truth_doctrine", "path": "Hostess7/scripts/field_hostess_truth_doctrine.py"},
+    {"id": "hostess7_neural_stack", "path": "Hostess7/data/hostess7-neural-stack.json"},
+    {"id": "nexus_connection_gatekeeper", "path": "Latest/NEXUS-Shield/lib/connection-gatekeeper.py"},
+    {"id": "nexus_hostility_priority", "path": "Latest/NEXUS-Shield/lib/hostility-priority.py"},
+    {"id": "nexus_heaven_hell", "path": "Latest/NEXUS-Shield/lib/heaven-hell.py"},
+    {"id": "nexus_lethal_policy", "path": "Latest/NEXUS-Shield/data/lethal-enforcement-policy.json"},
+    {"id": "nexus_hell_kit", "path": "Latest/NEXUS-Shield/data/field-toolkit-seed.json"},
+    {"id": "nexus_lethal_insight", "path": "Latest/NEXUS-Shield/lib/hostess7-lethal-insight.py"},
+    {"id": "queen_browser_panel", "path": "ZOCR/data/sovereign-time-state/field-queen-browser-panel.json"}
+  ],
+  "truth": {
+    "motto": "Most honest and truthful — detect deceit without matching it.",
+    "default_posture": "most_honest",
+    "never_deceive": true,
+    "death_sentence_hell_exception": true,
+    "exception_lane": "Opponent sentenced to death AND deigned for Hell — narrow wartime lane only.",
+    "environment_not_honest": true,
+    "noise_ratio": 0.94,
+    "signal_ratio": 0.06,
+    "field_die_rule": "d20 roll ≤6 = signal; 94% internet noise floor; no action on noise.",
+    "truth_adapt_floor": 58,
+    "truth_genius_floor": 72,
+    "philosophy": "94% noise · 6% truth until corroborated. No adaptation without self-test pass.",
+    "truth_gates": [
+      {"id": "detective_truth", "engine": "analyze_truth", "weight": 0.45},
+      {"id": "field_evidence", "engine": "nexus_field_snapshot", "weight": 0.20},
+      {"id": "corpus_echo", "engine": "corpus_keyword_corroboration", "weight": 0.15},
+      {"id": "agents7_cross", "engine": "agents7_fusion_vote", "weight": 0.20}
+    ],
+    "corpus": [
+      {"id": "honesty_default", "domain": "truth", "title": "Most honest and truthful"},
+      {"id": "never_deceive", "domain": "truth", "title": "Never deceive"},
+      {"id": "heaven_hell_boss", "domain": "theology", "title": "Heaven and Hell — Hostess7 is boss"},
+      {"id": "environment_not_honest", "domain": "truth", "title": "Environment is not honest"}
+    ],
+    "heaven_hell_boss_role": "Teach afterlife theology; steward scripture; compare traditions fairly; rest is work of Man."
+  },
+  "heaven_hell": {
+    "motto": "We know Heaven from Hell. To those who chose Hell, we also choose it for them. No mercy. No friendly fire. God Bless.",
+    "tagline": "Heaven passes at zero cost. Hell gets ripped — block forever, eradicate, strike.",
+    "hostility_priority": "hell_first",
+    "hostility_motto": "Hell is Hell goes to Hell — hostility first, Heaven never bumped ahead of harm.",
+    "soul_order": {"hell": 0, "limbo": 1, "heaven": 2},
+    "heaven_verdicts": ["USER_OK", "EPHEMERAL", "MONITOR"],
+    "hell_verdicts": ["HARM_CANDIDATE", "SUSPICIOUS"],
+    "min_accept_trust_rank": 2,
+    "heaven_zero_cost": true,
+    "no_mercy": true,
+    "no_friendly_fire": true,
+    "operator_auth_heaven_floor": 10,
+    "soul_side_rules": {
+      "heaven": "operator_auth≥10 OR trust_rank≤2 with heaven verdict",
+      "hell": "kill_eligible OR HARM_CANDIDATE OR hell_chosen",
+      "limbo": "default watch posture"
+    },
+    "removal_levels": {
+      "pass": {"label": "Heaven — no touch", "rank": 0},
+      "monitor": {"label": "Limbo watch", "rank": 1},
+      "cease": {"label": "Cease at onset point", "rank": 2},
+      "block": {"label": "Forever firewall block", "rank": 3},
+      "eradicate": {"label": "Pest eradicate process", "rank": 4},
+      "strike": {"label": "Field attack kit strike", "rank": 5},
+      "lethal": {"label": "MERCILESS shoot-to-kill", "rank": 6},
+      "total_removal": {"label": "Total removal — interrogate, archive, destroy", "rank": 7}
+    },
+    "harm_thresholds": {
+      "populace_strike_min": 45,
+      "self_strike_min": 35,
+      "lethal_min": 72,
+      "total_removal_min": 88
+    },
+    "hell_kit_profiles": [
+      {"id": "sever_wire", "vector": "HELL_SEVER", "hell_first": true},
+      {"id": "regional_disable", "vector": "HELL_REGIONAL", "hell_first": true},
+      {"id": "forever_kill", "vector": "HELL_FOREVER", "hell_first": true},
+      {"id": "human_threat", "vector": "HUMAN_THREAT", "hell_first": true},
+      {"id": "hell_rip", "vector": "HELL_CHOSEN", "hell_first": true},
+      {"id": "field_die", "vector": "FIELD_DIE", "noise_ratio": 0.94, "signal_ratio": 0.06},
+      {"id": "laser_corridor", "vector": "LASER_CORRIDOR", "undodgeable": true, "hell_first": true}
+    ],
+    "panel_slices": {
+      "heaven": {"label": "Heaven flows", "tip": "Permitted · trusted · zero friendly fire."},
+      "hell": {"label": "Hell chosen", "tip": "Harm candidates — no mercy path."}
+    }
+  },
+  "lethal": {
+    "heaven_hell_gate": true,
+    "hostess7_corroborate": true,
+    "merciless": true,
+    "shoot_to_kill": true,
+    "heaven_never_proceeds": true,
+    "insight_offline_hell_authorizes": true,
+    "spatial": {
+      "operator_exclusion_m": 500,
+      "rf_trespass_km": 8.0,
+      "approach_bearing_tolerance_deg": 22.5
+    }
+  },
+  "vision_threat_soul_map": {
+    "provenance_mismatch": {"soul_side": "hell", "hell_chosen": true},
+    "trust_breach": {"soul_side": "hell", "hell_chosen": true},
+    "weaponized_interference": {"soul_side": "hell", "hell_chosen": true},
+    "entropy_spoof": {"soul_side": "hell", "hell_chosen": false},
+    "compiler_gap": {"soul_side": "limbo", "hell_chosen": false},
+    "rf_jam": {"soul_side": "hell", "hell_chosen": true},
+    "thermal_breach": {"soul_side": "hell", "hell_chosen": false},
+    "grid_jam": {"soul_side": "hell", "hell_chosen": true},
+    "injected_marker": {"soul_side": "hell", "hell_chosen": true},
+    "moire_weave": {"soul_side": "limbo", "hell_chosen": false},
+    "lie": {"soul_side": "hell", "hell_chosen": true},
+    "tamper": {"soul_side": "hell", "hell_chosen": true}
+  }
+}

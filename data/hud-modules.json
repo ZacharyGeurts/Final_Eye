@@ -1,0 +1,199 @@
+{
+  "schema": "zocr-hud-modules/v1",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "rule": "Closed manifest only — no runtime modules, no injected HTML, no bullshit",
+  "max_active": 8,
+  "groups": ["vision", "spectrum", "robotics", "truth", "field"],
+  "actions": ["enable", "disable", "toggle", "focus", "analyze"],
+  "modules": {
+    "spectrum": {
+      "label": "Spectrum",
+      "kind": "spectrum",
+      "group": "spectrum",
+      "api": "/api/eye/doctrine",
+      "default": true,
+      "actions": ["enable", "disable", "toggle", "focus", "analyze"],
+      "describe": "Ocular gamut — cone weights, nm range, taught profile"
+    },
+    "stream_meter": {
+      "label": "Stream",
+      "kind": "meter",
+      "group": "robotics",
+      "api": "/api/video",
+      "default": true,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "ZOCRSM1 fps · fabric nm/px · adaptive scale"
+    },
+    "stereo_depth": {
+      "label": "Stereo",
+      "kind": "meter",
+      "group": "robotics",
+      "api": "/api/rig",
+      "default": false,
+      "actions": ["enable", "disable", "toggle", "focus"],
+      "describe": "Multi-eye rig — monocular/stereo/compound"
+    },
+    "threat_overlay": {
+      "label": "Threats",
+      "kind": "meter",
+      "group": "truth",
+      "api": "/api/preserve",
+      "default": true,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "Preserve cascade — threats, failovers, confidence"
+    },
+    "sovereign_clock": {
+      "label": "Time",
+      "kind": "meter",
+      "group": "field",
+      "api": "/api/hud/module/sovereign_clock",
+      "default": true,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "Sovereign sealed monotonic witness"
+    },
+    "trust_woven": {
+      "label": "Trust",
+      "kind": "meter",
+      "group": "truth",
+      "api": "/api/trust",
+      "default": false,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "IRTN woven paths · Hostess7 corroboration"
+    },
+    "twin_entity": {
+      "label": "Twins",
+      "kind": "meter",
+      "group": "truth",
+      "api": "/api/eye/twins",
+      "default": true,
+      "actions": ["enable", "disable", "toggle", "focus"],
+      "describe": "Vita lives · Veritas forward"
+    },
+    "final_mode": {
+      "label": "Mode",
+      "kind": "meter",
+      "group": "robotics",
+      "api": "/api/eye/final",
+      "default": true,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "Final Eyeball prescription — war/dishes/patrol"
+    },
+    "neural_assist": {
+      "label": "Neural",
+      "kind": "meter",
+      "group": "robotics",
+      "api": "/api/neural",
+      "default": false,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "Protected assist network seal"
+    },
+    "pattern_weave": {
+      "label": "Pattern",
+      "kind": "meter",
+      "group": "truth",
+      "api": "/api/pattern",
+      "default": false,
+      "actions": ["enable", "disable", "toggle", "analyze"],
+      "describe": "Provenance weave · foreign pattern detect"
+    },
+    "kill_gate": {
+      "label": "Kill",
+      "kind": "meter",
+      "group": "field",
+      "api": "/api/kill",
+      "default": true,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "One whole authority — eyes protected"
+    },
+    "offense_streak": {
+      "label": "Offense",
+      "kind": "meter",
+      "group": "truth",
+      "api": "/api/offense",
+      "default": false,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "Vision offense — streak, preempt RTX"
+    },
+    "capture_cascade": {
+      "label": "Cascade",
+      "kind": "meter",
+      "group": "vision",
+      "api": "/api/preserve",
+      "default": false,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "Ingress source — rtx/xwd/hold failover"
+    },
+    "ocr_hud": {
+      "label": "OCR",
+      "kind": "meter",
+      "group": "robotics",
+      "api": "/api/hud/module/ocr_hud",
+      "default": false,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "Last look text snippet"
+    },
+    "contract_budget": {
+      "label": "Budget",
+      "kind": "meter",
+      "group": "field",
+      "api": "/api/hud/module/contract_budget",
+      "default": false,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "Assist contract slots — no overflow"
+    },
+    "entity_weapons": {
+      "label": "Weapons",
+      "kind": "meter",
+      "group": "truth",
+      "api": "/api/eye/weapons",
+      "default": false,
+      "actions": ["enable", "disable", "toggle", "focus"],
+      "describe": "Truth entity weapon rack"
+    },
+    "vigilance_patrol": {
+      "label": "Vigil",
+      "kind": "meter",
+      "group": "robotics",
+      "api": "/api/vigilance/status",
+      "default": false,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "Modular additives patrol loop"
+    },
+    "video_tune": {
+      "label": "Tune",
+      "kind": "meter",
+      "group": "robotics",
+      "api": "/api/video",
+      "default": false,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "AI-tunable resolution and fps"
+    },
+    "look_radar": {
+      "label": "Look",
+      "kind": "meter",
+      "group": "vision",
+      "api": "/api/hud/module/look_radar",
+      "default": false,
+      "actions": ["enable", "disable", "toggle"],
+      "describe": "Capture prefer path and last source"
+    },
+    "field_compiler": {
+      "label": "Compiler",
+      "kind": "meter",
+      "group": "field",
+      "api": "/api/field/compiler",
+      "default": true,
+      "actions": ["enable", "disable", "toggle", "focus"],
+      "describe": "Grok16 G16 + FIELDC v4 — Queen forge compiler_probe"
+    },
+    "heaven_hell_truth": {
+      "label": "Truth·H/H",
+      "kind": "meter",
+      "group": "truth",
+      "api": "/api/eye/heaven-hell",
+      "default": true,
+      "actions": ["enable", "disable", "toggle", "focus"],
+      "describe": "Hostess7 truth gates · NEXUS Heaven/Hell counts · hell-first"
+    }
+  }
+}

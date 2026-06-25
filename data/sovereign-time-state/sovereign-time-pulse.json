@@ -1,0 +1,16 @@
+{
+  "pulse": 1,
+  "last": {
+    "schema": "sovereign-time/v1",
+    "pulse": 1,
+    "chain": "final_eye:status",
+    "host": "default-X870-Pro-RS",
+    "mono_ns": 107620503779738,
+    "realtime_ns": 1782390323980958801,
+    "utc": "2026-06-25T12:25:23.981589Z",
+    "freq_sum_khz": 98934073,
+    "micron_witness": "fe4b75ce14097976",
+    "entropy_tag": "049bddf0c9c0",
+    "sig": "5fa9c2ea26860816d7660342cdde2845429cc769af298a4239185e7d9237194d"
+  }
+}

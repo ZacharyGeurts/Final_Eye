@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import mimetypes
 import os
+import subprocess
 import sys
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -53,17 +54,81 @@ from zocr_eye import (  # noqa: E402
     spectrum_doctrine,
     teach,
 )
+from zocr_entity_eyeball import (  # noqa: E402
+    entity_doctrine,
+    entity_weapon_racks,
+    entity_weapons,
+    fire_entity_weapon,
+    living_eyeball_status,
+    make_living_live,
+    truth_eyeball_status,
+    truth_forward,
+    twin_eyeball_status,
+    weaponize_eyeball,
+)
 from zocr_neural import analyze as nn_analyze  # noqa: E402
 from zocr_neural import neural_status, seal_network, verify_network_seal  # noqa: E402
 from zocr_stereo import configure_rig, list_presets, perceive_rig, rig_status  # noqa: E402
 from zocr_kill import kill_all, kill_status, release, trip  # noqa: E402
 from zocr_vigilance import vigilance_start, vigilance_status, vigilance_stop  # noqa: E402
 from zocr_vision import look  # noqa: E402
+from zocr_field_compiler import (  # noqa: E402
+    field_compiler_doctrine,
+    field_compiler_status,
+    probe_compilers,
+)
+from zocr_grok16 import grok16_status  # noqa: E402
+from zocr_heaven_hell import (  # noqa: E402
+    heaven_hell_doctrine,
+    heaven_hell_status,
+    heaven_hell_truth_status,
+    heaven_pass,
+    hell_rip,
+    truth_doctrine_status,
+)
+from zocr_hud import (  # noqa: E402
+    fetch_module_data,
+    hud_posture,
+    hud_status,
+    list_modules,
+    module_analyze,
+    request_hud,
+)
 
 WEB = Path(__file__).resolve().parent
+HUD_STATIC = frozenset({"hud-modules.js", "hud.css"})
 OUT = ZOCR_ROOT / "out"
+QUEEN_BUILD = Path(
+    os.environ.get("QUEEN_ROOT", str(ZOCR_ROOT.parent / "NewLatest" / "Queen")),
+) / "lib" / "queen-build.py"
 HOST = os.environ.get("ZOCR_HOST", "127.0.0.1")
 PORT = int(os.environ.get("ZOCR_PORT", "9479"))
+
+
+def _queen_build_dispatch(body: dict) -> dict:
+    if not QUEEN_BUILD.is_file():
+        return {"ok": False, "error": "queen_build_missing", "path": str(QUEEN_BUILD)}
+    env = {
+        **os.environ,
+        "SG_ROOT": str(ZOCR_ROOT.parent),
+        "QUEEN_ROOT": str(QUEEN_BUILD.parent.parent),
+        "HOSTESS7_ROOT": os.environ.get("HOSTESS7_ROOT", str(ZOCR_ROOT.parent / "Hostess7")),
+        "NEXUS_INSTALL_ROOT": os.environ.get(
+            "NEXUS_INSTALL_ROOT", str(ZOCR_ROOT.parent / "NewLatest" / "Queen"),
+        ),
+    }
+    try:
+        proc = subprocess.run(
+            [sys.executable, str(QUEEN_BUILD), "dispatch"],
+            input=json.dumps(body),
+            capture_output=True,
+            text=True,
+            timeout=120,
+            env=env,
+        )
+        return json.loads(proc.stdout or "{}")
+    except (json.JSONDecodeError, subprocess.TimeoutExpired) as exc:
+        return {"ok": False, "error": str(exc)[:200]}
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -126,6 +191,36 @@ class Handler(BaseHTTPRequestHandler):
         if path in ("/", "/index.html", "/live", "/stream"):
             self._send_bytes((WEB / "index.html").read_bytes(), mime="text/html; charset=utf-8", cache="no-store")
             return
+        if path.startswith("/") and path.lstrip("/") in HUD_STATIC:
+            asset = WEB / path.lstrip("/")
+            if asset.is_file():
+                mime = mimetypes.guess_type(asset.name)[0] or "application/octet-stream"
+                self._send_bytes(asset.read_bytes(), mime=mime, cache="no-store")
+                return
+        if path == "/api/hud/modules":
+            self._send_json(HTTPStatus.OK, {"ok": True, "modules": list_modules(), "posture": hud_posture()})
+            return
+        if path == "/api/hud/status":
+            self._send_json(HTTPStatus.OK, hud_status())
+            return
+        if path.startswith("/api/hud/module/"):
+            mid = path[len("/api/hud/module/") :].strip("/")
+            self._send_json(HTTPStatus.OK, fetch_module_data(mid))
+            return
+        if path.startswith("/queen-build/"):
+            rel = path[len("/queen-build/") :]
+            target = (WEB / "queen-build" / rel).resolve()
+            base = (WEB / "queen-build").resolve()
+            if not str(target).startswith(str(base)) or not target.is_file():
+                self.send_response(HTTPStatus.NOT_FOUND)
+                self.end_headers()
+                return
+            mime = mimetypes.guess_type(target.name)[0] or "application/octet-stream"
+            self._send_bytes(target.read_bytes(), mime=mime, cache="no-store")
+            return
+        if path == "/api/queen-build":
+            self._send_json(HTTPStatus.OK, _queen_build_dispatch({"action": "json"}))
+            return
         if path == "/api/health":
             self._send_json(HTTPStatus.OK, {"ok": True, "service": "zocr-vision", **product_info()})
             return
@@ -147,6 +242,15 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/api/mandate":
             self._send_json(HTTPStatus.OK, {"ok": True, **load_mandate()})
+            return
+        if path == "/api/grok16":
+            self._send_json(HTTPStatus.OK, grok16_status())
+            return
+        if path == "/api/field/compiler":
+            self._send_json(HTTPStatus.OK, field_compiler_status())
+            return
+        if path == "/api/field/compiler/doctrine":
+            self._send_json(HTTPStatus.OK, field_compiler_doctrine())
             return
         if path == "/api/security":
             self._send_json(HTTPStatus.OK, security_status())
@@ -184,6 +288,38 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/eye/final/modes":
             self._send_json(HTTPStatus.OK, {"ok": True, "modes": list_final_modes()})
             return
+        if path == "/api/eye/twins":
+            self._send_json(HTTPStatus.OK, twin_eyeball_status())
+            return
+        if path == "/api/eye/living":
+            self._send_json(HTTPStatus.OK, living_eyeball_status())
+            return
+        if path == "/api/eye/truth":
+            self._send_json(HTTPStatus.OK, truth_eyeball_status())
+            return
+        if path == "/api/eye/heaven-hell":
+            self._send_json(HTTPStatus.OK, heaven_hell_truth_status())
+            return
+        if path == "/api/eye/heaven-hell/doctrine":
+            self._send_json(HTTPStatus.OK, heaven_hell_doctrine())
+            return
+        if path == "/api/eye/truth/doctrine":
+            self._send_json(HTTPStatus.OK, truth_doctrine_status())
+            return
+        if path == "/api/eye/entity/doctrine":
+            self._send_json(HTTPStatus.OK, entity_doctrine())
+            return
+        if path == "/api/eye/weapons":
+            rack = (qs.get("rack", [""])[0] or "").strip() or None
+            self._send_json(HTTPStatus.OK, {
+                "ok": True,
+                "weapons": entity_weapons(rack=rack),
+                "racks": entity_weapon_racks(),
+            })
+            return
+        if path == "/api/eye/weapons/racks":
+            self._send_json(HTTPStatus.OK, entity_weapon_racks())
+            return
         if path == "/api/eye/final/speak":
             mode = (qs.get("mode", [""])[0] or "").strip() or None
             voice = (qs.get("voice", [""])[0] or "").strip() or None
@@ -218,11 +354,17 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(HTTPStatus.OK, verify_video_index(tail=tail))
             return
         if path == "/api/video/benchmark":
+            low_end = (qs.get("low_end", ["1"])[0] or "1").strip().lower() not in ("0", "false", "no")
+            if low_end and not qs.get("profiles", [""])[0]:
+                from zocr_bench import benchmark_low_end
+                self._send_json(HTTPStatus.OK, benchmark_low_end())
+                return
             profiles = [p.strip() for p in (qs.get("profiles", [""])[0] or "").split(",") if p.strip()]
-            duration = float(qs.get("duration", ["2"])[0] or "2")
+            duration = float(qs.get("duration", ["0.5"])[0] or "0.5")
             self._send_json(HTTPStatus.OK, video_benchmark(
                 profiles=profiles or None,
                 duration_sec=duration,
+                low_end=low_end,
             ))
             return
         if path == "/api/grkmf":
@@ -560,6 +702,39 @@ class Handler(BaseHTTPRequestHandler):
                 voice = str(voice).strip()
             self._send_json(HTTPStatus.OK, set_final_mode(mode, voice=voice, source="api"))
             return
+        if path == "/api/eye/live":
+            mode = str(body.get("mode") or "dishes").strip()
+            voice = body.get("voice")
+            if voice is not None:
+                voice = str(voice).strip()
+            self._send_json(HTTPStatus.OK, make_living_live(
+                mode,
+                voice=voice,
+                start_stream=bool(body.get("start_stream")),
+                vigilance=bool(body.get("vigilance")),
+            ))
+            return
+        if path == "/api/eye/truth/forward":
+            self._send_json(HTTPStatus.OK, truth_forward(
+                speak=body.get("speak", True) is not False,
+                scan=body.get("scan", True) is not False,
+                fire_weapons=body.get("fire_weapons", True) is not False,
+            ))
+            return
+        if path == "/api/eye/weaponize":
+            mode = str(body.get("mode") or "war").strip()
+            self._send_json(HTTPStatus.OK, weaponize_eyeball(mode=mode))
+            return
+        if path == "/api/eye/weapons/fire":
+            weapon = str(body.get("weapon") or body.get("id") or "forward_truth").strip()
+            threat = body.get("threat")
+            if threat is not None:
+                threat = str(threat).strip()
+            mode = str(body.get("mode") or "").strip() or None
+            self._send_json(HTTPStatus.OK, fire_entity_weapon(
+                weapon, threat=threat, source="api", mode=mode,
+            ))
+            return
         if path == "/api/rig/configure":
             preset = body.get("preset")
             eyes = body.get("eyes")
@@ -599,6 +774,19 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/kill/release":
             switch = str(body.get("switch") or "all").strip()
             self._send_json(HTTPStatus.OK, release(switch))
+            return
+        if path == "/api/field/compiler/probe":
+            self._send_json(HTTPStatus.OK, probe_compilers())
+            return
+        if path == "/api/hud/request":
+            self._send_json(HTTPStatus.OK, request_hud(body))
+            return
+        if path == "/api/hud/analyze":
+            module = str(body.get("module") or "spectrum").strip()
+            self._send_json(HTTPStatus.OK, module_analyze(module))
+            return
+        if path == "/api/queen-build":
+            self._send_json(HTTPStatus.OK, _queen_build_dispatch(body or {"action": "json"}))
             return
         self._send_json(HTTPStatus.NOT_FOUND, {"ok": False, "error": "not_found"})
 

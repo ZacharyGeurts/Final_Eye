@@ -2,7 +2,8 @@
   "schema": "zocr-ocular-spectrum/v2",
   "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
   "engine": "cone_v2",
-  "doctrine": "Cone sensitivity engine — receptor weights, adaptation, foveal acuity, UV channel",
+  "grok16_default_profile": "field_opt",
+  "doctrine": "Cone sensitivity engine — receptor weights, adaptation, foveal acuity, UV channel; tuned by SG/Grok16 field_opt",
   "default_profile": "human",
   "profiles": {
     "human": {
