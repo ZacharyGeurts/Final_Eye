@@ -1,0 +1,26 @@
+services:
+  final_eye:
+    build: .
+    ports:
+      - "9479:9479"
+    environment:
+      FINAL_EYE_ASSIST: "1"
+      FINAL_EYE_LOW_END: "1"
+      HOSTESS7_ROOT: /sg/Hostess7
+      QUEEN_ROOT: /sg/NewLatest/Queen
+      GROK16_ROOT: /sg/Grok16
+    volumes:
+      - ./data:/app/data
+      - ./out:/app/out
+      - ../Hostess7:/sg/Hostess7:ro
+      - ../NewLatest/Queen:/sg/NewLatest/Queen:ro
+      - ../Grok16:/sg/Grok16:ro
+    restart: unless-stopped
+
+  # Optional — run tester against live server
+  tester_check:
+    build: .
+    profiles: ["test"]
+    command: ["python3", "tests/test_release_1_0.py"]
+    volumes:
+      - ./data:/app/data

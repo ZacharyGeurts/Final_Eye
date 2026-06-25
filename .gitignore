@@ -21,6 +21,9 @@ data/eye-teach.jsonl
 data/vigilance-log.jsonl
 data/pattern-security.jsonl
 data/sovereign-time-state/sovereign-time-key.bin
+data/operator-auth.json
+data/zac-restore/
+data/release-test-matrix.json
 manifest.jsonl
 *.grkm
-.DS_Storedata/sovereign-time-state/sovereign-time-key.bin
+.DS_Store

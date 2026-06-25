@@ -78,6 +78,16 @@ from zocr_field_compiler import (  # noqa: E402
     probe_compilers,
 )
 from zocr_grok16 import grok16_status  # noqa: E402
+from zocr_tester import tester_full, tester_matrix, tester_snapshot  # noqa: E402
+from zocr_zac import pack_vision_artifacts, restore_vision_artifacts, zac_self_test, zac_status  # noqa: E402
+from zocr_security import (  # noqa: E402
+    decrypt_stream_payload,
+    encrypt_stream_payload,
+    issue_operator_token,
+    security_model,
+    verify_gvc1_integrity,
+    verify_operator_token,
+)
 from zocr_heaven_hell import (  # noqa: E402
     heaven_hell_doctrine,
     heaven_hell_status,
@@ -97,6 +107,7 @@ from zocr_hud import (  # noqa: E402
 
 WEB = Path(__file__).resolve().parent
 HUD_STATIC = frozenset({"hud-modules.js", "hud.css"})
+TESTER_STATIC = frozenset({"tester.js", "tester.css"})
 OUT = ZOCR_ROOT / "out"
 QUEEN_BUILD = Path(
     os.environ.get("QUEEN_ROOT", str(ZOCR_ROOT.parent / "NewLatest" / "Queen")),
@@ -191,6 +202,15 @@ class Handler(BaseHTTPRequestHandler):
         if path in ("/", "/index.html", "/live", "/stream"):
             self._send_bytes((WEB / "index.html").read_bytes(), mime="text/html; charset=utf-8", cache="no-store")
             return
+        if path in ("/tester", "/tester.html"):
+            self._send_bytes((WEB / "tester.html").read_bytes(), mime="text/html; charset=utf-8", cache="no-store")
+            return
+        if path.startswith("/") and path.lstrip("/") in TESTER_STATIC:
+            asset = WEB / path.lstrip("/")
+            if asset.is_file():
+                mime = mimetypes.guess_type(asset.name)[0] or "application/octet-stream"
+                self._send_bytes(asset.read_bytes(), mime=mime, cache="no-store")
+                return
         if path.startswith("/") and path.lstrip("/") in HUD_STATIC:
             asset = WEB / path.lstrip("/")
             if asset.is_file():
@@ -257,6 +277,28 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/api/security/verify":
             self._send_json(HTTPStatus.OK, verify_code_seal())
+            return
+        if path == "/api/security/model":
+            self._send_json(HTTPStatus.OK, security_model())
+            return
+        if path == "/api/security/gvc1":
+            self._send_json(HTTPStatus.OK, verify_gvc1_integrity())
+            return
+        if path == "/api/tester/snapshot":
+            self._send_json(HTTPStatus.OK, tester_snapshot())
+            return
+        if path == "/api/tester/matrix":
+            self._send_json(HTTPStatus.OK, tester_matrix())
+            return
+        if path == "/api/tester/full":
+            run_matrix = (qs.get("matrix", ["1"])[0] or "1").strip().lower() not in ("0", "false", "no")
+            self._send_json(HTTPStatus.OK, tester_full(run_matrix=run_matrix))
+            return
+        if path == "/api/zac/status":
+            self._send_json(HTTPStatus.OK, zac_status())
+            return
+        if path == "/api/zac/test":
+            self._send_json(HTTPStatus.OK, zac_self_test())
             return
         if path == "/api/vigilance/status":
             self._send_json(HTTPStatus.OK, vigilance_status())
@@ -485,6 +527,25 @@ class Handler(BaseHTTPRequestHandler):
 
         if path == "/api/security/seal":
             self._send_json(HTTPStatus.OK, {"ok": True, **seal_codebase()})
+            return
+        if path == "/api/security/token":
+            sub = str(body.get("subject") or "operator").strip()
+            self._send_json(HTTPStatus.OK, issue_operator_token(subject=sub))
+            return
+        if path == "/api/security/encrypt":
+            payload = body.get("payload", "probe").encode() if isinstance(body.get("payload"), str) else b"probe"
+            self._send_json(HTTPStatus.OK, encrypt_stream_payload(payload))
+            return
+        if path == "/api/zac/pack":
+            label = str(body.get("label") or "api-pack").strip()
+            self._send_json(HTTPStatus.OK, pack_vision_artifacts(label=label))
+            return
+        if path == "/api/zac/restore":
+            zpath = str(body.get("path") or "").strip()
+            if not zpath:
+                self._send_json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "path_required"})
+                return
+            self._send_json(HTTPStatus.OK, restore_vision_artifacts(zpath))
             return
         if path == "/api/vigilance/start":
             if self._enforce("vigilance_start"):

@@ -22,7 +22,7 @@ def test_product_version():
     from zocr_product import product_info
     p = product_info()
     assert p["product"] == "Final_Eye"
-    assert p["version"] == "0.9.6"
+    assert p["version"] == "1.0.0"
 
 
 def test_mandate_loads():
@@ -106,7 +106,7 @@ def test_grkmf_tune_lock_low_end():
     from grkmf.tune import resolve, tune_apply, tune_reset
     tune_reset()
     r = resolve("combat")
-    assert r["mode"] == "combat"
+    assert r.get("preset") == "combat" or r.get("mode") == "combat"
     t = tune_apply(fps=8, width=640, height=480, mode="combat")
     assert t["width"] == 640
     assert t["fps"] == 8

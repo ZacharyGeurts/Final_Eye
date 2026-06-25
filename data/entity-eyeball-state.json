@@ -3,45 +3,245 @@
   "living_live": true,
   "truth_forward": true,
   "weapons_armed": true,
-  "forward_count": 9,
-  "lies_rejected": 8,
+  "forward_count": 19,
+  "lies_rejected": 18,
   "last_weapon": {
-    "ts": "2026-06-25T12:37:02.597282+00:00",
-    "weapon": "hell_rip",
+    "ts": "2026-06-25T12:44:35.969141+00:00",
+    "weapon": "trust_strike",
     "entity": "truth",
     "acted": [
-      "hell_rip",
-      "offense:trust_breach"
+      "trust_strike:ok=False",
+      "offense_strike:trust_breach"
     ],
-    "heaven_hell": {
-      "ok": true,
-      "schema": "zocr-hell-rip/v1",
-      "ripped": true,
-      "threat": "trust_breach",
-      "soul_side": "hell",
-      "hell_chosen": true,
-      "hostility_priority": "hell_first",
-      "offense": {
-        "ok": true,
-        "rule": "Defense of vision requires offense.",
-        "schema": "zocr-offense-strike/v1",
-        "ts": "2026-06-25T12:37:02.564964+00:00",
-        "threat": "trust_breach",
-        "strike": "reject_and_failover",
-        "offense": "seal_threat",
-        "severity": "medium",
-        "acted": [
-          "seal_threat"
-        ],
-        "source": "heaven_hell:hell_rip"
-      },
-      "rips_total": 3
+    "mesh": {
+      "ok": false,
+      "schema": "zocr-trust-mesh-verify/v1",
+      "ts": "2026-06-25T12:44:35.968913+00:00",
+      "rule": "Interwoven redundancies \u2014 no single path owns truth; Hostess7 corroborates ZOCR vision",
+      "peers_ok": 10,
+      "peers_total": 11,
+      "required_ok": false,
+      "woven_paths": 2,
+      "paths_total": 6,
+      "peers": [
+        {
+          "id": "code_seal",
+          "ok": true,
+          "role": "integrity",
+          "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+          "root_seal": "4c13663bf87acfe63a6a447f76c9c4ed67c0398abe46116a2f989ea2e8a8413c",
+          "file_count": 34,
+          "verified": 34,
+          "tampered": [],
+          "missing": [],
+          "unsealed_new": [],
+          "ts": "2026-06-25T12:44:34.630557+00:00"
+        },
+        {
+          "id": "neural",
+          "ok": true,
+          "role": "assist",
+          "network_id": "ZOCR_FIELD_ASSIST_v1",
+          "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+          "sha256": "f9f189d25c92b102a6d82661c4dc52b68b62d8ccb1fa536a1c54689fc85e81d2",
+          "ts": "2026-06-25T11:09:04.931912+00:00"
+        },
+        {
+          "id": "capture",
+          "ok": false,
+          "role": "ingress",
+          "vision_confidence": 1.0,
+          "cascade": [
+            "rtx",
+            "xwd_silent",
+            "grim",
+            "mss",
+            "import_silent",
+            "hold",
+            "synthetic"
+          ]
+        },
+        {
+          "id": "video",
+          "ok": true,
+          "role": "transport",
+          "envelopes_ok": 0,
+          "format": "ZOCRSM1"
+        },
+        {
+          "id": "offense",
+          "ok": true,
+          "role": "ingress",
+          "strikes": 60
+        },
+        {
+          "id": "kill",
+          "ok": true,
+          "role": "authority",
+          "whole": true
+        },
+        {
+          "id": "wrdt",
+          "ok": true,
+          "role": "integrity",
+          "binary": "/home/default/Desktop/SG/World_Redata/cpp/build/world-redata"
+        },
+        {
+          "id": "hostess7_truth",
+          "ok": true,
+          "role": "corroboration",
+          "root": "/home/default/Desktop/SG/Hostess7",
+          "neural_stack": "hostess7-neural-stack/v2",
+          "vision_nets": [
+            "vision"
+          ],
+          "truth_philosophy": "94% noise \u00b7 6% truth until corroborated. No adaptation without self-test pass. SDF brain imaging folds prose; vision net"
+        },
+        {
+          "id": "nexus_trust",
+          "ok": true,
+          "role": "egress",
+          "path": "/home/default/Desktop/SG/Hostess7/cache/fieldstorage/brain/security/nexus-trusted.jsonl",
+          "entries": 5
+        },
+        {
+          "id": "queen_gates",
+          "ok": true,
+          "role": "mandate",
+          "panel": "/home/default/Desktop/SG/NewLatest/Queen/lib/field-queen-browser.py",
+          "queen_verdict": "QUEEN_READY",
+          "gates_held": 40,
+          "gates_all_held": true,
+          "hostess7_available": null
+        },
+        {
+          "id": "sovereign_time",
+          "ok": true,
+          "role": "time",
+          "verdict": "USER_OK",
+          "always": true,
+          "sealed_mono_ns": 107620503779738
+        }
+      ],
+      "paths": [
+        {
+          "id": "vision_live",
+          "path": [
+            "capture",
+            "pattern",
+            "video",
+            "wrdt",
+            "eye"
+          ],
+          "hops_ok": [
+            false,
+            false,
+            true,
+            true,
+            false
+          ],
+          "ok": false,
+          "woven": false
+        },
+        {
+          "id": "vision_offense",
+          "path": [
+            "capture",
+            "offense",
+            "kill",
+            "capture"
+          ],
+          "hops_ok": [
+            false,
+            true,
+            true,
+            false
+          ],
+          "ok": false,
+          "woven": false
+        },
+        {
+          "id": "vision_trust",
+          "path": [
+            "wrdt",
+            "code_seal",
+            "hostess7_truth",
+            "queen_gates"
+          ],
+          "hops_ok": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "ok": true,
+          "woven": true
+        },
+        {
+          "id": "vision_egress",
+          "path": [
+            "nexus_trust",
+            "queen_gates",
+            "capture"
+          ],
+          "hops_ok": [
+            true,
+            true,
+            false
+          ],
+          "ok": false,
+          "woven": true
+        },
+        {
+          "id": "vision_assist",
+          "path": [
+            "eye",
+            "rig",
+            "neural",
+            "code_seal"
+          ],
+          "hops_ok": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "ok": false,
+          "woven": false
+        },
+        {
+          "id": "vision_time",
+          "path": [
+            "sovereign_time",
+            "code_seal",
+            "eye",
+            "capture"
+          ],
+          "hops_ok": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "ok": false,
+          "woven": false
+        }
+      ],
+      "quorum": {
+        "min_peers": 4,
+        "required": [
+          "code_seal",
+          "capture",
+          "hostess7_truth",
+          "queen_gates"
+        ]
+      }
     },
     "offense": {
       "ok": true,
       "rule": "Defense of vision requires offense.",
       "schema": "zocr-offense-strike/v1",
-      "ts": "2026-06-25T12:37:02.564964+00:00",
+      "ts": "2026-06-25T12:44:35.968981+00:00",
       "threat": "trust_breach",
       "strike": "reject_and_failover",
       "offense": "seal_threat",
@@ -49,9 +249,10 @@
       "acted": [
         "seal_threat"
       ],
-      "source": "heaven_hell:hell_rip"
-    }
+      "source": "entity:trust_strike"
+    },
+    "threat": "trust_breach"
   },
-  "updated": "2026-06-25T12:37:02.597309+00:00",
-  "weaponize_mode": "dishes"
+  "updated": "2026-06-25T12:44:35.970298+00:00",
+  "weaponize_mode": "war"
 }

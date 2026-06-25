@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.0.0 — 2026-06-25 (sovereign-vision)
+
+### Release
+- DARPA-quality 1.0 sovereign robotics vision — tagged `v1.0.0`
+- Internal tester UI at `/tester` — live factual panels, honesty labels, release matrix
+- Security model: GVC1 integrity, stream AES-GCM/HMAC, operator tokens, silent capture policy
+- ZAC vision artifact pack/restore (`zocr_zac.py`)
+- Grok16 field_opt integration test; war/dishes cycle tests
+- Docker + docker-compose for Queen/Hostess co-deployment
+- Docs: ARCHITECTURE, API (full 9479), SECURITY, PERFORMANCE, expanded REVIEW_CHECKLIST
+
+### Integration
+- Truth + Heaven/Hell parameters (Hostess7, NEXUS, Queen panel)
+- Twin entity eyeballs — 37 weapons, 8 racks
+- Closed-manifest HUD + Grok16 primary field compiler
+- 21 automated tests (smoke + release 1.0)
+
 ## 0.9.6 — 2026-06-25 (truth-heaven-hell)
 
 - Truth + Heaven/Hell parameters from Hostess7, NEXUS-Shield, Queen panel (`heaven-hell-truth.json`, `zocr_heaven_hell.py`)

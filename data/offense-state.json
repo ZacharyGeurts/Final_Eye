@@ -1,11 +1,11 @@
 {
   "schema": "zocr-offense-state/v1",
-  "strikes_total": 51,
-  "threat_streak": 7,
+  "strikes_total": 61,
+  "threat_streak": 17,
   "preempt_armed": true,
   "last_strike": {
     "schema": "zocr-offense-strike/v1",
-    "ts": "2026-06-25T12:37:02.564964+00:00",
+    "ts": "2026-06-25T12:44:35.968981+00:00",
     "threat": "trust_breach",
     "strike": "reject_and_failover",
     "offense": "seal_threat",
@@ -13,7 +13,7 @@
     "acted": [
       "seal_threat"
     ],
-    "source": "heaven_hell:hell_rip"
+    "source": "entity:trust_strike"
   },
-  "updated": "2026-06-25T12:37:02.564969+00:00"
+  "updated": "2026-06-25T12:44:35.968985+00:00"
 }

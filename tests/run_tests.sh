@@ -7,3 +7,4 @@ python3 zocr_security.py seal >/dev/null
 export PYTHONPATH="$ROOT:$ROOT/GrokMediaFormat:${PYTHONPATH:-}"
 [[ -d "$ROOT/../GrokMediaFormat" ]] && export PYTHONPATH="$ROOT/../GrokMediaFormat:$PYTHONPATH"
 python3 tests/test_robotics_smoke.py
+python3 tests/test_release_1_0.py

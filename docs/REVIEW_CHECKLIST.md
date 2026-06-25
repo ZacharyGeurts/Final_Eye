@@ -1,4 +1,4 @@
-# Final_Eye v0.9 — Review Checklist
+# Final_Eye 1.0 — Review Test Matrix
 
 ## Reproduce
 
@@ -8,19 +8,40 @@ cd Final_Eye
 pip install -r requirements.txt
 ./tests/run_tests.sh
 ./start.sh --no-open
-curl -s http://127.0.0.1:9479/api/version
-curl -s -X POST http://127.0.0.1:9479/api/robotics/arm -d '{"mode":"war"}'
-python3 zocr_watch.py verify
+open http://127.0.0.1:9479/tester
 ```
 
-## Verify
+## Automated matrix (`tests/test_release_1_0.py`)
 
-1. Silent capture — no flash tools on live path
-2. On-demand look — no auto frame loop by default
-3. War vs dishes modes — `POST /api/robotics/arm`
-4. AI tune — `POST /api/video/tune` fps 3–20 combat
-5. Code seal — `./tests/run_tests.sh` + `zocr_watch.py verify`
-6. 16K preset — `GET /api/grkmf/profiles` → `cinema_16k`
+| ID | Group | Check |
+|----|-------|-------|
+| product_1_0 | release | Version == 1.0.0 |
+| code_seal | security | Seal verifies |
+| gvc1_envelope | security | GVC1 round-trip + tamper reject |
+| war_mode | robotics | War in final modes |
+| dishes_mode | robotics | Dishes in final modes |
+| silent_capture_policy | security | Silent by default |
+| grok16_profile | compiler | field_opt profile present |
+| twin_eyeballs | entity | Twin schema v1 |
+| heaven_hell | truth | Heaven/Hell spec loaded |
+| zac_pack | integration | ZAC round-trip |
+| hud_manifest | ui | ≥16 HUD modules |
+| grkmf_format | codec | GRKMF1 |
+| not_mpeg | codec | GVC1 not MPEG |
+| sovereign_witness | field | Monotonic witness |
+
+## Manual verification
+
+1. **Tester UI** — `http://127.0.0.1:9479/tester` — all subsystems green, matrix 14/14
+2. **Silent capture** — `python3 zocr_watch.py look` — no display flash
+3. **War arm** — `POST /api/robotics/arm {"mode":"war"}` — combat profile
+4. **Dishes arm** — `POST /api/robotics/arm {"mode":"dishes"}` — media path
+5. **AI tune** — `POST /api/video/tune {"fps":8,"width":1280}`
+6. **Grok16** — `GET /api/grok16` — g16_version + field_opt
+7. **Heaven/Hell** — `GET /api/eye/heaven-hell`
+8. **ZAC pack** — `POST /api/zac/pack`
+9. **Security model** — `GET /api/security/model`
+10. **Code verify** — `python3 zocr_watch.py verify`
 
 ## Sign-off
 

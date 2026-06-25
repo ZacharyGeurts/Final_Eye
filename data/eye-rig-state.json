@@ -1,17 +1,26 @@
 {
   "schema": "zocr-eye-rig-state/v1",
-  "mode": "monocular",
+  "mode": "stereo_human",
   "stereoscopic": {
-    "enabled": false
+    "enabled": true,
+    "baseline_mm": 65,
+    "ipd_mm": 63
   },
   "eyes": [
     {
-      "id": "primary",
-      "role": "center",
+      "id": "left",
+      "role": "left",
       "profile": "human",
-      "offset_x": 0,
+      "offset_x": -8,
+      "enabled": true
+    },
+    {
+      "id": "right",
+      "role": "right",
+      "profile": "human",
+      "offset_x": 8,
       "enabled": true
     }
   ],
-  "updated": "2026-06-25T12:37:02.075443+00:00"
+  "updated": "2026-06-25T12:44:35.910712+00:00"
 }
