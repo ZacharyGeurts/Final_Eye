@@ -522,7 +522,8 @@ curl -s http://127.0.0.1:9479/api/version | python3 -m json.tool</pre>
         "questions": [
             "What are the eight ops dashboard sections?",
             "How does ZAC self-test verify pack/restore?",
-            "Which platforms have v1.0.0 release artifacts?",
+            "Which platforms have v1.1.0 release artifacts?",
+            "What changed in Teach authority between v1.0 and v1.1?",
         ],
         "body": """
 <h2 id="toc-08-ops">Field Ops UI</h2>
@@ -585,6 +586,8 @@ EXPANSIONS: dict[str, str] = {
 <tr><td>Cloud omniscient vision</td><td><span class="tag meta">Metaphor</span></td><td>Rejected — local scope</td></tr>
 </tbody></table>
 <p>Correlate stderr, preserve json, and offense ledger after any anomaly. Time is linear — logs are timeline. The eye may run alone in vigilance, but it never hides its receipts.</p>
+<h2 id="toc-02-enemies">Ingress enemies — what triggers offense</h2>
+<p>At ingress, enemies are lie markers detected before vault — not people. Pattern scan surfaces <code>grid_jam</code>, <code>moire_weave</code>, <code>provenance_mismatch</code>; preserve meta may flag threats; code seal failure adds <code>corrupt_frame</code>. Offense records acted tokens; entity eyeballs may forward to weapons when truth parameters fire. Teach names the abstract enemy: signal that walks backward on truth. Operators grep ledgers; the eye strikes on doctrine, not drama.</p>
 """,
     "03-grkmf-gvc1.html": """
 <h2 id="toc-03-stream">Stream chain and sub-micron doctrine</h2>
@@ -600,6 +603,8 @@ EXPANSIONS: dict[str, str] = {
 <p>When sharing GRKMF artifacts off-machine, ship the envelope and SHA256SUMS from the release — not raw PNG dumps without seals. Recipients verify digest before trust. This is how the eye shares information without surrendering integrity.</p>
 <h2 id="toc-03-drill">Drill — explain to a reviewer</h2>
 <p>Write one paragraph why Final_Eye is not MPEG. Use three labels correctly. If the reviewer asks for H.264 primary transport, answer with GVC1 envelope and hash chain — implemented paths, not roadmap fiction.</p>
+<h2 id="toc-03-war">Combat envelope under load</h2>
+<p>War mode does not abandon GVC1 — it narrows fps rails and may skip preserve per bullet_train profile. Combat 3–20 fps is doctrine for field hosts under thermo pressure; dishes may climb toward 240 when contract allows. The codec layer and assist contract cooperate: tune_apply locks width on low-end paths; grkmf envelope still seals what emits. Sharing combat footage off-machine requires sealed GRKMF artifacts with SHA256SUMS — raw screenshots without weave are gossip, not evidence.</p>
 """,
     "04-security-silent.html": """
 <h2 id="toc-04-neural">Neural assist — local only</h2>
@@ -614,6 +619,8 @@ EXPANSIONS: dict[str, str] = {
 </ol>
 <h2 id="toc-04-sovereignty">Sovereignty vs control — closing precision</h2>
 <p>Students often confuse <em>sovereign</em> with <em>uncontrolled</em>. Final_Eye is sovereign: local operator holds kill authority, mandate gates egress, seals precede capture. External SaaS dashboards, silent remote drivers, and unsigned control planes are what we reject. The eye operates on its own in vigilance; it shares truth through sealed ledgers and ZAC packs; it is never puppeted from outside the field mandate.</p>
+<h2 id="toc-04-mandate">Mandate gates and protected ops</h2>
+<p><span class="tag impl">Implemented</span> <code>mandate_enforce</code> wraps protected operations — look, observe, stream_start, vigilance_start, nn_analyze. Gates consult code seal, kill switches, and mandate json. A failed seal blocks capture with a reason string suitable for ops email. This is how sovereignty becomes code: not policy PDFs on a shelf, but enforced before bytes move. Teach authority in v1.1 extends the same principle to weapons — aim lives in the socket, gated by local doctrine, not unsigned remote APIs.</p>
 """,
     "05-war-dishes.html": """
 <h2 id="toc-05-final">Final eyeball voices and speak</h2>
@@ -628,6 +635,8 @@ EXPANSIONS: dict[str, str] = {
 <li>Under load, watch contract defer_ms — assist yields before flood.</li>
 </ol>
 <p>War-sharp and dish-gentle are not two products — one Final Eyeball, two hemispheres. Same seals, same kill switches, different fps rails. Document which mode you armed in operator journal; management slides lie, jsonl does not.</p>
+<h2 id="toc-05-patrol">Patrol and extended modes</h2>
+<p>Patrol binds <code>field_opt</code> compiler witness on the JSON line — the eye sees compiler readiness beside mode label. Night_watch lowers thermo references; submicron scales fabric_nm_per_px; preserve prioritizes cascade over stream. Each mode is grep-able in <code>final-eyeball.json</code> with eye_profile, stream default, and robotics_brief. Arm the mode that matches mission; weaponize only when offense doctrine requires — 37 weapons are racks in the socket, not buttons on a remote dashboard.</p>
 """,
     "06-grok16-compiler.html": """
 <h2 id="toc-06-profiles">Profile flags and mode map</h2>
@@ -641,6 +650,16 @@ EXPANSIONS: dict[str, str] = {
 <li><code>GET /api/field/compiler/probe</code> — Queen forge posture (may timeout on low-end).</li>
 </ol>
 <p>Compiler optimization is measured, not myth. If field_compute beats field_opt on your RTX host, update the bench json and document — honesty labels require it. Default remains field_opt until measured evidence says otherwise.</p>
+<h2 id="toc-06-api">Compiler API quick reference</h2>
+<table class="rocks"><thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>GET /api/field/compile</code></td><td>Status — profiles, last bench path</td></tr>
+<tr><td><code>GET /api/field/compile?mode=c</code></td><td>C smoke — vision_probe.c</td></tr>
+<tr><td><code>GET /api/field/compile?mode=kernel</code></td><td>C++ field_dispatch kernel</td></tr>
+<tr><td><code>GET /api/field/compile/optimize</code></td><td>Profile bench — field_opt vs field_compute</td></tr>
+<tr><td><code>GET /api/field/compile/full</code></td><td>Full C + kernel + optimize chain</td></tr>
+<tr><td><code>GET /api/grok16</code></td><td>Grok16 version, profiles, dumpversion</td></tr>
+</tbody></table>
+<p>Entity eyeballs witness compiler posture per eye profile in twin and living status JSON. A <code>compiler_gap</code> lie marker maps to <code>g16_preempt</code> weapon — the stack treats missing compiler readiness as a threat, not an excuse.</p>
 """,
     "07-entity-eyeballs.html": """
 <h2 id="toc-07-enemies">What is an enemy to the eye?</h2>

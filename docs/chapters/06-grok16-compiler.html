@@ -82,6 +82,16 @@
 <li><code>GET /api/field/compiler/probe</code> — Queen forge posture (may timeout on low-end).</li>
 </ol>
 <p>Compiler optimization is measured, not myth. If field_compute beats field_opt on your RTX host, update the bench json and document — honesty labels require it. Default remains field_opt until measured evidence says otherwise.</p>
+<h2 id="toc-06-api">Compiler API quick reference</h2>
+<table class="rocks"><thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>GET /api/field/compile</code></td><td>Status — profiles, last bench path</td></tr>
+<tr><td><code>GET /api/field/compile?mode=c</code></td><td>C smoke — vision_probe.c</td></tr>
+<tr><td><code>GET /api/field/compile?mode=kernel</code></td><td>C++ field_dispatch kernel</td></tr>
+<tr><td><code>GET /api/field/compile/optimize</code></td><td>Profile bench — field_opt vs field_compute</td></tr>
+<tr><td><code>GET /api/field/compile/full</code></td><td>Full C + kernel + optimize chain</td></tr>
+<tr><td><code>GET /api/grok16</code></td><td>Grok16 version, profiles, dumpversion</td></tr>
+</tbody></table>
+<p>Entity eyeballs witness compiler posture per eye profile in twin and living status JSON. A <code>compiler_gap</code> lie marker maps to <code>g16_preempt</code> weapon — the stack treats missing compiler readiness as a threat, not an excuse.</p>
 
 
     <div class="chapter-summary-box">
