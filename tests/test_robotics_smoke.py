@@ -22,7 +22,7 @@ def test_product_version():
     from zocr_product import product_info
     p = product_info()
     assert p["product"] == "Final_Eye"
-    assert p["version"] == "0.9.9"
+    assert p["version"] == "1.0.0"
 
 
 def test_mandate_loads():

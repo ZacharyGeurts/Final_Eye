@@ -32,6 +32,16 @@ Labels: **Measured** = benchmark run; **Doctrine** = declared capability.
 - Entity weapons: `joule_throttle`, `cool_gate`, `entropy_fold` — thermo rack (Metaphor for field power doctrine).
 - Assist contract (`zocr_contract.py`) prevents slot overflow on shared systems.
 
+## Grok16 field compiler (`field_opt`)
+
+| Profile | C + kernel run | Compile (both) | Label |
+|---------|----------------|----------------|-------|
+| **field_opt** | **2.0 ms** | ~590 ms | Measured |
+| field_compute | 2.0 ms | ~586 ms | Measured |
+| ai | 2.0 ms | ~592 ms | Measured |
+
+Reproduce: `python3 zocr_field_compile.py optimize` or `GET /api/field/compile/optimize`.
+
 ## Reproduce
 
 ```bash

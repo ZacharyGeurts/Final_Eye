@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Final_Eye 0.9.9 release tests — security, matrix, ZAC, Grok16, war/dishes."""
+"""Final_Eye 1.0.0 release tests — security, matrix, ZAC, Grok16, war/dishes."""
 from __future__ import annotations
 
 import json
@@ -18,11 +18,12 @@ if GMF.is_dir():
     sys.path.insert(0, str(GMF))
 
 
-def test_product_0_9_9():
+def test_product_1_0():
     from zocr_product import product_info
     p = product_info()
-    assert p["version"] == "0.9.9"
+    assert p["version"] == "1.0.0"
     assert p["product"] == "Final_Eye"
+    assert p["codename"] == "sovereign-vision"
 
 
 def test_security_gvc1_and_stream():
@@ -122,7 +123,7 @@ def test_tester_snapshot_schema():
 
 def main() -> int:
     tests = [
-        test_product_0_9_9,
+        test_product_1_0,
         test_security_gvc1_and_stream,
         test_tester_matrix_all_pass,
         test_zac_roundtrip,
@@ -140,7 +141,7 @@ def main() -> int:
         except Exception as exc:
             failed += 1
             print(f"FAIL {t.__name__}: {exc}", file=sys.stderr)
-    print(json.dumps({"tests": len(tests), "failed": failed, "release": "0.9.9"}))
+    print(json.dumps({"tests": len(tests), "failed": failed, "release": "1.0.0"}))
     return 1 if failed else 0
 
 

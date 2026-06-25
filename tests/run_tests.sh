@@ -8,4 +8,5 @@ export PYTHONPATH="$ROOT:$ROOT/GrokMediaFormat:${PYTHONPATH:-}"
 [[ -d "$ROOT/../GrokMediaFormat" ]] && export PYTHONPATH="$ROOT/../GrokMediaFormat:$PYTHONPATH"
 python3 tests/test_robotics_smoke.py
 python3 tests/test_field_compiler_c.py
+python3 tests/test_integration_smoke.py
 python3 tests/test_release_1_0.py

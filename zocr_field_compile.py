@@ -224,7 +224,7 @@ def field_compile_status() -> dict[str, Any]:
 
 
 def field_compile_full_test() -> dict[str, Any]:
-    """Full C + kernel + optimize — for release 0.9.9 review."""
+    """Full C + kernel + optimize — for release 1.0.0 verification."""
     from zocr_field_compiler import field_compiler_status, probe_compilers
 
     c = compile_c_smoke()

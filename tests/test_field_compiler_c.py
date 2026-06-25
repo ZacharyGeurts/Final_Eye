@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Final_Eye 0.9.9 — Grok16 C/C++ field compiler smoke + optimize bench."""
+"""Final_Eye 1.0.0 — Grok16 C/C++ field compiler smoke + optimize bench."""
 from __future__ import annotations
 
 import json
@@ -80,7 +80,7 @@ def main() -> int:
         except Exception as exc:
             failed += 1
             print(f"FAIL {t.__name__}: {exc}", file=sys.stderr)
-    print(json.dumps({"tests": len(tests), "failed": failed, "release": "0.9.9"}))
+    print(json.dumps({"tests": len(tests), "failed": failed, "release": "1.0.0"}))
     return 1 if failed else 0
 
 

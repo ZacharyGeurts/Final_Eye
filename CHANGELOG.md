@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.0 — 2026-06-25 (sovereign-vision) — FINAL
+
+### Release (authorized sign-off)
+- **Final_Eye 1.0.0** — sovereign robotics vision stack, production-aligned with Field Technology v5
+- Silent capture integrity · proprietary **GVC1/GRKMF1** codec security (not MPEG) · field vision sovereignty
+- Field Ops UI at `/ops` and `/tester` — 8 sections, 37+ weapons, release matrix
+- Security: code seal, GVC1 tamper rejection, stream AES-GCM/HMAC, operator tokens, silent capture policy
+- **ZAC** vision artifact pack/restore (`zocr_zac.py`) — World_Redata alignment
+- **Grok16 + Queen/Hostess** integration layer complete — configurable paths, forge probe, co-deploy Docker
+- **Field compiler C/C++** harness (`zocr_field_compile.py`) — g16 smoke, g++16 kernel, profile optimization bench
+- Co-Pilot foundational truth sources · Heaven/Hell parameters · twin entity eyeballs
+- **33 automated tests** (smoke + field compiler + integration + release)
+- Docs: ARCHITECTURE, API (9479), SECURITY, PERFORMANCE, REVIEW_CHECKLIST
+
+### Highlights (extra work incorporated)
+- Forge integration strengthened · examples expanded · tests robust
+- Performance metrics in README and `data/zocrsm1-benchmark.json`
+- Field_Primer Ch 11 + glossary updated with Final_Eye 1.0 vision layer reference
+
 ## 0.9.9 — 2026-06-25 (field-forge-opt)
 
 ### Release
