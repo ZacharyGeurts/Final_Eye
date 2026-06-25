@@ -1,16 +1,16 @@
 {
   "schema": "zocr-code-seal/v1",
   "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
-  "ts": "2026-06-25T13:00:01.548558+00:00",
+  "ts": "2026-06-25T13:13:17.779110+00:00",
   "files": {
-    "gui/app.py": "801ddf9fc3bfae06e97222643568d37364fb27153b88288dd7c44ee0cd7af7c1",
+    "gui/app.py": "2057285345ef1bc286c5458ae0c8f6797e440879945ba9b7f1e3812363aff623",
     "zocr.py": "28bc7afdf1f099196e5f9d134a060a70d95af3b8623ad5da9de5b7f65480b802",
     "zocr_additives.py": "4ca1812ebd23184f1e9878ca5989ee12222c5e8c5fddad32381c19101a6f7074",
-    "zocr_ai.py": "6055049d14fa36a5649d9fb54f6c591156601260c14fd491bfa56d2dd036765a",
+    "zocr_ai.py": "083ba2f37a974f9297a972df5353f45d880e2d1671a74b9fa67618953b58d747",
     "zocr_capture.py": "4ec625a9e8d66f1d9d76bba338b5e750f52a1760ca8c92070652365264222b9f",
     "zocr_contract.py": "d1d2824dd00a9658886e669f69084604cb380d2497bb731af545ea9552daabad",
     "zocr_copilot.py": "36d0d57c8f2467df0f510ada8f54ab42838dfca6dda6f3335b0df5535e8bf1ba",
-    "zocr_entity_eyeball.py": "e32f251351bca26aa183dd29aef1f21031d52a7ea618247b8a5e784b24da2d1f",
+    "zocr_entity_eyeball.py": "5152c6bc0e1862cdd7db185b88ed05e3a6b26d1f05ab58c965e72e5c08ada261",
     "zocr_eye.py": "8690849ee936de71ea11a613f425577ce7b723063977a0c3a0e300b244837fad",
     "zocr_field.py": "a253f223ee42133a3315989fdf733868007c865e33257630240d77a65695864c",
     "zocr_field_compile.py": "16ac790e9367b83721ea01694fcf2e0c338fb5f7f57de52d1dc32e309e28ee43",
@@ -41,6 +41,6 @@
     "zocr_zac.py": "536ec66b8cf4a1905ab5d1b9e69564121bcc932f85c7a883efdb48d0cafc3031"
   },
   "file_count": 36,
-  "root_seal": "0b259bd62edc397beba3a74a74233e27702710fdefd8ba85bb35e36e3dd5e2a9",
+  "root_seal": "f603be3552fb7ea3a74331a93e4f9a0426d1d23a0a8b8cf7dd1d8f3ffee21e31",
   "rule": "All ZOCR entry points verify this seal before protected operations"
 }

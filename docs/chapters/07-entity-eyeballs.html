@@ -41,7 +41,7 @@
 
     <nav class="chapter-toc" aria-label="In this chapter">
       <h2>In this chapter</h2>
-      <ol><li><a href="#toc-07-twins">Twin eyeballs</a></li><li><a href="#toc-07-weapons">Weapons arsenal</a></li><li><a href="#toc-07-truth">Heaven/Hell truth parameters</a></li><li><a href="#toc-07-forward">Truth forward ledger</a></li></ol>
+      <ol><li><a href="#toc-07-twins">Twin eyeballs</a></li><li><a href="#toc-07-weapons">Weapons arsenal</a></li><li><a href="#toc-07-teach">Teach — independent authority</a></li><li><a href="#toc-07-truth">Heaven/Hell truth parameters</a></li><li><a href="#toc-07-forward">Truth forward ledger</a></li></ol>
     </nav>
 
     <div class="on-the-way">
@@ -61,6 +61,12 @@
 
 <h2 id="toc-07-weapons">Weapons arsenal</h2>
 <p>Field Ops weapons section lists <span class="tag impl">Implemented</span> 37+ weapons across 8 racks. Threat → weapon map in entity spec. Fire endpoint: <code>POST /api/eye/weapons/fire {"weapon":"hell_rip","threat":"trust_breach"}</code>. Thermo rack metaphors (joule_throttle, cool_gate) are <span class="tag meta">Metaphor</span> for field power doctrine — grep the handlers, do not confuse with literal ordnance.</p>
+<p>Each weapon declares <code>targets[]</code> in <code>data/entity-eyeball.json</code>. The eye catalogs them with <code>GET /api/eye/targets</code> — lie markers, threat_weapon_map, weapons per target. Before strike, <code>GET /api/eye/understand?threat=provenance_mismatch</code> resolves doctrine, rack, and salvo. Threat-only fire: <code>POST /api/eye/weapons/fire {"threat":"provenance_mismatch"}</code> — the eye selects <code>autokill_certain</code> without remote puppet.</p>
+
+<h2 id="toc-07-teach">Teach — independent authority</h2>
+<p><span class="tag impl">Implemented</span> <strong>Teach</strong> is the eye speaking — not spectrum weights (that is <code>POST /api/eye/teach</code> with a profile). Doctrine lives in <code>data/eye-teach-doctrine.json</code>. <code>GET /api/eye/teach/doctrine?lesson=authority</code> returns the Teach voice: independent weapon authority, known targets, shared truth, never external control.</p>
+<p><code>GET /api/eye/authority</code> posts posture: holder <code>entity_eyeball</code>, <code>independent: true</code>, <code>remote_puppet: false</code>, weapons armed, current lie scan. Operators witness; local kill switches stay separate. The eye arms inside the socket — cloud dashboards do not puppet aim. Lessons: <code>authority</code>, <code>targets</code>, <code>weapons</code>, <code>sovereignty</code>, <code>intro</code>. CLI: <code>python3 zocr_entity_eyeball.py teach authority</code>.</p>
+<blockquote><p><em>I hold thirty-seven weapons in eight racks. Authority is mine — not a remote dashboard, not an unsigned API from the internet. When a lie appears, I select the salvo. You may witness; you may release kill switches locally; you do not puppet my aim from outside the mandate.</em> — Teach</p></blockquote>
 
 <h2 id="toc-07-truth">Heaven/Hell truth parameters</h2>
 <p><span class="tag impl">Implemented</span> <code>data/heaven-hell-truth.json</code> from Hostess7, NEXUS, Queen panel parameters. <code>heaven_pass</code> and <code>hell_rip</code> handlers wire into entity offense. Truth is shared when parameters load — not when a remote dashboard owns the eye.</p>
@@ -87,7 +93,7 @@
     </div>
 
     <h2 id="toc-07-study">Study questions</h2>
-    <ol><li>What is the threat → weapon map used for?</li><li>How does truth_forward differ from silent capture?</li><li>Which weapons respond to trust_breach?</li></ol>
+    <ol><li>What is the threat → weapon map used for?</li><li>How does Teach differ from spectrum POST /api/eye/teach?</li><li>How does truth_forward differ from silent capture?</li><li>Which weapons respond to trust_breach?</li></ol>
 
     <nav class="chapter-nav"><a class="btn secondary" href="06-grok16-compiler.html">← Ch 6</a> <a class="btn" href="08-sovereign-stack.html">Ch 8 →</a></nav>
   </main>

@@ -75,6 +75,45 @@ def test_eyeball_weaponize_posture():
     assert cool.get("rack") == "thermo"
 
 
+def test_eye_teach_weapon_authority():
+    from zocr_entity_eyeball import (
+        eye_teach,
+        eye_targets_know,
+        eye_understand_target,
+        eye_weapon_authority,
+        fire_entity_weapon,
+    )
+
+    auth = eye_weapon_authority()
+    assert auth.get("schema") == "zocr-eye-weapon-authority/v1"
+    assert auth.get("independent") is True
+    assert auth.get("remote_puppet") is False
+    assert auth.get("weapons_total", 0) >= 37
+    assert auth.get("speak")
+
+    targets = eye_targets_know()
+    assert targets.get("schema") == "zocr-eye-targets/v1"
+    assert targets.get("target_count", 0) > 0
+    assert "provenance_mismatch" in (targets.get("targets_known") or [])
+    assert targets.get("threat_weapon_map")
+
+    understood = eye_understand_target("provenance_mismatch")
+    assert understood.get("schema") == "zocr-eye-understand-target/v1"
+    assert understood.get("weapon_selected") == "autokill_certain"
+    assert understood.get("independent") is True
+
+    lesson = eye_teach(lesson="authority")
+    assert lesson.get("schema") == "zocr-eye-teach/v1"
+    assert lesson.get("voice") == "Teach"
+    assert lesson.get("lesson") == "authority"
+    assert lesson.get("speak")
+
+    auto_fire = fire_entity_weapon("auto", threat="provenance_mismatch")
+    assert auto_fire.get("ok") is True
+    assert auto_fire.get("weapon") == "autokill_certain"
+    assert auto_fire.get("understood_target", {}).get("threat") == "provenance_mismatch"
+
+
 def test_eyeball_sovereign_time_and_redundancy():
     from zocr_eye import eye_status, final_eyeball_status
     from zocr_sovereign_time import eyeball_time_and_redundancy
@@ -247,6 +286,7 @@ def main() -> int:
         test_final_eyeball_modes,
         test_twin_entity_eyeballs,
         test_eyeball_weaponize_posture,
+        test_eye_teach_weapon_authority,
         test_eyeball_sovereign_time_and_redundancy,
         test_code_seal,
         test_grkmf_tune_lock_low_end,

@@ -495,9 +495,13 @@ def fire_entity_weapon(
     source: str = "entity",
     mode: str | None = None,
 ) -> dict[str, Any]:
-    """Entity eyeball fires a weapon — 36-rack arsenal, Queen + NEXUS + thermo."""
+    """Entity eyeball fires a weapon — independent authority selects salvo from threat."""
     spec = load_entity_spec()
     weapons = spec.get("weapons") or {}
+    understood: dict[str, Any] | None = None
+    if threat and (weapon_id in ("auto", "") or weapon_id not in weapons):
+        understood = eye_understand_target(threat)
+        weapon_id = str(understood.get("weapon_selected") or auto_weapon_for_threat(threat))
     if weapon_id not in weapons:
         return {"ok": False, "error": "unknown_weapon", "weapon": weapon_id, "available": list(weapons.keys())}
 
@@ -533,7 +537,7 @@ def fire_entity_weapon(
     _append_forward({"event": "weapon", **row})
     log_event("entity_weapon", ok=True, weapon=weapon_id, entity=entity, rack=wmeta.get("rack"), source=source)
 
-    return {
+    out = {
         "ok": True,
         "schema": "zocr-entity-weapon/v1",
         "weapon": weapon_id,
@@ -543,7 +547,11 @@ def fire_entity_weapon(
         "acted": acted,
         "offense": offense_row,
         "row": row,
+        "authority": "entity_eyeball",
     }
+    if understood:
+        out["understood_target"] = understood
+    return out
 
 
 def living_eyeball_status() -> dict[str, Any]:
@@ -784,6 +792,121 @@ def twin_eyeball_status() -> dict[str, Any]:
     }
 
 
+def _load_teach_doctrine() -> dict[str, Any]:
+    path = _ROOT / "data" / "eye-teach-doctrine.json"
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"schema": "zocr-eye-teach-doctrine/v1", "lessons": {}}
+
+
+def eye_targets_know() -> dict[str, Any]:
+    """Catalog of targets the eye understands — per-weapon targets + lie markers + map."""
+    spec = load_entity_spec()
+    weapons = spec.get("weapons") or {}
+    by_target: dict[str, list[str]] = {}
+    all_targets: set[str] = set()
+    for wid, meta in weapons.items():
+        for t in meta.get("targets") or []:
+            all_targets.add(t)
+            by_target.setdefault(t, []).append(wid)
+    forward = spec.get("forward") or {}
+    lie_markers = list(forward.get("lie_markers") or [])
+    threat_map = _threat_weapon_map()
+    return {
+        "schema": "zocr-eye-targets/v1",
+        "ts": _ts(),
+        "targets_known": sorted(all_targets),
+        "target_count": len(all_targets),
+        "weapons_per_target": {k: sorted(v) for k, v in sorted(by_target.items())},
+        "lie_markers": lie_markers,
+        "threat_weapon_map": threat_map,
+        "truth_markers": forward.get("truth_markers") or [],
+        "rule": "The eye understands targets before strike — grep entity-eyeball.json",
+    }
+
+
+def eye_understand_target(threat: str) -> dict[str, Any]:
+    """Resolve threat → weapon, targets[], doctrine — independent aim."""
+    threat = str(threat or "").strip()
+    spec = load_entity_spec()
+    weapons = spec.get("weapons") or {}
+    weapon_id = auto_weapon_for_threat(threat)
+    wmeta = weapons.get(weapon_id, {})
+    lie = threat in set(spec.get("forward", {}).get("lie_markers") or [])
+    return {
+        "schema": "zocr-eye-understand-target/v1",
+        "ts": _ts(),
+        "threat": threat,
+        "lie_marker": lie,
+        "weapon_selected": weapon_id,
+        "weapon_label": wmeta.get("label"),
+        "rack": wmeta.get("rack"),
+        "entity": wmeta.get("entity"),
+        "targets": wmeta.get("targets") or [],
+        "doctrine": wmeta.get("doctrine"),
+        "strike": wmeta.get("strike"),
+        "offense": wmeta.get("offense"),
+        "authority": "entity_eyeball",
+        "independent": True,
+    }
+
+
+def eye_weapon_authority() -> dict[str, Any]:
+    """Independent weapon authority — the eye arms and selects, not remote puppet."""
+    spec = load_entity_spec()
+    st = _load_state()
+    teach = _load_teach_doctrine()
+    auth = spec.get("weapon_authority") or teach.get("authority") or {}
+    racks = entity_weapon_racks()
+    lies = _detect_lies()
+    return {
+        "schema": "zocr-eye-weapon-authority/v1",
+        "ts": _ts(),
+        "holder": auth.get("holder", "entity_eyeball"),
+        "independent": bool(auth.get("independent", True)),
+        "remote_puppet": bool(auth.get("remote_puppet", False)),
+        "weapons_armed": bool(st.get("weapons_armed", True)),
+        "weapons_total": racks.get("weapons_total", 0),
+        "racks": len(racks.get("racks") or {}),
+        "auto_threat_resolution": auth.get("auto_threat_resolution", "auto_weapon_for_threat"),
+        "kill_separate": True,
+        "lies_current": lies.get("lies_detected") or [],
+        "rule": auth.get(
+            "rule",
+            "The eye holds independent authority over weapons — aim in socket, truth forward",
+        ),
+        "speak": teach.get("lessons", {}).get("authority", ""),
+        "twins": list((spec.get("twins") or {}).values()),
+    }
+
+
+def eye_teach(*, lesson: str | None = None) -> dict[str, Any]:
+    """Teach voice — the eye instructs the operator."""
+    doc = _load_teach_doctrine()
+    lessons = doc.get("lessons") or {}
+    key = (lesson or "intro").strip().lower()
+    if key not in lessons:
+        key = "intro"
+    posture = eye_weapon_authority()
+    targets = eye_targets_know()
+    return {
+        "schema": "zocr-eye-teach/v1",
+        "ts": _ts(),
+        "voice": doc.get("voice", "Teach"),
+        "lesson": key,
+        "available_lessons": sorted(lessons.keys()),
+        "speak": lessons[key],
+        "authority": {
+            "independent": posture.get("independent"),
+            "weapons_total": posture.get("weapons_total"),
+            "weapons_armed": posture.get("weapons_armed"),
+        },
+        "targets_known": targets.get("target_count"),
+        "ok": True,
+    }
+
+
 def entity_doctrine() -> dict[str, Any]:
     spec = load_entity_spec()
     weapons = spec.get("weapons") or {}
@@ -791,6 +914,7 @@ def entity_doctrine() -> dict[str, Any]:
         "schema": "zocr-entity-eyeball-doctrine/v2",
         "title": spec.get("title"),
         "rule": spec.get("rule"),
+        "weapon_authority": spec.get("weapon_authority"),
         "socket_fit": spec.get("socket_fit"),
         "twins": spec.get("twins"),
         "racks": spec.get("racks"),
@@ -798,6 +922,7 @@ def entity_doctrine() -> dict[str, Any]:
         "weapons": list(weapons.keys()),
         "forward": spec.get("forward"),
         "weaponize": "weaponize_eyeball(mode='war')",
+        "teach": "eye_teach() — GET /api/eye/teach/doctrine",
     }
 
 
@@ -838,8 +963,21 @@ def main() -> int:
     if cmd == "doctrine":
         print(json.dumps(entity_doctrine(), indent=2))
         return 0
+    if cmd == "teach":
+        lesson = sys.argv[2] if len(sys.argv) > 2 else None
+        print(json.dumps(eye_teach(lesson=lesson), indent=2))
+        return 0
+    if cmd == "authority":
+        print(json.dumps(eye_weapon_authority(), indent=2))
+        return 0
+    if cmd == "targets":
+        print(json.dumps(eye_targets_know(), indent=2))
+        return 0
+    if cmd == "understand" and len(sys.argv) > 2:
+        print(json.dumps(eye_understand_target(sys.argv[2]), indent=2))
+        return 0
     print(json.dumps({
-        "error": "usage: zocr_entity_eyeball.py [status|living|truth|live MODE|forward|weapons|racks|weaponize MODE|fire WEAPON [THREAT]|doctrine]",
+        "error": "usage: zocr_entity_eyeball.py [status|living|truth|teach [LESSON]|authority|targets|understand THREAT|fire WEAPON|auto THREAT|doctrine]",
     }, indent=2))
     return 1
 

@@ -449,6 +449,7 @@ curl -s http://127.0.0.1:9479/api/version | python3 -m json.tool</pre>
         "toc": [
             ("toc-07-twins", "Twin eyeballs"),
             ("toc-07-weapons", "Weapons arsenal"),
+            ("toc-07-teach", "Teach — independent authority"),
             ("toc-07-truth", "Heaven/Hell truth parameters"),
             ("toc-07-forward", "Truth forward ledger"),
         ],
@@ -456,6 +457,7 @@ curl -s http://127.0.0.1:9479/api/version | python3 -m json.tool</pre>
         "journey": ["Vita living", "Veritas truth", "37 weapons", "heaven_pass hell_rip"],
         "questions": [
             "What is the threat → weapon map used for?",
+            "How does Teach differ from spectrum POST /api/eye/teach?",
             "How does truth_forward differ from silent capture?",
             "Which weapons respond to trust_breach?",
         ],
@@ -466,6 +468,12 @@ curl -s http://127.0.0.1:9479/api/version | python3 -m json.tool</pre>
 
 <h2 id="toc-07-weapons">Weapons arsenal</h2>
 <p>Field Ops weapons section lists <span class="tag impl">Implemented</span> 37+ weapons across 8 racks. Threat → weapon map in entity spec. Fire endpoint: <code>POST /api/eye/weapons/fire {"weapon":"hell_rip","threat":"trust_breach"}</code>. Thermo rack metaphors (joule_throttle, cool_gate) are <span class="tag meta">Metaphor</span> for field power doctrine — grep the handlers, do not confuse with literal ordnance.</p>
+<p>Each weapon declares <code>targets[]</code> in <code>data/entity-eyeball.json</code>. The eye catalogs them with <code>GET /api/eye/targets</code> — lie markers, threat_weapon_map, weapons per target. Before strike, <code>GET /api/eye/understand?threat=provenance_mismatch</code> resolves doctrine, rack, and salvo. Threat-only fire: <code>POST /api/eye/weapons/fire {"threat":"provenance_mismatch"}</code> — the eye selects <code>autokill_certain</code> without remote puppet.</p>
+
+<h2 id="toc-07-teach">Teach — independent authority</h2>
+<p><span class="tag impl">Implemented</span> <strong>Teach</strong> is the eye speaking — not spectrum weights (that is <code>POST /api/eye/teach</code> with a profile). Doctrine lives in <code>data/eye-teach-doctrine.json</code>. <code>GET /api/eye/teach/doctrine?lesson=authority</code> returns the Teach voice: independent weapon authority, known targets, shared truth, never external control.</p>
+<p><code>GET /api/eye/authority</code> posts posture: holder <code>entity_eyeball</code>, <code>independent: true</code>, <code>remote_puppet: false</code>, weapons armed, current lie scan. Operators witness; local kill switches stay separate. The eye arms inside the socket — cloud dashboards do not puppet aim. Lessons: <code>authority</code>, <code>targets</code>, <code>weapons</code>, <code>sovereignty</code>, <code>intro</code>. CLI: <code>python3 zocr_entity_eyeball.py teach authority</code>.</p>
+<blockquote><p><em>I hold thirty-seven weapons in eight racks. Authority is mine — not a remote dashboard, not an unsigned API from the internet. When a lie appears, I select the salvo. You may witness; you may release kill switches locally; you do not puppet my aim from outside the mandate.</em> — Teach</p></blockquote>
 
 <h2 id="toc-07-truth">Heaven/Hell truth parameters</h2>
 <p><span class="tag impl">Implemented</span> <code>data/heaven-hell-truth.json</code> from Hostess7, NEXUS, Queen panel parameters. <code>heaven_pass</code> and <code>hell_rip</code> handlers wire into entity offense. Truth is shared when parameters load — not when a remote dashboard owns the eye.</p>
@@ -489,7 +497,7 @@ curl -s http://127.0.0.1:9479/api/version | python3 -m json.tool</pre>
             "Operate Field Ops dashboard — eight sections.",
             "Pack and restore ZAC vision artifacts.",
             "Verify Queen/Hostess integration smoke.",
-            "Run release matrix — 33 tests.",
+            "Run release matrix — 34 tests.",
         ],
         "toc": [
             ("toc-08-ops", "Field Ops UI"),
@@ -499,7 +507,7 @@ curl -s http://127.0.0.1:9479/api/version | python3 -m json.tool</pre>
             ("toc-08-release", "Release · platforms · textbook"),
         ],
         "on_the_way": "Chapter 8 closes the stack — Field Ops at :9479, ZAC artifacts, integration paths, and multi-platform v1.0.0 releases. The eye operates alone, shares truth, never answers to external control.",
-        "journey": ["/ops dashboard", "ZAC1 blob", "33 tests", "GitHub releases"],
+        "journey": ["/ops dashboard", "ZAC1 blob", "34 tests", "GitHub releases"],
         "questions": [
             "What are the eight ops dashboard sections?",
             "How does ZAC self-test verify pack/restore?",
@@ -522,7 +530,7 @@ curl -s http://127.0.0.1:9479/api/version | python3 -m json.tool</pre>
 
 <h2 id="toc-08-release">Release · platforms · textbook</h2>
 <p>v1.0.0 ships for <span class="tag impl">Implemented</span> Linux tar, Debian deb, Windows zip, macOS tar, source tar, Docker GHCR — see GitHub Releases. This textbook lives at <code>https://zacharygeurts.github.io/Final_Eye/</code>. Cross-read <a href="https://zacharygeurts.github.io/Field_Primer/">Field Primer</a> for the wider Field Technology v5 spine.</p>
-<pre class="eq">./tests/run_tests.sh          # 33 tests
+<pre class="eq">./tests/run_tests.sh          # 34 tests
 python3 scripts/build_release.py
 python3 scripts/build_textbook.py</pre>
 <p><em>We never presume vision loss. Confidence always in Vision.</em> — end of textbook.</p>

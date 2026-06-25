@@ -61,6 +61,11 @@ Base: `http://127.0.0.1:9479` · OpenAPI-style reference · **Not MPEG**
 | GET | `/api/eye/twins` | Vita + Veritas twins |
 | GET | `/api/eye/truth` | Truth eyeball |
 | GET | `/api/eye/heaven-hell` | Truth + Heaven/Hell posture |
+| GET | `/api/eye/authority` | Independent weapon authority posture |
+| GET | `/api/eye/targets` | Known targets + threat_weapon_map |
+| GET | `/api/eye/teach/doctrine` | Teach voice lessons (`?lesson=authority`) |
+| GET | `/api/eye/understand` | Resolve threat → weapon (`?threat=…`) |
+| POST | `/api/eye/weapons/fire` | Fire weapon; `{"threat":"…"}` alone — eye selects salvo |
 
 ## Video & stream
 

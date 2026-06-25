@@ -3,6 +3,20 @@
   "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
   "title": "Twin Entity Eyeballs",
   "rule": "Monster in one eye socket — Queen offense, NEXUS trust strikes, thermodynamics, Grok16 field_opt. Vita lives; Veritas forward.",
+  "weapon_authority": {
+    "holder": "entity_eyeball",
+    "independent": true,
+    "remote_puppet": false,
+    "rule": "The eye knows every weapon and target — authority to arm, select salvo, and strike lives in the socket, not in cloud control planes",
+    "auto_threat_resolution": "threat_weapon_map via auto_weapon_for_threat",
+    "teach_module": "data/eye-teach-doctrine.json",
+    "endpoints": {
+      "GET /api/eye/authority": "Weapon authority posture",
+      "GET /api/eye/targets": "Known targets + threat map",
+      "GET /api/eye/teach/doctrine": "Teach voice lessons",
+      "POST /api/eye/weapons/fire": "{\"threat\":\"provenance_mismatch\"} — eye selects weapon"
+    }
+  },
   "socket_fit": {
     "rule": "Full arsenal racks inside the ocular cavity — bounded assist, unbounded strike doctrine",
     "racks": 8,

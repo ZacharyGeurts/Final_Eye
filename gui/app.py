@@ -58,6 +58,10 @@ from zocr_entity_eyeball import (  # noqa: E402
     entity_doctrine,
     entity_weapon_racks,
     entity_weapons,
+    eye_targets_know,
+    eye_teach,
+    eye_understand_target,
+    eye_weapon_authority,
     fire_entity_weapon,
     living_eyeball_status,
     make_living_live,
@@ -409,6 +413,27 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/api/eye/weapons/racks":
             self._send_json(HTTPStatus.OK, entity_weapon_racks())
+            return
+        if path == "/api/eye/authority":
+            self._send_json(HTTPStatus.OK, eye_weapon_authority())
+            return
+        if path == "/api/eye/targets":
+            self._send_json(HTTPStatus.OK, eye_targets_know())
+            return
+        if path == "/api/eye/teach/doctrine":
+            lesson = (qs.get("lesson", [""])[0] or "").strip() or None
+            self._send_json(HTTPStatus.OK, eye_teach(lesson=lesson))
+            return
+        if path == "/api/eye/understand":
+            threat = (qs.get("threat", [""])[0] or "").strip()
+            if not threat:
+                self._send_json(HTTPStatus.BAD_REQUEST, {
+                    "ok": False,
+                    "error": "missing_threat",
+                    "hint": "GET /api/eye/understand?threat=provenance_mismatch",
+                })
+                return
+            self._send_json(HTTPStatus.OK, eye_understand_target(threat))
             return
         if path == "/api/eye/final/speak":
             mode = (qs.get("mode", [""])[0] or "").strip() or None
@@ -839,10 +864,16 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(HTTPStatus.OK, weaponize_eyeball(mode=mode))
             return
         if path == "/api/eye/weapons/fire":
-            weapon = str(body.get("weapon") or body.get("id") or "forward_truth").strip()
             threat = body.get("threat")
             if threat is not None:
                 threat = str(threat).strip()
+            raw_weapon = body.get("weapon") or body.get("id")
+            if raw_weapon is not None:
+                weapon = str(raw_weapon).strip()
+            elif threat:
+                weapon = "auto"
+            else:
+                weapon = "forward_truth"
             mode = str(body.get("mode") or "").strip() or None
             self._send_json(HTTPStatus.OK, fire_entity_weapon(
                 weapon, threat=threat, source="api", mode=mode,
