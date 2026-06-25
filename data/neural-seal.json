@@ -1,0 +1,8 @@
+{
+  "schema": "zocr-neural-seal/v1",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "network_id": "ZOCR_FIELD_ASSIST_v1",
+  "ts": "2026-06-25T11:09:04.931912+00:00",
+  "sha256": "f9f189d25c92b102a6d82661c4dc52b68b62d8ccb1fa536a1c54689fc85e81d2",
+  "root_seal": "e520a2dab4862e14fb4245c8e83c658a1fbe7acfd2cddec2e5dffab9725f1edf"
+}

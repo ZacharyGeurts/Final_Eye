@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZOCR · Field Robotics Vision</title>
+  <style>
+    :root {
+      --bg:#0a0e14; --panel:#121820; --text:#e6edf3; --muted:#8b9cb3;
+      --accent:#5eead4; --warn:#fbbf24; --ok:#4ade80; --border:#243044;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-monospace,Menlo,monospace;background:var(--bg);color:var(--text)}
+    header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);background:var(--panel)}
+    h1{margin:0;font-size:1.1rem;color:var(--accent)}
+    .sub{color:var(--muted);font-size:0.8rem;margin-top:0.35rem}
+    main{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1rem}
+    @media(max-width:960px){main{grid-template-columns:1fr}}
+    section{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:1rem}
+    h2{margin:0 0 0.75rem;font-size:0.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+    .viewport{background:#000;border:1px solid var(--border);border-radius:4px;min-height:200px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .viewport img,.viewport #mjpeg{max-width:100%;max-height:360px;background:#000}
+    .ocr{white-space:pre-wrap;font-size:0.72rem;max-height:200px;overflow:auto;background:#0d1117;padding:.75rem;border:1px solid var(--border);border-radius:4px}
+    button,select{background:var(--accent);color:#0a0e14;border:none;padding:.45rem .8rem;border-radius:4px;font-family:inherit;font-weight:700;cursor:pointer;margin:.35rem .3rem 0 0}
+    button.secondary{background:var(--border);color:var(--text)}
+    button.danger{background:#7f1d1d;color:#fecaca}
+    .stats span{color:var(--accent)}
+    .feed .row{padding:.35rem 0;border-bottom:1px solid var(--border);font-size:.72rem;color:var(--muted)}
+    code{color:var(--accent);font-size:.78rem}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ZOCR · Field Robotics Vision</h1>
+    <div class="sub" id="meta">ZOCRSM1 sub-micron video · WRDT seals · adaptive tide</div>
+  </header>
+  <main>
+    <section id="stream">
+      <h2>Video · ZOCRSM1 (no flash)</h2>
+      <div class="viewport">
+        <img id="mjpeg" alt="stream" hidden />
+        <div id="streamOff" class="sub">Stream off — pick profile and Start View</div>
+      </div>
+      <select id="profile">
+        <option value="idle">idle — on-demand only (0 fps)</option>
+        <option value="sentinel">sentinel — 0.25 fps · ultra_low</option>
+        <option value="patrol">patrol — 1 fps · low</option>
+        <option value="watch" selected>watch — 2 fps · balanced</option>
+        <option value="tactical">tactical — 5 fps · medium</option>
+        <option value="engage">engage — 15 fps · high</option>
+        <option value="combat">combat — AI 3–20 fps · tunable</option>
+        <option value="burst">burst — 30 fps · max</option>
+        <option value="submicron">submicron — 8 fps · fabric 100nm/px</option>
+        <option value="ultra_4k">ultra_4k — 120 fps · 4K dodge</option>
+        <option value="bullet_120">bullet_120 — 240 fps · 4K dodge</option>
+        <option value="bullet_240">bullet_240 — 240 fps · 4K dodge</option>
+        <option value="cinema_8k">cinema_8k — 8K movie · AI tunable</option>
+        <option value="cinema_16k">cinema_16k — 16K movie · AI tunable</option>
+      </select>
+      <div class="sub">FPS + resolution AI-tunable — POST /api/video/tune {fps, width, height}</div>
+      <button type="button" id="viewBtn">Start MJPEG view</button>
+      <button type="button" class="secondary" id="stopViewBtn">Stop view</button>
+      <button type="button" id="zocrStartBtn">Start ZOCRSM1 seal</button>
+      <button type="button" class="danger" id="zocrStopBtn">Stop seal</button>
+      <div class="sub" id="streamStats"></div>
+    </section>
+    <section>
+      <h2>Rig · multi-eye stereo</h2>
+      <div class="stats" id="rigStats"></div>
+      <select id="rigPreset">
+        <option value="monocular">monocular — 1 eye</option>
+        <option value="stereo_human">stereo human — L/R</option>
+        <option value="stereo_bird">stereo bird — L/R UV</option>
+        <option value="compound_six">compound — 6 eyes</option>
+      </select>
+      <button type="button" id="rigBtn">Configure rig</button>
+    </section>
+    <section>
+      <h2>Neural · protected assist</h2>
+      <div class="stats" id="neuralStats"></div>
+      <button type="button" id="nnAnalyzeBtn">Analyze frame</button>
+      <button type="button" class="secondary" id="nnSealBtn">Seal network</button>
+    </section>
+    <section style="grid-column:1/-1">
+      <h2>Final Eyeball · war &amp; dishes</h2>
+      <div class="stats" id="finalEyeStats"></div>
+      <select id="finalMode">
+        <option value="dishes" selected>dishes — human, monocular, idle</option>
+        <option value="war">war — raptor, stereo, tactical</option>
+        <option value="patrol">patrol — bird UV stereo</option>
+        <option value="engage">engage — compound six eyes</option>
+        <option value="night_watch">night watch — rod stereo</option>
+        <option value="submicron">submicron — insect UV fabric</option>
+        <option value="preserve">preserve — confidence in Vision</option>
+      </select>
+      <select id="finalVoice">
+        <option value="robotics_brief">robotics brief</option>
+        <option value="tactical">tactical</option>
+        <option value="clinical">clinical</option>
+        <option value="field_poet">field poet</option>
+        <option value="maternal">maternal</option>
+        <option value="dish_hand">dish hand</option>
+        <option value="raptor_pilot">raptor pilot</option>
+        <option value="silent_monk">silent monk</option>
+        <option value="preserve_oracle">preserve oracle</option>
+        <option value="kill_switch_priest">kill switch priest</option>
+        <option value="submicron_weaver">submicron weaver</option>
+        <option value="engineer">engineer</option>
+      </select>
+      <button type="button" id="finalArmBtn">Arm mode</button>
+      <button type="button" class="secondary" id="finalSpeakBtn">Speak</button>
+      <div class="sub" id="finalSpeak"></div>
+    </section>
+    <section>
+      <h2>Eye · ocular spectrum</h2>
+      <div class="stats" id="eyeStats"></div>
+      <select id="eyeProfile">
+        <option value="human">human — trichromat 400–700nm</option>
+        <option value="bird">bird — tetrachromat + UV</option>
+        <option value="reptile">reptile — tetrachromat UV</option>
+        <option value="snake_pit">snake pit — thermal + visible</option>
+        <option value="fish">fish — underwater blue-green</option>
+        <option value="insect">insect — UV compound</option>
+        <option value="mammal_night">mammal night — rod dominant</option>
+        <option value="raptor">raptor — high acuity UV</option>
+      </select>
+      <button type="button" id="eyeTeachBtn">Teach eye</button>
+      <div class="sub" id="eyeTeach"></div>
+    </section>
+    <section>
+      <h2>Look · single frame</h2>
+      <select id="prefer">
+        <option value="auto">auto</option>
+        <option value="rtx">rtx</option>
+        <option value="screen">screen (xwd silent)</option>
+        <option value="text">text only</option>
+      </select>
+      <button type="button" id="lookBtn">Look now</button>
+      <button type="button" class="secondary" id="verifyBtn">Verify chain</button>
+      <div class="ocr" id="ocrText">—</div>
+    </section>
+    <section>
+      <h2>Vigilance · modular additives</h2>
+      <div class="stats" id="vigilanceStats"></div>
+      <button type="button" id="vigStartBtn">Start vigilance</button>
+      <button type="button" class="secondary" id="vigStopBtn">Stop vigilance</button>
+      <button type="button" class="secondary" id="additivesBtn">List additives</button>
+      <div class="sub" id="additiveFeed"></div>
+    </section>
+    <section>
+      <h2>Kill · one whole authority</h2>
+      <div class="stats" id="killStats"></div>
+      <button type="button" class="danger" id="killAllBtn">Kill all vision</button>
+      <button type="button" class="secondary" id="killReleaseBtn">Release all</button>
+      <div class="sub" id="eyesRule">Protect your eyes — silent capture only</div>
+    </section>
+    <section>
+      <h2>Pattern · internal imaging security</h2>
+      <div class="stats" id="patternStats"></div>
+      <button type="button" id="patternScanBtn">Scan last frame</button>
+      <button type="button" class="secondary" id="patternDoctrineBtn">Pattern doctrine</button>
+      <div class="sub" id="patternFeed"></div>
+    </section>
+    <section>
+      <h2>Security · code seal</h2>
+      <div class="stats" id="securityStats"></div>
+      <button type="button" id="sealBtn">Re-seal code</button>
+      <button type="button" class="secondary" id="secVerifyBtn">Verify seal</button>
+    </section>
+    <section style="grid-column:1/-1">
+      <h2>Preserve · confidence &amp; offense</h2>
+      <div class="stats" id="preserveStats"></div>
+      <div class="stats" id="offenseStats"></div>
+      <div class="sub" id="threatFeed"></div>
+    </section>
+    <section style="grid-column:1/-1">
+      <h2>Trust · IRTN · Hostess7</h2>
+      <div class="stats" id="trustStats"></div>
+      <button type="button" id="trustVerifyBtn">Verify mesh</button>
+      <button type="button" class="secondary" id="trustHostessBtn">Hostess7 bridge</button>
+      <div class="sub" id="trustFeed"></div>
+    </section>
+    <section style="grid-column:1/-1">
+      <h2>Field protection · DARPA-style</h2>
+      <div class="stats" id="fieldStats"></div>
+      <div class="feed" id="feed"></div>
+    </section>
+  </main>
+  <script>
+    let mjpegOn = false;
+    const mjpeg = document.getElementById('mjpeg');
+    const streamOff = document.getElementById('streamOff');
+
+    function stopMjpeg() {
+      mjpegOn = false;
+      mjpeg.removeAttribute('src');
+      mjpeg.hidden = true;
+      streamOff.hidden = false;
+    }
+
+    function startMjpeg() {
+      const p = document.getElementById('profile').value;
+      if (p === 'idle') {
+        document.getElementById('ocrText').textContent = 'idle = 0 fps. Pick patrol/watch/tactical for stream view.';
+        return;
+      }
+      mjpegOn = true;
+      streamOff.hidden = true;
+      mjpeg.hidden = false;
+      mjpeg.src = '/api/stream/mjpeg?profile=' + encodeURIComponent(p) + '&prefer=auto';
+    }
+
+    async function refresh() {
+      const res = await fetch('/api/status', {cache:'no-store'});
+      if (!res.ok) throw new Error('offline');
+      const d = await res.json();
+      const s = d.session || {};
+      const st = d.video || d.stream || {};
+      const f = d.field || {};
+      const p = d.preserve || {};
+      const v = d.vigilance || {};
+      const sec = d.security || {};
+      const kill = d.kill || {};
+      const eye = d.eye || {};
+      const rig = d.rig || {};
+      const neural = d.neural || {};
+      const add = d.additives || {};
+      const pat = d.pattern || {};
+      const off = d.offense || {};
+      const tr = d.trust || {};
+      const fe = d.final_eyeball || {};
+      document.getElementById('meta').textContent =
+        (fe.title ? fe.title + ' · ' : '') + (d.doctrine || '');
+      document.getElementById('finalEyeStats').innerHTML =
+        `mode <span>${fe.active_mode || '—'}</span> · voice <span>${fe.active_voice || '—'}</span> · ` +
+        `eye <span>${(fe.eye && fe.eye.label) || '—'}</span>`;
+      document.getElementById('finalSpeak').textContent = fe.speak || '';
+      if (fe.active_mode) {
+        const fm = document.getElementById('finalMode');
+        if ([...fm.options].some(o => o.value === fe.active_mode)) fm.value = fe.active_mode;
+      }
+      if (fe.active_voice) {
+        const fv = document.getElementById('finalVoice');
+        if ([...fv.options].some(o => o.value === fe.active_voice)) fv.value = fe.active_voice;
+      }
+      document.getElementById('patternStats').innerHTML =
+        `enabled <span>${pat.enabled ? 'yes' : 'no'}</span> · stamps <span>${pat.stamps_total || 0}</span> · ` +
+        `scans <span>${pat.scans_total || 0}</span> · foreign <span>${pat.foreign_total || 0}</span>`;
+      document.getElementById('patternFeed').textContent =
+        (pat.recent || []).slice(-4).map(r =>
+          `${r.ts || ''} · ${r.schema || ''} · ${(r.threats || r.foreign || []).length ? 'alert' : 'ok'}`
+        ).join(' · ') || (pat.doctrine || 'Provenance weave on internal frames');
+      document.getElementById('rigStats').innerHTML =
+        `mode <span>${rig.mode || '—'}</span> · eyes <span>${rig.eye_count || 0}</span> · ` +
+        `stereo <span>${rig.stereoscopic && rig.stereoscopic.enabled ? 'on' : 'off'}</span>`;
+      document.getElementById('neuralStats').innerHTML =
+        `network <span>${neural.network_id || '—'}</span> · seal <span>${neural.seal && neural.seal.ok ? 'OK' : '—'}</span>`;
+      document.getElementById('eyeStats').innerHTML =
+        `seeing as <span>${eye.label || eye.active_profile || 'human'}</span> · ` +
+        `class <span>${eye.class || '—'}</span> · ` +
+        `range <span>${(eye.range_nm || []).join('–') || '—'}nm</span>`;
+      document.getElementById('eyeTeach').textContent = eye.teach || '';
+      if (eye.active_profile) {
+        const sel = document.getElementById('eyeProfile');
+        if ([...sel.options].some(o => o.value === eye.active_profile)) sel.value = eye.active_profile;
+      }
+      const whole = kill.whole !== false;
+      document.getElementById('killStats').innerHTML =
+        `whole <span>${whole ? 'armed' : 'KILLED'}</span> · eyes <span>${kill.eyes_protect ? 'protected' : 'off'}</span>`;
+      document.getElementById('eyesRule').textContent = kill.eyes_rule || 'Protect your eyes — silent capture only';
+      document.getElementById('vigilanceStats').innerHTML =
+        `running <span>${v.running ? 'yes' : 'no'}</span> · checks <span>${v.checks || 0}</span> · ` +
+        `alerts <span>${v.alerts || 0}</span> · additives <span>${(add.available || 0)}/${(add.count || 0)}</span>`;
+      document.getElementById('additiveFeed').textContent =
+        (add.additives || []).filter(a => a.available).map(a => `${a.id} (${a.label})`).join(' · ') ||
+        'No additives available';
+      const seal = (sec.code_seal || {});
+      document.getElementById('securityStats').innerHTML =
+        `seal <span>${seal.ok ? 'OK' : 'FAIL'}</span> · files <span>${seal.file_count || 0}</span> · ` +
+        `mandate <span>${sec.mandate_id || '—'}</span>`;
+      document.getElementById('preserveStats').innerHTML =
+        `confidence <span>${p.vision_confidence != null ? p.vision_confidence : '1.0'}</span> · ` +
+        `offense <span>${off.strikes_total || 0}</span> strikes · ` +
+        `holds <span>${p.holds_total || 0}</span> · threats <span>${p.threats_total || 0}</span> · ` +
+        `failovers <span>${p.failovers_total || 0}</span> · ` +
+        `vault <span>${p.last_good ? 'armed' : 'empty'}</span>`;
+      document.getElementById('trustStats').innerHTML =
+        `${tr.abbrev || 'IRTN'} <span>${tr.mesh_ok ? 'woven' : 'partial'}</span> · ` +
+        `peers <span>${tr.peers_ok || 0}</span> · paths <span>${tr.interwoven || 0}</span> · ` +
+        `H7 <span>${tr.hostess7 && tr.hostess7.present ? 'yes' : 'no'}</span>`;
+      document.getElementById('trustFeed').textContent =
+        (tr.rule || 'Interwoven redundancies trust network') +
+        (tr.hostess7 && tr.hostess7.queen ? ` · Queen ${tr.hostess7.queen.queen_verdict || '—'}` : '');
+      document.getElementById('offenseStats').innerHTML =
+        `${off.rule || 'Defense requires offense'} · streak <span>${off.threat_streak || 0}</span> · ` +
+        `preempt <span>${off.preempt_armed ? 'armed' : 'idle'}</span>`;
+      const threatLine = (p.recent_threats || []).map(t => `${t.threat} · ${t.source || ''}`).join(' · ');
+      document.getElementById('threatFeed').textContent =
+        (p.offense_rule || off.rule || 'Defense of vision requires offense') + ' · ' +
+        (p.confidence_rule || 'Confidence always in Vision') +
+        (threatLine ? ' · struck: ' + threatLine : ' · cascade affirms Vision');
+      document.getElementById('streamStats').textContent =
+        `${st.format || 'ZOCRSM1'} running: ${st.running ? 'yes' : 'no'} · profile ${st.profile} · ${st.fps} fps · ` +
+        `fabric ${st.fabric_nm_per_px || '—'}nm/px · scale ${st.adaptive_scale || 1} · fast ${st.fast_path ? 'yes' : 'no'} · seq ${st.seq || 0}`;
+      document.getElementById('fieldStats').innerHTML =
+        `mandate <span>${f.mandate_id || '—'}</span> · chain <span>${f.chain_verify && f.chain_verify.ok ? 'OK' : '—'}</span> · ` +
+        `stream frames <span>${s.stream_frames || 0}</span> · looks <span>${s.captures || 0}</span>`;
+      document.getElementById('feed').innerHTML = (s.recent || []).slice(0, 12).map(r =>
+        `<div class="row">${r.ts} · <strong>${r.action}</strong> · ${r.profile || r.source || ''} · ${r.power || ''}</div>`
+      ).join('') || '<div class="row">No events yet.</div>';
+    }
+
+    document.getElementById('viewBtn').onclick = startMjpeg;
+    document.getElementById('stopViewBtn').onclick = stopMjpeg;
+    document.getElementById('zocrStartBtn').onclick = async () => {
+      const profile = document.getElementById('profile').value;
+      const r = await fetch('/api/stream/start', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({profile, prefer:'auto'})});
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+      refresh();
+    };
+    document.getElementById('zocrStopBtn').onclick = async () => {
+      await fetch('/api/stream/stop', {method:'POST'});
+      refresh();
+    };
+    document.getElementById('rigBtn').onclick = async () => {
+      const preset = document.getElementById('rigPreset').value;
+      const r = await fetch('/api/rig/configure', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({preset})});
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+      refresh();
+    };
+    document.getElementById('nnAnalyzeBtn').onclick = async () => {
+      const r = await fetch('/api/neural/analyze', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({look:true, prefer:'auto'})});
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+    };
+    document.getElementById('nnSealBtn').onclick = async () => {
+      const r = await fetch('/api/neural/seal', {method:'POST'});
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+      refresh();
+    };
+    document.getElementById('finalArmBtn').onclick = async () => {
+      const mode = document.getElementById('finalMode').value;
+      const voice = document.getElementById('finalVoice').value;
+      const r = await fetch('/api/eye/final/mode', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({mode, voice})});
+      const d = await r.json();
+      document.getElementById('finalSpeak').textContent = d.speak || JSON.stringify(d, null, 2);
+      document.getElementById('ocrText').textContent = (d.video_hint || '') + '\n' + JSON.stringify(d.prescription || {}, null, 2);
+      refresh();
+    };
+    document.getElementById('finalSpeakBtn').onclick = async () => {
+      const mode = document.getElementById('finalMode').value;
+      const voice = document.getElementById('finalVoice').value;
+      const r = await fetch('/api/eye/final/speak?mode=' + encodeURIComponent(mode) + '&voice=' + encodeURIComponent(voice));
+      const d = await r.json();
+      document.getElementById('finalSpeak').textContent = d.speak || JSON.stringify(d, null, 2);
+    };
+    document.getElementById('eyeTeachBtn').onclick = async () => {
+      const profile = document.getElementById('eyeProfile').value;
+      const r = await fetch('/api/eye/teach', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({profile})});
+      const d = await r.json();
+      document.getElementById('eyeTeach').textContent = d.teach || JSON.stringify(d);
+      refresh();
+    };
+    document.getElementById('lookBtn').onclick = async () => {
+      const prefer = document.getElementById('prefer').value;
+      const r = await fetch('/api/look', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({prefer, label:'gui_look'})});
+      const d = await r.json();
+      document.getElementById('ocrText').textContent = (d.capture && d.capture.ocr) || JSON.stringify(d, null, 2);
+      refresh();
+    };
+    document.getElementById('verifyBtn').onclick = async () => {
+      const r = await fetch('/api/stream/verify');
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+    };
+    document.getElementById('vigStartBtn').onclick = async () => {
+      const r = await fetch('/api/vigilance/start', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({profile:'sentinel', prefer:'auto'})});
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+      refresh();
+    };
+    document.getElementById('vigStopBtn').onclick = async () => {
+      await fetch('/api/vigilance/stop', {method:'POST'});
+      refresh();
+    };
+    document.getElementById('additivesBtn').onclick = async () => {
+      const r = await fetch('/api/vigilance/additives');
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+    };
+    document.getElementById('killAllBtn').onclick = async () => {
+      stopMjpeg();
+      const r = await fetch('/api/kill/all', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({reason:'gui'})});
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+      refresh();
+    };
+    document.getElementById('killReleaseBtn').onclick = async () => {
+      const r = await fetch('/api/kill/release', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({switch:'all'})});
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+      refresh();
+    };
+    document.getElementById('trustVerifyBtn').onclick = async () => {
+      const r = await fetch('/api/trust/mesh');
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+      refresh();
+    };
+    document.getElementById('trustHostessBtn').onclick = async () => {
+      const r = await fetch('/api/trust/hostess7');
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+    };
+    document.getElementById('patternScanBtn').onclick = async () => {
+      const r = await fetch('/api/look', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({prefer:'auto', label:'pattern_scan'})});
+      const d = await r.json();
+      const img = d.capture && d.capture.image;
+      if (!img) {
+        document.getElementById('ocrText').textContent = JSON.stringify(d, null, 2);
+        return;
+      }
+      const sr = await fetch('/api/pattern/scan', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({image: img})});
+      document.getElementById('ocrText').textContent = JSON.stringify(await sr.json(), null, 2);
+      refresh();
+    };
+    document.getElementById('patternDoctrineBtn').onclick = async () => {
+      const r = await fetch('/api/pattern/doctrine');
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+    };
+    document.getElementById('sealBtn').onclick = async () => {
+      const r = await fetch('/api/security/seal', {method:'POST'});
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+      refresh();
+    };
+    document.getElementById('secVerifyBtn').onclick = async () => {
+      const r = await fetch('/api/security/verify');
+      document.getElementById('ocrText').textContent = JSON.stringify(await r.json(), null, 2);
+    };
+
+    refresh().catch(() => { document.getElementById('meta').textContent = 'Offline — ./start.sh --no-open'; });
+    setInterval(() => refresh().catch(() => {}), 5000);
+  </script>
+</body>
+</html>

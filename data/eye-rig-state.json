@@ -1,0 +1,26 @@
+{
+  "schema": "zocr-eye-rig-state/v1",
+  "mode": "stereo_human",
+  "stereoscopic": {
+    "enabled": true,
+    "baseline_mm": 65,
+    "ipd_mm": 63
+  },
+  "eyes": [
+    {
+      "id": "left",
+      "role": "left",
+      "profile": "human",
+      "offset_x": -8,
+      "enabled": true
+    },
+    {
+      "id": "right",
+      "role": "right",
+      "profile": "human",
+      "offset_x": 8,
+      "enabled": true
+    }
+  ],
+  "updated": "2026-06-25T11:21:20.559384+00:00"
+}

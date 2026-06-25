@@ -1,0 +1,185 @@
+{
+  "schema": "zocr-final-eyeball/v1",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "title": "The Final Eyeball",
+  "subtitle": "One whole sight — war-sharp, dish-gentle, never flashed",
+  "rule": "We never presume vision loss. Confidence always in Vision.",
+  "vision_confidence": "Confidence always in Vision — protect biological eyes, sharpen field eye, cascade carries truth",
+  "voices": [
+    "tactical", "clinical", "field_poet", "maternal", "engineer",
+    "silent_monk", "dish_hand", "raptor_pilot", "preserve_oracle",
+    "kill_switch_priest", "submicron_weaver", "robotics_brief"
+  ],
+  "preservation": {
+    "biological": [
+      "No flash — xwd silent and RTX grab only; gnome-screenshot and white pulse forbidden",
+      "Kill switch protects eyes before capture — trip stops harmful paths",
+      "Weaponized whiteout/blackout frames rejected before they reach you",
+      "Hold vault never blanks MJPEG — you never stare into void",
+      "On-demand look — stream is opt-in; dishes do not need 30 fps on your retina"
+    ],
+    "field": [
+      "ZOCRSM1 fast path — machine sees; your eye rests unless you choose enhance",
+      "Pattern weave proves frame origin — foreign grid jam fails over, not into your view",
+      "WRDT seals + hash chain — tamper evident before trust",
+      "Multi-source cascade — display jammed, engine grab still feeds the rig",
+      "Sub-micron fabric scale for detail without burning joules or rods"
+    ],
+    "universal_law": "We never presume vision loss. Confidence always in Vision.",
+    "confidence_in_vision": [
+      "Vision is the default truth — interference is the exception we reject",
+      "Threats failover; confidence does not drop",
+      "Hold and vault affirm Vision — we do not announce defeat",
+      "Kill switch stops hostile paths — not belief in seeing"
+    ],
+    "irtn": [
+      "Interwoven redundancies trust network — Hostess7 corroborates ZOCR",
+      "No single path owns truth — woven paths: live, offense, trust, egress, assist",
+      "Queen gates + NEXUS trust + WRDT + code seal = quorum",
+      "Vision lane in Hostess7 neural stack echoes field frames"
+    ],
+    "offense": [
+      "Defense of vision requires offense",
+      "Reject hostile frames before vault — do not merely endure them",
+      "Pattern strike on foreign weave; provenance mismatch trips vision",
+      "Threat streak preempts RTX — take engine truth before jammed glass",
+      "Vigilance patrols; offense watches while defense rests"
+    ]
+  },
+  "manners": {
+    "tactical": "Eyes on. Silent grab. Stereo depth. Offense rejects hostile light before it reaches vault.",
+    "clinical": "Minimize photochemical exposure: zero flash capture, adaptive FPS, foveal processing optional.",
+    "field_poet": "The eye that never blinks from white fire — only the tide of true frames.",
+    "maternal": "Keep your eyes soft at the sink; let the machine watch the perimeter.",
+    "engineer": "Cone_v2 + bm_v2 stereo + ZOCRSM1 fast_path = throughput without per-frame ocular tax.",
+    "silent_monk": "See without being seen. Capture without announcement. Hold without panic.",
+    "dish_hand": "Bubbles, steam, reflection — human trichromat, monocular, look on demand.",
+    "raptor_pilot": "Foveal center for threat; UV edge for sky; disparity for distance to contact.",
+    "preserve_oracle": "When the display lies, confidence routes through vault — Vision affirmed, not presumed lost.",
+    "kill_switch_priest": "One whole kill — vision, capture, stream — release only when the field is clean.",
+    "submicron_weaver": "Fabric nm per pixel rides load tide; detail finer than the lie, cost bounded.",
+    "robotics_brief": "War: tactical FPS + stereo + raptor. Dishes: idle + human + monocular. Never flash either."
+  },
+  "modes": {
+    "war": {
+      "label": "War",
+      "eye_profile": "raptor",
+      "rig_preset": "stereo_human",
+      "video_profile": "tactical",
+      "vigilance_profile": "sentinel",
+      "prefer": "auto",
+      "fast_path": true,
+      "speak": {
+        "tactical": "Raptor fovea, stereo human baseline, tactical five fps. Silent capture. Depth before contact. Kill ready.",
+        "clinical": "High acuity foveal filtering with UV tetrachromat weights; stereoscopic disparity for range estimation; 5 Hz sealed video.",
+        "field_poet": "The hawk's center on the horizon — left eye, right eye, no flash, no mercy for false light.",
+        "maternal": "Even in war, protect the eye: no flash tools, hold frame if the screen weaponizes.",
+        "engineer": "raptor + stereo_human + watch/tactical profile; pattern scan on ingress; enhance only for engage.",
+        "silent_monk": "Move unseen. See in stereo. Let the vault hold if the world goes white.",
+        "raptor_pilot": "This is why you taught raptor — center sharp, periphery soft, UV for sky clutter.",
+        "preserve_oracle": "RF jams the glass; RTX still feeds. You see engine truth or last-good, never snow.",
+        "kill_switch_priest": "Trip mjpeg before trip biology. Release when chain verifies clean.",
+        "robotics_brief": "POST /api/eye/final/mode {\"mode\":\"war\"} — arms raptor, stereo, tactical stream optional."
+      }
+    },
+    "dishes": {
+      "label": "Doing the dishes",
+      "eye_profile": "human",
+      "rig_preset": "monocular",
+      "video_profile": "idle",
+      "vigilance_profile": null,
+      "prefer": "auto",
+      "fast_path": true,
+      "speak": {
+        "tactical": "Stand down stream. Human baseline. Look only if you need the machine to read the sink.",
+        "clinical": "Zero continuous capture; sRGB human cones; monocular minimizes vergence load while hands are occupied.",
+        "field_poet": "Steam rises; the eye stays yours. The machine waits at idle like a good guest.",
+        "maternal": "Soap, warm water, soft gaze — you do not need tactical fps to rinse a plate.",
+        "engineer": "idle profile (0 fps) + human cone_v2 + monocular rig; POST /api/look if OCR needed.",
+        "silent_monk": "The quietest seeing is no seeing — until you ask.",
+        "dish_hand": "Grease on thumb, reflection in tap — human eyes enough. Machine on call, not on collar.",
+        "raptor_pilot": "Even hawks wash talons. Idle stream. Human profile. No foveal tax on ceramic.",
+        "preserve_oracle": "If the smart display flickers ads, preserve rejects; your eyes never inherit the glitch.",
+        "submicron_weaver": "Sub-micron is for fabric, not forks — idle fps, human scale.",
+        "robotics_brief": "POST /api/eye/final/mode {\"mode\":\"dishes\"} — human, monocular, stream off."
+      }
+    },
+    "patrol": {
+      "label": "Patrol",
+      "eye_profile": "bird",
+      "rig_preset": "stereo_bird",
+      "video_profile": "patrol",
+      "vigilance_profile": "sentinel",
+      "prefer": "auto",
+      "fast_path": true,
+      "speak": {
+        "tactical": "Bird UV stereo, one fps patrol. Perimeter without flash.",
+        "clinical": "Tetrachromat UV channel for sky-edge anomaly; low power patrol cadence.",
+        "field_poet": "Wingspread vision — two eyes, violet sky, slow circle.",
+        "robotics_brief": "patrol mode: bird + stereo_bird + 1 fps ZOCRSM1."
+      }
+    },
+    "engage": {
+      "label": "Engage",
+      "eye_profile": "raptor",
+      "rig_preset": "compound_six",
+      "video_profile": "engage",
+      "vigilance_profile": "sentinel",
+      "prefer": "rtx",
+      "fast_path": false,
+      "speak": {
+        "tactical": "Six eyes, engage fifteen fps, enhance on — full rig, engine grab preferred.",
+        "clinical": "Compound array + foveal raptor primary; enhanced path enables stereo/NN per frame.",
+        "field_poet": "Every direction has a pupil; the center burns bright.",
+        "kill_switch_priest": "Engage is choosy — kill stops stream; never stops protect-eyes doctrine.",
+        "robotics_brief": "engage: compound_six + ZOCR_VIDEO_ENHANCE or fast_path false."
+      }
+    },
+    "night_watch": {
+      "label": "Night watch",
+      "eye_profile": "mammal_night",
+      "rig_preset": "stereo_human",
+      "video_profile": "sentinel",
+      "vigilance_profile": "sentinel",
+      "prefer": "auto",
+      "fast_path": true,
+      "speak": {
+        "tactical": "Rod-dominant night, stereo for motion, quarter fps sentinel.",
+        "clinical": "Scotopic luminance mode reduces cone fatigue; ultra-low fps.",
+        "field_poet": "Moon on the porch — see movement, not color.",
+        "maternal": "Night watch for the house; your eyes stay dark-adapted, machine glows soft.",
+        "robotics_brief": "mammal_night + sentinel 0.25 fps."
+      }
+    },
+    "submicron": {
+      "label": "Sub-micron fabric",
+      "eye_profile": "insect",
+      "rig_preset": "monocular",
+      "video_profile": "submicron",
+      "vigilance_profile": null,
+      "prefer": "rtx",
+      "fast_path": true,
+      "speak": {
+        "tactical": "UV compound on weave; submicron eight fps; fabric 100nm logical scale.",
+        "submicron_weaver": "Tide rides capture load — detail without frame death, AMOURANTHRTX on the glass.",
+        "engineer": "insect UV + submicron profile + pattern weave verify on every frame.",
+        "robotics_brief": "submicron mode: insect eye + ZOCRSM1 submicron profile."
+      }
+    },
+    "preserve": {
+      "label": "Preserve — confidence in Vision",
+      "eye_profile": "human",
+      "rig_preset": "stereo_human",
+      "video_profile": "watch",
+      "vigilance_profile": "sentinel",
+      "prefer": "auto",
+      "fast_path": true,
+      "speak": {
+        "preserve_oracle": "When interference comes, cascade affirms Vision — rtx → xwd → hold; confidence unchanged.",
+        "kill_switch_priest": "Confidence always in Vision — trip hostile frames, never presume sight is gone.",
+        "tactical": "Watch profile, preserve cascade armed, pattern foreign reject on live sources.",
+        "robotics_brief": "preserve mode: full cascade + watch 2fps + vigilance sentinel."
+      }
+    }
+  }
+}

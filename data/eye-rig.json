@@ -1,0 +1,53 @@
+{
+  "schema": "zocr-eye-rig/v1",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "doctrine": "Permit any number of eyes — monocular, stereoscopic, compound arrays",
+  "default_mode": "monocular",
+  "stereoscopic": {
+    "enabled": false,
+    "baseline_mm": 65,
+    "ipd_mm": 63,
+    "max_disparity_px": 32,
+    "output": ["anaglyph", "side_by_side", "depth_map"]
+  },
+  "eyes": [
+    {
+      "id": "primary",
+      "role": "center",
+      "profile": "human",
+      "offset_x": 0,
+      "enabled": true
+    }
+  ],
+  "presets": {
+    "monocular": {
+      "stereoscopic": {"enabled": false},
+      "eyes": [{"id": "primary", "role": "center", "profile": "human", "offset_x": 0, "enabled": true}]
+    },
+    "stereo_human": {
+      "stereoscopic": {"enabled": true, "baseline_mm": 65, "ipd_mm": 63},
+      "eyes": [
+        {"id": "left", "role": "left", "profile": "human", "offset_x": -8, "enabled": true},
+        {"id": "right", "role": "right", "profile": "human", "offset_x": 8, "enabled": true}
+      ]
+    },
+    "stereo_bird": {
+      "stereoscopic": {"enabled": true, "baseline_mm": 24, "ipd_mm": 22},
+      "eyes": [
+        {"id": "left", "role": "left", "profile": "bird", "offset_x": -6, "enabled": true},
+        {"id": "right", "role": "right", "profile": "bird", "offset_x": 6, "enabled": true}
+      ]
+    },
+    "compound_six": {
+      "stereoscopic": {"enabled": true, "baseline_mm": 40},
+      "eyes": [
+        {"id": "front_left", "role": "left", "profile": "insect", "offset_x": -10, "enabled": true},
+        {"id": "front_right", "role": "right", "profile": "insect", "offset_x": 10, "enabled": true},
+        {"id": "top", "role": "top", "profile": "bird", "offset_x": 0, "enabled": true},
+        {"id": "bottom", "role": "bottom", "profile": "reptile", "offset_x": 0, "enabled": true},
+        {"id": "rear_left", "role": "rear_left", "profile": "mammal_night", "offset_x": -5, "enabled": true},
+        {"id": "rear_right", "role": "rear_right", "profile": "mammal_night", "offset_x": 5, "enabled": true}
+      ]
+    }
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "schema": "zocr-field-mandate/v2",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "title": "ZOCR Field Vision — DARPA-grade stream protection",
+  "rule": "Sovereign vision only — sealed frames, hash chain, localhost egress default, field power governs FPS, code seal on all protected ops",
+  "vision_confidence": "We never presume vision loss. Confidence always in Vision.",
+  "vision_offense": "Defense of vision requires offense.",
+  "trust_network": {
+    "abbrev": "IRTN",
+    "title": "Interwoven Redundancies Trust Network",
+    "rule": "No single path owns truth — Hostess7 corroborates ZOCR vision",
+    "spec": "data/zocr-trust-network.json",
+    "module": "zocr_trust.py",
+    "hostess7": "truth gates + vision lane + nexus trust",
+    "queen": "gates quorum via field-queen-browser.json",
+    "endpoints": {
+      "GET /api/trust": "IRTN status + mesh verify",
+      "GET /api/trust/hostess7": "Hostess7 bridge posture",
+      "GET /api/trust/mesh": "Interwoven redundancy path verify"
+    }
+  },
+  "doctrine": [
+    "We never presume vision loss — confidence always in Vision",
+    "Defense of vision requires offense — reject, preempt, seal, strike on ingress",
+    "Silent capture only — no screen flash in robotics or AI observe paths",
+    "Stream frames are lossless PNG seals with SHA-256 chain — tamper evident",
+    "FPS profiles map to field power — robot stacks throttle before thermal breach",
+    "On-demand look always available — stream is opt-in, not mandatory poll",
+    "No hard frame quota — operator or agent selects profile when stream runs",
+    "Vigilance watch with modular display additives — accessibility metadata on every source",
+    "All protected operations verify code seal before execution",
+    "Kill switches at choke points only — one whole, no redundant guards",
+    "Protect your eyes — silent capture, flash forbidden, threat frames rejected"
+  ],
+  "kill_switches": {
+    "authority": "zocr_kill.py",
+    "state": "data/kill-state.json",
+    "switches": ["vision", "capture", "stream", "vigilance", "mjpeg", "egress"],
+    "choke_points": ["mandate_enforce", "acquire_preserved", "stream_loop", "vigilance_loop"],
+    "whole_kill": "POST /api/kill/all or ./start.sh --kill",
+    "release": "POST /api/kill/release or ./start.sh --kill-release all"
+  },
+  "eye_rig": {
+    "config": "data/eye-rig.json",
+    "stereoscopic": true,
+    "any_eyes": true,
+    "presets": ["monocular", "stereo_human", "stereo_bird", "compound_six"],
+    "configure": "POST /api/rig/configure"
+  },
+  "neural_protected": {
+    "network": "data/neural-protected.json",
+    "seal": "data/neural-seal.json",
+    "local_only": true,
+    "egress": false,
+    "analyze": "POST /api/neural/analyze"
+  },
+  "ocular_spectrum": {
+    "doctrine": "data/ocular-spectrum.json",
+    "eye_module": "zocr_eye.py",
+    "profiles": ["human", "bird", "reptile", "snake_pit", "fish", "insect", "mammal_night", "raptor"],
+    "teach": "POST /api/eye/teach — eye learns photoreceptor weights per species class",
+    "perceive_hook": "look + MJPEG view — vault seals raw capture, eye sees taught spectrum"
+  },
+  "final_eyeball": {
+    "spec": "data/final-eyeball.json",
+    "title": "The Final Eyeball",
+    "rule": "War-sharp, dish-gentle — one whole sight, never flashed",
+    "modes": ["war", "dishes", "patrol", "engage", "night_watch", "submicron", "preserve"],
+    "voices": 12,
+    "arm_war": "POST /api/eye/final/mode {\"mode\":\"war\"}",
+    "arm_dishes": "POST /api/eye/final/mode {\"mode\":\"dishes\"}",
+    "speak": "GET /api/eye/final/speak?mode=war&voice=tactical"
+  },
+  "eyes_protect": {
+    "default": true,
+    "rule": "Silent additives only — no flash tools, whiteout/blackout rejected before vault",
+    "disable": "ZOCR_EYES_OFF=1"
+  },
+  "protection": {
+    "hash_chain": true,
+    "frame_seal": "sha256",
+    "egress_default": "127.0.0.1",
+    "mandate_gate": true,
+    "integrity_verify": true,
+    "flash_forbidden": true,
+    "code_seal": true
+  },
+  "security": {
+    "code_seal_required": true,
+    "enforce_all_ops": false,
+    "seal_path": "data/code-seal.json",
+    "protected_ops": [
+      "look", "observe", "stream_start", "stream_stop", "mjpeg",
+      "preserve", "verify", "vigilance_start", "vigilance_stop"
+    ]
+  },
+  "vigilance": {
+    "enabled": true,
+    "default_profile": "sentinel",
+    "interval_sec": 4,
+    "modular_additives": true,
+    "accessibility_export": "/api/vigilance/additives"
+  },
+  "display_additives": {
+    "config": "data/display-additives.json",
+    "addons_dir": "addons",
+    "require_approval": true,
+    "builtin": ["rtx", "xwd_silent", "grim", "mss", "hold", "synthetic"]
+  },
+  "video": {
+    "format": "ZOCRSM1",
+    "spec": "data/zocr-video-format.json",
+    "module": "zocr_video.py",
+    "whole_new": true,
+    "sub_micron": "adaptive fabric_nm_per_px — AMOURANTHRTX tide on capture load",
+    "seal": "WRDT-inspired ZOCR frame envelopes + hash chain",
+    "fast_path": "MJPEG raw preserve — enhance on demand"
+  },
+  "patterning": {
+    "registry": "data/zocr-pattern-registry.json",
+    "module": "zocr_pattern.py",
+    "rule": "Real internal imaging — provenance weave stamped on every video frame",
+    "detect": "Foreign grid/moiré/injection patterns rejected before vault",
+    "stamp": "64-bit corner weave from session+seq+mandate digest",
+    "endpoints": {
+      "GET /api/pattern": "Pattern security status",
+      "GET /api/pattern/doctrine": "Pattern catalog + lineage",
+      "POST /api/pattern/scan": "{\"image\":\"path\"} — foreign pattern detect",
+      "POST /api/pattern/stamp": "{\"image\":\"path\",\"session_id\":\"…\",\"seq\":1}"
+    }
+  },
+  "formats": {
+    "ZOCRSM1": "Sub-micron video — out/video/ + video-index.jsonl + .zocrsm envelopes",
+    "ZOCRSM_MJPEG": "Fast multipart transport — no page flash",
+    "ZOCRS1": "Legacy alias → ZOCRSM1",
+    "ZOCR_MANIFEST": "Per-frame OCR + metadata in manifest.jsonl"
+  },
+  "fps_profiles": {
+    "idle": {"fps": 0, "power": "minimal", "use": "Look on demand only"},
+    "sentinel": {"fps": 0.25, "power": "ultra_low", "use": "Long watch, minimal joules"},
+    "patrol": {"fps": 1, "power": "low", "use": "Perimeter patrol"},
+    "watch": {"fps": 2, "power": "balanced", "use": "Default field watch"},
+    "tactical": {"fps": 5, "power": "medium", "use": "Manipulation / nav assist"},
+    "engage": {"fps": 15, "power": "high", "use": "Active engagement"},
+    "burst": {"fps": 30, "power": "max", "use": "Short burst — thermal watch"},
+    "submicron": {"fps": 8, "power": "fabric", "use": "Sub-micron fabric scale — 100nm/px logical resolution"}
+  },
+  "robotics": {
+    "field_power": "FPS profile selects joules-per-frame budget",
+    "stream_control": "POST /api/stream/start|stop — profile + prefer source",
+    "mjpeg_view": "GET /api/stream/mjpeg?profile=watch — no full-page reload",
+    "vigilance": "POST /api/vigilance/start|stop — modular additive watch"
+  },
+  "preserve": {
+    "doctrine": "Confidence always in Vision — we never presume vision loss",
+    "threats": ["rf_jam", "static_snow", "blackout", "whiteout", "frozen_display", "weaponized_interference"],
+    "cascade": ["rtx_grab", "xwd_silent", "grim", "mss", "approved_additives", "hold", "synthetic"],
+    "countermeasures": {
+      "multi_source_failover": "Engine grab survives display RF jam",
+      "modular_additives": "Approved display extensions plug into cascade",
+      "last_good_vault": "data/preserve/last-good.png",
+      "threat_reject": "Bad frames never replace vault",
+      "mjpeg_never_blank": "Hold frame sent if all sources fail",
+      "threat_log": "data/preserve/threat-log.jsonl"
+    }
+  }
+}

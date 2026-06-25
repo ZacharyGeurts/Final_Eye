@@ -1,0 +1,74 @@
+{
+  "schema": "zocr-video-format/v1",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "format_id": "ZOCRSM1",
+  "title": "ZOCR Sub-Micron Video — AI-tunable field vision",
+  "rule": "GRKMF1 underneath — AI tunable fps + resolution, legacy through 16K",
+  "parent_format": "GRKMF1",
+  "codec": "GVC1",
+  "proprietary": true,
+  "not_mpeg": true,
+  "ai_tunable": {
+    "rule": "All fps and resolution AI-tunable to whatever — POST /api/video/tune",
+    "combat_fps_range": [3, 20],
+    "media_fps_max": 240,
+    "resolution_max": "15360x8640"
+  },
+  "lineage": {
+    "World_Redata": "WRDT1 lossless envelope + sha256 + tail discipline",
+    "AMOURANTHRTX": "Adaptive resolution tide — AI rides load on demand",
+    "GRKMF1": "Proprietary cinema container — legacy to 16K"
+  },
+  "supersedes": ["ZOCRS1"],
+  "transports": {
+    "ZOCRSM_MJPEG": "AI-tunable GRKMF dodge rail",
+    "ZOCRSM_WRDT": "Sealed frame segments under out/video/",
+    "ZOCRSM_INDEX": "Append-only video-index.jsonl + hash chain",
+    "GRKMF_FILE": ".grkm export — cinema_4k through cinema_16k"
+  },
+  "grkmf_profiles": {
+    "legacy_vga": "640×480 back-support",
+    "combat": "AI 3–20fps field",
+    "cinema_4k": "4K movies",
+    "cinema_16k": "16K movies",
+    "stream_4k_240": "Media 240fps cap",
+    "dodge_240": "Live dodge rail"
+  },
+  "adaptive": {
+    "enabled": true,
+    "ai_tune": true,
+    "fabric_nm_floor": 250.0,
+    "fabric_nm_ceiling": 50.0,
+    "scale_tiers": [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0],
+    "ride_load": "AI tunes fps + resolution from capture load — AMOURANTHRTX tide"
+  },
+  "profiles": {
+    "idle": {"fps": 0, "power": "minimal", "max_width": 0, "mode": "legacy"},
+    "sentinel": {"fps": 0.25, "power": "ultra_low", "max_width": 640, "mode": "legacy", "ai_tunable": true},
+    "patrol": {"fps": 1, "power": "low", "max_width": 960, "mode": "legacy", "ai_tunable": true},
+    "watch": {"fps": 2, "power": "balanced", "max_width": 1280, "mode": "combat", "ai_tunable": true},
+    "tactical": {"fps": 5, "power": "medium", "max_width": 1600, "mode": "combat", "ai_tunable": true},
+    "engage": {"fps": 15, "power": "high", "max_width": 1920, "mode": "combat", "ai_tunable": true},
+    "combat": {"fps": 8, "power": "combat", "max_width": 3840, "mode": "combat", "ai_tunable": true},
+    "burst": {"fps": 30, "power": "max", "max_width": 2560, "mode": "media", "ai_tunable": true},
+    "submicron": {"fps": 8, "power": "fabric", "max_width": 3840, "fabric_nm_per_px": 100.0, "mode": "media", "ai_tunable": true},
+    "ultra_4k": {"fps": 120, "power": "media", "max_width": 3840, "resolution": "4K", "mode": "media", "ai_tunable": true},
+    "bullet_120": {"fps": 240, "power": "dodge", "max_width": 3840, "resolution": "4K", "bullet_train": true, "refresh_hz": 240, "mode": "dodge", "ai_tunable": true},
+    "bullet_240": {"fps": 240, "power": "dodge", "max_width": 3840, "resolution": "4K", "bullet_train": true, "refresh_hz": 240, "mode": "dodge", "ai_tunable": true},
+    "cinema_8k": {"fps": 24, "power": "cinema", "max_width": 7680, "mode": "media", "ai_tunable": true},
+    "cinema_16k": {"fps": 24, "power": "cinema", "max_width": 15360, "mode": "media", "ai_tunable": true}
+  },
+  "bullet_train": {
+    "enabled": true,
+    "rule": "GRKMF dodge rail — AI sets emit fps + resolution on demand",
+    "skip_per_frame": ["preserve_cascade", "pattern_stamp", "offense_scan", "wrdt_disk", "index_append"],
+    "seal_every_n": 120,
+    "jpeg_quality": 72,
+    "resize": "bilinear"
+  },
+  "fast_path": {
+    "default": true,
+    "rule": "MJPEG uses GRKMF bullet or field capture — AI tune anytime",
+    "enhance": "POST /api/video/enhance or ZOCR_VIDEO_ENHANCE=1"
+  }
+}

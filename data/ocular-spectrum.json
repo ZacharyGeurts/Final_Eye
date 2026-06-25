@@ -1,0 +1,153 @@
+{
+  "schema": "zocr-ocular-spectrum/v2",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "engine": "cone_v2",
+  "doctrine": "Cone sensitivity engine — receptor weights, adaptation, foveal acuity, UV channel",
+  "default_profile": "human",
+  "profiles": {
+    "human": {
+      "label": "Human trichromat",
+      "class": "mammal",
+      "engine": "cone_v2",
+      "range_nm": [400, 700],
+      "adaptation": 0.10,
+      "receptors": [
+        {"id": "L", "peak_nm": 560, "role": "long"},
+        {"id": "M", "peak_nm": 530, "role": "medium"},
+        {"id": "S", "peak_nm": 420, "role": "short"}
+      ],
+      "cones": [
+        {"id": "L", "weights": [0.64, 0.33, 0.03]},
+        {"id": "M", "weights": [0.27, 0.67, 0.06]},
+        {"id": "S", "weights": [0.02, 0.08, 0.90]}
+      ],
+      "display_matrix": [[1.0, -0.1, 0.0], [-0.05, 1.0, 0.0], [0.0, 0.0, 1.0]],
+      "teach": "sRGB through LMS cones with mild retinal adaptation — baseline human sight."
+    },
+    "bird": {
+      "label": "Bird tetrachromat + UV",
+      "class": "avian",
+      "engine": "cone_v2",
+      "range_nm": [300, 700],
+      "adaptation": 0.14,
+      "uv_sensitive": true,
+      "receptors": [
+        {"id": "L", "peak_nm": 570}, {"id": "M", "peak_nm": 508},
+        {"id": "S", "peak_nm": 455}, {"id": "UV", "peak_nm": 370}
+      ],
+      "cones": [
+        {"id": "L", "weights": [0.58, 0.32, 0.05]},
+        {"id": "M", "weights": [0.12, 0.78, 0.10]},
+        {"id": "S", "weights": [0.05, 0.18, 0.95]},
+        {"id": "UV", "weights": [0.02, 0.15, 1.10]}
+      ],
+      "display_matrix": [[0.85, 0.10, 0.12], [0.05, 0.95, 0.15], [0.10, 0.20, 1.25]],
+      "teach": "Tetrachromat with UV — violet blues intensify, red foliage contrast shifts."
+    },
+    "reptile": {
+      "label": "Reptile tetrachromat",
+      "class": "reptile",
+      "engine": "cone_v2",
+      "range_nm": [320, 700],
+      "adaptation": 0.12,
+      "uv_sensitive": true,
+      "receptors": [
+        {"id": "L", "peak_nm": 565}, {"id": "M", "peak_nm": 520},
+        {"id": "S", "peak_nm": 440}, {"id": "UV", "peak_nm": 360}
+      ],
+      "cones": [
+        {"id": "L", "weights": [0.62, 0.28, 0.06]},
+        {"id": "M", "weights": [0.18, 0.72, 0.12]},
+        {"id": "S", "weights": [0.08, 0.30, 0.88]},
+        {"id": "UV", "weights": [0.04, 0.22, 0.95]}
+      ],
+      "display_matrix": [[0.90, 0.12, 0.08], [0.12, 0.92, 0.18], [0.08, 0.28, 1.05]],
+      "teach": "Green-yellow discrimination boosted — basking terrain and mate patterns pop."
+    },
+    "snake_pit": {
+      "label": "Pit viper — thermal + visible",
+      "class": "reptile",
+      "engine": "cone_v2",
+      "mode": "thermal_overlay",
+      "range_nm": [400, 700],
+      "adaptation": 0.18,
+      "receptors": [
+        {"id": "visible", "peak_nm": 550},
+        {"id": "pit", "peak_nm": 10000, "role": "infrared pits"}
+      ],
+      "cones": [
+        {"id": "L", "weights": [0.55, 0.35, 0.10]},
+        {"id": "M", "weights": [0.15, 0.70, 0.15]},
+        {"id": "S", "weights": [0.05, 0.15, 0.80]}
+      ],
+      "teach": "Thermal colormap blended with visible cones — heat signatures overlay scene."
+    },
+    "fish": {
+      "label": "Fish — underwater spectrum",
+      "class": "fish",
+      "engine": "cone_v2",
+      "range_nm": [400, 680],
+      "adaptation": 0.16,
+      "receptors": [
+        {"id": "L", "peak_nm": 600}, {"id": "M", "peak_nm": 530}, {"id": "S", "peak_nm": 450}
+      ],
+      "cones": [
+        {"id": "L", "weights": [0.35, 0.30, 0.08]},
+        {"id": "M", "weights": [0.10, 0.82, 0.22]},
+        {"id": "S", "weights": [0.05, 0.25, 1.05]}
+      ],
+      "display_matrix": [[0.55, 0.15, 0.05], [0.08, 0.95, 0.28], [0.05, 0.32, 1.18]],
+      "teach": "Red absorbed underwater — blue-green channel dominance."
+    },
+    "insect": {
+      "label": "Insect compound — UV",
+      "class": "insect",
+      "engine": "cone_v2",
+      "range_nm": [300, 650],
+      "adaptation": 0.20,
+      "uv_sensitive": true,
+      "receptors": [
+        {"id": "UV", "peak_nm": 350}, {"id": "B", "peak_nm": 440}, {"id": "G", "peak_nm": 520}
+      ],
+      "cones": [
+        {"id": "UV", "weights": [0.05, 0.20, 1.05]},
+        {"id": "B", "weights": [0.15, 0.35, 0.95]},
+        {"id": "G", "weights": [0.20, 0.75, 0.30]}
+      ],
+      "display_matrix": [[0.35, 0.25, 0.55], [0.15, 0.80, 0.45], [0.25, 0.22, 1.28]],
+      "teach": "No red receptor — UV bullseyes and sky polarization cues visible."
+    },
+    "mammal_night": {
+      "label": "Nocturnal mammal — rod dominant",
+      "class": "mammal",
+      "engine": "cone_v2",
+      "mode": "luminance",
+      "range_nm": [400, 650],
+      "adaptation": 0.22,
+      "receptors": [{"id": "rod", "peak_nm": 500}],
+      "teach": "Scotopic rods — luminance and motion, color drained, contrast lifted."
+    },
+    "raptor": {
+      "label": "Raptor — foveal tetrachromat",
+      "class": "avian",
+      "engine": "cone_v2",
+      "range_nm": [300, 700],
+      "adaptation": 0.11,
+      "uv_sensitive": true,
+      "foveal": true,
+      "foveal_strength": 0.72,
+      "receptors": [
+        {"id": "L", "peak_nm": 565}, {"id": "M", "peak_nm": 503},
+        {"id": "S", "peak_nm": 450}, {"id": "UV", "peak_nm": 365}
+      ],
+      "cones": [
+        {"id": "L", "weights": [0.52, 0.34, 0.06]},
+        {"id": "M", "weights": [0.08, 0.82, 0.08]},
+        {"id": "S", "weights": [0.04, 0.16, 0.98]},
+        {"id": "UV", "weights": [0.02, 0.12, 1.08]}
+      ],
+      "display_matrix": [[0.82, 0.12, 0.14], [0.04, 0.98, 0.12], [0.12, 0.18, 1.22]],
+      "teach": "UV tetrachromat plus foveal acuity falloff — center sharp, periphery soft."
+    }
+  }
+}

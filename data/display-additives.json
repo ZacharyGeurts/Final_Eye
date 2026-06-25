@@ -1,0 +1,23 @@
+{
+  "schema": "zocr-display-additives/v1",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "rule": "Approved additives only — one whole cascade, no redundant mirrors",
+  "additives": [
+    {
+      "id": "import_silent",
+      "label": "ImageMagick import silent root",
+      "kind": "shell",
+      "enabled": true,
+      "approved": true,
+      "require_approval": true,
+      "priority": 35,
+      "requires": ["import", "DISPLAY"],
+      "command": ["import", "-window", "root", "-silent", "{out}"],
+      "timeout": 12,
+      "accessibility": {
+        "aria_label": "ImageMagick silent root capture",
+        "flash_free": true
+      }
+    }
+  ]
+}

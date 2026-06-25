@@ -1,0 +1,21 @@
+{
+  "stamps_total": 65,
+  "scans_total": 200,
+  "foreign_total": 136,
+  "last_scan": {
+    "ts": "2026-06-25T11:39:52.312967+00:00",
+    "path": "/tmp/zocr-preserve-xwd_silent.png",
+    "foreign_count": 2,
+    "threats": [
+      "grid_jam"
+    ]
+  },
+  "updated": "2026-06-25T11:39:52.312978+00:00",
+  "last_stamp": {
+    "ts": "2026-06-25T11:30:12.098839+00:00",
+    "path": "/home/default/Desktop/SG/ZOCR/out/video/bench_iso/frame_000003.png",
+    "session_id": "bench_iso",
+    "seq": 3,
+    "weave": "8fec376bc24edb04"
+  }
+}

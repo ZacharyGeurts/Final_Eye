@@ -1,0 +1,58 @@
+{
+  "schema": "zocr-trust-network/v1",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "title": "Interwoven Redundancies Trust Network",
+  "abbrev": "IRTN",
+  "rule": "Interwoven redundancies — no single path owns truth; Hostess7 corroborates ZOCR vision",
+  "paired": [
+    "We never presume vision loss. Confidence always in Vision.",
+    "Defense of vision requires offense."
+  ],
+  "hostess7": {
+    "root_env": "HOSTESS7_ROOT",
+    "default_root": "../Hostess7",
+    "neural_stack": "data/hostess7-neural-stack.json",
+    "nexus_trusted": "cache/fieldstorage/brain/security/nexus-trusted.jsonl",
+    "vision_lane": "vision",
+    "truth_gates": "truth_gates"
+  },
+  "queen": {
+    "panel_json": "../NewLatest/Queen/lib/field-queen-browser.py",
+    "verdict_ready": "QUEEN_READY"
+  },
+  "mesh": {
+    "nodes": [
+      {"id": "capture", "layer": "ingress", "module": "zocr_preserve.py"},
+      {"id": "pattern", "layer": "ingress", "module": "zocr_pattern.py"},
+      {"id": "offense", "layer": "ingress", "module": "zocr_offense.py"},
+      {"id": "video", "layer": "transport", "module": "zocr_video.py"},
+      {"id": "eye", "layer": "perceive", "module": "zocr_eye.py"},
+      {"id": "rig", "layer": "perceive", "module": "zocr_stereo.py"},
+      {"id": "neural", "layer": "assist", "module": "zocr_neural.py"},
+      {"id": "kill", "layer": "authority", "module": "zocr_kill.py"},
+      {"id": "code_seal", "layer": "integrity", "module": "zocr_security.py"},
+      {"id": "wrdt", "layer": "integrity", "module": "World_Redata"},
+      {"id": "hostess7_truth", "layer": "corroboration", "module": "Hostess7"},
+      {"id": "nexus_trust", "layer": "egress", "module": "NEXUS-Shield"},
+      {"id": "queen_gates", "layer": "mandate", "module": "Queen"}
+    ],
+    "edges": [
+      ["capture", "pattern"], ["capture", "offense"], ["pattern", "offense"],
+      ["capture", "video"], ["video", "wrdt"], ["pattern", "code_seal"],
+      ["offense", "kill"], ["eye", "rig"], ["eye", "neural"], ["rig", "neural"],
+      ["code_seal", "neural"], ["wrdt", "hostess7_truth"], ["hostess7_truth", "queen_gates"],
+      ["nexus_trust", "queen_gates"], ["kill", "capture"], ["video", "eye"]
+    ]
+  },
+  "redundancy_paths": [
+    {"id": "vision_live", "path": ["capture", "pattern", "video", "wrdt", "eye"]},
+    {"id": "vision_offense", "path": ["capture", "offense", "kill", "capture"]},
+    {"id": "vision_trust", "path": ["wrdt", "code_seal", "hostess7_truth", "queen_gates"]},
+    {"id": "vision_egress", "path": ["nexus_trust", "queen_gates", "capture"]},
+    {"id": "vision_assist", "path": ["eye", "rig", "neural", "code_seal"]}
+  ],
+  "quorum": {
+    "min_peers": 4,
+    "required": ["code_seal", "capture", "hostess7_truth", "queen_gates"]
+  }
+}

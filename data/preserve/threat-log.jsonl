@@ -1,0 +1,62 @@
+{"ts": "2026-06-25T11:03:02.709154+00:00", "threat": "corrupt_frame", "source": "xwd_silent", "profile": "sentinel", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:03:02.787361+00:00", "threat": "frozen_display", "source": "vault_mirror", "profile": "sentinel", "tried": ["rtx", "xwd_silent", "grim", "mss", "import_silent", "vault_mirror"]}
+{"ts": "2026-06-25T11:16:26.923512+00:00", "threat": "corrupt_frame", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:18:39.464577+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:18:39.728400+00:00", "threat": "grid_jam", "source": "hold", "profile": "watch", "tried": ["rtx", "xwd_silent", "grim", "mss", "import_silent", "hold"]}
+{"ts": "2026-06-25T11:18:39.777325+00:00", "threat": "grid_jam", "source": "synthetic", "profile": "watch", "tried": ["rtx", "xwd_silent", "grim", "mss", "import_silent", "hold", "synthetic"]}
+{"ts": "2026-06-25T11:18:42.050144+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:18:42.321047+00:00", "threat": "grid_jam", "source": "hold", "profile": "watch", "tried": ["rtx", "xwd_silent", "grim", "mss", "import_silent", "hold"]}
+{"ts": "2026-06-25T11:18:42.365873+00:00", "threat": "grid_jam", "source": "synthetic", "profile": "watch", "tried": ["rtx", "xwd_silent", "grim", "mss", "import_silent", "hold", "synthetic"]}
+{"ts": "2026-06-25T11:18:46.467073+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:18:46.738921+00:00", "threat": "grid_jam", "source": "hold", "profile": "patrol", "tried": ["rtx", "xwd_silent", "grim", "mss", "import_silent", "hold"]}
+{"ts": "2026-06-25T11:18:46.782303+00:00", "threat": "grid_jam", "source": "synthetic", "profile": "patrol", "tried": ["rtx", "xwd_silent", "grim", "mss", "import_silent", "hold", "synthetic"]}
+{"ts": "2026-06-25T11:18:49.167923+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:18:49.436209+00:00", "threat": "grid_jam", "source": "hold", "profile": "patrol", "tried": ["rtx", "xwd_silent", "grim", "mss", "import_silent", "hold"]}
+{"ts": "2026-06-25T11:18:49.480388+00:00", "threat": "grid_jam", "source": "synthetic", "profile": "patrol", "tried": ["rtx", "xwd_silent", "grim", "mss", "import_silent", "hold", "synthetic"]}
+{"ts": "2026-06-25T11:18:51.760359+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:18:52.028818+00:00", "threat": "grid_jam", "source": "hold", "profile": "patrol", "tried": ["rtx", "xwd_silent", "grim", "mss", "import_silent", "hold"]}
+{"ts": "2026-06-25T11:18:52.072878+00:00", "threat": "grid_jam", "source": "synthetic", "profile": "patrol", "tried": ["rtx", "xwd_silent", "grim", "mss", "import_silent", "hold", "synthetic"]}
+{"ts": "2026-06-25T11:20:02.727106+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:05.347392+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:07.929585+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:10.565176+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:13.125598+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:15.487967+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:17.862106+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:20.142869+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:22.467084+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:24.854013+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:27.196915+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:29.532213+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:31.917440+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:34.321101+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:36.803451+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:39.260741+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:41.676627+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:44.169720+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:46.611851+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:49.021059+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:51.388117+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:53.831365+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:56.296368+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:20:58.780811+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:21:01.271512+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:21:03.802434+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:21:06.320873+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:21:08.867569+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:21:11.374280+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:21:13.914908+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:21:16.423567+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:21:18.975500+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "patrol", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:29:59.804141+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:29:59.855262+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:30:01.836378+00:00", "threat": "corrupt_frame", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:30:02.453406+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:30:04.172843+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:30:05.113283+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:30:06.480220+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:30:07.754762+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:30:09.158035+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:30:10.306784+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:30:11.727969+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}
+{"ts": "2026-06-25T11:39:52.313570+00:00", "threat": "grid_jam", "source": "xwd_silent", "profile": "watch", "tried": ["rtx", "xwd_silent"]}

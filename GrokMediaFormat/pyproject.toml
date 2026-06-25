@@ -1,0 +1,24 @@
+[project]
+name = "grkmf"
+version = "1.0.0"
+description = "Grok Media Format — proprietary GRKMF1 / GVC1 for 4K cinema"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+dependencies = [
+  "Pillow>=9.0",
+]
+
+[project.optional-dependencies]
+fast = ["numpy>=1.20"]
+
+[project.scripts]
+grkmf = "grkmf.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["grkmf*"]

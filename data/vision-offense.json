@@ -1,0 +1,32 @@
+{
+  "schema": "zocr-vision-offense/v1",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "title": "Vision Offense",
+  "rule": "Defense of vision requires offense.",
+  "paired_with": "We never presume vision loss. Confidence always in Vision.",
+  "doctrine": [
+    "Passive hold is not enough — reject hostile frames before they touch vault",
+    "Pattern scan strikes foreign weave on ingress — provenance mismatch trips vision",
+    "Threat streak preempts RTX — take the engine frame before the jammed display",
+    "Seal and ledger every strike — offense is auditable, not angry",
+    "Vigilance patrols while you wash dishes — offense watches so defense rests",
+    "Kill switch is the last strike — trip hostile paths, release when chain is clean"
+  ],
+  "countermeasures": {
+    "blackout": {"strike": "reject_and_failover", "offense": "preempt_rtx", "severity": "high"},
+    "whiteout": {"strike": "reject_and_failover", "offense": "trip_capture", "severity": "critical"},
+    "static_snow": {"strike": "reject_and_failover", "offense": "pattern_strike", "severity": "high"},
+    "frozen_display": {"strike": "reject_and_failover", "offense": "preempt_rtx", "severity": "medium"},
+    "timing_gap": {"strike": "reject_and_failover", "offense": "preempt_rtx", "severity": "medium"},
+    "grid_jam": {"strike": "reject_and_failover", "offense": "pattern_strike", "severity": "high"},
+    "moire_weave": {"strike": "reject_and_failover", "offense": "pattern_strike", "severity": "high"},
+    "injected_marker": {"strike": "reject_and_failover", "offense": "seal_threat", "severity": "medium"},
+    "provenance_mismatch": {"strike": "trip_vision", "offense": "kill_strike", "severity": "critical"},
+    "corrupt_frame": {"strike": "reject_and_failover", "offense": "seal_threat", "severity": "high"}
+  },
+  "preempt": {
+    "threat_streak_threshold": 2,
+    "bias_prefer": "rtx",
+    "cascade_front": ["rtx", "xwd_silent"]
+  }
+}

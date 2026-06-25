@@ -1,0 +1,46 @@
+{
+  "schema": "zocrsm1-benchmark/v2",
+  "ts": "2026-06-25T11:46:39.165939+00:00",
+  "format": "ZOCRSM1",
+  "bullet_train": {
+    "enabled": true,
+    "rule": "Direct capture rail + in-memory MJPEG \u2014 emit at profile fps, ingest at refresh_hz",
+    "skip_per_frame": [
+      "preserve_cascade",
+      "pattern_stamp",
+      "offense_scan",
+      "wrdt_disk",
+      "index_append"
+    ],
+    "seal_every_n": 120,
+    "jpeg_quality": 72,
+    "resize": "bilinear"
+  },
+  "profiles": [
+    {
+      "profile": "bullet_240",
+      "mode": "bullet_train",
+      "resolution": "4K",
+      "max_width": 3840,
+      "target_fps": 480.0,
+      "refresh_hz": 480,
+      "frames": 960,
+      "target_frames": 960,
+      "elapsed_sec": 3.083,
+      "emit_elapsed_sec": 2.06,
+      "emit_fps": 465.5,
+      "emit_headroom": 0.97,
+      "bytes_total": 358574400,
+      "max_width_seen": 3840,
+      "4k_ok": true,
+      "fabric_nm_per_px": 25.0
+    }
+  ],
+  "summary": {
+    "best_emit_fps": 465.5,
+    "dodge_rule": "double fps \u2014 dodge the bullet",
+    "target_240_met": false,
+    "target_480_met": true,
+    "4k_emit_ok": true
+  }
+}

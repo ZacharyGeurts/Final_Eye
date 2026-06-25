@@ -1,0 +1,21 @@
+{
+  "schema": "zocr-offense-state/v1",
+  "strikes_total": 44,
+  "threat_streak": 0,
+  "preempt_armed": false,
+  "last_strike": {
+    "schema": "zocr-offense-strike/v1",
+    "ts": "2026-06-25T11:39:52.313840+00:00",
+    "threat": "grid_jam",
+    "strike": "reject_and_failover",
+    "offense": "pattern_strike",
+    "severity": "high",
+    "acted": [
+      "pattern_strike",
+      "seal_threat"
+    ],
+    "source": "xwd_silent",
+    "profile": "watch"
+  },
+  "updated": "2026-06-25T11:39:52.393591+00:00"
+}

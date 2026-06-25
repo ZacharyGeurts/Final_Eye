@@ -1,0 +1,39 @@
+{
+  "schema": "zocr-kill-state/v1",
+  "tripped": {
+    "vision": false,
+    "capture": false,
+    "stream": false,
+    "vigilance": false,
+    "mjpeg": false,
+    "egress": false
+  },
+  "eyes_protect": true,
+  "last_trip": {
+    "ts": "2026-06-25T11:19:39.763762+00:00",
+    "switch": "vision",
+    "reason": "provenance_mismatch",
+    "source": "api"
+  },
+  "history": [
+    {
+      "ts": "2026-06-25T11:03:04.184191+00:00",
+      "switch": "all",
+      "reason": "operator",
+      "source": "kill_all"
+    },
+    {
+      "ts": "2026-06-25T11:03:13.312376+00:00",
+      "switch": "all",
+      "reason": "api",
+      "source": "kill_all"
+    },
+    {
+      "ts": "2026-06-25T11:19:39.763762+00:00",
+      "switch": "vision",
+      "reason": "provenance_mismatch",
+      "source": "api"
+    }
+  ],
+  "updated": "2026-06-25T11:28:22.365046+00:00"
+}

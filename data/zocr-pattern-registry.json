@@ -1,0 +1,38 @@
+{
+  "schema": "zocr-pattern-registry/v1",
+  "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
+  "title": "Internal imaging patterning — provenance weave + interference catalog",
+  "rule": "Real internal frames get stamped; foreign patterns trip security before vault",
+  "lineage": {
+    "World_Redata": "WRDT provenance + sha256 weave",
+    "Field_Primer": "Fabric pattern doctrine on internal imaging",
+    "ZOCR": "Threat classify + preserve cascade"
+  },
+  "stamp": {
+    "enabled": true,
+    "grid": 8,
+    "cell_px": 4,
+    "corner": "bottom_right",
+    "modulation": 6,
+    "encode": "session_seq_mandate_digest_64bit"
+  },
+  "detect": {
+    "grid_jam_threshold": 0.78,
+    "moire_threshold": 0.72,
+    "injection_threshold": 0.58,
+    "verify_provenance": true,
+    "reject_on_foreign": true
+  },
+  "foreign_patterns": [
+    {"id": "grid_jam", "label": "Checkerboard RF jam", "severity": "high"},
+    {"id": "moire_weave", "label": "Periodic moiré weave", "severity": "high"},
+    {"id": "injected_marker", "label": "Injected high-contrast marker block", "severity": "medium"},
+    {"id": "provenance_missing", "label": "ZOCR provenance weave absent", "severity": "medium"},
+    {"id": "provenance_mismatch", "label": "Provenance weave does not match session", "severity": "critical"}
+  ],
+  "security": {
+    "trip_on_critical": true,
+    "log_path": "data/pattern-security.jsonl",
+    "state_path": "data/pattern-state.json"
+  }
+}

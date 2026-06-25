@@ -1,0 +1,10 @@
+{
+  "threats_total": 0,
+  "holds_total": 39,
+  "failovers_total": 54,
+  "last_threat": null,
+  "vision_never_lost": true,
+  "vision_confidence": 1.0,
+  "confidence_rule": "We never presume vision loss. Confidence always in Vision.",
+  "updated": "2026-06-25T11:39:52.393459+00:00"
+}

@@ -1,0 +1,109 @@
+{
+  "schema": "grkmf/v2",
+  "format_id": "GRKMF1",
+  "title": "Grok Media Format — AI-tunable 16K cinema",
+  "vendor": "Grok / SG",
+  "license": "proprietary",
+  "rule": "Not MPEG. AI tunable fps + resolution — legacy through 16K, combat to media dodge.",
+  "extensions": [".grkm", ".grkmf"],
+  "magic": "GRKM",
+  "codec_id": "GVC1",
+  "codec_title": "Grok Vision Codec v1",
+  "codec_rule": "Proprietary inter-frame — JPEG keyframes + sealed delta predictors. No MPEG stack.",
+  "ai_tunable": {
+    "rule": "All fps and resolution AI-tunable to whatever — presets are hints, not cages",
+    "bounds": {
+      "width": {"min": 160, "max": 15360},
+      "height": {"min": 120, "max": 8640},
+      "fps": {"min": 0.1, "max": 1000},
+      "gop": {"min": 1, "max": 240},
+      "jpeg_quality": {"min": 40, "max": 100}
+    },
+    "modes": {
+      "legacy": {
+        "label": "Legacy back-support",
+        "width_range": [160, 1920],
+        "height_range": [120, 1080],
+        "fps_range": [0.25, 30],
+        "width_default": 640,
+        "height_default": 480,
+        "fps_default": 15
+      },
+      "combat": {
+        "label": "ZOCR field combat — AI performance on demand",
+        "width_range": [640, 3840],
+        "height_range": [360, 2160],
+        "fps_range": [3, 20],
+        "width_default": 1920,
+        "height_default": 1080,
+        "fps_default": 8
+      },
+      "media": {
+        "label": "Movies & streaming — up to 16K / 240fps",
+        "width_range": [1280, 15360],
+        "height_range": [720, 8640],
+        "fps_range": [1, 240],
+        "width_default": 3840,
+        "height_default": 2160,
+        "fps_default": 24
+      },
+      "dodge": {
+        "label": "Bullet dodge live rail",
+        "width_range": [1280, 15360],
+        "height_range": [720, 8640],
+        "fps_range": [60, 480],
+        "width_default": 3840,
+        "height_default": 2160,
+        "fps_default": 240
+      }
+    },
+    "resolution_ladder": [
+      {"label": "QCIF", "width": 176, "height": 144},
+      {"label": "QVGA", "width": 320, "height": 240},
+      {"label": "VGA", "width": 640, "height": 480},
+      {"label": "SD", "width": 720, "height": 480},
+      {"label": "HD", "width": 1280, "height": 720},
+      {"label": "FHD", "width": 1920, "height": 1080},
+      {"label": "2K", "width": 2560, "height": 1440},
+      {"label": "4K", "width": 3840, "height": 2160},
+      {"label": "5K", "width": 5120, "height": 2880},
+      {"label": "8K", "width": 7680, "height": 4320},
+      {"label": "10K", "width": 10240, "height": 5760},
+      {"label": "12K", "width": 12288, "height": 6912},
+      {"label": "16K", "width": 15360, "height": 8640}
+    ]
+  },
+  "lineage": {
+    "World_Redata": "WRDT-inspired per-segment sha256 envelopes",
+    "ZOCRSM1": "Combat vision — AI tunable 3–20fps field",
+    "AMOURANTHRTX": "Adaptive tide — AI rides load"
+  },
+  "profiles": {
+    "legacy_vga": {"mode": "legacy", "width": 640, "height": 480, "fps": 15, "gop": 15, "jpeg_quality": 80, "tier": "legacy"},
+    "legacy_hd": {"mode": "legacy", "width": 1280, "height": 720, "fps": 24, "gop": 24, "jpeg_quality": 82, "tier": "legacy"},
+    "combat": {"mode": "combat", "width": 1920, "height": 1080, "fps": 8, "gop": 8, "jpeg_quality": 85, "tier": "combat", "target_mbps": 8},
+    "combat_tactical": {"mode": "combat", "width": 2560, "height": 1440, "fps": 12, "gop": 6, "jpeg_quality": 86, "tier": "combat"},
+    "combat_engage": {"mode": "combat", "width": 3840, "height": 2160, "fps": 20, "gop": 4, "jpeg_quality": 88, "tier": "combat"},
+    "cinema_4k": {"mode": "media", "width": 3840, "height": 2160, "fps": 24, "gop": 24, "jpeg_quality": 94, "target_mbps": 35, "tier": "cinema"},
+    "cinema_8k": {"mode": "media", "width": 7680, "height": 4320, "fps": 24, "gop": 24, "jpeg_quality": 95, "target_mbps": 120, "tier": "cinema"},
+    "cinema_16k": {"mode": "media", "width": 15360, "height": 8640, "fps": 24, "gop": 48, "jpeg_quality": 96, "target_mbps": 400, "tier": "cinema"},
+    "stream_4k": {"mode": "media", "width": 3840, "height": 2160, "fps": 60, "gop": 12, "jpeg_quality": 88, "target_mbps": 25, "tier": "stream"},
+    "stream_4k_240": {"mode": "media", "width": 3840, "height": 2160, "fps": 240, "gop": 1, "jpeg_quality": 82, "target_mbps": 750, "tier": "stream", "bullet_train": true, "refresh_hz": 240},
+    "stream_8k": {"mode": "media", "width": 7680, "height": 4320, "fps": 60, "gop": 12, "jpeg_quality": 90, "target_mbps": 90, "tier": "stream"},
+    "dodge_240": {"mode": "dodge", "width": 3840, "height": 2160, "fps": 240, "gop": 1, "jpeg_quality": 72, "bullet_train": true, "refresh_hz": 240, "tier": "dodge"},
+    "dodge_4k": {"mode": "dodge", "width": 3840, "height": 2160, "fps": 240, "gop": 1, "jpeg_quality": 72, "bullet_train": true, "refresh_hz": 240, "tier": "dodge"},
+    "archive_4k": {"mode": "media", "width": 3840, "height": 2160, "fps": 24, "gop": 48, "jpeg_quality": 98, "target_mbps": 80, "tier": "archive"}
+  },
+  "container": {
+    "header_bytes": 64,
+    "index_entry_bytes": 48,
+    "max_width": 15360,
+    "max_height": 8640,
+    "segment_seal": "sha256 per segment — GRKM envelope"
+  },
+  "transports": {
+    "GRKMF_FILE": ".grkm sealed container — legacy to 16K",
+    "GRKMF_MJPEG": "AI-tunable multipart stream",
+    "GRKMF_SEGMENT": "HTTP range per segment"
+  }
+}

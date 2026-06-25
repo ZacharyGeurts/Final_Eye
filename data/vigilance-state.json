@@ -1,0 +1,10 @@
+{
+  "running": false,
+  "profile": "sentinel",
+  "prefer": "auto",
+  "interval_sec": 4.0,
+  "started": null,
+  "checks": 0,
+  "alerts": 0,
+  "last_check": null
+}

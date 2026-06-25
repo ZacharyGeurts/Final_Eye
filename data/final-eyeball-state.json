@@ -1,0 +1,12 @@
+{
+  "schema": "zocr-final-eyeball-state/v1",
+  "active_mode": "war",
+  "active_voice": "tactical",
+  "last_prescription": {
+    "eye_profile": "raptor",
+    "rig_preset": "stereo_human",
+    "video_profile": "tactical",
+    "vigilance_profile": "sentinel"
+  },
+  "updated": "2026-06-25T11:21:20.559681+00:00"
+}
