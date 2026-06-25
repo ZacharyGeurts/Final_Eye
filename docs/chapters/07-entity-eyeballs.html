@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>07 — Entity Eyeballs &amp; Weapons · The Final Eyeball</title>
-  <meta name="description" content="Chapter 7: Entity Eyeballs &amp; Weapons. Final_Eye v1.0 sovereign vision textbook." />
+  <meta name="description" content="Chapter 7: Entity Eyeballs &amp; Weapons. Final_Eye v1.1 sovereign vision textbook." />
   <link rel="canonical" href="https://zacharygeurts.github.io/Final_Eye/chapters/07-entity-eyeballs.html" />
   <meta name="theme-color" content="#05070a" />
   <meta property="og:title" content="07 — Entity Eyeballs &amp; Weapons" />
@@ -15,7 +15,7 @@
 </head>
 <body class="chapter-page accent-entity">
   <nav class="top"><div class="inner">
-    <a class="logo" href="../index.html">THE FINAL EYEBALL <span class="v-badge">v1.0</span></a>
+    <a class="logo" href="../index.html">THE FINAL EYEBALL <span class="v-badge">v1.1</span></a>
     <ul>
       <li><a href="../index.html#chapters">Chapters</a></li>
       <li><a href="https://github.com/ZacharyGeurts/Final_Eye">GitHub</a></li>
@@ -25,7 +25,7 @@
   <header class="chapter-hero" style="background-image:url('../assets/images/chapters/ch06-entity-eyeballs.jpg')">
     <div class="chapter-hero-overlay"></div>
     <div class="chapter-hero-content">
-      <p class="eyebrow">Chapter 07 · Final_Eye v1.0</p>
+      <p class="eyebrow">Chapter 07 · Final_Eye v1.1</p>
       <h1>Entity Eyeballs &amp; Weapons</h1>
       <p class="lead" style="margin-top:0.75rem;color:var(--muted)">Vita · Veritas · twins · 37 weapons · heaven &amp; hell</p>
     </div>
@@ -74,14 +74,27 @@
 <h2 id="toc-07-forward">Truth forward ledger</h2>
 <p><code>truth_forward()</code> appends to <code>data/truth-forward-ledger.jsonl</code>. Entity section in ops dashboard shows recent forward events. Sharing information is part of sovereignty when seals and corroboration hold — never unauthenticated puppet control.</p>
 
+<h2 id="toc-07-enemies">What is an enemy to the eye?</h2>
+<p>Teach does not keep a roster of people or nations. The enemy is whatever <strong>lies to vision</strong> — forged, jammed, or puppeted signal presented as truth before the ledger accepts it. <span class="tag impl">Implemented</span> lie markers in <code>data/entity-eyeball.json</code> name the enemies:</p>
+<table class="rocks"><thead><tr><th>Lie marker</th><th>Meaning to the eye</th><th>Default salvo</th></tr></thead><tbody>
+<tr><td><code>provenance_mismatch</code></td><td>Frame claims lineage it cannot prove</td><td><code>autokill_certain</code></td></tr>
+<tr><td><code>grid_jam</code></td><td>Foreign grid woven into ingress</td><td><code>grid_jam_sever</code></td></tr>
+<tr><td><code>moire_weave</code></td><td>Moiré interference — visual lie</td><td><code>moire_kill</code></td></tr>
+<tr><td><code>trust_breach</code></td><td>IRTN / Hostess7 trust line broken</td><td><code>trust_strike</code> / <code>hell_rip</code></td></tr>
+<tr><td><code>rf_jam</code></td><td>RF before display speaks truth</td><td><code>rf_jam_slice</code></td></tr>
+<tr><td><code>weaponized_interference</code></td><td>Aggressive stack interference</td><td><code>hardware_destroy_trip</code></td></tr>
+</tbody></table>
+<p>Abstract enemy: anything that <em>walks backward on truth</em> — lie, tamper, foreign weave, remote puppet. Not enemies: operators, witnesses, truth markers (<code>woven_paths</code>, <code>code_seal</code>, <code>USER_OK</code>, <code>last_good</code>). <code>GET /api/eye/understand?threat=provenance_mismatch</code> resolves doctrine before strike; threat-only <code>POST /api/eye/weapons/fire {"threat":"…"}</code> lets the eye choose salvo independently.</p>
 <h2 id="toc-07-trust">IRTN — sharing without single-owner truth</h2>
 <p>The Interwoven Redundancies Trust Network says: no single path owns truth. Hostess7 corroborates ZOCR vision; Queen gates quorum via field-queen-browser panel slice; mesh verify returns path redundancy scores. <span class="tag impl">Implemented</span> endpoints <code>/api/trust</code>, <code>/api/trust/mesh</code>, <code>/api/trust/hostess7</code>. Sharing information is mandatory for field forensics; surrendering control to one cloud verdict is not.</p>
-<p>Entity eyeballs participate in forward doctrine — when offense acts, truth eyeball may speak, twin may corroborate, ledger records acted tokens. Lie markers in entity spec flag phrases that fail honesty review — use them when writing status email to management.</p>
+<p>Entity eyeballs participate in forward doctrine — when offense acts, truth eyeball may speak, twin may corroborate, ledger records acted tokens. Lie markers flag phrases that fail honesty review — use them when writing status email to management.</p>
 <h2 id="toc-07-lab">Entity and weapons lab</h2>
 <ol>
-<li><code>GET /api/ops/full</code> — weapons section, threat_weapon_map, lie_markers.</li>
-<li>Read twin, living, truth status endpoints — schemas present.</li>
-<li>Inspect heaven_hell_truth_status — parameters loaded.</li>
+<li><code>GET /api/eye/authority</code> — independent posture, weapons armed, current lies.</li>
+<li><code>GET /api/eye/targets</code> — full catalog + threat_weapon_map.</li>
+<li><code>GET /api/eye/teach/doctrine?lesson=targets</code> — Teach on known enemies.</li>
+<li><code>GET /api/ops/full</code> — weapons section, lie_markers in entity panel.</li>
+<li>Fire threat-only: <code>POST /api/eye/weapons/fire {"threat":"provenance_mismatch"}</code> — confirm auto salvo.</li>
 <li>truth_forward once — line in forward ledger.</li>
 </ol>
 <p>Weapons are forward doctrine — heaven_pass and hell_rip encode truth parameters from Hostess7 and Queen panel slices. Firing in lab uses explicit API; production discipline means threat labels match ledger, not theater.</p>

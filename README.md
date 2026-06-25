@@ -1,8 +1,8 @@
-# Final_Eye v1.0.0
+# Final_Eye v1.1.0
 
 **The Final Eyeball** — sovereign field robotics vision by [Zachary Geurts](https://github.com/ZacharyGeurts).
 
-Proprietary stack: **ZOCRSM1** field vision + **GRKMF1/GVC1** media (**not MPEG**). Silent capture, AI-tunable fps/resolution, sealed integrity, Grok16 field compiler, Queen/Hostess integration.
+Proprietary stack: **ZOCRSM1** field vision + **GRKMF1/GVC1** media (**not MPEG**). Silent capture, AI-tunable fps/resolution, sealed integrity, Grok16 field compiler, Queen/Hostess integration, **Teach** doctrine with independent weapon authority.
 
 > We never presume vision loss. Confidence always in Vision.
 
@@ -15,7 +15,9 @@ python3 zocr_security.py seal
 ./start.sh --no-open          # http://127.0.0.1:9479
 ```
 
-**Field Ops UI (1.0):** http://127.0.0.1:9479/ops — live factual panels, release matrix, honesty labels.
+**Field Ops UI:** http://127.0.0.1:9479/ops — live factual panels, release matrix, honesty labels.
+
+**Teach (v1.1):** `GET /api/eye/teach/doctrine?lesson=authority` — the eye instructs the operator.
 
 ## Robotics modes
 
@@ -29,6 +31,16 @@ curl -X POST http://127.0.0.1:9479/api/robotics/arm \
   -H 'Content-Type: application/json' \
   -d '{"mode":"war","start_stream":false}'
 ```
+
+## Weapon authority (v1.1)
+
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /api/eye/authority` | Independent weapon posture |
+| `GET /api/eye/targets` | Known targets + threat_weapon_map |
+| `GET /api/eye/understand?threat=…` | Resolve threat → weapon |
+| `GET /api/eye/teach/doctrine?lesson=authority` | Teach voice |
+| `POST /api/eye/weapons/fire` | `{"threat":"provenance_mismatch"}` — eye selects salvo |
 
 ## Performance benchmarks (measured)
 
@@ -66,18 +78,18 @@ curl -s http://127.0.0.1:9479/api/grok16 | jq '.profiles'
 | Field_Primer docs | [Ch 11 — Final_Eye vision layer](https://github.com/ZacharyGeurts/Field_Primer) |
 | ZAC artifacts | `POST /api/zac/pack` |
 
-## Releases (v1.0.0 — all platforms)
+## Releases (v1.1.0 — all platforms)
 
 | Platform | Artifact |
 |----------|----------|
-| **Linux** | `Final_Eye-1.0.0-linux-x86_64.tar.gz` |
-| **Linux .deb** | `final-eye_1.0.0_amd64.deb` → `final-eye-start` |
-| **Windows** | `Final_Eye-1.0.0-windows-x64.zip` |
-| **macOS** | `Final_Eye-1.0.0-macos-universal.tar.gz` |
-| **Source** | `Final_Eye-1.0.0-source.tar.gz` |
-| **Docker** | `ghcr.io/zacharygeurts/final-eye:1.0.0` |
+| **Linux** | `Final_Eye-1.1.0-linux-x86_64.tar.gz` |
+| **Linux .deb** | `final-eye_1.1.0_amd64.deb` → `final-eye-start` |
+| **Windows** | `Final_Eye-1.1.0-windows-x64.zip` |
+| **macOS** | `Final_Eye-1.1.0-macos-universal.tar.gz` |
+| **Source** | `Final_Eye-1.1.0-source.tar.gz` |
+| **Docker** | `ghcr.io/zacharygeurts/final-eye:1.1.0` |
 
-Download from [GitHub Releases](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.0.0). Verify: `sha256sum -c SHA256SUMS`.
+Download from [GitHub Releases](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.1.0). Verify: `sha256sum -c SHA256SUMS`.
 
 Build locally: `python3 scripts/build_release.py`
 
@@ -99,7 +111,3 @@ Mounts: `Hostess7`, `Queen`, `Grok16` under `/sg/` — same paths as bare-metal 
 - [SECURITY.md](docs/SECURITY.md)
 - [PERFORMANCE.md](docs/PERFORMANCE.md)
 - [REVIEW_CHECKLIST.md](docs/REVIEW_CHECKLIST.md)
-
-## License
-
-Proprietary — see [LICENSE](LICENSE). Scientific robotics review permitted at tagged releases.

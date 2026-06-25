@@ -21,9 +21,10 @@ if GMF.is_dir():
 def test_product_1_0():
     from zocr_product import product_info
     p = product_info()
-    assert p["version"] == "1.0.0"
+    expected = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+    assert p["version"] == expected
     assert p["product"] == "Final_Eye"
-    assert p["codename"] == "sovereign-vision"
+    assert p["codename"] == "teach-authority"
 
 
 def test_security_gvc1_and_stream():
@@ -141,7 +142,7 @@ def main() -> int:
         except Exception as exc:
             failed += 1
             print(f"FAIL {t.__name__}: {exc}", file=sys.stderr)
-    print(json.dumps({"tests": len(tests), "failed": failed, "release": "1.0.0"}))
+    print(json.dumps({"tests": len(tests), "failed": failed, "release": (ROOT / "VERSION").read_text(encoding="utf-8").strip()}))
     return 1 if failed else 0
 
 

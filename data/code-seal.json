@@ -1,7 +1,7 @@
 {
   "schema": "zocr-code-seal/v1",
   "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
-  "ts": "2026-06-25T13:13:17.779110+00:00",
+  "ts": "2026-06-25T13:16:02.913216+00:00",
   "files": {
     "gui/app.py": "2057285345ef1bc286c5458ae0c8f6797e440879945ba9b7f1e3812363aff623",
     "zocr.py": "28bc7afdf1f099196e5f9d134a060a70d95af3b8623ad5da9de5b7f65480b802",
@@ -24,7 +24,7 @@
     "zocr_offense.py": "e1741956992098a700243d5aa5a0b377546beeddb57e46d1353c6c94fd8503d0",
     "zocr_pattern.py": "6dc1d7c6df8c22e364e8b3bf20018ca8e11724dcbdb0dfa43844f03679fe03c9",
     "zocr_preserve.py": "2d05dc2bb4180a684559f451bb0c6e2d9fb95754c9ef7b15229d4414e34fb74d",
-    "zocr_product.py": "57829d4db15b4ba6a18421401a0db994788a83b0f31eab46a681717341d94451",
+    "zocr_product.py": "9a977d9645650e5bfaec34505db3d491b72738b77ce8ec5178b41135165d450a",
     "zocr_robotics.py": "04f0b631143e7deadccaa4b54e5c51fe29d13ecdf06a230ca0d8e15e45d2f8ec",
     "zocr_security.py": "29d31a407f64d8f2a85d1fc77af546368f860e94d408f41c88719e165052d5f2",
     "zocr_session.py": "d76afbf3257f3935660b58fdb53688e388b7d8f3816a698301c2e72ddd4d6dfe",
@@ -32,7 +32,7 @@
     "zocr_status.py": "7ac85dd0cf1982ed0111a1b400e7c25c282b6c83b9945a778ffc1602d048c5a4",
     "zocr_stereo.py": "20736b06bdab4c0978a858936c2cdf77851cf0b2c875372d37e099244a943bbb",
     "zocr_stream.py": "d455f2f446aafeac990d06ffbfe45adbc6af28075de60a6d3b5e1cb1a1974dd8",
-    "zocr_tester.py": "accf72588ec78e0e5ca26a515a2e104c40bd7afbdd729d4fc3757c63eb5381d4",
+    "zocr_tester.py": "74e92df39a5bff1e9e68eedc48ed15ab33c804b5e6e68406bd808a7dbe795e0e",
     "zocr_trust.py": "5a78b80590e4158f6b2fbe4f2d2febcf9315c2495f790771c4043383798d9c7a",
     "zocr_video.py": "a6df6773687d330614d4250fabfea5fa77e25273dd99694f52580bc93ee6f94f",
     "zocr_vigilance.py": "08394a7beb61cc75dd94e96b722dd77d5e623ed5faf78d2d484bb32a33880059",
@@ -41,6 +41,6 @@
     "zocr_zac.py": "536ec66b8cf4a1905ab5d1b9e69564121bcc932f85c7a883efdb48d0cafc3031"
   },
   "file_count": 36,
-  "root_seal": "f603be3552fb7ea3a74331a93e4f9a0426d1d23a0a8b8cf7dd1d8f3ffee21e31",
+  "root_seal": "1d27b4d14eb13b0438f75650b9cd528cb66518222b69d876e51dc3b6e25d929a",
   "rule": "All ZOCR entry points verify this seal before protected operations"
 }

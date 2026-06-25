@@ -20,9 +20,10 @@ if GMF.is_dir():
 
 def test_product_version():
     from zocr_product import product_info
+    expected = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     p = product_info()
     assert p["product"] == "Final_Eye"
-    assert p["version"] == "1.0.0"
+    assert p["version"] == expected
 
 
 def test_mandate_loads():

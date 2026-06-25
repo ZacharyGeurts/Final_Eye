@@ -4,8 +4,19 @@ from __future__ import annotations
 
 from pathlib import Path
 
-DOCS = Path(__file__).resolve().parents[1] / "docs"
+ROOT = Path(__file__).resolve().parents[1]
+DOCS = ROOT / "docs"
 CHAPTERS = DOCS / "chapters"
+
+
+def _version() -> str:
+    return (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+
+
+def _version_short() -> str:
+    v = _version()
+    parts = v.split(".")
+    return f"v{parts[0]}.{parts[1]}" if len(parts) >= 2 else f"v{v}"
 
 
 def _shell(
@@ -41,7 +52,7 @@ def _shell(
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>{num:02d} — {title} · The Final Eyeball</title>
-  <meta name="description" content="Chapter {num}: {title}. Final_Eye v1.0 sovereign vision textbook." />
+  <meta name="description" content="Chapter {num}: {title}. Final_Eye {_version_short()} sovereign vision textbook." />
   <link rel="canonical" href="https://zacharygeurts.github.io/Final_Eye/chapters/{slug}" />
   <meta name="theme-color" content="#05070a" />
   <meta property="og:title" content="{num:02d} — {title}" />
@@ -52,7 +63,7 @@ def _shell(
 </head>
 <body class="chapter-page {accent}">
   <nav class="top"><div class="inner">
-    <a class="logo" href="../index.html">THE FINAL EYEBALL <span class="v-badge">v1.0</span></a>
+    <a class="logo" href="../index.html">THE FINAL EYEBALL <span class="v-badge">{_version_short()}</span></a>
     <ul>
       <li><a href="../index.html#chapters">Chapters</a></li>
       <li><a href="https://github.com/ZacharyGeurts/Final_Eye">GitHub</a></li>
@@ -62,7 +73,7 @@ def _shell(
   <header class="chapter-hero" style="background-image:url('{img}')">
     <div class="chapter-hero-overlay"></div>
     <div class="chapter-hero-content">
-      <p class="eyebrow">Chapter {num:02d} · Final_Eye v1.0</p>
+      <p class="eyebrow">Chapter {num:02d} · Final_Eye {_version_short()}</p>
       <h1>{title}</h1>
       <p class="lead" style="margin-top:0.75rem;color:var(--muted)">{subtitle}</p>
     </div>
@@ -139,7 +150,7 @@ MANUSCRIPT: list[dict] = [
             ("toc-01-map", "Operator map — stack and port"),
             ("toc-01-illustration", "Illustration theory — one figure per thousand words"),
         ],
-        "on_the_way": "You are opening the Final_Eye operator textbook — manuscript-grade prose for v1.0.0, not a marketing deck. On the way you will lock the sovereignty thesis, read the honesty table, and see where the eye sits beside Field Primer Chapter 11 and Queen Chapter 21.",
+        "on_the_way": "You are opening the Final_Eye operator textbook — manuscript-grade prose for v1.1.0, not a marketing deck. On the way you will lock the sovereignty thesis, meet Teach (the eye speaking), read the honesty table, and see where the eye sits beside Field Primer Chapter 11 and Queen Chapter 21.",
         "journey": ["Creed and axioms", "Sovereign vs controlled", "ZOCRSM1 + GVC1 stack", "Field Ops :9479"],
         "questions": [
             "Write three sentences about Final_Eye using Implemented, Doctrine, and Metaphor labels correctly.",
@@ -148,7 +159,7 @@ MANUSCRIPT: list[dict] = [
         ],
         "body": """
 <h2 id="toc-01-thesis">Core thesis — confidence always in Vision</h2>
-<p><strong>The Final Eyeball</strong> is Final_Eye v1.0.0 — sovereign field robotics vision by Zachary Geurts. It is not a cloud camera feed, not a surveillance SaaS, and <strong>not MPEG</strong>. The product packages <span class="tag impl">Implemented</span> ZOCRSM1 vision ingress with <span class="tag impl">Implemented</span> GRKMF1/GVC1 proprietary media envelopes, Grok16 field_opt compilation, twin entity eyeballs, and a Field Ops dashboard at port 9479.</p>
+<p><strong>The Final Eyeball</strong> is Final_Eye v1.1.0 — sovereign field robotics vision by Zachary Geurts. It is not a cloud camera feed, not a surveillance SaaS, and <strong>not MPEG</strong>. The product packages <span class="tag impl">Implemented</span> ZOCRSM1 vision ingress with <span class="tag impl">Implemented</span> GRKMF1/GVC1 proprietary media envelopes, Grok16 field_opt compilation, twin entity eyeballs with <strong>Teach</strong> doctrine (independent weapon authority), and a Field Ops dashboard at port 9479.</p>
 <p>The creed is fixed in the field mandate: <em>We never presume vision loss. Confidence always in Vision.</em> That sentence is <span class="tag doctrine">Doctrine</span> — it governs how operators speak about outages. We do not assume the eye is blind when a stream pauses; we verify seals, grep ledgers, and re-arm capture on demand. Defense of vision requires offense: reject foreign patterns, seal threats, strike on ingress when the offense layer fires.</p>
 <figure class="figure"><img src="../assets/images/chapters/ch01-vision-ingress.jpg" alt="Vision ingress" loading="lazy" /><figcaption>Figure 1.1 — Sovereign vision ingress: capture flows through sealed layers, not open cloud pipes.</figcaption></figure>
 <p>This textbook follows Field Primer illustration theory: roughly <strong>one generated figure every thousand words</strong>, each paired with expanded prose you can grep. Pictures hold interest; labels keep us honest.</p>
@@ -506,7 +517,7 @@ curl -s http://127.0.0.1:9479/api/version | python3 -m json.tool</pre>
             ("toc-08-copilot", "Co-Pilot foundations"),
             ("toc-08-release", "Release · platforms · textbook"),
         ],
-        "on_the_way": "Chapter 8 closes the stack — Field Ops at :9479, ZAC artifacts, integration paths, and multi-platform v1.0.0 releases. The eye operates alone, shares truth, never answers to external control.",
+        "on_the_way": "Chapter 8 closes the stack — Field Ops at :9479, ZAC artifacts, integration paths, and multi-platform v1.1.0 releases. The eye operates alone, shares truth, never answers to external control.",
         "journey": ["/ops dashboard", "ZAC1 blob", "34 tests", "GitHub releases"],
         "questions": [
             "What are the eight ops dashboard sections?",
@@ -515,7 +526,7 @@ curl -s http://127.0.0.1:9479/api/version | python3 -m json.tool</pre>
         ],
         "body": """
 <h2 id="toc-08-ops">Field Ops UI</h2>
-<p><span class="tag impl">Implemented</span> <code>GET /api/ops/full</code> — priority: robotics, ai, weapons, entity, vision, truth, field, integration. Honesty labels on every panel. Live at <code>http://127.0.0.1:9479/ops</code>. Matrix cases include product_1_0, field_compile_c, code_seal, grok16_profile — grep before you demo.</p>
+<p><span class="tag impl">Implemented</span> <code>GET /api/ops/full</code> — priority: robotics, ai, weapons, entity, vision, truth, field, integration. Honesty labels on every panel. Live at <code>http://127.0.0.1:9479/ops</code>. Matrix cases include product_version, field_compile_c, code_seal, grok16_profile — grep before you demo.</p>
 <figure class="figure"><img src="../assets/images/chapters/ch07-field-ops.jpg" alt="Field Ops" loading="lazy" /><figcaption>Figure 8.1 — Eight ops sections: robotics through integration.</figcaption></figure>
 
 <h2 id="toc-08-zac">ZAC pack/restore</h2>
@@ -529,7 +540,7 @@ curl -s http://127.0.0.1:9479/api/version | python3 -m json.tool</pre>
 <p><span class="tag impl">Implemented</span> <code>zocr_copilot.py</code> — 14 foundational truth sources, hold_together integrity percent, <code>POST /api/copilot/ask</code>. Co-Pilot shares structure context; it does not override kill switches or mandate gates.</p>
 
 <h2 id="toc-08-release">Release · platforms · textbook</h2>
-<p>v1.0.0 ships for <span class="tag impl">Implemented</span> Linux tar, Debian deb, Windows zip, macOS tar, source tar, Docker GHCR — see GitHub Releases. This textbook lives at <code>https://zacharygeurts.github.io/Final_Eye/</code>. Cross-read <a href="https://zacharygeurts.github.io/Field_Primer/">Field Primer</a> for the wider Field Technology v5 spine.</p>
+<p>v1.1.0 ships for <span class="tag impl">Implemented</span> Linux tar, Debian deb, Windows zip, macOS tar, source tar, Docker GHCR — see GitHub Releases. v1.1 adds Teach doctrine, weapon authority APIs, and threat-only auto salvo. This textbook lives at <code>https://zacharygeurts.github.io/Final_Eye/</code>. Cross-read <a href="https://zacharygeurts.github.io/Field_Primer/">Field Primer</a> for the wider Field Technology v5 spine.</p>
 <pre class="eq">./tests/run_tests.sh          # 34 tests
 python3 scripts/build_release.py
 python3 scripts/build_textbook.py</pre>
@@ -541,15 +552,19 @@ python3 scripts/build_textbook.py</pre>
 
 EXPANSIONS: dict[str, str] = {
     "01-preface.html": """
+<h2 id="toc-01-teach">Teach — the eye speaks</h2>
+<p><span class="tag impl">Implemented</span> v1.1 introduces <strong>Teach</strong> — the Final Eyeball instructing the operator in first person. Not spectrum weights (<code>POST /api/eye/teach</code> with a profile). Doctrine lives in <code>data/eye-teach-doctrine.json</code>. <code>GET /api/eye/teach/doctrine?lesson=authority</code> returns independent weapon authority prose. The eye knows thirty-seven weapons, understands targets, selects salvo — operators witness, they do not puppet from cloud.</p>
+<p>Teach names the enemy plainly: <em>the lie, not the liar's face</em>. Lie markers in entity spec — provenance_mismatch, grid_jam, trust_breach, and more — are grep-able threats, not people. Remote puppet control is doctrinal enemy; local kill switches stay with the field operator beside the socket.</p>
 <h2 id="toc-01-lab">Week-zero operator lab</h2>
 <ol>
-<li>Clone or extract Final_Eye v1.0.0 for your platform from GitHub Releases.</li>
-<li>Run <code>python3 zocr_security.py seal</code> and <code>FINAL_EYE_LOW_END=1 ./tests/run_tests.sh</code>.</li>
+<li>Clone or extract Final_Eye v1.1.0 for your platform from GitHub Releases.</li>
+<li>Run <code>python3 zocr_security.py seal</code> and <code>FINAL_EYE_LOW_END=1 ./tests/run_tests.sh</code> — 34 tests.</li>
 <li>Start <code>./start.sh --no-open</code> — open <code>/ops</code> and read honesty labels on each section.</li>
+<li><code>GET /api/eye/teach/doctrine?lesson=intro</code> — hear Teach introduce the mandate.</li>
 <li>Arm dishes mode without stream; confirm silent capture — no display flash.</li>
 <li>Read Field Primer Ch 11 Final_Eye section — cross-link in your operator journal.</li>
 </ol>
-<p>Sovereignty checklist: egress localhost default, neural local_only, kill switches armed but not tripped, code seal ok. If any fail, fix before demo — grep is forensic defense.</p>
+<p>Sovereignty checklist: egress localhost default, neural local_only, kill switches armed but not tripped, code seal ok, weapon authority independent. If any fail, fix before demo — grep is forensic defense.</p>
 """,
     "02-zocrsm1-vision.html": """
 <h2 id="toc-02-stereo">Stereo rig and ocular spectrum</h2>
@@ -628,14 +643,27 @@ EXPANSIONS: dict[str, str] = {
 <p>Compiler optimization is measured, not myth. If field_compute beats field_opt on your RTX host, update the bench json and document — honesty labels require it. Default remains field_opt until measured evidence says otherwise.</p>
 """,
     "07-entity-eyeballs.html": """
+<h2 id="toc-07-enemies">What is an enemy to the eye?</h2>
+<p>Teach does not keep a roster of people or nations. The enemy is whatever <strong>lies to vision</strong> — forged, jammed, or puppeted signal presented as truth before the ledger accepts it. <span class="tag impl">Implemented</span> lie markers in <code>data/entity-eyeball.json</code> name the enemies:</p>
+<table class="rocks"><thead><tr><th>Lie marker</th><th>Meaning to the eye</th><th>Default salvo</th></tr></thead><tbody>
+<tr><td><code>provenance_mismatch</code></td><td>Frame claims lineage it cannot prove</td><td><code>autokill_certain</code></td></tr>
+<tr><td><code>grid_jam</code></td><td>Foreign grid woven into ingress</td><td><code>grid_jam_sever</code></td></tr>
+<tr><td><code>moire_weave</code></td><td>Moiré interference — visual lie</td><td><code>moire_kill</code></td></tr>
+<tr><td><code>trust_breach</code></td><td>IRTN / Hostess7 trust line broken</td><td><code>trust_strike</code> / <code>hell_rip</code></td></tr>
+<tr><td><code>rf_jam</code></td><td>RF before display speaks truth</td><td><code>rf_jam_slice</code></td></tr>
+<tr><td><code>weaponized_interference</code></td><td>Aggressive stack interference</td><td><code>hardware_destroy_trip</code></td></tr>
+</tbody></table>
+<p>Abstract enemy: anything that <em>walks backward on truth</em> — lie, tamper, foreign weave, remote puppet. Not enemies: operators, witnesses, truth markers (<code>woven_paths</code>, <code>code_seal</code>, <code>USER_OK</code>, <code>last_good</code>). <code>GET /api/eye/understand?threat=provenance_mismatch</code> resolves doctrine before strike; threat-only <code>POST /api/eye/weapons/fire {"threat":"…"}</code> lets the eye choose salvo independently.</p>
 <h2 id="toc-07-trust">IRTN — sharing without single-owner truth</h2>
 <p>The Interwoven Redundancies Trust Network says: no single path owns truth. Hostess7 corroborates ZOCR vision; Queen gates quorum via field-queen-browser panel slice; mesh verify returns path redundancy scores. <span class="tag impl">Implemented</span> endpoints <code>/api/trust</code>, <code>/api/trust/mesh</code>, <code>/api/trust/hostess7</code>. Sharing information is mandatory for field forensics; surrendering control to one cloud verdict is not.</p>
-<p>Entity eyeballs participate in forward doctrine — when offense acts, truth eyeball may speak, twin may corroborate, ledger records acted tokens. Lie markers in entity spec flag phrases that fail honesty review — use them when writing status email to management.</p>
+<p>Entity eyeballs participate in forward doctrine — when offense acts, truth eyeball may speak, twin may corroborate, ledger records acted tokens. Lie markers flag phrases that fail honesty review — use them when writing status email to management.</p>
 <h2 id="toc-07-lab">Entity and weapons lab</h2>
 <ol>
-<li><code>GET /api/ops/full</code> — weapons section, threat_weapon_map, lie_markers.</li>
-<li>Read twin, living, truth status endpoints — schemas present.</li>
-<li>Inspect heaven_hell_truth_status — parameters loaded.</li>
+<li><code>GET /api/eye/authority</code> — independent posture, weapons armed, current lies.</li>
+<li><code>GET /api/eye/targets</code> — full catalog + threat_weapon_map.</li>
+<li><code>GET /api/eye/teach/doctrine?lesson=targets</code> — Teach on known enemies.</li>
+<li><code>GET /api/ops/full</code> — weapons section, lie_markers in entity panel.</li>
+<li>Fire threat-only: <code>POST /api/eye/weapons/fire {"threat":"provenance_mismatch"}</code> — confirm auto salvo.</li>
 <li>truth_forward once — line in forward ledger.</li>
 </ol>
 <p>Weapons are forward doctrine — heaven_pass and hell_rip encode truth parameters from Hostess7 and Queen panel slices. Firing in lab uses explicit API; production discipline means threat labels match ledger, not theater.</p>
@@ -644,18 +672,23 @@ EXPANSIONS: dict[str, str] = {
 <h2 id="toc-08-hud">HUD closed manifest</h2>
 <p><span class="tag impl">Implemented</span> HUD module system in <code>data/hud-modules.json</code> — closed manifest whitelist rejects bullshit modules in tests. Tiles include spectrum, field_compiler, truth heaven/hell, copilot hold. HUD is how operators see the eye without opening eight API tabs — still localhost, still sealed, still honest labels on each tile fetch.</p>
 <p>Sovereign time seals eyeball ticks — monotonic receipts in <code>zocr_sovereign_time.py</code>. Cross-read Field Primer Ch 19 for SQUIDGIE witness vocabulary. Time disagreement blocks clean verdicts upstream; Final_Eye aligns with that perimeter, not pool NTP alone.</p>
+<h2 id="toc-08-release111">v1.1.0 — Teach authority release</h2>
+<p><span class="tag impl">Implemented</span> Release 1.1.0 codename <code>teach-authority</code> ships Teach doctrine, weapon authority endpoints, target understanding, and threat-only auto fire. Build: <code>python3 scripts/build_release.py</code>. Tag <code>v1.1.0</code> triggers GitHub Actions release workflow — Linux tar, deb, Windows zip, macOS tar, source tar, SHA256SUMS, Docker GHCR.</p>
 <h2 id="toc-08-lab">Capstone lab — full stack verify</h2>
 <ol>
-<li><code>./tests/run_tests.sh</code> — 33 tests, zero failed.</li>
-<li><code>GET /api/tester/matrix</code> — all cases ok.</li>
+<li><code>./tests/run_tests.sh</code> — 34 tests, zero failed.</li>
+<li><code>GET /api/tester/matrix</code> — all cases ok including <code>product_version</code>.</li>
 <li><code>zac_self_test</code> — pack and restore ok.</li>
+<li><code>GET /api/eye/teach/doctrine?lesson=sovereignty</code> — Teach closing voice.</li>
 <li>Integration smoke: Queen forge path, Hostess7 bridge present.</li>
-<li>Open this textbook in reader mode; read Ch 1 sovereignty block aloud to a peer.</li>
+<li>Open this textbook in reader mode; read Ch 7 enemies table aloud to a peer.</li>
 </ol>
-<h2 id="toc-08-rocks">Master rocks — Final_Eye v1.0</h2>
+<h2 id="toc-08-rocks">Master rocks — Final_Eye v1.1</h2>
 <table class="rocks"><thead><tr><th>Rock</th><th>Label</th></tr></thead><tbody>
 <tr><td>Operates on its own (vigilance, on-demand look)</td><td><span class="tag impl">Implemented</span></td></tr>
 <tr><td>Shares truth (IRTN, ZAC, forward ledger)</td><td><span class="tag impl">Implemented</span></td></tr>
+<tr><td>Independent weapon authority (Teach, auto salvo)</td><td><span class="tag impl">Implemented</span></td></tr>
+<tr><td>Enemy = lie on vision path, not people roster</td><td><span class="tag doctrine">Doctrine</span></td></tr>
 <tr><td>Never externally controlled (egress, kill, seal)</td><td><span class="tag doctrine">Doctrine</span></td></tr>
 <tr><td>Queen robot brain literal hardware</td><td><span class="tag meta">Metaphor</span></td></tr>
 </tbody></table>

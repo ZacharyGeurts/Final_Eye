@@ -1,4 +1,4 @@
-"""Final_Eye product metadata — v1.0.0 sovereign robotics vision release."""
+"""Final_Eye product metadata — sovereign robotics vision release."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -9,11 +9,19 @@ _VERSION_FILE = _ROOT / "VERSION"
 if not _VERSION_FILE.is_file():
     _VERSION_FILE = _ROOT.parent / "VERSION"
 
+
+def _read_version() -> str:
+    try:
+        return _VERSION_FILE.read_text(encoding="utf-8").strip()
+    except OSError:
+        return "1.1.0"
+
+
 PRODUCT_ID = "Final_Eye"
 PRODUCT_NAME = "The Final Eyeball"
-VERSION = "1.0.0"
+VERSION = _read_version()
 SCHEMA = "final-eye-product/v1"
-CODENAME = "sovereign-vision"
+CODENAME = "teach-authority"
 LICENSE = "proprietary"
 REPO = "https://github.com/ZacharyGeurts/Final_Eye"
 

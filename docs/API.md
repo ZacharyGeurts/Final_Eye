@@ -15,7 +15,7 @@ Base: `http://127.0.0.1:9479` · OpenAPI-style reference · **Not MPEG**
 
 | Method | Path | Description |
 |--------|------|-------------|
-| GET | `/api/version` | Product metadata 1.0.0 |
+| GET | `/api/version` | Product metadata (current VERSION) |
 | GET | `/api/health` | Liveness |
 | GET | `/api/status` | Live session status |
 

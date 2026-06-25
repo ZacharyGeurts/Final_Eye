@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.0 — 2026-06-25 (teach-authority)
+
+### Release
+- **Final_Eye 1.1.0** — Teach doctrine: the eye speaks with independent weapon authority
+- `data/eye-teach-doctrine.json` — Teach voice lessons (authority, targets, weapons, sovereignty, intro)
+- API: `GET /api/eye/authority`, `/api/eye/targets`, `/api/eye/teach/doctrine`, `/api/eye/understand?threat=`
+- Threat-only `POST /api/eye/weapons/fire {"threat":"…"}` — eye auto-selects salvo via `threat_weapon_map`
+- Entity spec `weapon_authority` block — independent aim, no remote puppet
+- **34 automated tests** (+ `test_eye_teach_weapon_authority`)
+- Textbook Ch 1 Teach intro, Ch 7 enemies table, Ch 8 v1.1 release — expanded prose toward manuscript target
+
 ## 1.0.0 — 2026-06-25 (sovereign-vision) — FINAL
 
 ### Release (authorized sign-off)

@@ -78,7 +78,7 @@ def main() -> int:
         except Exception as exc:
             failed += 1
             print(f"FAIL {t.__name__}: {exc}", file=sys.stderr)
-    print(json.dumps({"tests": len(tests), "failed": failed, "release": "1.0.0"}))
+    print(json.dumps({"tests": len(tests), "failed": failed, "release": (ROOT / "VERSION").read_text(encoding="utf-8").strip()}))
     return 1 if failed else 0
 
 

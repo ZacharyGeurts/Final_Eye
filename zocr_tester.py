@@ -237,11 +237,12 @@ def tester_snapshot(*, include_slow: bool = False) -> dict[str, Any]:
 def _matrix_cases() -> list[dict[str, Any]]:
     return [
         {
-            "id": "product_1_0",
+            "id": "product_version",
             "group": "release",
-            "label": "Product version 1.0.0",
+            "label": f"Product version {product_info().get('version')}",
             "kind": "implemented",
-            "check": lambda: product_info().get("version") == "1.0.0",
+            "check": lambda: product_info().get("version")
+            == (_ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         },
         {
             "id": "code_seal",
