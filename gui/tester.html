@@ -3,61 +3,52 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Final_Eye · Internal Tester 1.0</title>
+  <title>Final_Eye · Field Ops — AI & Robotics</title>
   <link rel="stylesheet" href="/tester.css">
 </head>
 <body>
-  <header>
+  <header class="ops-header">
     <div>
-      <h1 id="productTitle">Final_Eye Internal Tester</h1>
+      <h1 id="productTitle">Final_Eye Field Ops</h1>
       <div class="meta" id="productVer">loading…</div>
-      <div class="legend" style="margin-top:0.35rem">
-        <span class="implemented">implemented</span>
-        <span class="measured">measured</span>
-        <span class="doctrine">doctrine</span>
-        <span class="metaphor">metaphor</span>
-      </div>
     </div>
-    <div style="text-align:center">
+    <div class="ops-health">
       <div class="health" id="healthPct">—</div>
-      <div class="meta">subsystem health</div>
-      <div id="readyFlag" style="font-weight:700;margin-top:0.25rem">—</div>
+      <div class="meta">sections ok</div>
+      <div id="copilotIntegrity" class="copilot-integrity">—</div>
     </div>
     <div class="toolbar">
-      <button type="button" class="primary" id="btnRefresh">Refresh + matrix</button>
-      <button type="button" id="btnMatrix">Matrix only</button>
+      <button type="button" class="primary" id="btnRefresh">Refresh all</button>
       <button type="button" id="btnPoll">Stop poll</button>
-      <a href="/" style="color:var(--accent);font-size:0.72rem;margin-left:0.5rem">← Live UI</a>
+      <a href="/" class="nav-link">Live UI</a>
+      <a href="#raw" class="nav-link">Raw JSON</a>
     </div>
   </header>
 
-  <section class="copilot-panel" id="copilotPanel">
-    <div class="copilot-head">
-      <h2>Co-Pilot · foundational truths</h2>
-      <div class="copilot-integrity" id="copilotIntegrity">—</div>
-    </div>
-    <p class="copilot-speak" id="copilotSpeak">Loading hold-together report…</p>
+  <nav class="ops-nav" id="opsNav" aria-label="Section jump"></nav>
+
+  <section class="copilot-strip" id="copilotStrip">
     <div class="copilot-ask">
-      <input type="text" id="copilotQuery" placeholder="Ask: what holds trust together? heaven? seal?" aria-label="Co-pilot query" />
+      <input type="text" id="copilotQuery" placeholder="Co-Pilot: what holds weapons and trust together?" />
       <button type="button" id="btnCopilotAsk">Ask</button>
     </div>
+    <p class="copilot-speak" id="copilotSpeak">—</p>
     <pre class="copilot-answer" id="copilotAnswer"></pre>
-    <div class="copilot-pillars" id="copilotPillars"></div>
-    <div class="copilot-sources" id="copilotSources"></div>
   </section>
 
-  <div class="grid" id="subGrid"></div>
+  <main id="opsMain" class="ops-main"></main>
 
-  <section class="matrix-section">
-    <h2 style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--muted)">
-      Release test matrix · <span id="matrixSummary">—</span>
-    </h2>
+  <section class="ops-section" id="sec-matrix">
+    <h2 class="sec-title">Release matrix <span class="sec-badge" id="matrixSummary">—</span></h2>
     <div class="matrix-grid" id="matrixGrid"></div>
   </section>
 
-  <pre class="raw" id="rawJson" aria-label="raw snapshot json"></pre>
+  <section class="ops-section" id="raw">
+    <h2 class="sec-title">Raw ops JSON</h2>
+    <pre class="raw" id="rawJson"></pre>
+  </section>
 
-  <footer id="footerTs">Polling every 2.5s · port 9479 · factual labels only</footer>
+  <footer id="footerTs">Field Ops · AI & robotics priority · details first</footer>
   <script src="/tester.js"></script>
 </body>
 </html>

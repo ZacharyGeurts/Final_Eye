@@ -1,15 +1,24 @@
-/* Final_Eye 1.0 internal tester — live factual panels */
+/* Final_Eye Field Ops — single page, AI/robotics first, all details */
 (function () {
   "use strict";
 
   const POLL_MS = 2500;
-  let lastFull = null;
-  let pollTimer = null;
+  const SECTION_META = {
+    robotics: { title: "01 · Robotics", sub: "modes · rig · stream · video · contract" },
+    ai: { title: "02 · AI & Compiler", sub: "Grok16 · neural · GRKMF · field compiler" },
+    weapons: { title: "03 · Weapons Arsenal", sub: "racks · salvo · threat map · entity state" },
+    entity: { title: "04 · Entity Eyeballs", sub: "Vita · Veritas · twins · forward ledger" },
+    vision: { title: "05 · Vision Ingress", sub: "preserve · offense · pattern · vigilance" },
+    truth: { title: "06 · Truth & Trust", sub: "heaven/hell · IRTN · Hostess7 · co-pilot" },
+    field: { title: "07 · Field Authority", sub: "mandate · kill · seal · sovereign · HUD" },
+    integration: { title: "08 · Integration", sub: "ZAC · Queen · Hostess7 · environment" },
+  };
 
+  let pollTimer = null;
   const $ = (id) => document.getElementById(id);
 
-  function labelClass(kind) {
-    return kind || "implemented";
+  function esc(s) {
+    return String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
   function fmt(v) {
@@ -19,170 +28,208 @@
     return String(v);
   }
 
-  function flatten(obj, prefix, out, depth) {
-    if (depth > 4 || obj === null || obj === undefined) return;
-    if (typeof obj !== "object" || Array.isArray(obj)) {
+  async function fetchJson(url) {
+    const r = await fetch(url, { cache: "no-store" });
+    return r.json();
+  }
+
+  function flattenRows(obj, prefix, out, depth) {
+    if (depth > 5 || obj === null || obj === undefined) return;
+    if (Array.isArray(obj)) {
+      out.push({ k: prefix, v: "[" + obj.length + " items] " + JSON.stringify(obj).slice(0, 200) });
+      return;
+    }
+    if (typeof obj !== "object") {
       out.push({ k: prefix, v: fmt(obj) });
       return;
     }
-    if (obj.value !== undefined && obj.label) {
-      out.push({ k: prefix, v: fmt(obj.value), kind: obj.label });
+    const keys = Object.keys(obj);
+    if (keys.length > 24 && depth > 0) {
+      out.push({ k: prefix, v: "{" + keys.length + " keys}" });
       return;
     }
-    const keys = Object.keys(obj).slice(0, 40);
-    for (const key of keys) {
+    for (const key of keys.slice(0, 60)) {
       if (key.startsWith("_")) continue;
       const p = prefix ? prefix + "." + key : key;
       const val = obj[key];
-      if (val && typeof val === "object" && !Array.isArray(val) && Object.keys(val).length > 6 && depth > 1) {
-        out.push({ k: p, v: "[object]" });
+      if (val && typeof val === "object" && !Array.isArray(val) && Object.keys(val).length > 12 && depth >= 1) {
+        flattenRows(val, p, out, depth + 1);
       } else {
-        flatten(val, p, out, depth + 1);
+        flattenRows(val, p, out, depth + 1);
       }
     }
   }
 
-  function renderCard(sub) {
-    const card = document.createElement("div");
-    card.className = "card";
-    const ok = sub.ok;
-    const h2 = document.createElement("h2");
-    h2.innerHTML = sub.id + ' <span class="badge ' + (ok ? "ok" : "bad") + '">' +
-      (ok ? "OK" : "ERR") + " · " + sub.latency_ms + "ms</span>";
-    card.appendChild(h2);
-    const body = document.createElement("div");
-    body.className = "body";
+  function detailTable(data, maxRows) {
     const rows = [];
-    flatten(sub.data, "", rows, 0);
-    for (const r of rows.slice(0, 48)) {
-      const row = document.createElement("div");
-      row.className = "row";
-      const k = document.createElement("div");
-      k.className = "k";
-      k.textContent = r.k;
-      const v = document.createElement("div");
-      v.className = "v";
-      if (r.kind) {
-        const tag = document.createElement("span");
-        tag.className = labelClass(r.kind);
-        tag.style.fontSize = "0.58rem";
-        tag.style.marginRight = "0.25rem";
-        tag.textContent = r.kind.slice(0, 3);
-        v.appendChild(tag);
-      }
-      v.appendChild(document.createTextNode(r.v));
-      row.appendChild(k);
-      row.appendChild(v);
-      body.appendChild(row);
+    flattenRows(data, "", rows, 0);
+    let html = '<table class="detail-table"><tbody>';
+    for (const r of rows.slice(0, maxRows || 80)) {
+      html += "<tr><th>" + esc(r.k) + "</th><td>" + esc(r.v) + "</td></tr>";
     }
-    card.appendChild(body);
-    return card;
+    if (rows.length > (maxRows || 80)) {
+      html += '<tr><th colspan="2">… ' + (rows.length - (maxRows || 80)) + " more rows</th></tr>";
+    }
+    html += "</tbody></table>";
+    return html;
+  }
+
+  function weaponsTable(weapons, racks) {
+    if (!weapons || !weapons.length) return "<p class='muted'>No weapons loaded</p>";
+    const rackMeta = (racks && racks.racks) || {};
+    let html = '<table class="weapons-table"><thead><tr>' +
+      "<th>id</th><th>rack</th><th>label</th><th>entity</th><th>strike</th><th>offense</th><th>handler</th><th>targets</th><th>doctrine</th>" +
+      "</tr></thead><tbody>";
+    for (const w of weapons) {
+      const rackLabel = (rackMeta[w.rack] || {}).label || w.rack;
+      html += "<tr>" +
+        "<td><code>" + esc(w.id) + "</code></td>" +
+        "<td>" + esc(rackLabel) + "</td>" +
+        "<td>" + esc(w.label) + "</td>" +
+        "<td>" + esc(w.entity) + "</td>" +
+        "<td>" + esc(w.strike) + "</td>" +
+        "<td>" + esc(w.offense) + "</td>" +
+        "<td>" + esc(w.handler || "—") + "</td>" +
+        "<td>" + esc((w.targets || []).join(", ")) + "</td>" +
+        "<td class='doc'>" + esc((w.doctrine || "").slice(0, 120)) + "</td>" +
+        "</tr>";
+    }
+    html += "</tbody></table>";
+    html += '<p class="muted">Total ' + weapons.length + " · racks " + Object.keys(rackMeta).length +
+      " · socket: " + esc(((racks.socket_fit || {}).rule || "").slice(0, 100)) + "</p>";
+    return html;
+  }
+
+  function threatMapTable(map) {
+    if (!map) return "";
+    let html = '<table class="detail-table compact"><thead><tr><th>threat</th><th>weapon</th></tr></thead><tbody>';
+    for (const [t, w] of Object.entries(map).sort()) {
+      html += "<tr><th>" + esc(t) + "</th><td><code>" + esc(w) + "</code></td></tr>";
+    }
+    return html + "</tbody></table>";
+  }
+
+  function modesTable(modes) {
+    if (!modes || !modes.length) return "";
+    let html = '<table class="detail-table"><thead><tr><th>id</th><th>label</th><th>detail</th></tr></thead><tbody>';
+    for (const m of modes) {
+      html += "<tr><th>" + esc(m.id || m) + "</th><td>" + esc(m.label) + "</td><td>" + esc(JSON.stringify(m).slice(0, 200)) + "</td></tr>";
+    }
+    return html + "</tbody></table>";
+  }
+
+  function renderSection(id, sec, meta) {
+    const data = sec.data || {};
+    const el = document.createElement("section");
+    el.className = "ops-section";
+    el.id = "sec-" + id;
+    const badge = sec.ok ? "ok" : "err";
+    let body = "";
+
+    if (id === "weapons") {
+      body += "<h3 class='block-title'>Full weapon rack (" + ((data.weapons || []).length) + ")</h3>";
+      body += weaponsTable(data.weapons, data.racks);
+      body += "<h3 class='block-title'>Threat → weapon map</h3>";
+      body += threatMapTable(data.threat_weapon_map);
+      body += "<h3 class='block-title'>Lie markers</h3><p class='mono'>" + esc((data.lie_markers || []).join(" · ")) + "</p>";
+      body += "<h3 class='block-title'>Entity state</h3>";
+      body += detailTable(data.state, 24);
+      body += "<h3 class='block-title'>Endpoints</h3>";
+      body += detailTable({ fire: data.fire_endpoint, weaponize: data.weaponize_endpoint }, 8);
+      body += "<h3 class='block-title'>Doctrine</h3>";
+      body += detailTable(data.doctrine, 40);
+    } else if (id === "robotics") {
+      body += "<h3 class='block-title'>Final modes</h3>" + modesTable(data.final_modes);
+      body += "<h3 class='block-title'>Final eyeball (live)</h3>" + detailTable(data.final_eyeball, 50);
+      body += "<h3 class='block-title'>Video / stream</h3>" + detailTable({ video: data.video, stream: data.stream, benchmark: data.benchmark }, 60);
+      body += "<h3 class='block-title'>Rig · eye · contract</h3>" + detailTable({ rig: data.rig, eye: data.eye, contract: data.contract, presets: data.rig_presets }, 70);
+      body += "<h3 class='block-title'>Arm endpoints</h3>" + detailTable(data.arm_endpoints, 10);
+      body += "<h3 class='block-title'>Robotics doctrine</h3>" + detailTable(data.doctrine, 30);
+    } else if (id === "ai") {
+      body += "<h3 class='block-title'>Grok16 status</h3>" + detailTable(data.grok16, 40);
+      body += "<h3 class='block-title'>Grok16 tune (war / patrol)</h3>" + detailTable({ war: data.grok16_tune_war, patrol: data.grok16_tune_patrol }, 20);
+      body += "<h3 class='block-title'>Field compiler</h3>" + detailTable({ status: data.field_compiler, probe: data.compiler_probe }, 50);
+      body += "<h3 class='block-title'>Neural assist</h3>" + detailTable({ neural: data.neural, verify: data.neural_verify }, 30);
+      body += "<h3 class='block-title'>AI / robotics context</h3>" + detailTable({ grkmf: data.grkmf, ai: data.ai_context, robotics: data.robotics_context }, 40);
+    } else if (id === "entity") {
+      body += "<h3 class='block-title'>Twins status</h3>" + detailTable(data.twins, 50);
+      body += "<h3 class='block-title'>Living (Vita)</h3>" + detailTable(data.living, 40);
+      body += "<h3 class='block-title'>Truth (Veritas)</h3>" + detailTable(data.truth, 60);
+      body += "<h3 class='block-title'>Recent forward ledger</h3>" + detailTable(data.recent_forward, 30);
+      body += "<h3 class='block-title'>Sovereign + redundancy</h3>" + detailTable(data.sovereign_redundancy, 30);
+    } else {
+      body += detailTable(data, 120);
+    }
+
+    el.innerHTML =
+      '<h2 class="sec-title">' + esc(meta.title) +
+      ' <span class="sec-badge ' + badge + '">' + (sec.ok ? "OK" : "ERR") + " · " + sec.latency_ms + "ms</span></h2>" +
+      '<p class="sec-sub">' + esc(meta.sub) + "</p>" +
+      '<div class="sec-body">' + body + "</div>";
+    return el;
+  }
+
+  function renderNav(priority) {
+    const nav = $("opsNav");
+    nav.textContent = "";
+    for (const id of priority || []) {
+      const m = SECTION_META[id] || { title: id };
+      const a = document.createElement("a");
+      a.href = "#sec-" + id;
+      a.textContent = m.title.replace(/^\d+ · /, "");
+      nav.appendChild(a);
+    }
   }
 
   function renderMatrix(matrix) {
     const host = $("matrixGrid");
     host.textContent = "";
     if (!matrix || !matrix.cases) return;
-    $("matrixSummary").textContent =
-      matrix.passed + "/" + matrix.total + " passed (" + matrix.pass_pct + "%)";
+    $("matrixSummary").textContent = matrix.passed + "/" + matrix.total + " (" + matrix.pass_pct + "%)";
     for (const c of matrix.cases) {
       const el = document.createElement("div");
       el.className = "mcase " + (c.ok ? "pass" : "fail");
-      el.innerHTML =
-        '<div><div class="id">' + c.id + " · " + c.kind + "</div>" +
-        '<div class="lbl">' + c.label + "</div></div>" +
-        '<div>' + (c.ok ? "✓" : "✗") + "</div>";
+      el.innerHTML = '<span class="id">' + esc(c.id) + "</span> " + esc(c.label) + " <strong>" + (c.ok ? "✓" : "✗") + "</strong>";
       host.appendChild(el);
     }
   }
 
-  function updateHeader(full) {
-    const snap = full.snapshot || {};
-    const prod = snap.product || {};
-    const sum = snap.summary || {};
-    $("productTitle").textContent = (prod.name || "Final_Eye") + " Internal Tester";
-    $("productVer").textContent =
-      (prod.product || "") + " v" + (prod.version || "?") +
-      " · " + (prod.codename || "") + " · " + (snap.ts || "");
+  function updateHeader(ops) {
+    const prod = ops.product || {};
+    $("productTitle").textContent = (prod.name || "Final_Eye") + " Field Ops";
+    $("productVer").textContent = (prod.product || "") + " v" + (prod.version || "?") + " · " + (prod.codename || "") + " · " + (ops.ts || "");
+    const sum = ops.summary || {};
     const pct = sum.health_pct || 0;
     const h = $("healthPct");
-    h.textContent = pct + "%";
-    h.className = "health" + (pct >= 90 ? "" : pct >= 70 ? " warn" : " fail");
-    $("readyFlag").textContent = full.release_ready ? "RELEASE READY" : "NOT READY";
-    $("readyFlag").style.color = full.release_ready ? "var(--ok)" : "var(--fail)";
+    h.textContent = (sum.sections_ok || 0) + "/" + (sum.sections_total || 0) + " · " + pct + "%";
+    h.className = "health" + (pct >= 90 ? "" : pct >= 75 ? " warn" : " fail");
+    const hold = ops.copilot_hold || {};
+    $("copilotIntegrity").textContent = "Co-Pilot " + (hold.integrity_pct || "—") + "% held";
+    $("copilotSpeak").textContent = hold.speak || "—";
   }
 
-  async function fetchJson(url) {
-    const r = await fetch(url, { cache: "no-store" });
-    return r.json();
-  }
-
-  function renderCopilot(copilot) {
-    if (!copilot) return;
-    const hold = copilot.hold || {};
-    const pct = hold.integrity_pct || 0;
-    const el = $("copilotIntegrity");
-    el.textContent = pct + "% held";
-    el.className = "copilot-integrity" + (pct >= 90 ? "" : pct >= 75 ? " warn" : " fail");
-    $("copilotSpeak").textContent = copilot.speak || hold.speak || "—";
-
-    const pillars = $("copilotPillars");
-    pillars.textContent = "";
-    for (const p of hold.pillars || []) {
-      const d = document.createElement("div");
-      d.className = "pillar " + (p.ok ? "ok" : "bad");
-      d.innerHTML = '<div class="name">' + p.pillar + "</div><div>" + (p.truth || "") + "</div>";
-      pillars.appendChild(d);
-    }
-
-    const srcHost = $("copilotSources");
-    srcHost.textContent = "";
-    for (const s of copilot.sources || []) {
-      const d = document.createElement("div");
-      d.className = "foundational " + (s.ok ? "ok" : "bad");
-      d.innerHTML =
-        '<div class="layer">' + (s.layer || "") + " · " + (s.label || "") + "</div>" +
-        "<strong>" + (s.title || s.id) + "</strong><br>" +
-        (s.holds || "").slice(0, 80);
-      srcHost.appendChild(d);
-    }
-  }
-
-  async function loadCopilot() {
+  async function refresh() {
     try {
-      const c = await fetchJson("/api/copilot");
-      renderCopilot(c);
+      const ops = await fetchJson("/api/ops/full");
+      updateHeader(ops);
+      renderNav(ops.priority);
+      const main = $("opsMain");
+      main.textContent = "";
+      for (const id of ops.priority || []) {
+        const sec = (ops.sections || {})[id];
+        if (sec) main.appendChild(renderSection(id, sec, SECTION_META[id] || { title: id, sub: "" }));
+      }
+      if (ops.matrix) renderMatrix(ops.matrix);
+      $("rawJson").textContent = JSON.stringify(ops, null, 2);
+      $("footerTs").textContent = "Last poll " + new Date().toISOString() + " · /api/ops/full";
     } catch (e) {
-      $("copilotSpeak").textContent = "Co-Pilot offline: " + e.message;
+      $("footerTs").textContent = "Error: " + e.message;
     }
   }
 
-  async function refresh(runMatrix) {
-    try {
-      const url = "/api/tester/full" + (runMatrix ? "?matrix=1" : "");
-      const full = await fetchJson(url);
-      lastFull = full;
-      updateHeader(full);
-      const grid = $("subGrid");
-      grid.textContent = "";
-      const subs = (full.snapshot && full.snapshot.subsystems) || [];
-      for (const s of subs) grid.appendChild(renderCard(s));
-      if (full.matrix) renderMatrix(full.matrix);
-      $("rawJson").textContent = JSON.stringify(full, null, 2);
-      $("footerTs").textContent = "Last poll: " + new Date().toISOString();
-    } catch (e) {
-      $("footerTs").textContent = "Poll error: " + e.message;
-    }
-  }
-
-  function startPoll() {
-    if (pollTimer) clearInterval(pollTimer);
-    pollTimer = setInterval(() => refresh(false), POLL_MS);
-  }
-
-  $("btnRefresh").addEventListener("click", () => { refresh(true); loadCopilot(); });
+  $("btnRefresh").addEventListener("click", refresh);
   $("btnCopilotAsk").addEventListener("click", async () => {
-    const q = ($("copilotQuery").value || "").trim() || "what holds it together";
+    const q = ($("copilotQuery").value || "").trim() || "what holds weapons and trust together";
     try {
       const r = await fetchJson("/api/copilot/ask?q=" + encodeURIComponent(q));
       $("copilotAnswer").textContent = r.answer || "—";
@@ -190,27 +237,18 @@
       $("copilotAnswer").textContent = e.message;
     }
   });
-  $("copilotQuery").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") $("btnCopilotAsk").click();
-  });
-  $("btnMatrix").addEventListener("click", async () => {
-    const m = await fetchJson("/api/tester/matrix");
-    renderMatrix(m);
-  });
+  $("copilotQuery").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btnCopilotAsk").click(); });
   $("btnPoll").addEventListener("click", () => {
     if (pollTimer) {
       clearInterval(pollTimer);
       pollTimer = null;
       $("btnPoll").textContent = "Start poll";
     } else {
-      startPoll();
+      pollTimer = setInterval(refresh, POLL_MS);
       $("btnPoll").textContent = "Stop poll";
     }
   });
 
-  refresh(true);
-  loadCopilot();
-  startPoll();
-  setInterval(loadCopilot, POLL_MS);
-  $("btnPoll").textContent = "Stop poll";
+  refresh();
+  pollTimer = setInterval(refresh, POLL_MS);
 })();

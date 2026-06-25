@@ -30,11 +30,19 @@ Base: `http://127.0.0.1:9479` · OpenAPI-style reference · **Not MPEG**
 | GET | `/api/copilot/ask?q=…` | Route query to foundational truths |
 | POST | `/api/copilot/ask` | `{"query":"what holds trust together?"}` |
 
+## Field Ops dashboard (single UI)
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/ops` | Unified Field Ops UI — AI/robotics first, all weapons |
+| GET | `/api/ops/full` | Full ops payload (8 sections + matrix + co-pilot) |
+| GET | `/tester` | Alias → Field Ops UI |
+
 ## Internal tester (1.0)
 
 | Method | Path | Description |
 |--------|------|-------------|
-| GET | `/tester` | Internal tester UI |
+| GET | `/tester` | Field Ops UI (same as `/ops`) |
 | GET | `/api/tester/snapshot` | Live subsystem snapshot |
 | GET | `/api/tester/matrix` | Release test matrix |
 | GET | `/api/tester/full?matrix=1` | Snapshot + matrix |

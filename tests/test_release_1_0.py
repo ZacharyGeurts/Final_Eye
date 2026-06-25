@@ -103,6 +103,16 @@ def test_copilot_foundations():
     assert ask.get("answer")
 
 
+def test_ops_dashboard_full():
+    from zocr_tester import ops_dashboard
+    ops = ops_dashboard(include_matrix=False)
+    assert ops.get("schema") == "final-eye-ops-dashboard/v1"
+    assert ops.get("priority", [])[0] == "robotics"
+    weapons = (ops.get("sections") or {}).get("weapons", {}).get("data", {})
+    assert len(weapons.get("weapons") or []) >= 37
+    assert weapons.get("threat_weapon_map")
+
+
 def test_tester_snapshot_schema():
     from zocr_tester import tester_snapshot
     snap = tester_snapshot()
@@ -119,6 +129,7 @@ def main() -> int:
         test_grok16_field_opt,
         test_war_dishes_cycles,
         test_copilot_foundations,
+        test_ops_dashboard_full,
         test_tester_snapshot_schema,
     ]
     failed = 0

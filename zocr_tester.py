@@ -381,7 +381,7 @@ def tester_matrix(*, persist: bool = True) -> dict[str, Any]:
 
 def tester_full(*, run_matrix: bool = True) -> dict[str, Any]:
     snap = tester_snapshot()
-    matrix = tester_matrix() if run_matrix else None
+    matrix = tester_matrix(persist=False) if run_matrix else None
     all_ok = matrix and matrix.get("passed") == matrix.get("total")
     return {
         "schema": "final-eye-tester-full/v1",
@@ -389,6 +389,163 @@ def tester_full(*, run_matrix: bool = True) -> dict[str, Any]:
         "release_ready": bool(all_ok and snap.get("summary", {}).get("health_pct", 0) >= 80),
         "snapshot": snap,
         "matrix": matrix,
+        "ops": ops_dashboard(include_matrix=False),
+    }
+
+
+def _load_entity_state() -> dict[str, Any]:
+    path = _ROOT / "data" / "entity-eyeball-state.json"
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _recent_forward(n: int = 8) -> list[dict[str, Any]]:
+    ledger = _ROOT / "data" / "truth-forward-ledger.jsonl"
+    if not ledger.is_file():
+        return []
+    try:
+        lines = ledger.read_text(encoding="utf-8").strip().splitlines()[-n:]
+        return [json.loads(ln) for ln in lines if ln.strip()]
+    except (OSError, json.JSONDecodeError):
+        return []
+
+
+def ops_dashboard(*, include_matrix: bool = True) -> dict[str, Any]:
+    """Single unified ops payload — AI & robotics first, all details."""
+    product = product_info()
+
+    def _section(name: str, fn: Callable[[], dict[str, Any]]) -> dict[str, Any]:
+        t0 = time.perf_counter()
+        data = _safe(fn, {})
+        return {
+            "id": name,
+            "ok": not (isinstance(data, dict) and data.get("error")),
+            "latency_ms": round((time.perf_counter() - t0) * 1000, 2),
+            "data": data,
+        }
+
+    sections: dict[str, Any] = {}
+
+    sections["robotics"] = _section("robotics", lambda: {
+        "doctrine": __import__("zocr_robotics", fromlist=["robotics_doctrine"]).robotics_doctrine(),
+        "final_eyeball": __import__("zocr_eye", fromlist=["final_eyeball_status"]).final_eyeball_status(),
+        "final_modes": __import__("zocr_eye", fromlist=["list_final_modes"]).list_final_modes(),
+        "eye": __import__("zocr_eye", fromlist=["eye_status"]).eye_status(),
+        "rig": __import__("zocr_stereo", fromlist=["rig_status"]).rig_status(),
+        "rig_presets": __import__("zocr_stereo", fromlist=["list_presets"]).list_presets(),
+        "stream": __import__("zocr_stream", fromlist=["stream_status"]).stream_status(),
+        "video": __import__("zocr_video", fromlist=["video_status"]).video_status(),
+        "video_format": __import__("zocr_video", fromlist=["format_doctrine"]).format_doctrine(),
+        "contract": __import__("zocr_contract", fromlist=["contract_status"]).contract_status(),
+        "benchmark": _load_benchmark_cache().get("summary"),
+        "arm_endpoints": {
+            "war": 'POST /api/robotics/arm {"mode":"war","start_stream":false}',
+            "dishes": 'POST /api/robotics/arm {"mode":"dishes"}',
+            "tune": 'POST /api/video/tune {"fps":8,"width":1280}',
+            "ai_tune": "POST /api/video/ai-tune",
+        },
+    })
+
+    sections["ai"] = _section("ai", lambda: {
+        "grok16": __import__("zocr_grok16", fromlist=["grok16_status"]).grok16_status(),
+        "grok16_tune_war": __import__("zocr_grok16", fromlist=["grok16_eye_tune"]).grok16_eye_tune(mode="war", eye_profile="raptor"),
+        "grok16_tune_patrol": __import__("zocr_grok16", fromlist=["grok16_eye_tune"]).grok16_eye_tune(mode="patrol", eye_profile="bird"),
+        "field_compiler": __import__("zocr_field_compiler", fromlist=["field_compiler_status"]).field_compiler_status(),
+        "compiler_probe": __import__("zocr_field_compiler", fromlist=["probe_compilers"]).probe_compilers(),
+        "neural": __import__("zocr_neural", fromlist=["neural_status"]).neural_status(),
+        "neural_verify": __import__("zocr_neural", fromlist=["verify_network_seal"]).verify_network_seal(),
+        "grkmf": (lambda g=__import__("zocr_grkmf", fromlist=["grkmf"]).grkmf: {
+            "format": g.FORMAT_ID,
+            "codec": g.CODEC_ID,
+        })(),
+        "ai_context": __import__("zocr_ai", fromlist=["ai_context"]).ai_context(),
+        "robotics_context": __import__("zocr_ai", fromlist=["robotics_context"]).robotics_context(),
+    })
+
+    sections["weapons"] = _section("weapons", lambda: {
+        "racks": __import__("zocr_entity_eyeball", fromlist=["entity_weapon_racks"]).entity_weapon_racks(),
+        "weapons": __import__("zocr_entity_eyeball", fromlist=["entity_weapons"]).entity_weapons(),
+        "doctrine": __import__("zocr_entity_eyeball", fromlist=["entity_doctrine"]).entity_doctrine(),
+        "state": _load_entity_state(),
+        "threat_weapon_map": (
+            __import__("zocr_entity_eyeball", fromlist=["load_entity_spec"]).load_entity_spec().get("forward", {}).get("threat_weapon_map")
+        ),
+        "lie_markers": (
+            __import__("zocr_entity_eyeball", fromlist=["load_entity_spec"]).load_entity_spec().get("forward", {}).get("lie_markers")
+        ),
+        "fire_endpoint": 'POST /api/eye/weapons/fire {"weapon":"hell_rip","threat":"trust_breach"}',
+        "weaponize_endpoint": 'POST /api/eye/weaponize {"mode":"war"}',
+    })
+
+    sections["entity"] = _section("entity", lambda: {
+        "twins": __import__("zocr_entity_eyeball", fromlist=["twin_eyeball_status"]).twin_eyeball_status(),
+        "living": __import__("zocr_entity_eyeball", fromlist=["living_eyeball_status"]).living_eyeball_status(),
+        "truth": __import__("zocr_entity_eyeball", fromlist=["truth_eyeball_status"]).truth_eyeball_status(),
+        "recent_forward": _recent_forward(),
+        "sovereign_redundancy": __import__("zocr_sovereign_time", fromlist=["eyeball_time_and_redundancy"]).eyeball_time_and_redundancy(seal=False),
+    })
+
+    sections["vision"] = _section("vision", lambda: {
+        "preserve": __import__("zocr_preserve", fromlist=["preserve_status"]).preserve_status(),
+        "preserve_doctrine": __import__("zocr_preserve", fromlist=["threat_doctrine"]).threat_doctrine(),
+        "offense": __import__("zocr_offense", fromlist=["offense_status"]).offense_status(),
+        "offense_doctrine": __import__("zocr_offense", fromlist=["offense_doctrine"]).offense_doctrine(),
+        "pattern": __import__("zocr_pattern", fromlist=["pattern_status"]).pattern_status(),
+        "pattern_doctrine": __import__("zocr_pattern", fromlist=["pattern_doctrine"]).pattern_doctrine(),
+        "vigilance": __import__("zocr_vigilance", fromlist=["vigilance_status"]).vigilance_status(),
+        "additives": __import__("zocr_additives", fromlist=["additives_status"]).additives_status(),
+        "spectrum": __import__("zocr_eye", fromlist=["spectrum_doctrine"]).spectrum_doctrine(),
+        "ocular_profiles": __import__("zocr_eye", fromlist=["list_profiles"]).list_profiles(),
+        "session": __import__("zocr_status", fromlist=["live_status"]).live_status(),
+    })
+
+    sections["truth"] = _section("truth", lambda: {
+        "heaven_hell": __import__("zocr_heaven_hell", fromlist=["heaven_hell_truth_status"]).heaven_hell_truth_status(),
+        "trust": __import__("zocr_trust", fromlist=["trust_network_status"]).trust_network_status(),
+        "trust_mesh": __import__("zocr_trust", fromlist=["verify_trust_mesh"]).verify_trust_mesh(),
+        "hostess7": __import__("zocr_trust", fromlist=["hostess7_bridge"]).hostess7_bridge(),
+        "copilot": __import__("zocr_copilot", fromlist=["copilot_status"]).copilot_status(),
+    })
+
+    sections["field"] = _section("field", lambda: {
+        "mandate": __import__("zocr_field", fromlist=["load_mandate"]).load_mandate(),
+        "chain_verify": __import__("zocr_field", fromlist=["verify_chain"]).verify_chain(),
+        "kill": __import__("zocr_kill", fromlist=["kill_status"]).kill_status(),
+        "security": __import__("zocr_security", fromlist=["security_status"]).security_status(),
+        "code_seal": __import__("zocr_security", fromlist=["verify_code_seal"]).verify_code_seal(),
+        "gvc1": __import__("zocr_security", fromlist=["verify_gvc1_integrity"]).verify_gvc1_integrity(),
+        "sovereign_time": __import__("zocr_sovereign_time", fromlist=["sovereign_time_status"]).sovereign_time_status(seal=False),
+        "hud": __import__("zocr_hud", fromlist=["hud_status"]).hud_status(),
+        "hud_modules": __import__("zocr_hud", fromlist=["list_modules"]).list_modules(),
+    })
+
+    sections["integration"] = _section("integration", lambda: {
+        "zac": __import__("zocr_zac", fromlist=["zac_status"]).zac_status(),
+        "hostess7_root": str(Path(os.environ.get("HOSTESS7_ROOT", str(_ROOT.parent / "Hostess7")))),
+        "hostess7_script": (Path(os.environ.get("HOSTESS7_ROOT", str(_ROOT.parent / "Hostess7"))) / "Hostess7.sh").is_file(),
+        "queen_root": str(Path(os.environ.get("QUEEN_ROOT", str(_ROOT.parent / "NewLatest" / "Queen")))),
+        "grok16_root": str(Path(os.environ.get("GROK16_ROOT", str(_ROOT.parent / "Grok16")))),
+        "environment": _environment(),
+    })
+
+    priority = ["robotics", "ai", "weapons", "entity", "vision", "truth", "field", "integration"]
+    ok_n = sum(1 for k in priority if sections.get(k, {}).get("ok"))
+
+    return {
+        "schema": "final-eye-ops-dashboard/v1",
+        "ts": _ts(),
+        "product": product,
+        "priority": priority,
+        "summary": {
+            "sections_ok": ok_n,
+            "sections_total": len(priority),
+            "health_pct": round(100 * ok_n / len(priority), 1),
+        },
+        "sections": {k: sections[k] for k in priority if k in sections},
+        "matrix": tester_matrix(persist=False) if include_matrix else None,
+        "copilot_hold": __import__("zocr_copilot", fromlist=["hold_together"]).hold_together(),
     }
 
 
@@ -400,6 +557,9 @@ def main() -> int:
         return 0
     if cmd == "matrix":
         print(json.dumps(tester_matrix(), indent=2))
+        return 0
+    if cmd == "ops":
+        print(json.dumps(ops_dashboard(), indent=2))
         return 0
     print(json.dumps(tester_full(), indent=2))
     return 0

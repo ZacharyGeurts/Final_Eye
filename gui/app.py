@@ -78,7 +78,7 @@ from zocr_field_compiler import (  # noqa: E402
     probe_compilers,
 )
 from zocr_grok16 import grok16_status  # noqa: E402
-from zocr_tester import tester_full, tester_matrix, tester_snapshot  # noqa: E402
+from zocr_tester import ops_dashboard, tester_full, tester_matrix, tester_snapshot  # noqa: E402
 from zocr_copilot import copilot_ask, copilot_doctrine, copilot_status, hold_together  # noqa: E402
 from zocr_zac import pack_vision_artifacts, restore_vision_artifacts, zac_self_test, zac_status  # noqa: E402
 from zocr_security import (  # noqa: E402
@@ -203,7 +203,7 @@ class Handler(BaseHTTPRequestHandler):
         if path in ("/", "/index.html", "/live", "/stream"):
             self._send_bytes((WEB / "index.html").read_bytes(), mime="text/html; charset=utf-8", cache="no-store")
             return
-        if path in ("/tester", "/tester.html"):
+        if path in ("/tester", "/tester.html", "/ops", "/ops.html"):
             self._send_bytes((WEB / "tester.html").read_bytes(), mime="text/html; charset=utf-8", cache="no-store")
             return
         if path.startswith("/") and path.lstrip("/") in TESTER_STATIC:
@@ -295,6 +295,10 @@ class Handler(BaseHTTPRequestHandler):
             run_matrix = (qs.get("matrix", ["1"])[0] or "1").strip().lower() not in ("0", "false", "no")
             self._send_json(HTTPStatus.OK, tester_full(run_matrix=run_matrix))
             return
+        if path in ("/api/ops", "/api/ops/full"):
+            self._send_json(HTTPStatus.OK, ops_dashboard())
+            return
+
         if path == "/api/copilot":
             self._send_json(HTTPStatus.OK, copilot_status())
             return
