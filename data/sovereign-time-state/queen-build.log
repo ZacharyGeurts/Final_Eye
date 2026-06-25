@@ -1,0 +1,16 @@
+[2026-06-25T12:47:54Z] FORGE START compiler_probe
+[2026-06-25T12:47:54Z] === forge:compiler_probe (Grok16 unified @ 16.1.1) ===
+[2026-06-25T12:47:54Z]   profile: field_opt unified=True
+[2026-06-25T12:47:54Z]   bash: /usr/bin/bash
+[2026-06-25T12:47:54Z]   cmake: /usr/bin/cmake
+[2026-06-25T12:47:54Z]   g++16: /home/default/Desktop/SG/Grok16/bin/g++16
+[2026-06-25T12:47:54Z]   g16: /home/default/Desktop/SG/Grok16/bin/g16
+[2026-06-25T12:47:54Z]   git: /usr/bin/git
+[2026-06-25T12:47:54Z]   glslc: /usr/local/bin/glslc
+[2026-06-25T12:47:54Z]   ld: /usr/bin/ld
+[2026-06-25T12:47:54Z]   make: /usr/bin/make
+[2026-06-25T12:47:54Z]   ninja: /home/default/.local/bin/ninja
+[2026-06-25T12:47:54Z]   python3: /usr/bin/python3
+[2026-06-25T12:47:54Z]   wrote g16-toolchain.json
+[2026-06-25T12:47:54Z]   WARN installed 16.0.0 → target 16.1.1; run: G16_RELEASE_PROFILE=1 bash Grok16/scripts/grok16-toolchain.sh rebuild
+[2026-06-25T12:47:54Z] FORGE END compiler_probe ok=True

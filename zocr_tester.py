@@ -168,6 +168,19 @@ def _zac_probe() -> dict[str, Any]:
     return zac_status()
 
 
+def _copilot_probe() -> dict[str, Any]:
+    from zocr_copilot import copilot_status
+    c = copilot_status()
+    hold = c.get("hold") or {}
+    return {
+        "integrity_pct": hold.get("integrity_pct"),
+        "structure_held": hold.get("structure_held"),
+        "sources_ok": hold.get("sources_ok"),
+        "sources_total": hold.get("sources_total"),
+        "speak": (c.get("speak") or "")[:120],
+    }
+
+
 def _environment() -> dict[str, Any]:
     return {
         "python": platform.python_version(),
@@ -197,6 +210,7 @@ def tester_snapshot(*, include_slow: bool = False) -> dict[str, Any]:
         _subsystem("zac", _zac_probe),
         _subsystem("hostess7", _hostess7_probe),
         _subsystem("queen", _queen_probe),
+        _subsystem("copilot", _copilot_probe),
     ]
     ok_count = sum(1 for s in subsystems if s.get("ok"))
     return {

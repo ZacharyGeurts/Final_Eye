@@ -33,7 +33,7 @@
 <body>
   <header>
     <h1>ZOCR · Field Robotics Vision</h1>
-    <div class="sub" id="meta">ZOCRSM1 sub-micron video · WRDT seals · adaptive tide · <a href="/tester" style="color:var(--accent)">Internal Tester 1.0</a></div>
+    <div class="sub" id="meta">ZOCRSM1 sub-micron video · WRDT seals · <a href="/tester" style="color:var(--accent)">Tester</a> · <span id="copilotHint"></span></div>
   </header>
   <div id="hudBar" aria-label="HUD module bar"></div>
   <main>
@@ -318,6 +318,14 @@
       document.getElementById('feed').innerHTML = (s.recent || []).slice(0, 12).map(r =>
         `<div class="row">${r.ts} · <strong>${r.action}</strong> · ${r.profile || r.source || ''} · ${r.power || ''}</div>`
       ).join('') || '<div class="row">No events yet.</div>';
+      try {
+        const cr = await fetch('/api/copilot/hold', {cache:'no-store'});
+        if (cr.ok) {
+          const ch = await cr.json();
+          const hint = document.getElementById('copilotHint');
+          if (hint) hint.textContent = 'Co-Pilot: ' + (ch.integrity_pct || '—') + '% held · ' + (ch.speak || '').slice(0, 60);
+        }
+      } catch (_) {}
     }
 
     document.getElementById('viewBtn').onclick = startMjpeg;

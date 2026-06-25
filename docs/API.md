@@ -19,6 +19,17 @@ Base: `http://127.0.0.1:9479` · OpenAPI-style reference · **Not MPEG**
 | GET | `/api/health` | Liveness |
 | GET | `/api/status` | Live session status |
 
+## Co-Pilot — foundational truths
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/copilot` | Full status + hold-together report |
+| GET | `/api/copilot/hold` | Structural integrity — what holds it together |
+| GET | `/api/copilot/foundations` | All 14 foundational sources + live probe |
+| GET | `/api/copilot/doctrine` | Foundations manifest |
+| GET | `/api/copilot/ask?q=…` | Route query to foundational truths |
+| POST | `/api/copilot/ask` | `{"query":"what holds trust together?"}` |
+
 ## Internal tester (1.0)
 
 | Method | Path | Description |

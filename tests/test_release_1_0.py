@@ -88,6 +88,21 @@ def test_war_dishes_cycles():
     assert w.get("weapons_total", 0) >= 37
 
 
+def test_copilot_foundations():
+    from zocr_copilot import copilot_ask, copilot_status, hold_together, load_foundations
+
+    spec = load_foundations()
+    assert len(spec.get("sources") or []) >= 12
+    hold = hold_together()
+    assert hold.get("integrity_pct", 0) >= 50
+    assert "pillars" in hold
+    st = copilot_status()
+    assert st.get("schema") == "final-eye-copilot/v1"
+    ask = copilot_ask("what holds the code seal and trust mesh together")
+    assert ask.get("ok") is True
+    assert ask.get("answer")
+
+
 def test_tester_snapshot_schema():
     from zocr_tester import tester_snapshot
     snap = tester_snapshot()
@@ -103,6 +118,7 @@ def main() -> int:
         test_zac_roundtrip,
         test_grok16_field_opt,
         test_war_dishes_cycles,
+        test_copilot_foundations,
         test_tester_snapshot_schema,
     ]
     failed = 0

@@ -1,14 +1,15 @@
 {
   "schema": "zocr-code-seal/v1",
   "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
-  "ts": "2026-06-25T12:44:41.305343+00:00",
+  "ts": "2026-06-25T12:47:51.165009+00:00",
   "files": {
-    "gui/app.py": "7b2288a9ae52559f45d563a52dba2f28c895c6af842af8d43dc695ebccb971fd",
+    "gui/app.py": "e9af2b3ca00742ee61f4149cf40f49f4d5060b4d47558adec69b962c6d00a287",
     "zocr.py": "28bc7afdf1f099196e5f9d134a060a70d95af3b8623ad5da9de5b7f65480b802",
     "zocr_additives.py": "4ca1812ebd23184f1e9878ca5989ee12222c5e8c5fddad32381c19101a6f7074",
     "zocr_ai.py": "6055049d14fa36a5649d9fb54f6c591156601260c14fd491bfa56d2dd036765a",
     "zocr_capture.py": "4ec625a9e8d66f1d9d76bba338b5e750f52a1760ca8c92070652365264222b9f",
     "zocr_contract.py": "d1d2824dd00a9658886e669f69084604cb380d2497bb731af545ea9552daabad",
+    "zocr_copilot.py": "36d0d57c8f2467df0f510ada8f54ab42838dfca6dda6f3335b0df5535e8bf1ba",
     "zocr_entity_eyeball.py": "e32f251351bca26aa183dd29aef1f21031d52a7ea618247b8a5e784b24da2d1f",
     "zocr_eye.py": "8690849ee936de71ea11a613f425577ce7b723063977a0c3a0e300b244837fad",
     "zocr_field.py": "a253f223ee42133a3315989fdf733868007c865e33257630240d77a65695864c",
@@ -16,7 +17,7 @@
     "zocr_grkmf.py": "1238cfa0e9814c661abf2ac865872cad12f81f8ec4d633a2cd52a674d550f7d8",
     "zocr_grok16.py": "977d6c769029976b732e2d457abd156918859f45cf1968bb66acbe0b80a70eb4",
     "zocr_heaven_hell.py": "f8faf0c5f5440ed8e8fb7f3befb02ba0c0717eb8e80651d7e7d5642f2c1c337b",
-    "zocr_hud.py": "67560bcb9be8e6729525cde27fe21bd143391b228545601e5f4ac35ef59a1982",
+    "zocr_hud.py": "a8af61a2cfe5257060bcc335c6e3159afc1dcf39be8ad62e84c23a57f1b93b54",
     "zocr_kill.py": "73fc1a01aecdf173009dad8ac2fccbb750f3a339008077b4c784bc69dcfa62a1",
     "zocr_neural.py": "36e9c101fc98e71043742161797116e0f4d27c7a80223b7704c5959487176fd5",
     "zocr_offense.py": "e1741956992098a700243d5aa5a0b377546beeddb57e46d1353c6c94fd8503d0",
@@ -30,7 +31,7 @@
     "zocr_status.py": "7ac85dd0cf1982ed0111a1b400e7c25c282b6c83b9945a778ffc1602d048c5a4",
     "zocr_stereo.py": "20736b06bdab4c0978a858936c2cdf77851cf0b2c875372d37e099244a943bbb",
     "zocr_stream.py": "d455f2f446aafeac990d06ffbfe45adbc6af28075de60a6d3b5e1cb1a1974dd8",
-    "zocr_tester.py": "234224ed48f4e5051433fe447b800480e3239f322be01cdab4d11846541c926c",
+    "zocr_tester.py": "0c0a5441f7f711cbfb696fbba0b9e9f93e58d5a98fe1c94fbe3f5aac95720b76",
     "zocr_trust.py": "5a78b80590e4158f6b2fbe4f2d2febcf9315c2495f790771c4043383798d9c7a",
     "zocr_video.py": "a6df6773687d330614d4250fabfea5fa77e25273dd99694f52580bc93ee6f94f",
     "zocr_vigilance.py": "08394a7beb61cc75dd94e96b722dd77d5e623ed5faf78d2d484bb32a33880059",
@@ -38,7 +39,7 @@
     "zocr_watch.py": "58877772d022d4fd1e8abf500e09e185f87ff800e4685e73c34b47250660d3b7",
     "zocr_zac.py": "536ec66b8cf4a1905ab5d1b9e69564121bcc932f85c7a883efdb48d0cafc3031"
   },
-  "file_count": 34,
-  "root_seal": "4c13663bf87acfe63a6a447f76c9c4ed67c0398abe46116a2f989ea2e8a8413c",
+  "file_count": 35,
+  "root_seal": "68503058c8f7338cde2d43f33d607e41fd06c812fdee4586e0ac865032222d21",
   "rule": "All ZOCR entry points verify this seal before protected operations"
 }

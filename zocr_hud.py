@@ -248,6 +248,19 @@ def _module_field_compiler() -> dict[str, Any]:
     }
 
 
+def _module_copilot_foundations() -> dict[str, Any]:
+    from zocr_copilot import copilot_status
+    c = copilot_status()
+    hold = c.get("hold") or {}
+    return {
+        "integrity": hold.get("integrity_pct"),
+        "held": hold.get("structure_held"),
+        "ok": hold.get("sources_ok"),
+        "total": hold.get("sources_total"),
+        "speak": (c.get("speak") or "")[:80],
+    }
+
+
 def _module_heaven_hell_truth() -> dict[str, Any]:
     from zocr_heaven_hell import heaven_hell_truth_status
     doc = heaven_hell_truth_status()
@@ -425,6 +438,7 @@ _FETCHERS: dict[str, Any] = {
     "look_radar": _module_look_radar,
     "field_compiler": _module_field_compiler,
     "heaven_hell_truth": _module_heaven_hell_truth,
+    "copilot_foundations": _module_copilot_foundations,
 }
 
 

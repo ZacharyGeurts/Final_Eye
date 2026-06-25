@@ -186,6 +186,15 @@
       "actions": ["enable", "disable", "toggle", "focus"],
       "describe": "Grok16 G16 + FIELDC v4 — Queen forge compiler_probe"
     },
+    "copilot_foundations": {
+      "label": "Co-Pilot",
+      "kind": "meter",
+      "group": "truth",
+      "api": "/api/copilot",
+      "default": true,
+      "actions": ["enable", "disable", "toggle", "focus"],
+      "describe": "Foundational truths — what holds the structure together"
+    },
     "heaven_hell_truth": {
       "label": "Truth·H/H",
       "kind": "meter",

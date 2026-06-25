@@ -1,0 +1,174 @@
+{
+  "schema": "final-eye-copilot-foundations/v1",
+  "title": "Co-Pilot — instant sources of truth",
+  "motto": "Foundationals first. Structures hold when truths corroborate — never a single path alone.",
+  "hold_rule": "What holds Final_Eye together: mandate genesis → sealed code → chained frames → woven trust → sovereign witness → truth forward → one whole kill authority.",
+  "sources": [
+    {
+      "id": "mandate",
+      "layer": "genesis",
+      "title": "Field mandate",
+      "truth": "ZOCR_FIELD_ROBOTICS_MANDATE_v1 — sovereign vision doctrine",
+      "holds": "Every protected op knows why it exists; egress, flash, offense rules",
+      "spec": "data/zocr-field-mandate.json",
+      "module": "zocr_field.py",
+      "api": "/api/mandate",
+      "label": "doctrine"
+    },
+    {
+      "id": "code_seal",
+      "layer": "integrity",
+      "title": "Code seal",
+      "truth": "SHA-256 manifest of all zocr*.py — tamper evident before look/stream",
+      "holds": "Code cannot drift under operator feet mid-mission",
+      "spec": "data/code-seal.json",
+      "module": "zocr_security.py",
+      "api": "/api/security/verify",
+      "label": "implemented"
+    },
+    {
+      "id": "hash_chain",
+      "layer": "integrity",
+      "title": "Frame hash chain",
+      "truth": "WRDT-inspired seal chain on stream frames",
+      "holds": "Vision transport cannot swap frames silently",
+      "spec": "data/stream-chain.json",
+      "module": "zocr_field.py",
+      "api": "/api/stream/verify",
+      "label": "implemented"
+    },
+    {
+      "id": "gvc1_codec",
+      "layer": "integrity",
+      "title": "GVC1 / GRKMF1",
+      "truth": "Proprietary envelope — not MPEG",
+      "holds": "Media layer stays sovereign; tamper rejected at unpack",
+      "spec": "GrokMediaFormat/grkmf/envelope.py",
+      "module": "zocr_security.py",
+      "api": "/api/security/gvc1",
+      "label": "implemented"
+    },
+    {
+      "id": "sovereign_time",
+      "layer": "witness",
+      "title": "Sovereign time",
+      "truth": "Sealed monotonic witness — micron pulse receipts",
+      "holds": "Time cannot be gaslit; eyeball always timestamps truth",
+      "spec": "data/eyeball-sovereign-time.json",
+      "module": "zocr_sovereign_time.py",
+      "api": "/api/hud/module/sovereign_clock",
+      "label": "measured"
+    },
+    {
+      "id": "trust_mesh",
+      "layer": "corroboration",
+      "title": "IRTN trust mesh",
+      "truth": "Interwoven redundancies — Hostess7 corroborates ZOCR vision",
+      "holds": "No single path owns truth; woven paths quorum",
+      "spec": "data/zocr-trust-network.json",
+      "module": "zocr_trust.py",
+      "api": "/api/trust/mesh",
+      "label": "implemented"
+    },
+    {
+      "id": "truth_doctrine",
+      "layer": "truth",
+      "title": "Truth doctrine",
+      "truth": "94% noise · 6% signal — truth gates before adapt",
+      "holds": "Honesty default; lies detected before spread",
+      "spec": "data/heaven-hell-truth.json",
+      "module": "zocr_heaven_hell.py",
+      "api": "/api/eye/truth/doctrine",
+      "label": "doctrine"
+    },
+    {
+      "id": "heaven_hell",
+      "layer": "truth",
+      "title": "Heaven / Hell gate",
+      "truth": "Hell first — heaven passes at zero cost, no friendly fire",
+      "holds": "Hostility sorted before strike; Veritas weapons armed",
+      "spec": "data/heaven-hell-truth.json",
+      "module": "zocr_heaven_hell.py",
+      "api": "/api/eye/heaven-hell",
+      "label": "doctrine"
+    },
+    {
+      "id": "kill_authority",
+      "layer": "authority",
+      "title": "One whole kill",
+      "truth": "Kill switches at choke points only — eyes protected",
+      "holds": "Operator can always disengage; no redundant guards",
+      "spec": "data/kill-state.json",
+      "module": "zocr_kill.py",
+      "api": "/api/kill",
+      "label": "implemented"
+    },
+    {
+      "id": "twin_eyeballs",
+      "layer": "entity",
+      "title": "Twin entity eyeballs",
+      "truth": "Vita lives · Veritas always forward",
+      "holds": "Living perceive + truth strike in one socket",
+      "spec": "data/entity-eyeball.json",
+      "module": "zocr_entity_eyeball.py",
+      "api": "/api/eye/twins",
+      "label": "implemented"
+    },
+    {
+      "id": "field_compiler",
+      "layer": "build",
+      "title": "Grok16 field compiler",
+      "truth": "G16 @ gnu++26 — field_opt primary; Queen forge sub-layer",
+      "holds": "Vision kernels compile against real toolchain truth",
+      "spec": "data/field-compiler.json",
+      "module": "zocr_field_compiler.py",
+      "api": "/api/field/compiler",
+      "label": "implemented"
+    },
+    {
+      "id": "assist_contract",
+      "layer": "bounded",
+      "title": "Assist contract",
+      "truth": "One tenant — bounded slots, no overflow",
+      "holds": "Shared system never overdrawn; robotics stays assistive",
+      "spec": "zocr_contract.py",
+      "module": "zocr_contract.py",
+      "api": "/api/hud/module/contract_budget",
+      "label": "implemented"
+    },
+    {
+      "id": "preserve_cascade",
+      "layer": "vision",
+      "title": "Preserve cascade",
+      "truth": "Confidence always in Vision — never presume vision loss",
+      "holds": "RF jam / blackout failovers; last-good vault",
+      "spec": "data/preserve/",
+      "module": "zocr_preserve.py",
+      "api": "/api/preserve/status",
+      "label": "implemented"
+    },
+    {
+      "id": "pattern_weave",
+      "layer": "vision",
+      "title": "Pattern weave",
+      "truth": "Provenance stamped — foreign patterns rejected",
+      "holds": "Injected grid/moiré cannot enter vault as real",
+      "spec": "data/zocr-pattern-registry.json",
+      "module": "zocr_pattern.py",
+      "api": "/api/pattern",
+      "label": "implemented"
+    }
+  ],
+  "structure_layers": [
+    {"order": 0, "id": "genesis", "label": "Genesis — mandate + product"},
+    {"order": 1, "id": "integrity", "label": "Integrity — seal + chain + codec"},
+    {"order": 2, "id": "witness", "label": "Witness — sovereign time"},
+    {"order": 3, "id": "corroboration", "label": "Corroboration — IRTN mesh"},
+    {"order": 4, "id": "truth", "label": "Truth — doctrine + heaven/hell"},
+    {"order": 5, "id": "authority", "label": "Authority — one whole kill"},
+    {"order": 6, "id": "entity", "label": "Entity — twin eyeballs"},
+    {"order": 7, "id": "build", "label": "Build — Grok16 compiler"},
+    {"order": 8, "id": "bounded", "label": "Bounded — assist contract"},
+    {"order": 9, "id": "vision", "label": "Vision — preserve + pattern"}
+  ]
+}

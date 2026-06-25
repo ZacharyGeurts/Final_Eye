@@ -79,6 +79,7 @@ from zocr_field_compiler import (  # noqa: E402
 )
 from zocr_grok16 import grok16_status  # noqa: E402
 from zocr_tester import tester_full, tester_matrix, tester_snapshot  # noqa: E402
+from zocr_copilot import copilot_ask, copilot_doctrine, copilot_status, hold_together  # noqa: E402
 from zocr_zac import pack_vision_artifacts, restore_vision_artifacts, zac_self_test, zac_status  # noqa: E402
 from zocr_security import (  # noqa: E402
     decrypt_stream_payload,
@@ -293,6 +294,23 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/tester/full":
             run_matrix = (qs.get("matrix", ["1"])[0] or "1").strip().lower() not in ("0", "false", "no")
             self._send_json(HTTPStatus.OK, tester_full(run_matrix=run_matrix))
+            return
+        if path == "/api/copilot":
+            self._send_json(HTTPStatus.OK, copilot_status())
+            return
+        if path == "/api/copilot/hold":
+            self._send_json(HTTPStatus.OK, hold_together())
+            return
+        if path == "/api/copilot/foundations":
+            from zocr_copilot import all_foundational_sources
+            self._send_json(HTTPStatus.OK, {"ok": True, "sources": all_foundational_sources()})
+            return
+        if path == "/api/copilot/doctrine":
+            self._send_json(HTTPStatus.OK, copilot_doctrine())
+            return
+        if path == "/api/copilot/ask":
+            q = (qs.get("q", [""])[0] or qs.get("query", [""])[0] or "").strip()
+            self._send_json(HTTPStatus.OK, copilot_ask(q or "what holds it together"))
             return
         if path == "/api/zac/status":
             self._send_json(HTTPStatus.OK, zac_status())
@@ -546,6 +564,10 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": "path_required"})
                 return
             self._send_json(HTTPStatus.OK, restore_vision_artifacts(zpath))
+            return
+        if path == "/api/copilot/ask":
+            q = str(body.get("query") or body.get("q") or "what holds it together").strip()
+            self._send_json(HTTPStatus.OK, copilot_ask(q))
             return
         if path == "/api/vigilance/start":
             if self._enforce("vigilance_start"):

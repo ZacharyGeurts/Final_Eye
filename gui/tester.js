@@ -117,6 +117,46 @@
     return r.json();
   }
 
+  function renderCopilot(copilot) {
+    if (!copilot) return;
+    const hold = copilot.hold || {};
+    const pct = hold.integrity_pct || 0;
+    const el = $("copilotIntegrity");
+    el.textContent = pct + "% held";
+    el.className = "copilot-integrity" + (pct >= 90 ? "" : pct >= 75 ? " warn" : " fail");
+    $("copilotSpeak").textContent = copilot.speak || hold.speak || "—";
+
+    const pillars = $("copilotPillars");
+    pillars.textContent = "";
+    for (const p of hold.pillars || []) {
+      const d = document.createElement("div");
+      d.className = "pillar " + (p.ok ? "ok" : "bad");
+      d.innerHTML = '<div class="name">' + p.pillar + "</div><div>" + (p.truth || "") + "</div>";
+      pillars.appendChild(d);
+    }
+
+    const srcHost = $("copilotSources");
+    srcHost.textContent = "";
+    for (const s of copilot.sources || []) {
+      const d = document.createElement("div");
+      d.className = "foundational " + (s.ok ? "ok" : "bad");
+      d.innerHTML =
+        '<div class="layer">' + (s.layer || "") + " · " + (s.label || "") + "</div>" +
+        "<strong>" + (s.title || s.id) + "</strong><br>" +
+        (s.holds || "").slice(0, 80);
+      srcHost.appendChild(d);
+    }
+  }
+
+  async function loadCopilot() {
+    try {
+      const c = await fetchJson("/api/copilot");
+      renderCopilot(c);
+    } catch (e) {
+      $("copilotSpeak").textContent = "Co-Pilot offline: " + e.message;
+    }
+  }
+
   async function refresh(runMatrix) {
     try {
       const url = "/api/tester/full" + (runMatrix ? "?matrix=1" : "");
@@ -140,7 +180,19 @@
     pollTimer = setInterval(() => refresh(false), POLL_MS);
   }
 
-  $("btnRefresh").addEventListener("click", () => refresh(true));
+  $("btnRefresh").addEventListener("click", () => { refresh(true); loadCopilot(); });
+  $("btnCopilotAsk").addEventListener("click", async () => {
+    const q = ($("copilotQuery").value || "").trim() || "what holds it together";
+    try {
+      const r = await fetchJson("/api/copilot/ask?q=" + encodeURIComponent(q));
+      $("copilotAnswer").textContent = r.answer || "—";
+    } catch (e) {
+      $("copilotAnswer").textContent = e.message;
+    }
+  });
+  $("copilotQuery").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") $("btnCopilotAsk").click();
+  });
   $("btnMatrix").addEventListener("click", async () => {
     const m = await fetchJson("/api/tester/matrix");
     renderMatrix(m);
@@ -157,6 +209,8 @@
   });
 
   refresh(true);
+  loadCopilot();
   startPoll();
+  setInterval(loadCopilot, POLL_MS);
   $("btnPoll").textContent = "Stop poll";
 })();
