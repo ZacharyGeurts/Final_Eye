@@ -1,0 +1,11 @@
+Package: final-eye
+Version: @VERSION@
+Section: science
+Priority: optional
+Architecture: amd64
+Maintainer: Zachary Geurts
+Description: Final_Eye sovereign field robotics vision
+ The Final Eyeball — ZOCRSM1 vision + GRKMF1/GVC1 media.
+ Silent capture, AI-tunable video, Grok16 field compiler.
+Depends: python3 (>= 3.10), python3-pip, tesseract-ocr
+Homepage: https://github.com/ZacharyGeurts/Final_Eye

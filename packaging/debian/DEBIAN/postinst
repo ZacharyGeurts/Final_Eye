@@ -1,0 +1,21 @@
+#!/bin/bash
+set -e
+APP=/opt/final-eye
+if [ -d "$APP" ]; then
+  cd "$APP"
+  python3 -m pip install -q -r requirements.txt 2>/dev/null || true
+  python3 zocr_security.py seal >/dev/null 2>&1 || true
+  mkdir -p /opt/final-eye/data /opt/final-eye/out
+fi
+cat > /usr/local/bin/final-eye-start << 'EOF'
+#!/bin/bash
+cd /opt/final-eye && exec ./start.sh --no-open "$@"
+EOF
+chmod 755 /usr/local/bin/final-eye-start
+cat > /usr/local/bin/final-eye-ops << 'EOF'
+#!/bin/bash
+cd /opt/final-eye && exec ./start.sh "$@"
+EOF
+chmod 755 /usr/local/bin/final-eye-ops
+echo "Final_Eye installed. Run: final-eye-start"
+exit 0

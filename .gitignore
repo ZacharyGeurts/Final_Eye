@@ -4,9 +4,13 @@ __pycache__/
 .venv/
 venv/
 out/
+releases/
 *.png
 *.jpg
 *.jpeg
+!docs/assets/**/*.jpg
+!docs/assets/**/*.png
+!docs/assets/**/*.jpeg
 data/server.log
 data/poll.log
 data/zocr-server.pid

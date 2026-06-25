@@ -1,0 +1,204 @@
+/* Final_Eye textbook chapters */
+.chapter-page { --accent: var(--accent, #5eead4); }
+.chapter-page.accent-vision { --accent: #5eead4; }
+.chapter-page.accent-codec { --accent: #fbbf24; }
+.chapter-page.accent-security { --accent: #4ade80; }
+.chapter-page.accent-war { --accent: #f87171; }
+.chapter-page.accent-compiler { --accent: #a78bfa; }
+.chapter-page.accent-entity { --accent: #f472b6; }
+.chapter-page.accent-ops { --accent: #38bdf8; }
+
+.chapter-hero {
+  position: relative;
+  min-height: 44vh;
+  background: center/cover no-repeat;
+  display: flex;
+  align-items: flex-end;
+}
+
+.chapter-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5,7,10,0.2) 0%, rgba(5,7,10,0.7) 55%, var(--bg) 100%);
+}
+
+.chapter-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  width: 100%;
+}
+
+.chapter-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  -webkit-text-fill-color: var(--text);
+  background: none;
+  border-left: 4px solid var(--accent);
+  padding-left: 1rem;
+}
+
+.chapter-main {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 5rem;
+  line-height: 1.82;
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+}
+
+.chapter-main h2 {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  margin: 2.5rem 0 1rem;
+  color: var(--text);
+  scroll-margin-top: 5rem;
+}
+
+.chapter-main h3 {
+  font-size: 1.15rem;
+  margin: 1.75rem 0 0.75rem;
+  color: var(--accent);
+}
+
+.chapter-main p {
+  margin-bottom: 1.15rem;
+  color: #c5d0de;
+}
+
+.chapter-main ul, .chapter-main ol {
+  margin: 0 0 1.25rem 1.5rem;
+  color: #c5d0de;
+}
+
+.chapter-main li { margin-bottom: 0.45rem; }
+
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.objectives,
+.on-the-way,
+.chapter-summary-box,
+.drill-box {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.35rem 1.5rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.on-the-way { border-left: 4px solid var(--accent); }
+
+.on-the-way-lead {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin: 0.75rem 0 1rem;
+  line-height: 1.75;
+}
+
+.chapter-toc {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.chapter-toc h2 {
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.75rem;
+}
+
+.chapter-toc ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.chapter-toc a { color: var(--accent); }
+
+.figure {
+  margin: 2rem 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.figure img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.figure figcaption {
+  padding: 0.85rem 1.1rem;
+  font-family: var(--font);
+  font-size: 0.88rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  font-style: italic;
+}
+
+.on-the-way-figure { margin: 1rem 0; }
+
+pre.eq, code {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+}
+
+pre.eq {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.15rem;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  color: var(--accent);
+}
+
+code {
+  background: rgba(94, 234, 212, 0.08);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  color: var(--accent);
+}
+
+table.rocks {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font);
+  font-size: 0.88rem;
+  margin: 1.5rem 0;
+}
+
+table.rocks th, table.rocks td {
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+}
+
+table.rocks th {
+  background: var(--panel2);
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.part-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 2.5rem 0 0.5rem;
+}

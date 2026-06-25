@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -f /usr/local/bin/final-eye-start /usr/local/bin/final-eye-ops
+exit 0

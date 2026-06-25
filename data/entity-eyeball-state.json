@@ -3,10 +3,10 @@
   "living_live": true,
   "truth_forward": true,
   "weapons_armed": true,
-  "forward_count": 25,
-  "lies_rejected": 24,
+  "forward_count": 33,
+  "lies_rejected": 32,
   "last_weapon": {
-    "ts": "2026-06-25T12:51:59.063437+00:00",
+    "ts": "2026-06-25T13:00:16.236946+00:00",
     "weapon": "trust_strike",
     "entity": "truth",
     "acted": [
@@ -16,7 +16,7 @@
     "mesh": {
       "ok": false,
       "schema": "zocr-trust-mesh-verify/v1",
-      "ts": "2026-06-25T12:51:59.063182+00:00",
+      "ts": "2026-06-25T13:00:16.236719+00:00",
       "rule": "Interwoven redundancies \u2014 no single path owns truth; Hostess7 corroborates ZOCR vision",
       "peers_ok": 10,
       "peers_total": 11,
@@ -29,13 +29,13 @@
           "ok": true,
           "role": "integrity",
           "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
-          "root_seal": "9c708530bc24ba14a43b9091b20da51078127f6b8eb7ca01902c851262a1ac34",
-          "file_count": 35,
-          "verified": 35,
+          "root_seal": "0b259bd62edc397beba3a74a74233e27702710fdefd8ba85bb35e36e3dd5e2a9",
+          "file_count": 36,
+          "verified": 36,
           "tampered": [],
           "missing": [],
           "unsealed_new": [],
-          "ts": "2026-06-25T12:51:57.641866+00:00"
+          "ts": "2026-06-25T13:00:01.548558+00:00"
         },
         {
           "id": "neural",
@@ -72,7 +72,7 @@
           "id": "offense",
           "ok": true,
           "role": "ingress",
-          "strikes": 66
+          "strikes": 74
         },
         {
           "id": "kill",
@@ -241,7 +241,7 @@
       "ok": true,
       "rule": "Defense of vision requires offense.",
       "schema": "zocr-offense-strike/v1",
-      "ts": "2026-06-25T12:51:59.063254+00:00",
+      "ts": "2026-06-25T13:00:16.236787+00:00",
       "threat": "trust_breach",
       "strike": "reject_and_failover",
       "offense": "seal_threat",
@@ -253,6 +253,6 @@
     },
     "threat": "trust_breach"
   },
-  "updated": "2026-06-25T12:51:59.073008+00:00",
+  "updated": "2026-06-25T13:00:16.241679+00:00",
   "weaponize_mode": "war"
 }

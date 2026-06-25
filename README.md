@@ -66,6 +66,23 @@ curl -s http://127.0.0.1:9479/api/grok16 | jq '.profiles'
 | Field_Primer docs | [Ch 11 — Final_Eye vision layer](https://github.com/ZacharyGeurts/Field_Primer) |
 | ZAC artifacts | `POST /api/zac/pack` |
 
+## Releases (v1.0.0 — all platforms)
+
+| Platform | Artifact |
+|----------|----------|
+| **Linux** | `Final_Eye-1.0.0-linux-x86_64.tar.gz` |
+| **Linux .deb** | `final-eye_1.0.0_amd64.deb` → `final-eye-start` |
+| **Windows** | `Final_Eye-1.0.0-windows-x64.zip` |
+| **macOS** | `Final_Eye-1.0.0-macos-universal.tar.gz` |
+| **Source** | `Final_Eye-1.0.0-source.tar.gz` |
+| **Docker** | `ghcr.io/zacharygeurts/final-eye:1.0.0` |
+
+Download from [GitHub Releases](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.0.0). Verify: `sha256sum -c SHA256SUMS`.
+
+Build locally: `python3 scripts/build_release.py`
+
+**Textbook (GitHub Pages):** https://zacharygeurts.github.io/Final_Eye/
+
 ## Docker (Queen/Hostess co-deployment)
 
 ```bash
