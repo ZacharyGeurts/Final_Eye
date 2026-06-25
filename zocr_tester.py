@@ -237,11 +237,11 @@ def tester_snapshot(*, include_slow: bool = False) -> dict[str, Any]:
 def _matrix_cases() -> list[dict[str, Any]]:
     return [
         {
-            "id": "product_1_0",
+            "id": "product_0_9_9",
             "group": "release",
-            "label": "Product version 1.0.0",
+            "label": "Product version 0.9.9",
             "kind": "implemented",
-            "check": lambda: product_info().get("version") == "1.0.0",
+            "check": lambda: product_info().get("version") == "0.9.9",
         },
         {
             "id": "code_seal",
@@ -284,6 +284,20 @@ def _matrix_cases() -> list[dict[str, Any]]:
             "label": "Grok16 field_opt profile",
             "kind": "implemented",
             "check": lambda: "field_opt" in (__import__("zocr_grok16", fromlist=["grok16_status"]).grok16_status().get("profiles") or []),
+        },
+        {
+            "id": "field_compile_c",
+            "group": "compiler",
+            "label": "Grok16 g16 C smoke (vision_probe.c)",
+            "kind": "measured",
+            "check": lambda: __import__("zocr_field_compile", fromlist=["compile_c_smoke"]).compile_c_smoke().get("ok") is True,
+        },
+        {
+            "id": "field_compile_kernel",
+            "group": "compiler",
+            "label": "Grok16 g++16 field_dispatch kernel",
+            "kind": "measured",
+            "check": lambda: __import__("zocr_field_compile", fromlist=["compile_vision_kernel"]).compile_vision_kernel().get("ok") is True,
         },
         {
             "id": "twin_eyeballs",
@@ -454,6 +468,13 @@ def ops_dashboard(*, include_matrix: bool = True) -> dict[str, Any]:
         "grok16_tune_patrol": __import__("zocr_grok16", fromlist=["grok16_eye_tune"]).grok16_eye_tune(mode="patrol", eye_profile="bird"),
         "field_compiler": __import__("zocr_field_compiler", fromlist=["field_compiler_status"]).field_compiler_status(),
         "compiler_probe": __import__("zocr_field_compiler", fromlist=["probe_compilers"]).probe_compilers(),
+        "field_compile": __import__("zocr_field_compile", fromlist=["field_compile_status"]).field_compile_status(),
+        "field_compile_endpoints": {
+            "status": "GET /api/field/compile",
+            "c_kernel": "GET /api/field/compile?mode=c",
+            "optimize": "GET /api/field/compile/optimize",
+            "full": "GET /api/field/compile/full",
+        },
         "neural": __import__("zocr_neural", fromlist=["neural_status"]).neural_status(),
         "neural_verify": __import__("zocr_neural", fromlist=["verify_network_seal"]).verify_network_seal(),
         "grkmf": (lambda g=__import__("zocr_grkmf", fromlist=["grkmf"]).grkmf: {

@@ -1,4 +1,4 @@
-"""Final_Eye product metadata — v1.0.0 sovereign robotics vision release."""
+"""Final_Eye product metadata — v0.9.9 field compiler review release."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -11,9 +11,9 @@ if not _VERSION_FILE.is_file():
 
 PRODUCT_ID = "Final_Eye"
 PRODUCT_NAME = "The Final Eyeball"
-VERSION = "1.0.0"
+VERSION = "0.9.9"
 SCHEMA = "final-eye-product/v1"
-CODENAME = "sovereign-vision"
+CODENAME = "field-forge-opt"
 LICENSE = "proprietary"
 REPO = "https://github.com/ZacharyGeurts/Final_Eye"
 

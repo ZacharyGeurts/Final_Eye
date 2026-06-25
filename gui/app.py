@@ -77,6 +77,13 @@ from zocr_field_compiler import (  # noqa: E402
     field_compiler_status,
     probe_compilers,
 )
+from zocr_field_compile import (  # noqa: E402
+    compile_c_smoke,
+    compile_vision_kernel,
+    field_compile_full_test,
+    field_compile_status,
+    field_compiler_optimize,
+)
 from zocr_grok16 import grok16_status  # noqa: E402
 from zocr_tester import ops_dashboard, tester_full, tester_matrix, tester_snapshot  # noqa: E402
 from zocr_copilot import copilot_ask, copilot_doctrine, copilot_status, hold_together  # noqa: E402
@@ -272,6 +279,25 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/api/field/compiler/doctrine":
             self._send_json(HTTPStatus.OK, field_compiler_doctrine())
+            return
+        if path == "/api/field/compile/full":
+            self._send_json(HTTPStatus.OK, field_compile_full_test())
+            return
+        if path == "/api/field/compile/optimize":
+            profile = (qs.get("profile") or [""])[0].strip()
+            profiles = [p.strip() for p in profile.split(",") if p.strip()] if profile else None
+            self._send_json(HTTPStatus.OK, field_compiler_optimize(profiles=profiles))
+            return
+        if path == "/api/field/compile":
+            mode = (qs.get("mode") or [""])[0].strip().lower()
+            prof = (qs.get("profile") or ["field_opt"])[0].strip() or "field_opt"
+            if mode == "c":
+                self._send_json(HTTPStatus.OK, compile_c_smoke(profile=prof))
+                return
+            if mode in ("kernel", "cxx", "cpp"):
+                self._send_json(HTTPStatus.OK, compile_vision_kernel(profile=prof))
+                return
+            self._send_json(HTTPStatus.OK, field_compile_status())
             return
         if path == "/api/security":
             self._send_json(HTTPStatus.OK, security_status())

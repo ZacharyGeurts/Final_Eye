@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.9.9 — 2026-06-25 (field-forge-opt)
+
+### Release
+- Review cycle **0.9.9** — Grok16 C/C++ field compiler harness (`zocr_field_compile.py`)
+- `field/vision_probe.c` — gnu17 C smoke with `FIELD_ENTROPY_DISPATCH`
+- Compile + run: `g16` C probe, `g++16` field_dispatch vision kernel
+- Profile optimization bench: `field_opt` vs `field_compute` vs `ai` → `data/field-compiler-bench.json`
+- API: `GET /api/field/compile`, `/api/field/compile/full`, `/api/field/compile/optimize`
+- Ops dashboard: field compile status + last bench in AI section
+- 28 automated tests (smoke + release + field compiler C)
+
 ## 1.0.0 — 2026-06-25 (sovereign-vision)
 
 ### Release

@@ -15,7 +15,7 @@ Base: `http://127.0.0.1:9479` · OpenAPI-style reference · **Not MPEG**
 
 | Method | Path | Description |
 |--------|------|-------------|
-| GET | `/api/version` | Product metadata 1.0.0 |
+| GET | `/api/version` | Product metadata 0.9.9 |
 | GET | `/api/health` | Liveness |
 | GET | `/api/status` | Live session status |
 
@@ -93,6 +93,11 @@ Base: `http://127.0.0.1:9479` · OpenAPI-style reference · **Not MPEG**
 | GET | `/api/grok16` | Grok16 status |
 | GET | `/api/field/compiler` | Field compiler stack |
 | POST | `/api/field/compiler/probe` | Compile probe |
+| GET | `/api/field/compile` | Grok16 compile status (g16/g++16 ready, last bench) |
+| GET | `/api/field/compile?mode=c` | Compile + run `field/vision_probe.c` (gnu17) |
+| GET | `/api/field/compile?mode=kernel` | Compile + run `field_dispatch.cpp` kernel |
+| GET | `/api/field/compile/optimize` | Bench profiles (`field_opt`, `field_compute`, `ai`) |
+| GET | `/api/field/compile/full` | Full C + kernel + optimize (+ Queen forge probe) |
 
 ## ZAC integration
 

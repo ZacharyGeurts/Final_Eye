@@ -15,7 +15,7 @@ open http://127.0.0.1:9479/tester
 
 | ID | Group | Check |
 |----|-------|-------|
-| product_1_0 | release | Version == 1.0.0 |
+| product_0_9_9 | release | Version == 0.9.9 |
 | code_seal | security | Seal verifies |
 | gvc1_envelope | security | GVC1 round-trip + tamper reject |
 | war_mode | robotics | War in final modes |

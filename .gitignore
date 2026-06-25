@@ -24,6 +24,7 @@ data/sovereign-time-state/sovereign-time-key.bin
 data/operator-auth.json
 data/zac-restore/
 data/release-test-matrix.json
+data/field-compiler-bench.json
 manifest.jsonl
 *.grkm
 .DS_Store

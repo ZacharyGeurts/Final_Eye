@@ -1,4 +1,4 @@
-# Final_Eye v1.0.0
+# Final_Eye v0.9.9
 
 **The Final Eyeball** — sovereign field robotics vision by [Zachary Geurts](https://github.com/ZacharyGeurts).
 

@@ -149,6 +149,7 @@
       body += "<h3 class='block-title'>Grok16 status</h3>" + detailTable(data.grok16, 40);
       body += "<h3 class='block-title'>Grok16 tune (war / patrol)</h3>" + detailTable({ war: data.grok16_tune_war, patrol: data.grok16_tune_patrol }, 20);
       body += "<h3 class='block-title'>Field compiler</h3>" + detailTable({ status: data.field_compiler, probe: data.compiler_probe }, 50);
+      body += "<h3 class='block-title'>Grok16 C/C++ compile</h3>" + detailTable({ field_compile: data.field_compile, endpoints: data.field_compile_endpoints }, 30);
       body += "<h3 class='block-title'>Neural assist</h3>" + detailTable({ neural: data.neural, verify: data.neural_verify }, 30);
       body += "<h3 class='block-title'>AI / robotics context</h3>" + detailTable({ grkmf: data.grkmf, ai: data.ai_context, robotics: data.robotics_context }, 40);
     } else if (id === "entity") {
