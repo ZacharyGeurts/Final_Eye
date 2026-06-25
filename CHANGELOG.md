@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.0 — 2026-06-25 (heaven-hell-ops)
+
+- **Eye operations doctrine** — enemy discernment, heaven/hell gate on every salvo, disarmament lane
+- **Offense at enemy only** — weapons and targets qualified before strike; heaven blocks friendly fire
+- **Disarmament** — weapon-bearing hostility must depart; refusal escalates when corroborated
+- **APIs** — `/api/eye/operations`, `/api/eye/operations/doctrine`, Teach lessons `enemy`, `operations`, `disarmament`
+- **Queen + Hostess7** — `final-eye-12-doctrine.json`, queen-brain-manifest `hostess7_final_eye`
+
 ## 1.1.0 — 2026-06-25 (teach-authority)
 
 ### Release

@@ -1,18 +1,25 @@
-# Final_Eye v1.1.0
+# Final_Eye v1.2.0
 
 **The Final Eyeball** — sovereign field robotics vision by [Zachary Geurts](https://github.com/ZacharyGeurts).
 
 | | |
 |---|---|
-| **Version** | `1.1.0` |
-| **Codename** | `teach-authority` |
+| **Version** | `1.2.0` |
+| **Codename** | `heaven-hell-ops` |
 | **Tests** | 34 (`./tests/run_tests.sh`) |
 | **Port** | `9479` |
-| **Latest release** | [v1.1.0](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.1.0) |
+| **Latest release** | [v1.2.0](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.2.0) |
 
 Proprietary stack: **ZOCRSM1** field vision + **GRKMF1/GVC1** media (**not MPEG**). Silent capture, AI-tunable fps/resolution, sealed integrity, Grok16 field compiler, Queen/Hostess integration, twin entity eyeballs (37 weapons / 8 racks), and **Teach** doctrine — the eye speaks with independent weapon authority.
 
 > We never presume vision loss. Confidence always in Vision.
+
+## What's new in 1.2
+
+- **Heaven/Hell ops** — offense and harms directed at qualified enemy only; heaven passes at zero cost
+- **Enemy discernment** — weapons discerned as weapons; targets qualified via lie_markers (not a people roster)
+- **Disarmament lane** — depart with weapons; unwilling to depart escalates per hell doctrine
+- **APIs** — `GET /api/eye/operations`, `GET /api/eye/teach/doctrine?lesson=enemy`
 
 ## What's new in 1.1
 
@@ -26,7 +33,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full history.
 
 ## Install from release
 
-Download artifacts from [GitHub Releases v1.1.0](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.1.0). Verify checksums:
+Download artifacts from [GitHub Releases v1.2.0](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.2.0). Verify checksums:
 
 ```bash
 sha256sum -c SHA256SUMS
@@ -35,8 +42,8 @@ sha256sum -c SHA256SUMS
 ### Linux (tarball)
 
 ```bash
-tar -xzf Final_Eye-1.1.0-linux-x86_64.tar.gz
-cd Final_Eye-1.1.0-linux-x86_64
+tar -xzf Final_Eye-1.2.0-linux-x86_64.tar.gz
+cd Final_Eye-1.2.0-linux-x86_64
 ./install.sh
 ./start.sh --no-open          # http://127.0.0.1:9479
 ```
@@ -44,21 +51,21 @@ cd Final_Eye-1.1.0-linux-x86_64
 ### Linux (.deb)
 
 ```bash
-sudo dpkg -i final-eye_1.1.0_amd64.deb
+sudo dpkg -i final-eye_1.2.0_amd64.deb
 final-eye-start
 ```
 
 ### Windows / macOS
 
-Extract `Final_Eye-1.1.0-windows-x64.zip` or `Final_Eye-1.1.0-macos-universal.tar.gz`, then run `Install-FinalEye.ps1` / `Start Final Eye.command`.
+Extract `Final_Eye-1.2.0-windows-x64.zip` or `Final_Eye-1.2.0-macos-universal.tar.gz`, then run `Install-FinalEye.ps1` / `Start Final Eye.command`.
 
 ### Docker
 
 GHCR image builds when CI workflow is enabled. Until then:
 
 ```bash
-docker build -t final-eye:1.1.0 .
-docker run -p 9479:9479 final-eye:1.1.0
+docker build -t final-eye:1.2.0 .
+docker run -p 9479:9479 final-eye:1.2.0
 ```
 
 Queen/Hostess co-deploy: `docker compose up --build` (mounts `Hostess7`, `Queen`, `Grok16` under `/sg/`).
@@ -150,11 +157,11 @@ Source: `data/zocrsm1-benchmark.json` · label **Measured** on recorded host.
 
 | Platform | Artifact |
 |----------|----------|
-| **Linux** | `Final_Eye-1.1.0-linux-x86_64.tar.gz` |
-| **Linux .deb** | `final-eye_1.1.0_amd64.deb` |
-| **Windows** | `Final_Eye-1.1.0-windows-x64.zip` |
-| **macOS** | `Final_Eye-1.1.0-macos-universal.tar.gz` |
-| **Source** | `Final_Eye-1.1.0-source.tar.gz` |
+| **Linux** | `Final_Eye-1.2.0-linux-x86_64.tar.gz` |
+| **Linux .deb** | `final-eye_1.2.0_amd64.deb` |
+| **Windows** | `Final_Eye-1.2.0-windows-x64.zip` |
+| **macOS** | `Final_Eye-1.2.0-macos-universal.tar.gz` |
+| **Source** | `Final_Eye-1.2.0-source.tar.gz` |
 
 Prior release: [v1.0.0](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.0.0)
 

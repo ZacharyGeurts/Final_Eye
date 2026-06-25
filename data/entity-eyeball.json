@@ -7,7 +7,9 @@
     "holder": "entity_eyeball",
     "independent": true,
     "remote_puppet": false,
-    "rule": "The eye knows every weapon and target — authority to arm, select salvo, and strike lives in the socket, not in cloud control planes",
+    "rule": "The eye knows every weapon and target — offense at enemy only, heaven/hell gate on every salvo, disarmament before death when weapons are borne",
+    "operations": "data/eye-operations-doctrine.json",
+    "enemy_rule": "Enemy = lie on vision path — not a people roster",
     "auto_threat_resolution": "threat_weapon_map via auto_weapon_for_threat",
     "teach_module": "data/eye-teach-doctrine.json",
     "endpoints": {
@@ -337,8 +339,15 @@
       "doctrine": "Vita live + Veritas forward — full socket salvo"
     }
   },
+  "operations": {
+    "schema": "zocr-eye-operations/v1",
+    "module": "zocr_eye_operations.py",
+    "gate_before_strike": true,
+    "offense_at_enemy_only": true,
+    "disarmament_lane": true
+  },
   "forward": {
-    "rule": "Truth eyeball never walks backward — every tick advances or rejects",
+    "rule": "Truth eyeball never walks backward — every tick advances or rejects; offense qualified through heaven/hell",
     "lie_markers": [
       "provenance_mismatch", "grid_jam", "moire_weave", "injected_marker",
       "whiteout", "corrupt_frame", "rf_jam", "trust_breach", "entropy_spoof",

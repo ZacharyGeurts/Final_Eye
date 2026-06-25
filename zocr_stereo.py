@@ -27,6 +27,37 @@ def load_rig_doctrine() -> dict[str, Any]:
         return {"schema": "zocr-eye-rig/v1", "eyes": [], "presets": {}}
 
 
+def comfort_doctrine() -> dict[str, Any]:
+    """Queen eye comfort — unlimited eyes; stereo for faces; monocular for media."""
+    doc = load_rig_doctrine()
+    cd = doc.get("comfort_doctrine") or {}
+    return {
+        "schema": "zocr-eye-comfort/v1",
+        "rule": cd.get("rule", "Permit any number of eyes"),
+        "stereo_preference": cd.get("stereo_preference"),
+        "person_present": cd.get("person_present") or {},
+        "media_relaxed": cd.get("media_relaxed") or {},
+        "operator_note": cd.get("operator_note"),
+        "presets": {
+            "person_present": (cd.get("person_present") or {}).get("preset", "stereo_human"),
+            "media": (cd.get("media_relaxed") or {}).get("preset", "monocular"),
+        },
+    }
+
+
+def preset_for_context(context: str | None) -> str | None:
+    """Map comfort context to rig preset — None leaves current rig unchanged."""
+    ctx = (context or "").strip().lower().replace("-", "_")
+    if not ctx:
+        return None
+    cd = comfort_doctrine()
+    if ctx in ("person", "person_present", "face", "faces", "local_comfort", "with_person"):
+        return cd["presets"]["person_present"]
+    if ctx in ("media", "browsing", "movies", "movie", "gallery", "streaming", "pictures"):
+        return cd["presets"]["media"]
+    return None
+
+
 def _load_state() -> dict[str, Any]:
     if RIG_STATE.is_file():
         try:
@@ -338,6 +369,7 @@ def rig_status() -> dict[str, Any]:
         "stereoscopic": st.get("stereoscopic", {}),
         "presets": list_presets(),
         "doctrine": load_rig_doctrine().get("doctrine"),
+        "comfort": comfort_doctrine(),
         "rule": "BM v2 block-matching disparity, occlusion fill, proper anaglyph",
     }
 

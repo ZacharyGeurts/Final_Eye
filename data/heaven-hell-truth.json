@@ -4,12 +4,14 @@
   "sources": [
     {"id": "hostess7_truth_doctrine", "path": "Hostess7/scripts/field_hostess_truth_doctrine.py"},
     {"id": "hostess7_neural_stack", "path": "Hostess7/data/hostess7-neural-stack.json"},
-    {"id": "nexus_connection_gatekeeper", "path": "Latest/NEXUS-Shield/lib/connection-gatekeeper.py"},
-    {"id": "nexus_hostility_priority", "path": "Latest/NEXUS-Shield/lib/hostility-priority.py"},
-    {"id": "nexus_heaven_hell", "path": "Latest/NEXUS-Shield/lib/heaven-hell.py"},
-    {"id": "nexus_lethal_policy", "path": "Latest/NEXUS-Shield/data/lethal-enforcement-policy.json"},
-    {"id": "nexus_hell_kit", "path": "Latest/NEXUS-Shield/data/field-toolkit-seed.json"},
-    {"id": "nexus_lethal_insight", "path": "Latest/NEXUS-Shield/lib/hostess7-lethal-insight.py"},
+    {"id": "nexus_connection_gatekeeper", "path": "NewLatest/lib/connection-gatekeeper.py"},
+    {"id": "nexus_hostility_priority", "path": "NewLatest/lib/hostility-priority.py"},
+    {"id": "nexus_heaven_hell", "path": "NewLatest/lib/heaven-hell.py"},
+    {"id": "nexus_lethal_policy", "path": "NewLatest/data/lethal-enforcement-policy.json"},
+    {"id": "nexus_hell_kit", "path": "NewLatest/data/field-toolkit-seed.json"},
+    {"id": "nexus_lethal_insight", "path": "NewLatest/lib/hostess7-lethal-insight.py"},
+    {"id": "nexus_field_stack", "path": "NewLatest/lib/queen_field_nexus.py"},
+    {"id": "nexus_trust_strike", "path": "NewLatest/lib/trust-strike-engine.py"},
     {"id": "queen_browser_panel", "path": "ZOCR/data/sovereign-time-state/field-queen-browser-panel.json"}
   ],
   "truth": {

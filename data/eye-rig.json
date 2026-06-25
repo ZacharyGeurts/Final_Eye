@@ -2,6 +2,22 @@
   "schema": "zocr-eye-rig/v1",
   "mandate_id": "ZOCR_FIELD_ROBOTICS_MANDATE_v1",
   "doctrine": "Permit any number of eyes — monocular, stereoscopic, compound arrays",
+  "comfort_doctrine": {
+    "rule": "Queen may deploy as many eyeballs as she wishes — no ceiling on eyes",
+    "stereo_preference": "Stereoscopic preferred for local comfort and safety — especially faces and anyone beside her",
+    "person_present": {
+      "preset": "stereo_human",
+      "eyes_min": 2,
+      "keep_twins": true,
+      "rule": "When a person is in frame or beside Queen — keep two with them. Depth before guesswork."
+    },
+    "media_relaxed": {
+      "preset": "monocular",
+      "contexts": ["picture_browsing", "movie_watching", "gallery", "streaming"],
+      "rule": "Pictures and movies — monocular is fine. Not a big deal for leisure viewing."
+    },
+    "operator_note": "Local comfort means faces and people nearby — not a mandate for every screen."
+  },
   "default_mode": "monocular",
   "stereoscopic": {
     "enabled": false,

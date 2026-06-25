@@ -1,8 +1,8 @@
 {
   "schema": "zocr-kill-state/v1",
   "tripped": {
-    "vision": false,
-    "capture": false,
+    "vision": true,
+    "capture": true,
     "stream": false,
     "vigilance": false,
     "mjpeg": false,
@@ -10,30 +10,156 @@
   },
   "eyes_protect": true,
   "last_trip": {
-    "ts": "2026-06-25T11:19:39.763762+00:00",
-    "switch": "vision",
-    "reason": "provenance_mismatch",
+    "ts": "2026-06-25T13:57:47.919578+00:00",
+    "switch": "capture",
+    "reason": "entity_weapon:autokill_certain",
     "source": "api"
   },
   "history": [
     {
-      "ts": "2026-06-25T11:03:04.184191+00:00",
-      "switch": "all",
-      "reason": "operator",
-      "source": "kill_all"
+      "ts": "2026-06-25T13:12:50.017061+00:00",
+      "switch": "capture",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
     },
     {
-      "ts": "2026-06-25T11:03:13.312376+00:00",
-      "switch": "all",
-      "reason": "api",
-      "source": "kill_all"
-    },
-    {
-      "ts": "2026-06-25T11:19:39.763762+00:00",
+      "ts": "2026-06-25T13:12:50.019029+00:00",
       "switch": "vision",
-      "reason": "provenance_mismatch",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:12:50.021926+00:00",
+      "switch": "vision",
+      "reason": "entity_weapon:autokill_certain",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:12:50.024319+00:00",
+      "switch": "capture",
+      "reason": "entity_weapon:autokill_certain",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:16:03.177184+00:00",
+      "switch": "capture",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:16:03.179139+00:00",
+      "switch": "vision",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:16:03.182900+00:00",
+      "switch": "vision",
+      "reason": "entity_weapon:autokill_certain",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:16:03.185347+00:00",
+      "switch": "capture",
+      "reason": "entity_weapon:autokill_certain",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:19:54.811250+00:00",
+      "switch": "capture",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:19:54.813253+00:00",
+      "switch": "vision",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:19:54.816231+00:00",
+      "switch": "vision",
+      "reason": "entity_weapon:autokill_certain",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:19:54.818646+00:00",
+      "switch": "capture",
+      "reason": "entity_weapon:autokill_certain",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:32.725647+00:00",
+      "switch": "capture",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:32.727607+00:00",
+      "switch": "vision",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:32.730605+00:00",
+      "switch": "vision",
+      "reason": "entity_weapon:autokill_certain",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:32.732993+00:00",
+      "switch": "capture",
+      "reason": "entity_weapon:autokill_certain",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:38.099411+00:00",
+      "switch": "capture",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:38.101374+00:00",
+      "switch": "vision",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:38.104255+00:00",
+      "switch": "vision",
+      "reason": "entity_weapon:autokill_certain",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:38.106716+00:00",
+      "switch": "capture",
+      "reason": "entity_weapon:autokill_certain",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:47.912215+00:00",
+      "switch": "capture",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:47.914180+00:00",
+      "switch": "vision",
+      "reason": "offense:provenance_mismatch",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:47.917107+00:00",
+      "switch": "vision",
+      "reason": "entity_weapon:autokill_certain",
+      "source": "api"
+    },
+    {
+      "ts": "2026-06-25T13:57:47.919578+00:00",
+      "switch": "capture",
+      "reason": "entity_weapon:autokill_certain",
       "source": "api"
     }
   ],
-  "updated": "2026-06-25T11:28:22.365046+00:00"
+  "updated": "2026-06-25T13:57:47.919589+00:00"
 }

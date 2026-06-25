@@ -241,12 +241,14 @@ def write_release_notes(version: str) -> Path:
 
 **The Final Eyeball** — sovereign field robotics vision for Linux, Windows, macOS, and source.
 
-## Highlights (v1.1)
-- **Teach doctrine** — the eye speaks; independent weapon authority over 37 weapons
-- API: `/api/eye/authority`, `/api/eye/targets`, `/api/eye/teach/doctrine`, `/api/eye/understand`
+## Highlights (v1.2 — heaven-hell-ops)
+- **Eye operations** — offense at qualified enemy only; heaven/hell gate on every salvo
+- **Enemy discernment** — weapons as weapons, targets via lie_markers (not a people roster)
+- **Disarmament lane** — depart with weapons; unwilling → removal escalates per hell doctrine
+- API: `/api/eye/operations`, `/api/eye/authority`, `/api/eye/teach/doctrine?lesson=enemy`
 - Threat-only fire: `POST /api/eye/weapons/fire {{"threat":"provenance_mismatch"}}` — eye selects salvo
 - Silent capture · GVC1/GRKMF1 proprietary codec (not MPEG)
-- Field Ops UI at `:9479/ops` · **34 automated tests**
+- Field Ops UI at `:9479/ops` · **40 automated tests**
 - Grok16 field_opt + Queen/Hostess/ZAC integration
 - Illustrated textbook: https://zacharygeurts.github.io/Final_Eye/
 

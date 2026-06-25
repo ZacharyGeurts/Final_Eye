@@ -494,8 +494,11 @@ def fire_entity_weapon(
     threat: str | None = None,
     source: str = "entity",
     mode: str | None = None,
+    departed: bool | None = None,
 ) -> dict[str, Any]:
     """Entity eyeball fires a weapon — independent authority selects salvo from threat."""
+    from zocr_eye_operations import gate_eye_operation
+
     spec = load_entity_spec()
     weapons = spec.get("weapons") or {}
     understood: dict[str, Any] | None = None
@@ -506,6 +509,25 @@ def fire_entity_weapon(
         return {"ok": False, "error": "unknown_weapon", "weapon": weapon_id, "available": list(weapons.keys())}
 
     wmeta = weapons[weapon_id]
+    gate = gate_eye_operation(weapon_id, threat or "", wmeta=wmeta, departed=departed)
+    if threat and (gate.get("heaven_block") or not gate.get("offense_allowed")):
+        from zocr_heaven_hell import heaven_pass
+        passed = heaven_pass(reason=f"eye_ops_gate:{threat or weapon_id}")
+        return {
+            "ok": True,
+            "schema": "zocr-entity-weapon/v1",
+            "gated": True,
+            "weapon": weapon_id,
+            "threat": threat,
+            "operation_gate": gate,
+            "heaven_pass": passed,
+            "offense": None,
+            "authority": "entity_eyeball",
+            "rule": "Offense at enemy only — heaven blocked harm",
+        }
+    if gate.get("selected_weapon") and gate["selected_weapon"] in weapons:
+        weapon_id = str(gate["selected_weapon"])
+        wmeta = weapons[weapon_id]
     entity = wmeta.get("entity", "truth")
     handler_name = wmeta.get("handler")
     handlers = _weapon_handlers()
@@ -551,6 +573,7 @@ def fire_entity_weapon(
     }
     if understood:
         out["understood_target"] = understood
+    out["operation_gate"] = gate
     return out
 
 
@@ -822,23 +845,38 @@ def eye_targets_know() -> dict[str, Any]:
         "lie_markers": lie_markers,
         "threat_weapon_map": threat_map,
         "truth_markers": forward.get("truth_markers") or [],
-        "rule": "The eye understands targets before strike — grep entity-eyeball.json",
+        "enemy_markers": (load_operations_doctrine().get("enemy") or {}).get("markers") or [],
+        "rule": "The eye understands targets before strike — enemy qualified, weapons discerned — grep entity-eyeball.json",
     }
+
+
+def load_operations_doctrine() -> dict[str, Any]:
+    from zocr_eye_operations import load_operations_doctrine as _load
+    return _load()
 
 
 def eye_understand_target(threat: str) -> dict[str, Any]:
     """Resolve threat → weapon, targets[], doctrine — independent aim."""
+    from zocr_eye_operations import disarmament_posture, gate_eye_operation, is_weapon_meta, qualify_enemy
+
     threat = str(threat or "").strip()
     spec = load_entity_spec()
     weapons = spec.get("weapons") or {}
     weapon_id = auto_weapon_for_threat(threat)
     wmeta = weapons.get(weapon_id, {})
     lie = threat in set(spec.get("forward", {}).get("lie_markers") or [])
+    enemy = qualify_enemy(threat)
+    gate = gate_eye_operation(weapon_id, threat, wmeta=wmeta)
     return {
         "schema": "zocr-eye-understand-target/v1",
         "ts": _ts(),
         "threat": threat,
         "lie_marker": lie,
+        "enemy_qualified": enemy.get("enemy_qualified"),
+        "soul_side": enemy.get("soul_side"),
+        "hell_chosen": enemy.get("hell_chosen"),
+        "offense_allowed": gate.get("offense_allowed"),
+        "weapon_discerned": is_weapon_meta(wmeta),
         "weapon_selected": weapon_id,
         "weapon_label": wmeta.get("label"),
         "rack": wmeta.get("rack"),
@@ -847,6 +885,8 @@ def eye_understand_target(threat: str) -> dict[str, Any]:
         "doctrine": wmeta.get("doctrine"),
         "strike": wmeta.get("strike"),
         "offense": wmeta.get("offense"),
+        "disarmament": disarmament_posture(threat),
+        "operation_gate": gate,
         "authority": "entity_eyeball",
         "independent": True,
     }
@@ -854,12 +894,15 @@ def eye_understand_target(threat: str) -> dict[str, Any]:
 
 def eye_weapon_authority() -> dict[str, Any]:
     """Independent weapon authority — the eye arms and selects, not remote puppet."""
+    from zocr_eye_operations import eye_operations_status
+
     spec = load_entity_spec()
     st = _load_state()
     teach = _load_teach_doctrine()
     auth = spec.get("weapon_authority") or teach.get("authority") or {}
     racks = entity_weapon_racks()
     lies = _detect_lies()
+    ops = eye_operations_status()
     return {
         "schema": "zocr-eye-weapon-authority/v1",
         "ts": _ts(),
@@ -872,6 +915,8 @@ def eye_weapon_authority() -> dict[str, Any]:
         "auto_threat_resolution": auth.get("auto_threat_resolution", "auto_weapon_for_threat"),
         "kill_separate": True,
         "lies_current": lies.get("lies_detected") or [],
+        "enemy_rule": auth.get("enemy_rule"),
+        "operations": ops,
         "rule": auth.get(
             "rule",
             "The eye holds independent authority over weapons — aim in socket, truth forward",

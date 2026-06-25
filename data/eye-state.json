@@ -1,11 +1,11 @@
 {
   "schema": "zocr-eye-state/v1",
-  "active_profile": "raptor",
+  "active_profile": "human",
   "taught": [
     "bird",
     "human",
     "reptile",
     "raptor"
   ],
-  "updated": "2026-06-25T13:00:16.177002+00:00"
+  "updated": "2026-06-25T13:57:47.619457+00:00"
 }

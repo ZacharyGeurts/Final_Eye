@@ -69,7 +69,7 @@
     "preserve_oracle": "When the display lies, confidence routes through vault — Vision affirmed, not presumed lost.",
     "kill_switch_priest": "One whole kill — vision, capture, stream — release only when the field is clean.",
     "submicron_weaver": "Fabric nm per pixel rides load tide; detail finer than the lie, cost bounded.",
-    "robotics_brief": "War: tactical FPS + stereo + raptor. Dishes: idle + human + monocular. Never flash either."
+    "robotics_brief": "War: tactical FPS + stereo + raptor. Dishes: idle + human + monocular for chores. Person present: stereo_human — keep two on faces. Media browsing: monocular — not a big deal. Never flash either."
   },
   "modes": {
     "war": {
@@ -91,6 +91,22 @@
         "preserve_oracle": "RF jams the glass; RTX still feeds. You see engine truth or last-good, never snow.",
         "kill_switch_priest": "Trip mjpeg before trip biology. Release when chain verifies clean.",
         "robotics_brief": "POST /api/eye/final/mode {\"mode\":\"war\"} — arms raptor, stereo, tactical stream optional."
+      }
+    },
+    "person_present": {
+      "label": "With a person",
+      "eye_profile": "human",
+      "rig_preset": "stereo_human",
+      "video_profile": "idle",
+      "vigilance_profile": null,
+      "prefer": "auto",
+      "fast_path": true,
+      "speak": {
+        "tactical": "Someone in frame — stereo human, two eyes, depth on faces. Keep two with the person.",
+        "clinical": "Binocular human baseline for vergence safety when a person is beside the operator.",
+        "maternal": "When they stand near you, I keep both eyes gentle — left and right — so we never guess how close they are.",
+        "dish_hand": "Hands may be busy; eyes stay paired on the face beside you.",
+        "robotics_brief": "POST /api/eye/final/mode {\"mode\":\"person_present\"} — stereo_human, keep two with the person."
       }
     },
     "dishes": {

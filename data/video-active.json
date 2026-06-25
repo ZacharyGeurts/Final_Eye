@@ -8,14 +8,14 @@
   "adaptive_scale": 1.0,
   "fabric_nm_per_px": 250.0,
   "ai_tune": {
-    "mode": "combat",
-    "width": 2560,
-    "height": 1440,
-    "max_width": 2560,
-    "fps": 8.0,
-    "refresh_hz": 8.0,
-    "gop": 6,
-    "jpeg_quality": 86,
+    "mode": "media",
+    "width": 1280,
+    "height": 720,
+    "max_width": 1280,
+    "fps": 2.0,
+    "refresh_hz": 2.0,
+    "gop": 24,
+    "jpeg_quality": 82,
     "ai_locked": false
   }
 }

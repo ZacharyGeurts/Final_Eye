@@ -54,6 +54,7 @@ from zocr_eye import (  # noqa: E402
     spectrum_doctrine,
     teach,
 )
+from zocr_eye_operations import eye_operations_status, load_operations_doctrine  # noqa: E402
 from zocr_entity_eyeball import (  # noqa: E402
     entity_doctrine,
     entity_weapon_racks,
@@ -419,6 +420,12 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/api/eye/targets":
             self._send_json(HTTPStatus.OK, eye_targets_know())
+            return
+        if path == "/api/eye/operations":
+            self._send_json(HTTPStatus.OK, eye_operations_status())
+            return
+        if path == "/api/eye/operations/doctrine":
+            self._send_json(HTTPStatus.OK, load_operations_doctrine())
             return
         if path == "/api/eye/teach/doctrine":
             lesson = (qs.get("lesson", [""])[0] or "").strip() or None

@@ -1,15 +1,15 @@
 {
   "schema": "zocr-heaven-hell-state/v1",
   "posture": "hell_first",
-  "rips": 12,
-  "heaven_passes": 24,
-  "updated": "2026-06-25T13:00:02.207988+00:00",
+  "rips": 18,
+  "heaven_passes": 41,
+  "updated": "2026-06-25T13:57:48.527353+00:00",
   "last_heaven_pass": {
-    "ts": "2026-06-25T13:00:02.207248+00:00",
+    "ts": "2026-06-25T13:57:48.493954+00:00",
     "reason": "entity_weapon:heaven_pass"
   },
   "last_rip": {
-    "ts": "2026-06-25T13:00:02.207987+00:00",
+    "ts": "2026-06-25T13:57:48.527351+00:00",
     "threat": "trust_breach",
     "soul_side": "hell",
     "hell_chosen": true

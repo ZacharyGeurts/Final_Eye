@@ -45,7 +45,13 @@ def _nexus_sg_root() -> Path:
     env = os.environ.get("NEXUS_SG_ROOT", "").strip()
     if env:
         return Path(env).resolve()
-    return (_SG / "Latest" / "NEXUS-Shield").resolve()
+    for candidate in (
+        _SG / "NewLatest",
+        _SG / "Latest" / "NEXUS-Shield",
+    ):
+        if (candidate / "lib" / "heaven-hell.py").is_file():
+            return candidate.resolve()
+    return (_SG / "NewLatest").resolve()
 
 
 def _nexus_install() -> Path:

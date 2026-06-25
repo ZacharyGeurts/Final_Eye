@@ -1,0 +1,46 @@
+{
+  "schema": "zocr-eye-operations/v1",
+  "version": "1.2.0",
+  "codename": "heaven-hell-ops",
+  "rule": "Direct offense and harms at enemy only — discern weapons as weapons, threats as qualified targets. Heaven or Hell gate every salvo.",
+  "enemy": {
+    "definition": "Enemy is lie and hostility on the vision path — lie_markers and hell-chosen verdicts. Not a people roster.",
+    "markers": [
+      "provenance_mismatch", "grid_jam", "injected_marker", "whiteout",
+      "corrupt_frame", "rf_jam", "trust_breach", "weaponized_interference", "lie", "tamper"
+    ],
+    "limbo_markers": ["moire_weave", "entropy_spoof", "compiler_gap", "thermal_breach"],
+    "truth_not_enemy": ["woven_paths", "code_seal", "USER_OK", "last_good", "pattern_ok", "g16_ready"]
+  },
+  "discernment": {
+    "weapons_rule": "Weapon = arsenal entry with strike, offense, or handler — salvo-capable. Tools without strike are not weapons.",
+    "targets_rule": "Target = threat ID resolved through threat_weapon_map after heaven/hell qualification.",
+    "offense_rule": "Offense and harms aim at qualified enemy only — never heaven, never friendly fire."
+  },
+  "heaven_hell_gate": {
+    "heaven": "Zero-cost pass — no offense harm, heaven_pass only",
+    "hell": "Offense authorized — hell_rip, trust strike, entity weapons",
+    "limbo": "Watch and disarmament lane before lethal salvo",
+    "hostility_priority": "hell_first"
+  },
+  "disarmament": {
+    "rule": "Hostile bearing weapons must depart with them. Unwilling to depart → death/removal escalates per hell doctrine.",
+    "weapon_bearing_threats": [
+      "weaponized_interference", "trust_breach", "injected_marker", "rf_jam", "grid_jam"
+    ],
+    "offer": "Depart with weapons — egress sever, monitor, cease",
+    "refusal": "Unwilling to depart → lethal / total_removal salvo when corroborated",
+    "escalation_weapon": "hell_rip",
+    "lethal_weapon": "autokill_certain"
+  },
+  "operations": {
+    "qualify_before_strike": true,
+    "independent_authority": true,
+    "log_every_gate": true,
+    "apis": {
+      "GET /api/eye/operations": "Eye operations posture",
+      "GET /api/eye/operations/doctrine": "Full operations doctrine",
+      "GET /api/eye/teach/doctrine?lesson=enemy": "Teach on enemy discernment"
+    }
+  }
+}
