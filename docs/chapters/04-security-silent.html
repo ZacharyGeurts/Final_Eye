@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>04 — Security &amp; Silent Capture · The Final Eyeball</title>
+  <meta name="description" content="Chapter 4: Security &amp; Silent Capture. Final_Eye v1.0 sovereign vision textbook." />
+  <link rel="canonical" href="https://zacharygeurts.github.io/Final_Eye/chapters/04-security-silent.html" />
+  <meta name="theme-color" content="#05070a" />
+  <meta property="og:title" content="04 — Security &amp; Silent Capture" />
+  <meta property="og:image" content="https://zacharygeurts.github.io/Final_Eye/assets/images/chapters/ch03-security-seal.jpg" />
+  <link rel="stylesheet" href="../css/final-eye.css" />
+  <link rel="stylesheet" href="../css/chapters.css" />
+  <link rel="stylesheet" href="../css/reader.css" />
+</head>
+<body class="chapter-page accent-security">
+  <nav class="top"><div class="inner">
+    <a class="logo" href="../index.html">THE FINAL EYEBALL <span class="v-badge">v1.0</span></a>
+    <ul>
+      <li><a href="../index.html#chapters">Chapters</a></li>
+      <li><a href="https://github.com/ZacharyGeurts/Final_Eye">GitHub</a></li>
+      <li><a href="https://zacharygeurts.github.io/Field_Primer/">Field Primer</a></li>
+    </ul>
+  </div></nav>
+  <header class="chapter-hero" style="background-image:url('../assets/images/chapters/ch03-security-seal.jpg')">
+    <div class="chapter-hero-overlay"></div>
+    <div class="chapter-hero-content">
+      <p class="eyebrow">Chapter 04 · Final_Eye v1.0</p>
+      <h1>Security &amp; Silent Capture</h1>
+      <p class="lead" style="margin-top:0.75rem;color:var(--muted)">Code seal · stream crypto · operator tokens · flash forbidden</p>
+    </div>
+  </header>
+  <main class="chapter-main">
+    <nav class="chapter-nav"><a class="btn secondary" href="03-grkmf-gvc1.html">← Ch 3</a> <a class="btn" href="05-war-dishes.html">Ch 5 →</a></nav>
+    <p class="eyebrow">Chapter 04 · Security &amp; Silent Capture</p>
+
+    <div class="objectives">
+      <h2 id="toc-04-objectives">Learning objectives</h2>
+      <ol><li>Seal and verify the codebase manifest.</li><li>Explain silent capture policy and flash_forbidden.</li><li>Use operator tokens and stream encrypt/decrypt round-trip.</li><li>Map kill switches to choke points.</li></ol>
+    </div>
+
+    <nav class="chapter-toc" aria-label="In this chapter">
+      <h2>In this chapter</h2>
+      <ol><li><a href="#toc-04-seal">Code seal — all zocr modules</a></li><li><a href="#toc-04-silent">Silent capture — protect your eyes</a></li><li><a href="#toc-04-stream">Stream AES-GCM / HMAC</a></li><li><a href="#toc-04-kill">Kill switches — local sovereignty</a></li></ol>
+    </nav>
+
+    <div class="on-the-way">
+      <h2 id="toc-04-on-the-way">On the way</h2>
+      <p class="on-the-way-lead">Chapter 4 is the security spine. Seal before capture. Silent by default. Local operator holds kill authority — never remote puppet control.</p>
+      <figure class="on-the-way-figure">
+        <img src="../assets/images/chapters/ch03-security-seal.jpg" alt="Security &amp; Silent Capture" loading="lazy" />
+        <figcaption>Figure 4.0 — Security &amp; Silent Capture</figcaption>
+      </figure>
+      <ul class="on-the-way-journey"><li>code-seal.json</li><li>silent_by_default</li><li>ZSE1 envelope</li><li>trip / release</li></ul>
+    </div>
+
+    
+<h2 id="toc-04-seal">Code seal — all zocr modules</h2>
+<p><span class="tag impl">Implemented</span> <code>zocr_security.seal_codebase()</code> hashes every <code>zocr*.py</code> and <code>gui/*.py</code> into <code>data/code-seal.json</code>. Protected operations — look, observe, stream_start, vigilance_start, and others — call <code>mandate_enforce</code> which verifies seal unless <code>ZOCR_MANDATE_OFF=1</code>. Tamper a module and protected capture blocks with a grep-able reason.</p>
+<figure class="figure"><img src="../assets/images/chapters/ch03-security-seal.jpg" alt="Security seal" loading="lazy" /><figcaption>Figure 4.1 — Cryptographic seal ring around codebase modules; silent capture never flashes the display path.</figcaption></figure>
+
+<h2 id="toc-04-silent">Silent capture — protect your eyes</h2>
+<p><span class="tag doctrine">Doctrine</span>: Silent capture only. <code>silent_capture_policy()</code> returns <code>silent_by_default: true</code>. Additives registry rejects whiteout/blackout flash tools. Robotics and AI observe paths must not harm the display — the eye protects the operator's literal eyes while seeing the field. This is implemented, not aspiration: check <code>data/display-additives.json</code> and HUD whitelist tests.</p>
+
+<h2 id="toc-04-stream">Stream AES-GCM / HMAC</h2>
+<p><span class="tag impl">Implemented</span> <code>encrypt_stream_payload</code> / <code>decrypt_stream_payload</code> — ZSE1 magic, optional AES-GCM with codec AAD. Operator tokens via HMAC: <code>issue_operator_token</code>, <code>verify_operator_token</code>. Sharing information is allowed; sharing plaintext to strangers is not the default.</p>
+
+<h2 id="toc-04-kill">Kill switches — local sovereignty</h2>
+<p><span class="tag impl">Implemented</span> <code>zocr_kill.py</code> — switches: vision, capture, stream, vigilance, mjpeg, egress. Whole kill: <code>POST /api/kill/all</code>. Release: <code>POST /api/kill/release</code>. Authority is <strong>local operator</strong> — this is how Final_Eye stays <em>never controlled</em> by external puppeteers while still allowing deliberate disengage.</p>
+
+<h2 id="toc-04-neural">Neural assist — local only</h2>
+<p><span class="tag impl">Implemented</span> Neural network seal in <code>data/neural-seal.json</code>; analyze endpoint runs local inference posture with <code>egress: false</code> in neural-protected spec. The eye may use neural assist to classify a frame — it does not ship pixels to a vendor cloud by default. Mandate gate and kill switch <code>egress</code> double-lock outbound paths when tripped.</p>
+<p>Display additives require approval — builtin rtx, xwd_silent, grim, mss, hold, synthetic registered with accessibility metadata. Flash-free aria labels are not cosmetic; they document silent capture for vigilance exports to screen readers and ops auditors.</p>
+<h2 id="toc-04-lab">Security lab</h2>
+<ol>
+<li>Verify code seal: <code>GET /api/security/verify</code>.</li>
+<li>Issue operator token; verify on a second curl with token header if wired.</li>
+<li>Read kill_status — all switches listed, none tripped after fresh install.</li>
+<li>Attempt protected look with ZOCR_MANDATE_OFF=0 and tampered module — expect block (lab only on copy).</li>
+</ol>
+<h2 id="toc-04-sovereignty">Sovereignty vs control — closing precision</h2>
+<p>Students often confuse <em>sovereign</em> with <em>uncontrolled</em>. Final_Eye is sovereign: local operator holds kill authority, mandate gates egress, seals precede capture. External SaaS dashboards, silent remote drivers, and unsigned control planes are what we reject. The eye operates on its own in vigilance; it shares truth through sealed ledgers and ZAC packs; it is never puppeted from outside the field mandate.</p>
+
+
+    <div class="chapter-summary-box">
+      <h2 id="toc-04-summary">Chapter summary</h2>
+      <p>Re-read the honesty labels on every claim you repeat to management. Grep beats screenshots.</p>
+    </div>
+
+    <h2 id="toc-04-study">Study questions</h2>
+    <ol><li>Which operations are protected when code seal fails?</li><li>Why is flash_forbidden a vision integrity rule?</li><li>Who can trip kill switches — local or remote?</li></ol>
+
+    <nav class="chapter-nav"><a class="btn secondary" href="03-grkmf-gvc1.html">← Ch 3</a> <a class="btn" href="05-war-dishes.html">Ch 5 →</a></nav>
+  </main>
+  <button type="button" class="reader-launch" id="reader-launch" aria-label="Open reader mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
+    Read
+  </button>
+  <script src="../js/reader.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>02 — ZOCRSM1 Vision Ingress · The Final Eyeball</title>
+  <meta name="description" content="Chapter 2: ZOCRSM1 Vision Ingress. Final_Eye v1.0 sovereign vision textbook." />
+  <link rel="canonical" href="https://zacharygeurts.github.io/Final_Eye/chapters/02-zocrsm1-vision.html" />
+  <meta name="theme-color" content="#05070a" />
+  <meta property="og:title" content="02 — ZOCRSM1 Vision Ingress" />
+  <meta property="og:image" content="https://zacharygeurts.github.io/Final_Eye/assets/images/chapters/ch01-vision-ingress.jpg" />
+  <link rel="stylesheet" href="../css/final-eye.css" />
+  <link rel="stylesheet" href="../css/chapters.css" />
+  <link rel="stylesheet" href="../css/reader.css" />
+</head>
+<body class="chapter-page accent-vision">
+  <nav class="top"><div class="inner">
+    <a class="logo" href="../index.html">THE FINAL EYEBALL <span class="v-badge">v1.0</span></a>
+    <ul>
+      <li><a href="../index.html#chapters">Chapters</a></li>
+      <li><a href="https://github.com/ZacharyGeurts/Final_Eye">GitHub</a></li>
+      <li><a href="https://zacharygeurts.github.io/Field_Primer/">Field Primer</a></li>
+    </ul>
+  </div></nav>
+  <header class="chapter-hero" style="background-image:url('../assets/images/chapters/ch01-vision-ingress.jpg')">
+    <div class="chapter-hero-overlay"></div>
+    <div class="chapter-hero-content">
+      <p class="eyebrow">Chapter 02 · Final_Eye v1.0</p>
+      <h1>ZOCRSM1 Vision Ingress</h1>
+      <p class="lead" style="margin-top:0.75rem;color:var(--muted)">Capture · preserve · pattern · offense — the silent pipeline</p>
+    </div>
+  </header>
+  <main class="chapter-main">
+    <nav class="chapter-nav"><a class="btn secondary" href="01-preface.html">← Ch 1</a> <a class="btn" href="03-grkmf-gvc1.html">Ch 3 →</a></nav>
+    <p class="eyebrow">Chapter 02 · ZOCRSM1 Vision Ingress</p>
+
+    <div class="objectives">
+      <h2 id="toc-02-objectives">Learning objectives</h2>
+      <ol><li>Trace a frame from <code>look</code> through preserve and pattern layers.</li><li>Explain bullet_train fast path versus full cascade.</li><li>Name offense actions on threat ingress.</li><li>Configure vigilance without mandatory streaming.</li></ol>
+    </div>
+
+    <nav class="chapter-toc" aria-label="In this chapter">
+      <h2>In this chapter</h2>
+      <ol><li><a href="#toc-02-pipeline">The ingress pipeline</a></li><li><a href="#toc-02-preserve">Preserve cascade — RTX, XWD, hold</a></li><li><a href="#toc-02-pattern">Pattern security — foreign weave rejection</a></li><li><a href="#toc-02-offense">Offense layer — defense requires offense</a></li><li><a href="#toc-02-vigilance">Vigilance — autonomous watch</a></li></ol>
+    </nav>
+
+    <div class="on-the-way">
+      <h2 id="toc-02-on-the-way">On the way</h2>
+      <p class="on-the-way-lead">Chapter 2 is the engineering spine of sight. You will follow one frame from operator intent through vault seals, learn when bullet_train skips heavy paths, and see how vigilance watches without flashing the display.</p>
+      <figure class="on-the-way-figure">
+        <img src="../assets/images/chapters/ch01-vision-ingress.jpg" alt="ZOCRSM1 Vision Ingress" loading="lazy" />
+        <figcaption>Figure 2.0 — ZOCRSM1 Vision Ingress</figcaption>
+      </figure>
+      <ul class="on-the-way-journey"><li>look → preserve → pattern</li><li>bullet_train 465 fps doctrine</li><li>offense on threat</li><li>sentinel vigilance</li></ul>
+    </div>
+
+    
+<h2 id="toc-02-pipeline">The ingress pipeline</h2>
+<p>ZOCRSM1 is the <span class="tag impl">Implemented</span> field vision format for Final_Eye — sub-micron video doctrine with WRDT-inspired frame envelopes and a SHA-256 hash chain. The pipeline begins when an operator or agent calls <code>POST /api/look</code> or arms robotics. <span class="tag doctrine">Doctrine</span> mandates silent capture: no screen flash, no whiteout tools — additives registry rejects flash paths before vault.</p>
+<p>Modules chain in order: <code>zocr_capture</code> grabs a frame via approved additives (XWD silent, grim, mss); <code>zocr_preserve</code> runs the failover cascade; <code>zocr_pattern</code> stamps provenance weave and scans for foreign grids; <code>zocr_offense</code> records strikes when threats match; optional <code>zocr_video</code> seals into ZOCRSM1 transport. Every step appends to jsonl ledgers you can grep after an incident.</p>
+<figure class="figure"><img src="../assets/images/chapters/ch01-vision-ingress.jpg" alt="Ingress pipeline" loading="lazy" /><figcaption>Figure 2.1 — Vision ingress layers: capture, preserve, pattern, offense — one timeline.</figcaption></figure>
+
+<h2 id="toc-02-preserve">Preserve cascade — RTX, XWD, hold</h2>
+<p>Preserve is not optional vanity — it is the RTX → XWD → hold failover that keeps <em>last-good</em> frames when live capture fails. <span class="tag impl">Implemented</span> <code>zocr_preserve.py</code> writes under <code>data/preserve/</code> with threat doctrine from Hostess7 alignment. When bullet_train mode runs, preserve cascade may be skipped per profile to hit emit fps targets — that trade is documented in <code>data/zocrsm1-benchmark.json</code>.</p>
+<p>Operators should verify preserve status after long sessions: <code>GET /api/preserve</code> returns cascade posture and last-good paths. If thermo or load spikes, the assist contract narrows capture width before preserve thrashes — bounded tenant behavior, not runaway capture.</p>
+
+<h2 id="toc-02-pattern">Pattern security — foreign weave rejection</h2>
+<p>Real internal imaging requires provenance. <span class="tag impl">Implemented</span> pattern_stamp embeds a 64-bit corner weave from session, sequence, and mandate digest. pattern_scan rejects moiré, foreign grids, and injection patterns before frames enter the vault. This is offense at the pixel layer — vision defense starts at ingress, not in a quarterly audit.</p>
+<pre class="eq">python3 zocr_watch.py pattern-scan data/preserve/last-good.png</pre>
+
+<h2 id="toc-02-offense">Offense layer — defense requires offense</h2>
+<p><span class="tag doctrine">Doctrine</span>: Defense of vision requires offense. The offense module maps threats to acted responses: seal_threat, pattern_strike, reject_and_failover. Entity eyeballs may forward to weapons when truth parameters fire. This is not metaphor for “being aggressive” — it is <span class="tag impl">Implemented</span> ledgered action you can replay from <code>data/offense-ledger.jsonl</code>.</p>
+
+<h2 id="toc-02-vigilance">Vigilance — autonomous watch</h2>
+<p>Vigilance is how the eye <strong>operates on its own</strong> without a human clicking Look every five seconds. <span class="tag impl">Implemented</span> <code>vigilance_start</code> with profile <code>sentinel</code> runs on an interval (default ~4s). It respects kill switches and mandate gates — if vision is tripped, vigilance stops cleanly. Start: <code>./start.sh --vigilance</code> or API. Stop: <code>vigilance-stop</code>. Autonomous, but sovereign: local choke points still apply.</p>
+
+<h2 id="toc-02-stereo">Stereo rig and ocular spectrum</h2>
+<p>Beyond monocular look, Final_Eye supports stereoscopic rigs and species-class eye profiles. <span class="tag impl">Implemented</span> <code>zocr_stereo.py</code> presets: monocular, stereo_human, stereo_bird, compound_six. The ocular spectrum module teaches photoreceptor weights per profile — human, bird, raptor, reptile, fish, insect, mammal_night, snake_pit. This is how one sovereign eye adapts perception without importing a cloud model that phones home.</p>
+<p>Configure rig: <code>POST /api/rig/configure {"preset":"stereo_bird"}</code>. Perceive merges left/right or compound paths into witness JSON for entity eyeballs. Every perceive hook still passes pattern and preserve gates — autonomy does not mean skip security.</p>
+<h2 id="toc-02-lab">Week-one ingress lab</h2>
+<ol>
+<li><code>./start.sh --look</code> — one frame, jsonl session append.</li>
+<li><code>GET /api/preserve</code> — note last-good path and cascade state.</li>
+<li><code>python3 zocr_watch.py pattern-scan data/preserve/last-good.png</code> if file exists.</li>
+<li>Start vigilance sentinel; watch <code>data/vigilance-log.jsonl</code> for 60s; stop cleanly.</li>
+<li>Trip vision kill; confirm look blocked; release all switches.</li>
+</ol>
+<h2 id="toc-02-rocks">Honest rocks — ingress</h2>
+<table class="rocks"><thead><tr><th>Claim</th><th>Label</th><th>Verify</th></tr></thead><tbody>
+<tr><td>Silent capture default</td><td><span class="tag impl">Implemented</span></td><td><code>silent_capture_policy()</code></td></tr>
+<tr><td>465.5 fps bullet_train</td><td><span class="tag measured">Measured</span></td><td><code>zocrsm1-benchmark.json</code></td></tr>
+<tr><td>Cloud omniscient vision</td><td><span class="tag meta">Metaphor</span></td><td>Rejected — local scope</td></tr>
+</tbody></table>
+<p>Correlate stderr, preserve json, and offense ledger after any anomaly. Time is linear — logs are timeline. The eye may run alone in vigilance, but it never hides its receipts.</p>
+
+
+    <div class="chapter-summary-box">
+      <h2 id="toc-02-summary">Chapter summary</h2>
+      <p>Re-read the honesty labels on every claim you repeat to management. Grep beats screenshots.</p>
+    </div>
+
+    <h2 id="toc-02-study">Study questions</h2>
+    <ol><li>What does bullet_train skip per frame and why?</li><li>How does pattern_stamp prove provenance?</li><li>When would you start vigilance versus a one-shot look?</li></ol>
+
+    <nav class="chapter-nav"><a class="btn secondary" href="01-preface.html">← Ch 1</a> <a class="btn" href="03-grkmf-gvc1.html">Ch 3 →</a></nav>
+  </main>
+  <button type="button" class="reader-launch" id="reader-launch" aria-label="Open reader mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
+    Read
+  </button>
+  <script src="../js/reader.js" defer></script>
+</body>
+</html>

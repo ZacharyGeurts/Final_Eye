@@ -81,7 +81,7 @@ Download from [GitHub Releases](https://github.com/ZacharyGeurts/Final_Eye/relea
 
 Build locally: `python3 scripts/build_release.py`
 
-**Textbook (GitHub Pages):** https://zacharygeurts.github.io/Final_Eye/
+**Textbook (GitHub Pages):** https://zacharygeurts.github.io/Final_Eye/ — 8 illustrated chapters, reader mode. Rebuild: `python3 scripts/build_textbook.py`
 
 ## Docker (Queen/Hostess co-deployment)
 

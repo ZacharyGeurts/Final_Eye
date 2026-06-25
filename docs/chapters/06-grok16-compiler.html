@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>06 — Grok16 Field Compiler · The Final Eyeball</title>
+  <meta name="description" content="Chapter 6: Grok16 Field Compiler. Final_Eye v1.0 sovereign vision textbook." />
+  <link rel="canonical" href="https://zacharygeurts.github.io/Final_Eye/chapters/06-grok16-compiler.html" />
+  <meta name="theme-color" content="#05070a" />
+  <meta property="og:title" content="06 — Grok16 Field Compiler" />
+  <meta property="og:image" content="https://zacharygeurts.github.io/Final_Eye/assets/images/chapters/ch05-grok16-forge.jpg" />
+  <link rel="stylesheet" href="../css/final-eye.css" />
+  <link rel="stylesheet" href="../css/chapters.css" />
+  <link rel="stylesheet" href="../css/reader.css" />
+</head>
+<body class="chapter-page accent-compiler">
+  <nav class="top"><div class="inner">
+    <a class="logo" href="../index.html">THE FINAL EYEBALL <span class="v-badge">v1.0</span></a>
+    <ul>
+      <li><a href="../index.html#chapters">Chapters</a></li>
+      <li><a href="https://github.com/ZacharyGeurts/Final_Eye">GitHub</a></li>
+      <li><a href="https://zacharygeurts.github.io/Field_Primer/">Field Primer</a></li>
+    </ul>
+  </div></nav>
+  <header class="chapter-hero" style="background-image:url('../assets/images/chapters/ch05-grok16-forge.jpg')">
+    <div class="chapter-hero-overlay"></div>
+    <div class="chapter-hero-content">
+      <p class="eyebrow">Chapter 06 · Final_Eye v1.0</p>
+      <h1>Grok16 Field Compiler</h1>
+      <p class="lead" style="margin-top:0.75rem;color:var(--muted)">g16 gnu17 · g++26 kernel · field_opt · Queen forge</p>
+    </div>
+  </header>
+  <main class="chapter-main">
+    <nav class="chapter-nav"><a class="btn secondary" href="05-war-dishes.html">← Ch 5</a> <a class="btn" href="07-entity-eyeballs.html">Ch 7 →</a></nav>
+    <p class="eyebrow">Chapter 06 · Grok16 Field Compiler</p>
+
+    <div class="objectives">
+      <h2 id="toc-06-objectives">Learning objectives</h2>
+      <ol><li>Compile C smoke vision_probe.c with g16.</li><li>Compile field_dispatch.cpp kernel with g++16.</li><li>Compare field_opt vs field_compute bench.</li><li>Run Queen forge compiler_probe.</li></ol>
+    </div>
+
+    <nav class="chapter-toc" aria-label="In this chapter">
+      <h2>In this chapter</h2>
+      <ol><li><a href="#toc-06-grok16">Grok16 status</a></li><li><a href="#toc-06-c">C smoke — vision_probe.c</a></li><li><a href="#toc-06-kernel">C++ kernel — field_dispatch</a></li><li><a href="#toc-06-bench">Profile optimization bench</a></li><li><a href="#toc-06-forge">Queen forge integration</a></li></ol>
+    </nav>
+
+    <div class="on-the-way">
+      <h2 id="toc-06-on-the-way">On the way</h2>
+      <p class="on-the-way-lead">Chapter 6 is the compiler forge. Grok16 builds sovereign vision kernels; Queen forge probes RTX sub-layer. field_opt wins the measured 2ms run bench on reference host.</p>
+      <figure class="on-the-way-figure">
+        <img src="../assets/images/chapters/ch05-grok16-forge.jpg" alt="Grok16 Field Compiler" loading="lazy" />
+        <figcaption>Figure 6.0 — Grok16 Field Compiler</figcaption>
+      </figure>
+      <ul class="on-the-way-journey"><li>g16 gnu17</li><li>g++26 kernel</li><li>field_opt default</li><li>compiler_probe</li></ul>
+    </div>
+
+    
+<h2 id="toc-06-grok16">Grok16 status</h2>
+<p><span class="tag impl">Implemented</span> <code>GET /api/grok16</code> — product Grok16, cxx_std gnu++26, c_std gnu17, profiles: field_opt, ai, field_compute, vulkan_rtx. Primary field compiler per mandate; Queen <code>lib/queen-forge.py compiler_probe</code> as RTX sub-layer witness.</p>
+<figure class="figure"><img src="../assets/images/chapters/ch05-grok16-forge.jpg" alt="Grok16 forge" loading="lazy" /><figcaption>Figure 6.1 — Grok16 forge: C and C++ streams through field_opt flames; Queen gears behind.</figcaption></figure>
+
+<h2 id="toc-06-c">C smoke — vision_probe.c</h2>
+<p><span class="tag impl">Implemented</span> <code>field/vision_probe.c</code> — gnu17 entropy fold loop, <code>FIELD_ENTROPY_DISPATCH</code> macro. Harness: <code>python3 zocr_field_compile.py c</code> or <code>GET /api/field/compile?mode=c</code>. Compiles with g16 + field_opt flags from <code>grok16-profile-flags.py</code>.</p>
+
+<h2 id="toc-06-kernel">C++ kernel — field_dispatch</h2>
+<p>Vision kernel source: <code>Grok16/examples/field-canvas-kernel/field_dispatch.cpp</code>. g++16 builds with gnu++26. Run metrics: entropy_micro, phi_micro, wave_speed_micro — grep stdout after compile run.</p>
+
+<h2 id="toc-06-bench">Profile optimization bench</h2>
+<p><span class="tag measured">Measured</span>: field_opt and field_compute both ~2ms C+kernel run; field_opt recommended default. <code>GET /api/field/compile/optimize</code> writes <code>data/field-compiler-bench.json</code>. Optimize the hot path, not the PowerPoint.</p>
+
+<h2 id="toc-06-forge">Queen forge integration</h2>
+<p><span class="tag impl">Implemented</span> <code>zocr_field_compiler.probe_compilers()</code> calls Queen forge when not <code>FINAL_EYE_LOW_END=1</code>. FIELDC v4 pipeline .fld → AMMO .OBJ documented in compiler doctrine. Two compilers, one mandate — Grok16 primary, FieldFieldCc inside AmmoOS shell.</p>
+
+<h2 id="toc-06-profiles">Profile flags and mode map</h2>
+<p>Grok16 profiles are not cosmetic labels. <code>grok16-profile-flags.py field_opt c</code> emits gnu17 flags including <code>-DGROK16_PROFILE_FIELD_OPT=1</code> and field macros. Mode map: war → vulkan_rtx, dishes → ai, patrol → field_opt. Eye profile map sends raptor and bird to field_opt for vision kernels. The compiler obeys the same mandate as capture — sealed, local, grep-able.</p>
+<p>FIELDC v4 remains the AmmoOS shell path — .fld to ASM to AMMO .OBJ inside FieldFieldCc. RTX binary readiness may be false on hosts without Queen browser build; doctrine still documents the pipeline so operators do not confuse “not built here” with “not real.”</p>
+<h2 id="toc-06-lab">Compiler forge lab</h2>
+<ol>
+<li><code>python3 zocr_field_compile.py c</code> — g16 smoke ok.</li>
+<li><code>python3 zocr_field_compile.py kernel</code> — metrics in stdout.</li>
+<li><code>python3 zocr_field_compile.py optimize</code> — best_profile field_opt.</li>
+<li><code>GET /api/field/compiler/probe</code> — Queen forge posture (may timeout on low-end).</li>
+</ol>
+<p>Compiler optimization is measured, not myth. If field_compute beats field_opt on your RTX host, update the bench json and document — honesty labels require it. Default remains field_opt until measured evidence says otherwise.</p>
+
+
+    <div class="chapter-summary-box">
+      <h2 id="toc-06-summary">Chapter summary</h2>
+      <p>Re-read the honesty labels on every claim you repeat to management. Grep beats screenshots.</p>
+    </div>
+
+    <h2 id="toc-06-study">Study questions</h2>
+    <ol><li>Which profile is default for patrol mode?</li><li>What does FIELD_ENTROPY_DISPATCH test in C smoke?</li><li>How do you invoke full compile test via API?</li></ol>
+
+    <nav class="chapter-nav"><a class="btn secondary" href="05-war-dishes.html">← Ch 5</a> <a class="btn" href="07-entity-eyeballs.html">Ch 7 →</a></nav>
+  </main>
+  <button type="button" class="reader-launch" id="reader-launch" aria-label="Open reader mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
+    Read
+  </button>
+  <script src="../js/reader.js" defer></script>
+</body>
+</html>

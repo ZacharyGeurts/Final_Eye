@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>05 — War &amp; Dishes — Robotics Modes · The Final Eyeball</title>
+  <meta name="description" content="Chapter 5: War &amp; Dishes — Robotics Modes. Final_Eye v1.0 sovereign vision textbook." />
+  <link rel="canonical" href="https://zacharygeurts.github.io/Final_Eye/chapters/05-war-dishes.html" />
+  <meta name="theme-color" content="#05070a" />
+  <meta property="og:title" content="05 — War &amp; Dishes — Robotics Modes" />
+  <meta property="og:image" content="https://zacharygeurts.github.io/Final_Eye/assets/images/chapters/ch04-war-dishes.jpg" />
+  <link rel="stylesheet" href="../css/final-eye.css" />
+  <link rel="stylesheet" href="../css/chapters.css" />
+  <link rel="stylesheet" href="../css/reader.css" />
+</head>
+<body class="chapter-page accent-war">
+  <nav class="top"><div class="inner">
+    <a class="logo" href="../index.html">THE FINAL EYEBALL <span class="v-badge">v1.0</span></a>
+    <ul>
+      <li><a href="../index.html#chapters">Chapters</a></li>
+      <li><a href="https://github.com/ZacharyGeurts/Final_Eye">GitHub</a></li>
+      <li><a href="https://zacharygeurts.github.io/Field_Primer/">Field Primer</a></li>
+    </ul>
+  </div></nav>
+  <header class="chapter-hero" style="background-image:url('../assets/images/chapters/ch04-war-dishes.jpg')">
+    <div class="chapter-hero-overlay"></div>
+    <div class="chapter-hero-content">
+      <p class="eyebrow">Chapter 05 · Final_Eye v1.0</p>
+      <h1>War &amp; Dishes — Robotics Modes</h1>
+      <p class="lead" style="margin-top:0.75rem;color:var(--muted)">Combat 3–20 fps · cinema 240 · arm API · assist contract</p>
+    </div>
+  </header>
+  <main class="chapter-main">
+    <nav class="chapter-nav"><a class="btn secondary" href="04-security-silent.html">← Ch 4</a> <a class="btn" href="06-grok16-compiler.html">Ch 6 →</a></nav>
+    <p class="eyebrow">Chapter 05 · War &amp; Dishes — Robotics Modes</p>
+
+    <div class="objectives">
+      <h2 id="toc-05-objectives">Learning objectives</h2>
+      <ol><li>Arm war and dishes modes via robotics API.</li><li>State fps ranges and video profiles for each mode.</li><li>Explain assist contract bounded usage.</li><li>Run weaponize cycle — 37+ weapons posture.</li></ol>
+    </div>
+
+    <nav class="chapter-toc" aria-label="In this chapter">
+      <h2>In this chapter</h2>
+      <ol><li><a href="#toc-05-modes">Two final modes</a></li><li><a href="#toc-05-war">War — field combat</a></li><li><a href="#toc-05-dishes">Dishes — domestic cinema</a></li><li><a href="#toc-05-arm">Arm API and stream opt-in</a></li><li><a href="#toc-05-assist">Assist contract — one tenant</a></li></ol>
+    </nav>
+
+    <div class="on-the-way">
+      <h2 id="toc-05-on-the-way">On the way</h2>
+      <p class="on-the-way-lead">Chapter 5 is robotics posture. War-sharp, dish-gentle — one whole sight, never flashed. You will arm modes, read fps doctrine, and see how assist prevents overflow on shared systems.</p>
+      <figure class="on-the-way-figure">
+        <img src="../assets/images/chapters/ch04-war-dishes.jpg" alt="War &amp; Dishes — Robotics Modes" loading="lazy" />
+        <figcaption>Figure 5.0 — War &amp; Dishes — Robotics Modes</figcaption>
+      </figure>
+      <ul class="on-the-way-journey"><li>war 3–20 fps</li><li>dishes 240 doctrine</li><li>POST /api/robotics/arm</li><li>FINAL_EYE_ASSIST</li></ul>
+    </div>
+
+    
+<h2 id="toc-05-modes">Two final modes</h2>
+<p>The Final Eyeball exposes <span class="tag impl">Implemented</span> final modes in <code>data/final-eyeball.json</code>: <strong>war</strong> and <strong>dishes</strong> are the robotics review pair; patrol, engage, night_watch, submicron, preserve extend the same eye module. Rule: <em>War-sharp, dish-gentle — one whole sight, never flashed.</em></p>
+<figure class="figure"><img src="../assets/images/chapters/ch04-war-dishes.jpg" alt="War and dishes" loading="lazy" /><figcaption>Figure 5.1 — Split posture: tactical low-light war vision versus bright cinema dishes mode.</figcaption></figure>
+
+<h2 id="toc-05-war">War — field combat</h2>
+<p><span class="tag impl">Implemented</span> War mode maps to Grok16 profile <code>vulkan_rtx</code> for vision kernels; combat fps range <span class="tag doctrine">Doctrine</span> 3–20, AI on demand. Video profile <code>combat</code>. Arm without auto-stream: <code>{"mode":"war","start_stream":false}</code> — sovereignty: stream is opt-in, not mandatory poll.</p>
+
+<h2 id="toc-05-dishes">Dishes — domestic cinema</h2>
+<p>Dishes mode uses AI-tunable media paths — up to <span class="tag doctrine">Doctrine</span> 240 fps, cinema_16k resolution declared. Grok16 profile <code>ai</code> for compiler tuning. This is the gentle hemisphere of the eye — same seals, different thermo and fps rails.</p>
+
+<h2 id="toc-05-arm">Arm API and stream opt-in</h2>
+<pre class="eq">curl -X POST http://127.0.0.1:9479/api/robotics/arm \
+  -H 'Content-Type: application/json' \
+  -d '{"mode":"war","start_stream":false}'</pre>
+<p>Weaponize: <code>POST /api/eye/weaponize {"mode":"war"}</code> — 37+ weapons, 8 racks. The eye operates; the operator arms when ready.</p>
+
+<h2 id="toc-05-assist">Assist contract — one tenant</h2>
+<p><span class="tag impl">Implemented</span> <code>zocr_contract.py</code> — posture assistive, rule: one tenant in a shared system, no overflow. Budgets per window for look, capture, stream, neural. Eye rails narrow width under load. Autonomous vigilance still respects these rails — sovereignty includes not drowning the host.</p>
+
+<h2 id="toc-05-final">Final eyeball voices and speak</h2>
+<p>The final eyeball module exposes twelve voices and mode-specific speak strings. <code>GET /api/eye/final/speak?mode=war&voice=tactical</code> returns doctrine-coded prose for HUD and ops — <span class="tag meta">Metaphor</span> layer for operator morale, not autonomous LOAC decisions. War mode sharpens language; dishes mode softens thermo references; patrol binds field_opt compiler witness on the JSON line.</p>
+<p>Modes extend beyond the robotics pair: night_watch for low-light sentinel, submicron for fabric-scaled capture, preserve for cascade-first posture. Arm the mode that matches mission; do not arm war for dishes washing — fps and offense thresholds differ.</p>
+<h2 id="toc-05-lab">Robotics arm lab</h2>
+<ol>
+<li>Arm war <code>start_stream:false</code> — read robotics context JSON.</li>
+<li>Arm dishes — note fps doctrine vs measured host throughput.</li>
+<li>Weaponize war — count weapons_total ≥ 37 in response.</li>
+<li>Run grok16_eye_tune for war/raptor and patrol/bird — both field_opt.</li>
+<li>Under load, watch contract defer_ms — assist yields before flood.</li>
+</ol>
+<p>War-sharp and dish-gentle are not two products — one Final Eyeball, two hemispheres. Same seals, same kill switches, different fps rails. Document which mode you armed in operator journal; management slides lie, jsonl does not.</p>
+
+
+    <div class="chapter-summary-box">
+      <h2 id="toc-05-summary">Chapter summary</h2>
+      <p>Re-read the honesty labels on every claim you repeat to management. Grep beats screenshots.</p>
+    </div>
+
+    <h2 id="toc-05-study">Study questions</h2>
+    <ol><li>Why does war cap combat fps differently than dishes?</li><li>What does start_stream:false do on arm?</li><li>How does contract defer under load?</li></ol>
+
+    <nav class="chapter-nav"><a class="btn secondary" href="04-security-silent.html">← Ch 4</a> <a class="btn" href="06-grok16-compiler.html">Ch 6 →</a></nav>
+  </main>
+  <button type="button" class="reader-launch" id="reader-launch" aria-label="Open reader mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
+    Read
+  </button>
+  <script src="../js/reader.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>03 — GRKMF1 &amp; GVC1 — Not MPEG · The Final Eyeball</title>
+  <meta name="description" content="Chapter 3: GRKMF1 &amp; GVC1 — Not MPEG. Final_Eye v1.0 sovereign vision textbook." />
+  <link rel="canonical" href="https://zacharygeurts.github.io/Final_Eye/chapters/03-grkmf-gvc1.html" />
+  <meta name="theme-color" content="#05070a" />
+  <meta property="og:title" content="03 — GRKMF1 &amp; GVC1 — Not MPEG" />
+  <meta property="og:image" content="https://zacharygeurts.github.io/Final_Eye/assets/images/chapters/ch02-gvc1-envelope.jpg" />
+  <link rel="stylesheet" href="../css/final-eye.css" />
+  <link rel="stylesheet" href="../css/chapters.css" />
+  <link rel="stylesheet" href="../css/reader.css" />
+</head>
+<body class="chapter-page accent-codec">
+  <nav class="top"><div class="inner">
+    <a class="logo" href="../index.html">THE FINAL EYEBALL <span class="v-badge">v1.0</span></a>
+    <ul>
+      <li><a href="../index.html#chapters">Chapters</a></li>
+      <li><a href="https://github.com/ZacharyGeurts/Final_Eye">GitHub</a></li>
+      <li><a href="https://zacharygeurts.github.io/Field_Primer/">Field Primer</a></li>
+    </ul>
+  </div></nav>
+  <header class="chapter-hero" style="background-image:url('../assets/images/chapters/ch02-gvc1-envelope.jpg')">
+    <div class="chapter-hero-overlay"></div>
+    <div class="chapter-hero-content">
+      <p class="eyebrow">Chapter 03 · Final_Eye v1.0</p>
+      <h1>GRKMF1 &amp; GVC1 — Not MPEG</h1>
+      <p class="lead" style="margin-top:0.75rem;color:var(--muted)">Proprietary envelope · tamper rejection · bullet_train benchmarks</p>
+    </div>
+  </header>
+  <main class="chapter-main">
+    <nav class="chapter-nav"><a class="btn secondary" href="02-zocrsm1-vision.html">← Ch 2</a> <a class="btn" href="04-security-silent.html">Ch 4 →</a></nav>
+    <p class="eyebrow">Chapter 03 · GRKMF1 &amp; GVC1 — Not MPEG</p>
+
+    <div class="objectives">
+      <h2 id="toc-03-objectives">Learning objectives</h2>
+      <ol><li>Contrast GVC1/GRKMF1 with MPEG transport.</li><li>Run GVC1 integrity verify and interpret tamper rejection.</li><li>Read bullet_train benchmark table — 465.5 fps at 4K.</li><li>Explain AI-tunable dishes mode up to 240 fps doctrine.</li></ol>
+    </div>
+
+    <nav class="chapter-toc" aria-label="In this chapter">
+      <h2>In this chapter</h2>
+      <ol><li><a href="#toc-03-not-mpeg">Why not MPEG</a></li><li><a href="#toc-03-gvc1">GVC1 envelope — seal and unpack</a></li><li><a href="#toc-03-grkmf">GRKMF1 container</a></li><li><a href="#toc-03-bench">Benchmarks — bullet_train measured</a></li><li><a href="#toc-03-tune">AI tuning — war vs dishes</a></li></ol>
+    </nav>
+
+    <div class="on-the-way">
+      <h2 id="toc-03-on-the-way">On the way</h2>
+      <p class="on-the-way-lead">Chapter 3 is media sovereignty. You will see why Final_Eye refuses MPEG dependency, how GVC1 seals payloads, and what the bullet_train numbers actually measured on host.</p>
+      <figure class="on-the-way-figure">
+        <img src="../assets/images/chapters/ch02-gvc1-envelope.jpg" alt="GRKMF1 &amp; GVC1 — Not MPEG" loading="lazy" />
+        <figcaption>Figure 3.0 — GRKMF1 &amp; GVC1 — Not MPEG</figcaption>
+      </figure>
+      <ul class="on-the-way-journey"><li>GVC1 52-byte header</li><li>tamper rejected</li><li>465.5 emit fps</li><li>cinema_16k doctrine</li></ul>
+    </div>
+
+    
+<h2 id="toc-03-not-mpeg">Why not MPEG</h2>
+<p>Final_Eye ships <span class="tag doctrine">Doctrine</span> proprietary media: <strong>GRKMF1</strong> container, <strong>GVC1</strong> codec. Not MPEG. Not H.264 as primary transport for field seals. The stack lives in <code>GrokMediaFormat/grkmf/</code> — envelope, stream, movie, tune modules wired through <code>zocr_grkmf.py</code>.</p>
+<p>MPEG ecosystems assume licensed pools, GOP latency, and decoder monoculture. Field vision needs tamper-evident envelopes, sub-micron fabric_nm_per_px doctrine, and hash-chained frames — none of which MPEG was asked to provide. Operators who grep <code>verify_gvc1_integrity()</code> get a boolean truth, not a patent slide deck.</p>
+<figure class="figure"><img src="../assets/images/chapters/ch02-gvc1-envelope.jpg" alt="GVC1 envelope" loading="lazy" /><figcaption>Figure 3.1 — GVC1 envelope protects frames; broken MPEG chains fall away from the sovereign path.</figcaption></figure>
+
+<h2 id="toc-03-gvc1">GVC1 envelope — seal and unpack</h2>
+<p><span class="tag impl">Implemented</span> <code>grkmf.envelope.seal_payload</code> writes a 52-byte header plus SHA-256 digest. <code>zocr_security.verify_gvc1_integrity()</code> round-trips sample payload and proves <code>tamper_rejected</code> on bit flip. Stream egress uses AES-GCM when cryptography is installed; HMAC-sealed fallback otherwise — both modes labeled in API responses.</p>
+<pre class="eq">python3 -c "from zocr_security import verify_gvc1_integrity; print(verify_gvc1_integrity())"</pre>
+
+<h2 id="toc-03-grkmf">GRKMF1 container</h2>
+<p>GRKMF1 wraps GVC1 streams for robotics transport. ZOCRSM1 video module calls into grkmf for tune locks during combat profiles. The assist contract prevents tune from overflowing shared hosts — <code>FINAL_EYE_ASSIST=1</code> is default in Docker and release packages.</p>
+
+<h2 id="toc-03-bench">Benchmarks — bullet_train measured</h2>
+<p><span class="tag measured">Measured</span> on recorded host (<code>data/zocrsm1-benchmark.json</code>): profile <code>bullet_240</code>, mode <code>bullet_train</code>, target 480 fps, <strong>emit 465.5 fps</strong>, 4K width 3840, 4k_ok true. Dodge rule: double fps — dodge the bullet. This is not marketing — reproduce with <code>GET /api/video/benchmark</code> on your RTX field host.</p>
+
+<h2 id="toc-03-tune">AI tuning — war vs dishes</h2>
+<p><span class="tag impl">Implemented</span> <code>POST /api/video/tune</code> sets fps/width/height. <code>POST /api/video/ai-tune</code> uses contract-bounded assist. War mode: combat 3–20 fps. Dishes mode: cinema up to <span class="tag doctrine">Doctrine</span> 240 fps, resolution max 15360×8640 declared in product metadata — host-dependent in practice.</p>
+
+<h2 id="toc-03-stream">Stream chain and sub-micron doctrine</h2>
+<p>Each sealed frame links to the previous via <code>seal_frame</code> in <code>zocr_field.py</code> — prev_seal, seq, fps_profile, power_mode hashed into the next seal. <code>verify_chain</code> walks the tail of stream-index.jsonl and reports breaks. Sub-micron video is <span class="tag doctrine">Doctrine</span> adaptive fabric_nm_per_px tied to AMOURANTHRTX tide — measured width scales with host load, not wishful 16K on a laptop.</p>
+<p>MJPEG transport remains a fast path for in-memory preview — ZOCRSM_MJPEG label in mandate formats table. Bullet_train skips heavy per-frame work to honor emit fps; full cascade runs when combat fidelity demands preserve and pattern on every frame. Know which profile you armed before interpreting benchmark charts.</p>
+<h2 id="toc-03-lab">Codec integrity lab</h2>
+<ol>
+<li>Run <code>verify_gvc1_integrity()</code> — assert ok and tamper_rejected.</li>
+<li>Round-trip <code>encrypt_stream_payload</code> / <code>decrypt_stream_payload</code> on sample bytes.</li>
+<li>Read benchmark summary — note best_emit_fps and 4k_ok.</li>
+<li>POST ai-tune with assist on; read contract_status for bounded posture.</li>
+</ol>
+<p>When sharing GRKMF artifacts off-machine, ship the envelope and SHA256SUMS from the release — not raw PNG dumps without seals. Recipients verify digest before trust. This is how the eye shares information without surrendering integrity.</p>
+<h2 id="toc-03-drill">Drill — explain to a reviewer</h2>
+<p>Write one paragraph why Final_Eye is not MPEG. Use three labels correctly. If the reviewer asks for H.264 primary transport, answer with GVC1 envelope and hash chain — implemented paths, not roadmap fiction.</p>
+
+
+    <div class="chapter-summary-box">
+      <h2 id="toc-03-summary">Chapter summary</h2>
+      <p>Re-read the honesty labels on every claim you repeat to management. Grep beats screenshots.</p>
+    </div>
+
+    <h2 id="toc-03-study">Study questions</h2>
+    <ol><li>What happens when a GVC1 digest mismatches?</li><li>Why is bullet_train allowed to skip preserve per frame?</li><li>Which mode allows AI tunable fps up to 240?</li></ol>
+
+    <nav class="chapter-nav"><a class="btn secondary" href="02-zocrsm1-vision.html">← Ch 2</a> <a class="btn" href="04-security-silent.html">Ch 4 →</a></nav>
+  </main>
+  <button type="button" class="reader-launch" id="reader-launch" aria-label="Open reader mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
+    Read
+  </button>
+  <script src="../js/reader.js" defer></script>
+</body>
+</html>
