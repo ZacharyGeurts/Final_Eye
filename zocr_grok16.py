@@ -177,7 +177,7 @@ def grok16_eye_tune(
 def grok16_eye_witness(*, mode: str | None = None, eye_profile: str | None = None) -> dict[str, Any]:
     st = grok16_status()
     tune = grok16_eye_tune(mode=mode, eye_profile=eye_profile)
-    return {
+    out = {
         "field_compiler": "Grok16",
         "g16_version": st.get("g16_version"),
         "dumpversion": st.get("dumpversion"),
@@ -189,3 +189,9 @@ def grok16_eye_witness(*, mode: str | None = None, eye_profile: str | None = Non
         "wave_phase": tune.get("wave_phase"),
         "root": st.get("root"),
     }
+    try:
+        from zocr_eye_stoard import stoard_for_field_compiler
+        out["stoard"] = stoard_for_field_compiler()
+    except ImportError:
+        pass
+    return out

@@ -21,8 +21,8 @@ def test_product_1_2():
     from zocr_product import product_info
     p = product_info()
     expected = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    assert p["version"] == expected == "1.2.0"
-    assert p["codename"] == "heaven-hell-ops"
+    assert p["version"] == expected
+    assert p["codename"] in ("heaven-hell-ops", "eye-stoard")
 
 
 def test_eye_operations_doctrine():

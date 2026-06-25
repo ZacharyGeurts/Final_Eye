@@ -241,15 +241,14 @@ def write_release_notes(version: str) -> Path:
 
 **The Final Eyeball** — sovereign field robotics vision for Linux, Windows, macOS, and source.
 
-## Highlights (v1.2 — heaven-hell-ops)
-- **Eye operations** — offense at qualified enemy only; heaven/hell gate on every salvo
-- **Enemy discernment** — weapons as weapons, targets via lie_markers (not a people roster)
-- **Disarmament lane** — depart with weapons; unwilling → removal escalates per hell doctrine
-- API: `/api/eye/operations`, `/api/eye/authority`, `/api/eye/teach/doctrine?lesson=enemy`
-- Threat-only fire: `POST /api/eye/weapons/fire {{"threat":"provenance_mismatch"}}` — eye selects salvo
+## Highlights (v1.2.1 — eye-stoard)
+- **Eye stoard** — secure expanding storage for field compiler witness (cap 256 MiB → 8 GiB)
+- Append-only ledger · content-addressed blobs · seal-gated writes · quarantine on overflow
+- API: `/api/eye/stoard`, `POST /api/eye/stoard/witness`, compiler probe auto-witness
+- **Eye operations** (1.2) — offense at qualified enemy; heaven/hell gate; disarmament lane
 - Silent capture · GVC1/GRKMF1 proprietary codec (not MPEG)
-- Field Ops UI at `:9479/ops` · **40 automated tests**
-- Grok16 field_opt + Queen/Hostess/ZAC integration
+- Field Ops UI at `:9479/ops` · **41 automated tests**
+- Grok16 field_opt + Queen/Hostess/ZAC integration · queen-browser RTX build loop fixed
 - Illustrated textbook: https://zacharygeurts.github.io/Final_Eye/
 
 ## Install by platform

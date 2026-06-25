@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.1 — 2026-06-25 (eye-stoard)
+
+- **Eye stoard** — secure, safely expanding storage for field compiler witness (`zocr_eye_stoard.py`)
+- **Growth policy** — 256 MiB → 8 GiB cap, tiered expand on verified demand, append-only hash-chained ledger
+- **APIs** — `GET /api/eye/stoard`, `POST /api/eye/stoard/witness`, `GET /api/eye/stoard/ledger`
+- **Field compiler** — `stoard` headroom on `/api/field/compiler`; auto-witness on `compiler_probe`
+- **Queen + Hostess7** — `eye_stoard` in queen-eyeball status; HUD tile; brain manifest updated
+- **41 automated tests** (+ `test_eye_stoard`)
+
 ## 1.2.0 — 2026-06-25 (heaven-hell-ops)
 
 - **Eye operations doctrine** — enemy discernment, heaven/hell gate on every salvo, disarmament lane

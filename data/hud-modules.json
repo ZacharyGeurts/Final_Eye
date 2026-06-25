@@ -186,6 +186,15 @@
       "actions": ["enable", "disable", "toggle", "focus"],
       "describe": "Grok16 G16 + FIELDC v4 — Queen forge compiler_probe"
     },
+    "eye_stoard": {
+      "label": "Stoard",
+      "kind": "meter",
+      "group": "field",
+      "api": "/api/eye/stoard",
+      "default": false,
+      "actions": ["enable", "disable", "toggle", "focus"],
+      "describe": "Secure expanding eye storage — field compiler witness + sealed blobs"
+    },
     "copilot_foundations": {
       "label": "Co-Pilot",
       "kind": "meter",

@@ -21,7 +21,7 @@ PRODUCT_ID = "Final_Eye"
 PRODUCT_NAME = "The Final Eyeball"
 VERSION = _read_version()
 SCHEMA = "final-eye-product/v1"
-CODENAME = "heaven-hell-ops"
+CODENAME = "eye-stoard"
 LICENSE = "proprietary"
 REPO = "https://github.com/ZacharyGeurts/Final_Eye"
 

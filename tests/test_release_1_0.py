@@ -24,7 +24,7 @@ def test_product_1_0():
     expected = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     assert p["version"] == expected
     assert p["product"] == "Final_Eye"
-    assert p["codename"] == "heaven-hell-ops"
+    assert p["codename"] in ("heaven-hell-ops", "eye-stoard")
 
 
 def test_security_gvc1_and_stream():

@@ -40,10 +40,20 @@
     "module": "zocr_eye.py",
     "witness": "grok16_eye_witness on every eye_status and final_eyeball_status"
   },
+  "stoard": {
+    "rule": "Eye stoard — secure expanding witness store for compiler receipts",
+    "module": "zocr_eye_stoard.py",
+    "doctrine": "data/eye-stoard-doctrine.json",
+    "root": "stoard/"
+  },
   "endpoints": {
-    "GET /api/field/compiler": "Grok16 status + Queen forge posture",
+    "GET /api/field/compiler": "Grok16 status + Queen forge posture + stoard headroom",
     "GET /api/field/compiler/doctrine": "Field compiler mandate",
-    "POST /api/field/compiler/probe": "Queen compiler_probe refresh",
-    "GET /api/grok16": "Canonical Grok16 status from SG/Grok16"
+    "POST /api/field/compiler/probe": "Queen compiler_probe refresh + stoard witness",
+    "GET /api/grok16": "Canonical Grok16 status from SG/Grok16",
+    "GET /api/eye/stoard": "Stoard status — cap, fill, ledger head",
+    "GET /api/eye/stoard/doctrine": "Stoard growth + security doctrine",
+    "POST /api/eye/stoard/witness": "Seal field compiler witness into stoard",
+    "GET /api/eye/stoard/ledger": "Recent append-only ledger rows"
   }
 }

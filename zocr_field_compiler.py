@@ -174,6 +174,12 @@ def field_compiler_status() -> dict[str, Any]:
     forge = forge_posture()
     grok16 = forge.get("grok16") or _grok16_layer()
     fieldc = forge.get("fieldc") or _fieldc_status(rtx_binary=_find_rtx_binary())
+    stoard: dict[str, Any] = {}
+    try:
+        from zocr_eye_stoard import stoard_for_field_compiler
+        stoard = stoard_for_field_compiler()
+    except ImportError:
+        pass
     return {
         "schema": "zocr-field-compiler-status/v1",
         "ts": _ts(),
@@ -181,6 +187,7 @@ def field_compiler_status() -> dict[str, Any]:
         "mandate_id": doc.get("mandate_id"),
         "grok16": grok16,
         "fieldc": fieldc,
+        "stoard": stoard,
         "forge": {k: v for k, v in forge.items() if k not in ("grok16", "fieldc", "tail")},
         "ready": bool(grok16.get("ready_rtx")) and bool(fieldc.get("rtx_ready") or grok16.get("ready")),
         "probe": f"python3 {QUEEN / 'lib' / 'queen-forge.py'} compiler_probe",
@@ -219,9 +226,18 @@ def probe_compilers(*, timeout: int = 90) -> dict[str, Any]:
                 payload = json.loads(proc.stdout)
             except json.JSONDecodeError:
                 payload = {"raw": proc.stdout[-800:]}
+        ok = proc.returncode == 0 and payload.get("ok", proc.returncode == 0)
+        stoard_witness = None
+        if ok:
+            try:
+                from zocr_eye_stoard import witness_compiler
+                stoard_witness = witness_compiler(reason="compiler_probe")
+            except ImportError:
+                pass
         return {
-            "ok": proc.returncode == 0 and payload.get("ok", proc.returncode == 0),
+            "ok": ok,
             "forge": payload,
+            "stoard_witness": stoard_witness,
             "status": field_compiler_status(),
             "stderr": (proc.stderr or "")[-400:] or None,
         }

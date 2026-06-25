@@ -90,6 +90,13 @@ from zocr_field_compile import (  # noqa: E402
     field_compiler_optimize,
 )
 from zocr_grok16 import grok16_status  # noqa: E402
+from zocr_eye_stoard import (  # noqa: E402
+    read_ledger,
+    stoard_doctrine,
+    stoard_status,
+    verify_stoard_chain,
+    witness_compiler,
+)
 from zocr_tester import ops_dashboard, tester_full, tester_matrix, tester_snapshot  # noqa: E402
 from zocr_copilot import copilot_ask, copilot_doctrine, copilot_status, hold_together  # noqa: E402
 from zocr_zac import pack_vision_artifacts, restore_vision_artifacts, zac_self_test, zac_status  # noqa: E402
@@ -284,6 +291,19 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/api/field/compiler/doctrine":
             self._send_json(HTTPStatus.OK, field_compiler_doctrine())
+            return
+        if path == "/api/eye/stoard":
+            self._send_json(HTTPStatus.OK, stoard_status())
+            return
+        if path == "/api/eye/stoard/doctrine":
+            self._send_json(HTTPStatus.OK, stoard_doctrine())
+            return
+        if path == "/api/eye/stoard/ledger":
+            n = int((qs.get("n") or ["20"])[0] or 20)
+            self._send_json(HTTPStatus.OK, {"ok": True, "rows": read_ledger(n=n), "chain": verify_stoard_chain()})
+            return
+        if path == "/api/eye/stoard/verify":
+            self._send_json(HTTPStatus.OK, verify_stoard_chain())
             return
         if path == "/api/field/compile/full":
             self._send_json(HTTPStatus.OK, field_compile_full_test())
@@ -928,6 +948,10 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/api/field/compiler/probe":
             self._send_json(HTTPStatus.OK, probe_compilers())
+            return
+        if path == "/api/eye/stoard/witness":
+            reason = str(body.get("reason") or "api_witness").strip()
+            self._send_json(HTTPStatus.OK, witness_compiler(reason=reason))
             return
         if path == "/api/hud/request":
             self._send_json(HTTPStatus.OK, request_hud(body))
