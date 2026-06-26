@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>The Final Eyeball — Sovereign Vision Textbook v1.1</title>
-  <meta name="description" content="Eight-chapter operator textbook for Final_Eye v1.1.0 — ZOCRSM1 vision, GVC1 codec, silent capture, Grok16 compiler, entity eyeballs, Teach doctrine, Field Ops. Illustrated. Honesty-labeled." />
+  <title>The Final Eyeball — Sovereign Vision Textbook v1.3</title>
+  <meta name="description" content="Operator textbook and manuals for Final_Eye v1.3.0 — motion tracking, ZOCRSM1 vision, GVC1 codec, silent capture, Grok16 compiler, entity eyeballs, Field Ops." />
   <link rel="canonical" href="https://zacharygeurts.github.io/Final_Eye/" />
   <meta name="theme-color" content="#05070a" />
   <meta property="og:type" content="website" />
@@ -21,11 +21,12 @@
 <body>
   <nav class="top">
     <div class="inner">
-      <a class="logo" href="index.html">THE FINAL EYEBALL <span class="v-badge">v1.1</span></a>
+      <a class="logo" href="index.html">THE FINAL EYEBALL <span class="v-badge">v1.3</span></a>
       <ul>
+        <li><a href="manual/motion-tracking.html">Motion manual</a></li>
         <li><a href="#reader-room">Reading room</a></li>
         <li><a href="#chapters">8 Chapters</a></li>
-        <li><a href="#axioms">Axioms</a></li>
+        <li><a href="https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.3.0">v1.3.0</a></li>
         <li><a href="https://github.com/ZacharyGeurts/Final_Eye">GitHub</a></li>
         <li><a href="https://zacharygeurts.github.io/Field_Primer/">Field Primer</a></li>
       </ul>
@@ -39,7 +40,8 @@
       <p class="eyebrow">Sovereign vision · Textbook of 2026 · Zachary Geurts</p>
       <h1>The Final Eyeball</h1>
       <p class="lead">
-        <strong>Eight chapters of operator prose</strong> for Final_Eye v1.1.0 — manuscript-grade, honesty-labeled, grep-first.
+        <strong>Eight chapters of operator prose</strong> for Final_Eye v1.3.0 — manuscript-grade, honesty-labeled, grep-first.
+        New: <a href="manual/motion-tracking.html">time &amp; movement tracking manual</a>.
         ZOCRSM1 field vision ingress, GRKMF1/GVC1 proprietary media, silent capture integrity, Grok16 field compiler,
         twin entity eyeballs with Teach doctrine, and the Field Ops surface at port 9479. Every chapter opens on generated art paired with expanded smart text.
       </p>
@@ -77,7 +79,7 @@
         <p class="reader-preview-title">The Final Eyeball</p>
         <p class="reader-preview-body">We never presume vision loss. Confidence always in Vision.</p>
         <span class="reader-preview-muted">Honesty labels on every claim</span>
-        <code class="reader-preview-code">python3 zocr_security.py seal</code>
+        <code class="reader-preview-code">pythong zocr_security.py seal</code>
       </div>
     </div>
   </section>
@@ -157,17 +159,30 @@
     </section>
 
     <section class="section">
+      <p class="eyebrow">Vision textbook · AI field manual</p>
+      <h2>Field manual for operators and AI</h2>
+      <p style="color:var(--muted);line-height:1.75;max-width:40rem">
+        This site is the <strong>Sovereign Vision Textbook</strong> — eight illustrated chapters for Final_Eye v1.1.
+        AI loads the structured manual at <code>data/field-manual-vision.json</code> via
+        <code>GET /api/field-manual?sense=vision</code> or
+        <code>POST /api/queen-eyeball {"action":"field_manual","sense":"vision"}</code>.
+        Hearing sibling: <a href="../../Final_Ear/docs/index.html">The Final Ear — Audio Textbook</a>
+        (<code>/api/field-manual?sense=audio</code>).
+      </p>
+    </section>
+
+    <section class="section">
       <p class="eyebrow">Cross-read</p>
       <h2>Sibling surfaces in the Field stack</h2>
       <p>
         Final_Eye is the vision layer beside <a href="https://zacharygeurts.github.io/Field_Primer/chapters/11-observability.html">Field Primer Ch 11</a>,
-        NEXUS panel at :9477, and Queen browser gates in Ch 21. One sovereign stack — gates held, vision sealed, receipts grep-able.
+        Final_Ear audio truth filters, NEXUS panel at :9477, and Queen browser gates in Ch 21. One sovereign stack — gates held, vision and hearing sealed, receipts grep-able.
       </p>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Final_Eye v1.1.0 · <a href="https://github.com/ZacharyGeurts/Final_Eye">github.com/ZacharyGeurts/Final_Eye</a> · Proprietary — scientific robotics review at tagged releases</p>
+    <p>Final_Eye v1.3.0 · <a href="https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.3.0">Release</a> · <a href="manual/motion-tracking.html">Motion manual</a> · Proprietary — scientific robotics review at tagged releases</p>
   </footer>
   <script src="js/reader.js" defer></script>
 </body>

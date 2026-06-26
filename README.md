@@ -1,18 +1,26 @@
-# Final_Eye v1.2.0
+# Final_Eye v1.3.0
 
 **The Final Eyeball** — sovereign field robotics vision by [Zachary Geurts](https://github.com/ZacharyGeurts).
 
 | | |
 |---|---|
-| **Version** | `1.2.0` |
-| **Codename** | `heaven-hell-ops` |
-| **Tests** | 34 (`./tests/run_tests.sh`) |
+| **Version** | `1.3.0` |
+| **Codename** | `motion-track` |
+| **Tests** | 44 (`./tests/run_tests.sh`) |
 | **Port** | `9479` |
-| **Latest release** | [v1.2.0](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.2.0) |
+| **Latest release** | [v1.3.0](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.3.0) |
 
 Proprietary stack: **ZOCRSM1** field vision + **GRKMF1/GVC1** media (**not MPEG**). Silent capture, AI-tunable fps/resolution, sealed integrity, Grok16 field compiler, Queen/Hostess integration, twin entity eyeballs (37 weapons / 8 racks), and **Teach** doctrine — the eye speaks with independent weapon authority.
 
 > We never presume vision loss. Confidence always in Vision.
+
+## What's new in 1.3
+
+- **Time tracking** — sealed UTC, session elapsed, sovereign pulse link when NEXUS state is present
+- **Movement tracking** — frame fingerprint kinematics: motion_score, velocity, direction, stationary streak
+- **Ledger** — `data/eye-motion.jsonl` append-only receipts
+- **APIs** — `GET /api/eye/motion`, `POST /api/eye/motion/tick`, `/start`, `/stop`
+- **Manual** — [Motion tracking operator guide](https://zacharygeurts.github.io/Final_Eye/manual/motion-tracking.html)
 
 ## What's new in 1.2
 
@@ -33,7 +41,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full history.
 
 ## Install from release
 
-Download artifacts from [GitHub Releases v1.2.0](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.2.0). Verify checksums:
+Download artifacts from [GitHub Releases v1.3.0](https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.3.0). Verify checksums:
 
 ```bash
 sha256sum -c SHA256SUMS
@@ -74,7 +82,7 @@ Queen/Hostess co-deploy: `docker compose up --build` (mounts `Hostess7`, `Queen`
 
 ```bash
 pip install -r requirements.txt
-python3 zocr_security.py seal
+pythong zocr_security.py seal
 FINAL_EYE_LOW_END=1 ./tests/run_tests.sh    # 34 tests
 ./start.sh --no-open                        # http://127.0.0.1:9479
 ```
@@ -85,8 +93,8 @@ FINAL_EYE_LOW_END=1 ./tests/run_tests.sh    # 34 tests
 | Tester / matrix | http://127.0.0.1:9479/tester |
 | API version | `curl -s http://127.0.0.1:9479/api/version` |
 
-Build release artifacts: `python3 scripts/build_release.py`  
-Rebuild textbook: `python3 scripts/build_textbook.py`
+Build release artifacts: `pythong scripts/build_release.py`  
+Rebuild textbook: `pythong scripts/build_textbook.py`
 
 ## Teach & weapon authority
 
@@ -103,7 +111,7 @@ The eye knows weapons, understands targets, and selects salvo independently. Ope
 ```bash
 curl -s 'http://127.0.0.1:9479/api/eye/teach/doctrine?lesson=authority'
 curl -s 'http://127.0.0.1:9479/api/eye/understand?threat=provenance_mismatch'
-python3 zocr_entity_eyeball.py teach authority
+pythong zocr_entity_eyeball.py teach authority
 ```
 
 **Enemies (to the eye):** lie markers on the vision path — `provenance_mismatch`, `grid_jam`, `trust_breach`, `rf_jam`, etc. — not a people roster. Grep `data/entity-eyeball.json` → `forward.lie_markers`.

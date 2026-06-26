@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.0 — 2026-06-26 (motion-track)
+
+- **Time tracking** — sealed UTC on every tick, session elapsed, optional NEXUS sovereign pulse link
+- **Movement tracking** — frame fingerprint kinematics: motion_score, velocity, direction_deg, stationary streak
+- **Ledger** — append-only `data/eye-motion.jsonl` — grep-friendly motion receipts
+- **APIs** — `GET /api/eye/motion`, `/api/eye/motion/doctrine`, `/api/eye/motion/ledger`; `POST /api/eye/motion/tick`, `/start`, `/stop`
+- **Stoard witness** — auto-witness on motion alert threshold
+- **IO manual** — `docs/manual/motion-tracking.html` on zacharygeurts.github.io/Final_Eye
+- **44 automated tests** (+ `test_eye_motion`)
+
 ## 1.2.1 — 2026-06-25 (eye-stoard)
 
 - **Eye stoard** — secure, safely expanding storage for field compiler witness (`zocr_eye_stoard.py`)

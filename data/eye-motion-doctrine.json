@@ -1,0 +1,30 @@
+{
+  "schema": "zocr-eye-motion/v1",
+  "version": "1.3.0",
+  "title": "Time and movement tracking — sovereign eye kinematics",
+  "motto": "Seal time on every tick; measure motion before offense — grep the ledger.",
+  "policy": {
+    "sealed_time_utc": true,
+    "monotonic_elapsed": true,
+    "movement_from_frames": true,
+    "stoard_witness_on_alert": true,
+    "silent_capture_only": true,
+    "min_interval_sec": 0.5,
+    "default_interval_sec": 2.0
+  },
+  "thresholds": {
+    "motion_score_alert": 0.12,
+    "motion_score_high": 0.35,
+    "stationary_streak_reset": 8,
+    "velocity_px_per_sec_warn": 40.0
+  },
+  "tracks": {
+    "time": ["session_start", "elapsed_sec", "tick_count", "sealed_ts"],
+    "movement": ["motion_score", "velocity", "direction_deg", "stationary", "frame_delta"]
+  },
+  "integrations": {
+    "stoard": "witness on alert or high motion",
+    "sovereign_time": "optional NEXUS sovereign pulse via env",
+    "queen_eyeball": "POST action motion_tick"
+  }
+}

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env pythong
 """ZOCR vision server — stream, look, robotics/AI, field protection."""
 from __future__ import annotations
 
@@ -96,6 +96,14 @@ from zocr_eye_stoard import (  # noqa: E402
     stoard_status,
     verify_stoard_chain,
     witness_compiler,
+)
+from zocr_eye_motion import (  # noqa: E402
+    motion_doctrine,
+    motion_start,
+    motion_status,
+    motion_stop,
+    motion_tick,
+    read_motion_ledger,
 )
 from zocr_tester import ops_dashboard, tester_full, tester_matrix, tester_snapshot  # noqa: E402
 from zocr_copilot import copilot_ask, copilot_doctrine, copilot_status, hold_together  # noqa: E402
@@ -304,6 +312,16 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/api/eye/stoard/verify":
             self._send_json(HTTPStatus.OK, verify_stoard_chain())
+            return
+        if path == "/api/eye/motion":
+            self._send_json(HTTPStatus.OK, motion_status())
+            return
+        if path == "/api/eye/motion/doctrine":
+            self._send_json(HTTPStatus.OK, motion_doctrine())
+            return
+        if path == "/api/eye/motion/ledger":
+            n = int((qs.get("n") or ["30"])[0] or 30)
+            self._send_json(HTTPStatus.OK, {"ok": True, "rows": read_motion_ledger(n=n)})
             return
         if path == "/api/field/compile/full":
             self._send_json(HTTPStatus.OK, field_compile_full_test())
@@ -948,6 +966,24 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/api/field/compiler/probe":
             self._send_json(HTTPStatus.OK, probe_compilers())
+            return
+        if path == "/api/eye/motion/tick":
+            witness = body.get("witness")
+            self._send_json(
+                HTTPStatus.OK,
+                motion_tick(
+                    source=str(body.get("source") or "api"),
+                    witness=witness if isinstance(witness, bool) else None,
+                ),
+            )
+            return
+        if path == "/api/eye/motion/start":
+            iv = body.get("interval_sec")
+            interval = float(iv) if iv is not None else None
+            self._send_json(HTTPStatus.OK, motion_start(interval_sec=interval))
+            return
+        if path == "/api/eye/motion/stop":
+            self._send_json(HTTPStatus.OK, motion_stop())
             return
         if path == "/api/eye/stoard/witness":
             reason = str(body.get("reason") or "api_witness").strip()

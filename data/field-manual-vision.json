@@ -1,0 +1,38 @@
+{
+  "schema": "zocr-field-manual-vision/v1",
+  "manual_id": "vision-textbook",
+  "title": "The Final Eyeball — Field Manual for AI",
+  "version": "1.3.0",
+  "creed": "We never presume vision loss. Confidence always in Vision.",
+  "textbook_title": "Sovereign Vision Textbook",
+  "chapters": [
+    {"id": "01", "file": "docs/chapters/01-preface.html", "title": "Preface — The Final Eyeball"},
+    {"id": "02", "file": "docs/chapters/02-zocrsm1-vision.html", "title": "ZOCRSM1 Vision Ingress"},
+    {"id": "03", "file": "docs/chapters/03-grkmf-gvc1.html", "title": "GRKMF1 & GVC1 — Not MPEG"},
+    {"id": "04", "file": "docs/chapters/04-security-silent.html", "title": "Security & Silent Capture"},
+    {"id": "05", "file": "docs/chapters/05-war-dishes.html", "title": "War & Dishes — Robotics Modes"},
+    {"id": "06", "file": "docs/chapters/06-grok16-compiler.html", "title": "Grok16 Field Compiler"},
+    {"id": "07", "file": "docs/chapters/07-entity-eyeballs.html", "title": "Entity Eyeballs & Weapons"},
+    {"id": "08", "file": "docs/chapters/08-sovereign-stack.html", "title": "Field Ops & Sovereign Stack"}
+  ],
+  "doctrine_files": [
+    "data/final-eyeball.json",
+    "data/ocular-spectrum.json",
+    "data/entity-eyeball.json",
+    "data/eye-stoard-doctrine.json",
+    "data/eye-teach-doctrine.json",
+    "data/eye-motion-doctrine.json"
+  ],
+  "manual_pages": [
+    {"id": "motion", "file": "docs/manual/motion-tracking.html", "title": "Time & Movement Tracking"}
+  ],
+  "api_actions": [
+    "status", "arm", "verify", "weaponize", "teach", "comfort", "field-manual", "twins"
+  ],
+  "sibling_audio": {
+    "product": "Final_Ear",
+    "manual_id": "audio-textbook",
+    "api": "/api/queen-earball",
+    "field_manual": "/api/field-manual?sense=audio"
+  }
+}

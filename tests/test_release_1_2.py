@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env pythong
 """Final_Eye 1.2.0 — heaven-hell-ops eye operations tests."""
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ def test_product_1_2():
     p = product_info()
     expected = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     assert p["version"] == expected
-    assert p["codename"] in ("heaven-hell-ops", "eye-stoard")
+    assert p["codename"] in ("heaven-hell-ops", "eye-stoard", "motion-track")
 
 
 def test_eye_operations_doctrine():
