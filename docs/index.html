@@ -2,188 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>The Final Eyeball — Sovereign Vision Textbook v1.3</title>
-  <meta name="description" content="Operator textbook and manuals for Final_Eye v1.3.0 — motion tracking, ZOCRSM1 vision, GVC1 codec, silent capture, Grok16 compiler, entity eyeballs, Field Ops." />
-  <link rel="canonical" href="https://zacharygeurts.github.io/Final_Eye/" />
-  <meta name="theme-color" content="#05070a" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Final_Eye" />
-  <meta property="og:title" content="The Final Eyeball — Sovereign Vision Textbook" />
-  <meta property="og:description" content="Illustrated operator textbook for Final_Eye v1.1.0 — field robotics vision, Teach authority, not MPEG." />
-  <meta property="og:url" content="https://zacharygeurts.github.io/Final_Eye/" />
-  <meta property="og:image" content="https://zacharygeurts.github.io/Final_Eye/assets/images/hero-cover.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/final-eye.css" />
-  <link rel="stylesheet" href="css/chapters.css" />
-  <link rel="stylesheet" href="css/reader.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Final Eye — AmmoOS manual</title>
+  <meta http-equiv="refresh" content="4;url=https://zacharygeurts.github.io/AmmoOS/launch-surfaces.html" />
+  <link rel="canonical" href="https://zacharygeurts.github.io/AmmoOS/launch-surfaces.html" />
+  <meta name="description" content="Final Eye — canonical docs in AmmoOS manual" />
+  <style>
+.github-chrome-top, .github-chrome-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.55rem 0.85rem;
+  margin: 0 0 1rem;
+  border-radius: 8px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  font-size: 0.92rem;
+}
+.github-chrome-bottom { margin: 2rem 0 0; }
+.github-chrome-top a.github-repo-primary,
+.github-chrome-bottom a.github-repo-primary {
+  font-weight: 700;
+  color: #4ade80;
+  text-decoration: none;
+}
+.github-chrome-top a.github-repo-primary:hover,
+.github-chrome-bottom a.github-repo-primary:hover { text-decoration: underline; }
+.github-chrome-links a { margin-right: 0.75rem; color: #94a3b8; }
+
+    body { font-family: system-ui, sans-serif; max-width: 46rem; margin: 0 auto; padding: 1rem 1.25rem 2rem; background: #0a0c12; color: #e8edf7; }
+    .lead { border-left: 3px solid #22c55e; padding-left: 1rem; margin: 1.25rem 0; }
+    .cta { display: inline-block; margin: 0.5rem 0.75rem 0.5rem 0; padding: 0.55rem 1rem; border-radius: 8px; background: #14532d; color: #bbf7d0; text-decoration: none; font-weight: 600; }
+    .cta:hover { background: #166534; }
+    .meta { color: #94a3b8; font-size: 0.92rem; }
+  </style>
 </head>
 <body>
-  <nav class="top">
-    <div class="inner">
-      <a class="logo" href="index.html">THE FINAL EYEBALL <span class="v-badge">v1.3</span></a>
-      <ul>
-        <li><a href="manual/motion-tracking.html">Motion manual</a></li>
-        <li><a href="#reader-room">Reading room</a></li>
-        <li><a href="#chapters">8 Chapters</a></li>
-        <li><a href="https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.3.0">v1.3.0</a></li>
-        <li><a href="https://github.com/ZacharyGeurts/Final_Eye">GitHub</a></li>
-        <li><a href="https://zacharygeurts.github.io/Field_Primer/">Field Primer</a></li>
-      </ul>
-    </div>
-  </nav>
+<div class="github-chrome-top" role="navigation" aria-label="Stack navigation">
+  <a class="github-repo-primary" href="https://github.com/ZacharyGeurts/AmmoOS">→ Code: ZacharyGeurts/AmmoOS</a>
+  <span class="github-chrome-links">
+    <a href="https://github.com/ZacharyGeurts/Final_Eye">ZacharyGeurts/Final_Eye</a>
+    <a href="https://zacharygeurts.github.io/AmmoOS/">AmmoOS manual</a>
+    <a href="https://zacharygeurts.github.io/ZacharyGeurts/stack.html">Stack hub</a>
+    <a href="https://github.com/ZacharyGeurts/AmmoOS/releases/tag/v2.0.0-beta3">Release v2.0.0-beta3</a>
+  </span>
+</div>
 
-  <header class="hero">
-    <div class="hero-bg" style="background-image:url('assets/images/hero-cover.jpg')" role="img" aria-label="The Final Eyeball cover"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="eyebrow">Sovereign vision · Textbook of 2026 · Zachary Geurts</p>
-      <h1>The Final Eyeball</h1>
-      <p class="lead">
-        <strong>Eight chapters of operator prose</strong> for Final_Eye v1.3.0 — manuscript-grade, honesty-labeled, grep-first.
-        New: <a href="manual/motion-tracking.html">time &amp; movement tracking manual</a>.
-        ZOCRSM1 field vision ingress, GRKMF1/GVC1 proprietary media, silent capture integrity, Grok16 field compiler,
-        twin entity eyeballs with Teach doctrine, and the Field Ops surface at port 9479. Every chapter opens on generated art paired with expanded smart text.
-      </p>
-      <p class="creed">We never presume vision loss. Confidence always in Vision.</p>
-      <div class="axiom-bar" id="axioms">
-        <span class="axiom">Not MPEG</span>
-        <span class="axiom">Silent by default</span>
-        <span class="axiom">Seal before capture</span>
-        <span class="axiom">Grep is forensic defense</span>
-      </div>
-      <div class="cta-row">
-        <a class="btn" href="chapters/01-preface.html?reader=1">Chapter 1 — Read</a>
-        <a class="btn secondary" href="chapters/01-preface.html">Start textbook</a>
-        <a class="btn secondary" href="https://github.com/ZacharyGeurts/Final_Eye">Source repo</a>
-      </div>
-    </div>
-  </header>
+  <h1>Final Eye</h1>
+  <p class="lead">Vision stack — launch surfaces in AmmoOS manual</p>
+  <p class="meta">This repo&apos;s GitHub Pages is a <strong>redirect hub</strong>. <strong>Source code</strong> for the full stack lives in <a href="https://github.com/ZacharyGeurts/AmmoOS">AmmoOS</a>. Documentation is maintained once in the <a href="https://zacharygeurts.github.io/AmmoOS/">AmmoOS manual</a> · 2.0.0-beta3.</p>
+  <p>
+    <a class="cta" href="https://github.com/ZacharyGeurts/AmmoOS">Clone AmmoOS (canonical code)</a>
+    <a class="cta" href="https://zacharygeurts.github.io/AmmoOS/launch-surfaces.html">Open manual → launch-surfaces.html</a>
+    <a class="cta" href="https://zacharygeurts.github.io/AmmoOS/stack-hub.html">Stack hub</a>
+  </p>
+  <p class="meta">Auto-redirecting in 4 seconds…</p>
+<div class="github-chrome-bottom" role="contentinfo">
+  <a class="github-repo-primary" href="https://github.com/ZacharyGeurts/AmmoOS">→ Code: ZacharyGeurts/AmmoOS</a>
+  <span class="github-chrome-links"><a href="https://github.com/ZacharyGeurts/Final_Eye">ZacharyGeurts/Final_Eye</a> · ships in AmmoOS · 2.0.0-beta3</span>
+</div>
 
-  <section id="reader-room" class="reader-room">
-    <div class="reader-room-inner">
-      <div>
-        <p class="eyebrow">Schools · home · any device</p>
-        <h2>Reading room — vanilla paper, your colors</h2>
-        <p style="color:var(--muted);line-height:1.75;max-width:36rem">
-          Every chapter opens in <strong>full-screen reader mode</strong>: warm cream paper, brown ink, soft grain —
-          like a textbook page beside the dark Field Ops console. Tap <strong>Read</strong> on any chapter.
-          Customize paper, ink, accent, typeface, and column width. Settings sync on this device.
-        </p>
-        <div class="cta-row" style="margin-top:1.25rem">
-          <a class="btn btn-reader-vanilla" href="chapters/01-preface.html?reader=1">Open Chapter 1 in reader</a>
-          <a class="btn secondary" href="#chapters">Browse chapters</a>
-        </div>
-      </div>
-      <div class="reader-preview-wrap">
-        <p class="reader-preview-title">The Final Eyeball</p>
-        <p class="reader-preview-body">We never presume vision loss. Confidence always in Vision.</p>
-        <span class="reader-preview-muted">Honesty labels on every claim</span>
-        <code class="reader-preview-code">pythong zocr_security.py seal</code>
-      </div>
-    </div>
-  </section>
-
-  <main>
-    <section id="chapters" class="section">
-      <p class="eyebrow">The textbook</p>
-      <h2>Eight chapters — picture-led, operator-honest</h2>
-      <p>Each chapter is ~1,000–1,200 words with a generated figure. Labels: <span class="tag impl">Implemented</span> <span class="tag measured">Measured</span> <span class="tag doctrine">Doctrine</span> <span class="tag meta">Metaphor</span></p>
-
-      <div class="chapter-grid">
-        <a class="chapter-card" href="chapters/01-preface.html">
-          <img src="assets/images/chapters/ch01-vision-ingress.jpg" alt="Vision ingress" loading="lazy" />
-          <div class="chapter-card-body">
-            <span class="num">Chapter 01</span>
-            <h3>Preface — The Final Eyeball</h3>
-            <p>Operator map, honesty covenant, thesis, and where Final_Eye sits in the Field stack.</p>
-          </div>
-        </a>
-        <a class="chapter-card" href="chapters/02-zocrsm1-vision.html">
-          <img src="assets/images/chapters/ch01-vision-ingress.jpg" alt="ZOCRSM1" loading="lazy" />
-          <div class="chapter-card-body">
-            <span class="num">Chapter 02</span>
-            <h3>ZOCRSM1 Vision Ingress</h3>
-            <p>Capture, preserve, pattern, offense — the silent vision pipeline from lens to ledger.</p>
-          </div>
-        </a>
-        <a class="chapter-card" href="chapters/03-grkmf-gvc1.html">
-          <img src="assets/images/chapters/ch02-gvc1-envelope.jpg" alt="GVC1" loading="lazy" />
-          <div class="chapter-card-body">
-            <span class="num">Chapter 03</span>
-            <h3>GRKMF1 &amp; GVC1 — Not MPEG</h3>
-            <p>Proprietary envelope, tamper rejection, bullet_train benchmarks, AI-tunable cinema.</p>
-          </div>
-        </a>
-        <a class="chapter-card" href="chapters/04-security-silent.html">
-          <img src="assets/images/chapters/ch03-security-seal.jpg" alt="Security" loading="lazy" />
-          <div class="chapter-card-body">
-            <span class="num">Chapter 04</span>
-            <h3>Security &amp; Silent Capture</h3>
-            <p>Code seal, stream AES-GCM, operator tokens, and why silence is integrity.</p>
-          </div>
-        </a>
-        <a class="chapter-card" href="chapters/05-war-dishes.html">
-          <img src="assets/images/chapters/ch04-war-dishes.jpg" alt="War and dishes" loading="lazy" />
-          <div class="chapter-card-body">
-            <span class="num">Chapter 05</span>
-            <h3>War &amp; Dishes — Robotics Modes</h3>
-            <p>Combat 3–20 fps versus cinema 240 doctrine — arm API, tune paths, assist contract.</p>
-          </div>
-        </a>
-        <a class="chapter-card" href="chapters/06-grok16-compiler.html">
-          <img src="assets/images/chapters/ch05-grok16-forge.jpg" alt="Grok16" loading="lazy" />
-          <div class="chapter-card-body">
-            <span class="num">Chapter 06</span>
-            <h3>Grok16 Field Compiler</h3>
-            <p>g16 gnu17, g++26 kernel, field_opt profiles, Queen forge probe.</p>
-          </div>
-        </a>
-        <a class="chapter-card" href="chapters/07-entity-eyeballs.html">
-          <img src="assets/images/chapters/ch06-entity-eyeballs.jpg" alt="Entity eyeballs" loading="lazy" />
-          <div class="chapter-card-body">
-            <span class="num">Chapter 07</span>
-            <h3>Entity Eyeballs &amp; Weapons</h3>
-            <p>Vita, Veritas, twins, 37 weapons, heaven_pass and hell_rip truth parameters.</p>
-          </div>
-        </a>
-        <a class="chapter-card" href="chapters/08-sovereign-stack.html">
-          <img src="assets/images/chapters/ch08-zac-sovereign.jpg" alt="Sovereign stack" loading="lazy" />
-          <div class="chapter-card-body">
-            <span class="num">Chapter 08</span>
-            <h3>Field Ops &amp; Sovereign Stack</h3>
-            <p>ZAC pack/restore, Queen/Hostess co-deploy, Co-Pilot, release matrix, grep labs.</p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section">
-      <p class="eyebrow">Vision textbook · AI field manual</p>
-      <h2>Field manual for operators and AI</h2>
-      <p style="color:var(--muted);line-height:1.75;max-width:40rem">
-        This site is the <strong>Sovereign Vision Textbook</strong> — eight illustrated chapters for Final_Eye v1.1.
-        AI loads the structured manual at <code>data/field-manual-vision.json</code> via
-        <code>GET /api/field-manual?sense=vision</code> or
-        <code>POST /api/queen-eyeball {"action":"field_manual","sense":"vision"}</code>.
-        Hearing sibling: <a href="../../Final_Ear/docs/index.html">The Final Ear — Audio Textbook</a>
-        (<code>/api/field-manual?sense=audio</code>).
-      </p>
-    </section>
-
-    <section class="section">
-      <p class="eyebrow">Cross-read</p>
-      <h2>Sibling surfaces in the Field stack</h2>
-      <p>
-        Final_Eye is the vision layer beside <a href="https://zacharygeurts.github.io/Field_Primer/chapters/11-observability.html">Field Primer Ch 11</a>,
-        Final_Ear audio truth filters, NEXUS panel at :9477, and Queen browser gates in Ch 21. One sovereign stack — gates held, vision and hearing sealed, receipts grep-able.
-      </p>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>Final_Eye v1.3.0 · <a href="https://github.com/ZacharyGeurts/Final_Eye/releases/tag/v1.3.0">Release</a> · <a href="manual/motion-tracking.html">Motion manual</a> · Proprietary — scientific robotics review at tagged releases</p>
-  </footer>
-  <script src="js/reader.js" defer></script>
 </body>
 </html>
